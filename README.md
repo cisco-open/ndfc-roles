@@ -153,7 +153,7 @@ When prompted, enter the password you used in response to the ansible-vault comm
 
 ```bash
 cd /top/level/directory/for/this/repo
-ansible-playbook fabric_create_f1.yml`
+ansible-playbook fabric_create_f1.yml -i inventory
 ```
 
 ### Roles
