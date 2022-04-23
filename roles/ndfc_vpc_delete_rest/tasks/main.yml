@@ -1,0 +1,63 @@
+# ndfc_vpc_delete/tasks/main.yml
+
+# REST returns internal server error (500) when called from 
+# Ansible dcnm_rest module per below.  Hence, this is a work in progress
+# and doesn't work.
+
+# Retrieve serial number and vpc config state for vpc_peer_1
+- name: "query vpc_peer_1 {{ fabric_name }} {{ vpc_name }}"
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ fabric_name }}"
+    state: query
+    config:
+    - seed_ip: "{{ ip }}"
+  register: p1_result
+  vars:
+    q1: "[?fabric == '{{ fabric_name }}'] | [?name == '{{ vpc_name }}'].peer_1_ip | [0]"
+    ip: "{{ vpc_peers | json_query(q1)}}"
+- name: set_fact vpc_peer_1 serial number
+  set_fact:
+    p1_serial: "{{ p1_result.response | json_query(q2) }}"
+    p1_vpc: "{{ p1_result.response | json_query(q3) }}"
+  vars:
+    q2: "[0].serialNumber"
+    q3: "[0].isVpcConfigured"
+
+# Retrieve serial number and vpc config state for vpc_peer_2
+- name: "query vpc_peer_2 {{ fabric_name }} {{ vpc_name }}"
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ fabric_name }}"
+    state: query
+    config:
+    - seed_ip: "{{ ip }}"
+  register: p2_result
+  vars:
+    q4: "[?fabric == '{{ fabric_name }}'] | [?name == '{{ vpc_name }}'].peer_2_ip | [0]"
+    ip: "{{ vpc_peers | json_query(q4)}}"
+# - name: p2_result
+#   debug:
+#     var: p2_result
+- name: set_fact vpc_peer_2 serial number
+  set_fact:
+    p2_serial: "{{ p2_result.response | json_query(q5) }}"
+    p2_vpc: "{{ p2_result.response | json_query(q6) }}"
+  vars:
+    q5: "[0].serialNumber"
+    q6: "[0].isVpcConfigured"
+
+# - name: check vars
+#   debug:
+#     msg: "{{ p1_vpc }}/{{ p2_vpc }} - {{ p1_serial }}/{{ p2_serial }}"
+
+# Conditionally delete vpc peering
+- name: "Delete VPC Peers {{ fabric_name }} {{ vpc_name }} {{ p1_vpc }}/{{ p2_vpc }} {{ p1_serial }}/{{ p2_serial }}"
+  cisco.dcnm.dcnm_rest:
+    method: DELETE
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/vpcpair"
+    json_data: "{{ vars_dict | to_json }}"
+  vars:
+    vars_dict:
+      serialNumber: "{{ p2_serial }}"
+      # peerTwoId: "{{ p2_serial }}"
+      # useVirtualPeerlink: "true"
+  when: p1_serial != '' and p2_serial != '' and p1_vpc == True and p2_vpc == True

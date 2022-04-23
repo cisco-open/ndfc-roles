@@ -1,0 +1,64 @@
+# ndfc_vpc_create_rest/tasks/main.yml
+
+# - Retrieve serialNumber and isVpcConfigured for both target vpc peers
+# - if, for both peers, serialNumber != '' and isVpcConfigured == 'false'
+#     create the peers
+# - else
+#     skip
+
+# set_fact for p1_serial, p1_vpc, p1_db_id
+- name: "query {{ fabric_name }} {{ vpc_name }} vpc_peer_1 {{ ip }}"
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ fabric_name }}"
+    state: query
+    config:
+    - seed_ip: "{{ ip }}"
+  register: p1_result
+  vars:
+    q1: "[?fabric == '{{ fabric_name }}'] | [?vpc_name == '{{ vpc_name }}'].peer_1_ip | [0]"
+    ip: "{{ vpc_peers | json_query(q1)}}"
+- name: set_fact p1_serial, p1_vpc, p1_db_id
+  set_fact:
+    p1_serial: "{{ p1_result.response | json_query(q2) }}"
+    p1_vpc: "{{ p1_result.response | json_query(q3) }}"
+    p1_db_id: "{{ p1_result.response | json_query(q4) }}"
+  vars:
+    q2: "[0].serialNumber"
+    q3: "[0].isVpcConfigured"
+    q4: "[0].switchDbID"
+# set_fact for p2_serial, p2_vpc, p2_db_id
+- name: "query {{ fabric_name }} {{ vpc_name }} vpc_peer_2"
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ fabric_name }}"
+    state: query
+    config:
+    - seed_ip: "{{ ip }}"
+  register: p2_result
+  vars:
+    q5: "[?fabric == '{{ fabric_name }}'] | [?vpc_name == '{{ vpc_name }}'].peer_2_ip | [0]"
+    ip: "{{ vpc_peers | json_query(q5)}}"
+- name: p2_result
+  debug:
+    var: p2_result
+- name: set_fact p2_serial, p2_vpc, p2_db_id
+  set_fact:
+    p2_serial: "{{ p2_result.response | json_query(q6) }}"
+    p2_vpc: "{{ p2_result.response | json_query(q7) }}"
+    p2_db_id: "{{ p2_result.response | json_query(q8) }}"
+  vars:
+    q6: "[0].serialNumber"
+    q7: "[0].isVpcConfigured"
+    q8: "[0].switchDbID"
+
+# Conditionally create vpc peering
+- name: "Create VPC Peers {{ fabric_name }} {{ vpc_name }} {{ p1_vpc }}/{{ p2_vpc }} {{ p1_serial }}/{{ p2_serial }}"
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/vpcpair"
+    json_data: "{{ vars_dict | to_json }}"
+  vars:
+    vars_dict:
+      peerOneId: "{{ p1_serial }}"
+      peerTwoId: "{{ p2_serial }}"
+      useVirtualPeerlink: "true"
+  when: p1_serial != '' and p2_serial != '' and p1_vpc == False and p2_vpc == False

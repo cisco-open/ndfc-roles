@@ -1,0 +1,9 @@
+# example_ndfc_vpc_interface_merged_all.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_vpc_interface_merged_all
+  vars:
+    fabric_name: f1
+    vpc_name: vpc1

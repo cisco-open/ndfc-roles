@@ -1,0 +1,13 @@
+# ndfc_vrf/tasks/update_vrf.yml
+- name: "{{ state }} FABRIC {{ item.fabric }} VRF {{ item.vrf_name }} VLAN {{ item.vlan_id }}"
+  cisco.dcnm.dcnm_vrf:
+    fabric: "{{ item.fabric }}"
+    state: "{{ state }}"
+    config:
+    - vrf_name: "{{ item.vrf_name }}"
+      vrf_id: "{{ item.vrf_id }}"
+      vlan_id: "{{ item.vlan_id }}"
+      vrf_template: Default_VRF_Universal
+      vrf_extension_template: Default_VRF_Extension_Universal
+      service_vrf_template: null
+      attach: "{{ item.attach }}"

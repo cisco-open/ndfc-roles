@@ -1,0 +1,19 @@
+# ndfc_policy_query_interface/tasks/main.yml
+---
+- name: Query Leaf Interface Policies
+  include_tasks: worker.yml
+  loop: "{{ leafs | json_query(qm1) }}"
+  vars:
+    qm1: "[?fabric == '{{ fabric_name }}']"
+
+- name: Query Spine Interface Policies
+  include_tasks: worker.yml
+  loop: "{{ spines | json_query(qm2) }}"
+  vars:
+    qm2: "[?fabric == '{{ fabric_name }}']"
+
+- name: Query Border Gateway Interface Policies
+  include_tasks: worker.yml
+  loop: "{{ border_gateways | json_query(qm3) }}"
+  vars:
+    qm3: "[?fabric == '{{ fabric_name }}']"

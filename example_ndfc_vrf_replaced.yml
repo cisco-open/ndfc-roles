@@ -1,0 +1,9 @@
+# example_ndfc_vrf_replaced.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_vrf_replaced
+  vars:
+    fabric_name: f1
+    vrf_name: v2

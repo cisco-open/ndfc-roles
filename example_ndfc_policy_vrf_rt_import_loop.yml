@@ -1,0 +1,53 @@
+# example_ndfc_policy_vrf_rt_import_loop.yml
+---
+# Import vrf v2 route-targets into vrf v1
+- hosts: ndfc
+  name: Import vrf v2 route-targets into vrf v1
+  gather_facts: false
+  vars:
+    state: merged
+    fabric_name: f1
+    vrf_name: v1
+    import_vrf_name: v2
+    devices:
+      - leaf_1
+      - leaf_2
+      - leaf_3
+      - leaf_4
+  roles:
+    - ndfc_policy_vrf_rt_import_loop
+
+# Deploy
+- hosts: ndfc
+  name: deploy and save configs
+  gather_facts: false
+  roles:
+    - ndfc_config_deploy_all_rest
+  vars:
+    fabric_name: f1
+
+# Import vrf v1 route-targets into vrf v2
+- hosts: ndfc
+  name: Import vrf v1 route-targets into vrf v2
+  gather_facts: false
+  vars:
+    state: merged
+    fabric_name: f1
+    vrf_name: v2
+    import_vrf_name: v1
+    devices:
+      - leaf_1
+      - leaf_2
+      - leaf_3
+      - leaf_4
+  roles:
+    - ndfc_policy_vrf_rt_import_loop
+
+# Deploy
+- hosts: ndfc
+  name: deploy and save configs
+  gather_facts: false
+  roles:
+    - ndfc_config_deploy_all_rest
+  vars:
+    fabric_name: f1

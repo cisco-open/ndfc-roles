@@ -1,0 +1,19 @@
+# ndfc_policy_query_interface/tasks/worker.yml
+- name: "dcnm_policy {{ fabric_name }} {{ item.role}} {{ item.name }} {{ interface_name }}"
+  cisco.dcnm.dcnm_policy:
+    fabric: "{{ fabric_name }}"
+    state: query
+    config:
+      - switch:
+          - ip: "{{ item.ip }}"
+  register: result
+
+- name: set_fact interface_config
+  set_fact:
+     interface_config: "{{ result.response | json_query(qw1) }}"
+  vars:
+    qw1: "[?contains(generatedConfig, '{{ interface_name }}') == `true`].{TemplateName: templateName GeneratedConfig: generatedConfig}"
+
+- name: show interface policy {{ interface_name }}
+  debug:
+    var: interface_config

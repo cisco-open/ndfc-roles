@@ -1,0 +1,17 @@
+# ndfc_device_merged_all/tasks/main.yml
+---
+- name: Update / Add Leafs
+  include_tasks: worker.yml
+  loop: "{{ leafs | json_query(query) }}"
+  vars:
+    query: "[?fabric == '{{ fabric_name }}']"
+- name: Update / Add Spines
+  include_tasks: worker.yml
+  loop: "{{ spines | json_query(query) }}"
+  vars:
+    query: "[?fabric == '{{ fabric_name }}']"
+- name: Update / Add Border Gateways
+  include_tasks: worker.yml
+  loop: "{{ border_gateways | json_query(query) }}"
+  vars:
+    query: "[?fabric == '{{ fabric_name }}']"

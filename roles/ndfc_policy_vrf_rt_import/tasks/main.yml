@@ -1,0 +1,8 @@
+# ndfc_policy_vrf_rt_import/tasks/main.yml
+---
+- name: vrf route-target import/export
+  include_tasks: worker.yml
+  loop: "{{ r1 }}"
+  vars:
+    q1: "[?name == '{{ device_name }}'] | [?fabric == '{{ fabric_name }}']"
+    r1: "{{ leafs | json_query(q1) + spines | json_query(q1) + border_gateways | json_query(q1) }}"

@@ -1,0 +1,10 @@
+ansible_connection: ansible.netcommon.httpapi
+ansible_network_os: cisco.dcnm.dcnm
+ansible_httpapi_validate_certs: no
+ansible_httpapi_use_ssl: yes
+# Default NDFC Controller username.
+# Update ansible_user if you login as a different user
+ansible_user: admin
+# ansible_password : See README.md in top-level directory for usage
+ansible_password: YourNdfcControllerPasswordGoesHere
+

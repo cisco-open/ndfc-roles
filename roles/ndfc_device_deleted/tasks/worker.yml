@@ -1,0 +1,23 @@
+---
+# ndfc_device_deleted/tasks/worker.yml
+- name: "query {{ item.ip }}"
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ fabric_name }}"
+    state: query
+    config:
+    - seed_ip: "{{ item.ip }}"
+  register: result
+
+- name: set_fact serial
+  set_fact:
+    serial: "{{ result.response | json_query(q2) }}"
+  vars:
+    q2: "[0].serialNumber"
+
+- name: deleted {{ item.fabric }} {{ item.role }} {{ item.name }} {{ item.ip}} serial ({{ serial }})
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ item.fabric }}"
+    state: deleted
+    config:
+    - seed_ip: "{{ item.ip }}"
+  when: "serial != ''"

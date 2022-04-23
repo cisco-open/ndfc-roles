@@ -1,0 +1,22 @@
+# ndfc_policy_vrf_rt_import_loop/tasks/policy_vrf_rt_import.yml
+- name: "dcnm_policy {{ state }} {{ fabric_name }} {{ item }} {{ vrf_name }} importing {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}"
+  cisco.dcnm.dcnm_policy:
+    state: "{{ state }}"
+    deploy: true
+    fabric: "{{ fabric_name }}"
+    config:
+      - name: vrf_context_rt
+        create_additional_policy: false
+        policy_vars:
+          VRF_NAME: "{{ vrf_name }}"
+          ASN: "{{ import_vrf_asn }}"
+          ALLOCATE_INDEX: "{{ import_vrf_index }}"
+      - switch:
+        - ip: "{{ devices[0].ip }}"
+  vars:
+    q2: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ import_vrf_name }}'].vrf_id | [0]"
+    q3: "[?name == '{{ fabric_name }}'].BGP_AS | [0]"
+    q4: "[?name == '{{ item }}'] | [?fabric == '{{ fabric_name }}']"
+    import_vrf_index: "{{ vrfs | json_query(q2) }}"
+    import_vrf_asn: "{{ fabrics | json_query(q3) }}"
+    devices: "{{ leafs | json_query(q4) + spines | json_query(q4) + border_gateways | json_query(q4) }}"

@@ -1,0 +1,8 @@
+# unit_test_ndfc_network_replaced_all.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_network_replaced_all
+  vars:
+    fabric_name: f1

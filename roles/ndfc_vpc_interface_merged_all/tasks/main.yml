@@ -1,0 +1,6 @@
+# ndfc_vpc_interface_merged_all/tasks/main.yml
+- name: merge all vpc interfaces for a given vpc peer pair (vpc_name)
+  include_tasks: worker.yml
+  loop: "{{ vpc_interfaces | json_query(q0) }}"
+  vars:
+    q0: "[?fabric == '{{ fabric_name }}'] | [?vpc_name == '{{ vpc_name }}']"

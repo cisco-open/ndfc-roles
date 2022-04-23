@@ -1,0 +1,10 @@
+# unit_test_ndfc_vpc_create_rest.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_vpc_create_rest
+    - ndfc_config_deploy_all_rest
+  vars:
+    fabric_name: f2
+    vpc_name: vpc2

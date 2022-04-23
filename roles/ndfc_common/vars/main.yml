@@ -1,0 +1,284 @@
+---
+# ndfc_common/vars/main.yml
+fabrics:
+- name: f1
+  BGP_AS: 65001
+  #ANYCAST_RP_IP_RANGE: 10.254.1.0/24
+  LOOPBACK0_IP_RANGE: 10.2.0.0/22
+  LOOPBACK1_IP_RANGE: 10.3.0.0/22
+  SUBNET_RANGE: 10.4.0.0/16
+  FABRIC_MTU: 9216
+  REPLICATION_MODE: Ingress
+- name: f2
+  BGP_AS: 65002
+  #ANYCAST_RP_IP_RANGE: 10.254.2.0/24
+  LOOPBACK0_IP_RANGE: 10.6.0.0/22
+  LOOPBACK1_IP_RANGE: 10.7.0.0/22
+  SUBNET_RANGE: 10.8.0.0/16
+  FABRIC_MTU: 9216
+  REPLICATION_MODE: Ingress
+leafs:
+- fabric: "{{ fabrics[0].name }}"
+  name: leaf_1
+  ip: 172.22.150.102
+  role: leaf
+- fabric: "{{ fabrics[0].name }}"
+  name: leaf_2
+  ip: 172.22.150.103
+  role: leaf
+- fabric: "{{ fabrics[0].name }}"
+  name: leaf_3
+  ip: 172.22.150.104
+  role: leaf
+- fabric: "{{ fabrics[0].name }}"
+  name: leaf_4
+  ip: 172.22.150.105
+  role: leaf
+- fabric: "{{ fabrics[1].name }}"
+  name: leaf_1
+  ip: 172.22.150.106
+  role: leaf
+- fabric: "{{ fabrics[1].name }}"
+  name: leaf_2
+  ip: 172.22.150.107
+  role: leaf
+- fabric: "{{ fabrics[1].name }}"
+  name: leaf_3
+  ip: 172.22.150.108
+  role: leaf
+- fabric: "{{ fabrics[1].name }}"
+  name: leaf_4
+  ip: 172.22.150.109
+  role: leaf
+
+spines:
+- fabric: "{{ fabrics[0].name }}"
+  name: spine_1
+  ip: 172.22.150.112
+  role: spine
+- fabric: "{{ fabrics[0].name }}"
+  name: spine_2
+  ip: 172.22.150.113
+  role: spine
+- fabric: "{{ fabrics[1].name }}"
+  name: spine_1
+  ip: 172.22.150.114
+  role: spine
+- fabric: "{{ fabrics[1].name }}"
+  name: spine_2
+  ip: 172.22.150.115
+  role: spine
+
+border_gateways:
+- fabric: "{{ fabrics[0].name }}"
+  name: border_gateway_1
+  ip: 172.22.150.110
+  role: border_gateway
+- fabric: "{{ fabrics[0].name }}"
+  name: border_gateway_2
+  ip: 172.22.150.111
+  role: border_gateway
+- fabric: "{{ fabrics[1].name }}"
+  name: border_gateway_1
+  ip: 172.22.150.100
+  role: border_gateway
+- fabric: "{{ fabrics[1].name }}"
+  name: border_gateway_2
+  ip: 172.22.150.101
+  role: border_gateway
+
+port_groups:
+  pg11:
+  - Port-channel11
+  pg12:
+  - Port-channel12
+
+networks:
+- fabric: "{{ fabrics[0].name }}"
+  net_name: n1111
+  vrf_name: v1
+  vlan_id: 1111
+  gw_ip_subnet: "10.21.1.1/24"
+  attach:
+  - ip_address: "{{ leafs[0].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[1].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[2].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[3].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+
+- fabric: "{{ fabrics[0].name }}"
+  net_name: n1112
+  vrf_name: v2
+  vlan_id: 1112
+  gw_ip_subnet: "10.22.1.1/24"
+  attach:
+  - ip_address: "{{ leafs[0].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[1].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[2].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[3].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+
+- fabric: "{{ fabrics[1].name }}"
+  net_name: n1111
+  vrf_name: v1
+  vlan_id: 1111
+  gw_ip_subnet: "10.21.1.1/24"
+  attach:
+  - ip_address: "{{ leafs[4].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[5].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[6].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[7].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+
+- fabric: "{{ fabrics[1].name }}"
+  net_name: n1112
+  vrf_name: v2
+  vlan_id: 1112
+  gw_ip_subnet: "10.22.1.1/24"
+  attach:
+  - ip_address: "{{ leafs[4].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[5].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[6].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[7].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+
+vrfs:
+- fabric: "{{ fabrics[0].name }}"
+  vrf_name: v1
+  vrf_id: 9003031
+  vlan_id: 3031
+  vrf_template: Default_VRF_Universal
+  vrf_extension_template: Default_VRF_Extension_Universal
+  service_vrf_template: null
+  attach:
+    - ip_address: "{{ leafs[0].ip }}"
+    - ip_address: "{{ leafs[1].ip }}"
+    - ip_address: "{{ leafs[2].ip }}"
+    - ip_address: "{{ leafs[3].ip }}"
+- fabric: "{{ fabrics[0].name }}"
+  vrf_name: v2
+  vrf_id: 9003032
+  vlan_id: 3032
+  vrf_template: Default_VRF_Universal
+  vrf_extension_template: Default_VRF_Extension_Universal
+  service_vrf_template: null
+  attach:
+    - ip_address: "{{ leafs[0].ip }}"
+    - ip_address: "{{ leafs[1].ip }}"
+    - ip_address: "{{ leafs[2].ip }}"
+    - ip_address: "{{ leafs[3].ip }}"
+- fabric: "{{ fabrics[1].name }}"
+  vrf_name: v1
+  vrf_id: 9003031
+  vlan_id: 3031
+  vrf_template: Default_VRF_Universal
+  vrf_extension_template: Default_VRF_Extension_Universal
+  service_vrf_template: null
+  attach:
+    - ip_address: "{{ leafs[4].ip }}"
+    - ip_address: "{{ leafs[5].ip }}"
+    - ip_address: "{{ leafs[6].ip }}"
+    - ip_address: "{{ leafs[7].ip }}"
+- fabric: "{{ fabrics[1].name }}"
+  vrf_name: v2
+  vrf_id: 9003032
+  vlan_id: 3032
+  vrf_template: Default_VRF_Universal
+  vrf_extension_template: Default_VRF_Extension_Universal
+  service_vrf_template: null
+  attach:
+    - ip_address: "{{ leafs[4].ip }}"
+    - ip_address: "{{ leafs[5].ip }}"
+
+vpc_peers:
+- fabric: "{{ fabrics[0].name}}"
+  vpc_name: "vpc1"
+  peer_1_ip: "{{ leafs[0].ip }}"
+  peer_2_ip: "{{ leafs[1].ip }}"
+- fabric: "{{ fabrics[0].name}}"
+  vpc_name: "vpc2"
+  peer_1_ip: "{{ leafs[2].ip }}"
+  peer_2_ip: "{{ leafs[3].ip }}"
+
+- fabric: "{{ fabrics[1].name}}"
+  vpc_name: "vpc1"
+  peer_1_ip: "{{ leafs[4].ip }}"
+  peer_2_ip: "{{ leafs[5].ip }}"
+- fabric: "{{ fabrics[1].name}}"
+  vpc_name: "vpc2"
+  peer_1_ip: "{{ leafs[6].ip }}"
+  peer_2_ip: "{{ leafs[7].ip }}"
+
+vpc_interfaces:
+- fabric: "{{ fabrics[0].name}}"
+  vpc_name: vpc1
+  vpc_port_id: vpi11
+  interface_mode: trunk
+  port_channel_mode: active
+  member_list:
+  - Ethernet1/11
+- fabric: "{{ fabrics[0].name}}"
+  vpc_name: vpc2
+  vpc_port_id: vpi11
+  interface_mode: trunk
+  member_list:
+  - Ethernet1/11
+  port_channel_mode: active
+
+- fabric: "{{ fabrics[0].name}}"
+  vpc_name: vpc1
+  vpc_port_id: vpi12
+  interface_mode: trunk
+  member_list:
+  - Ethernet1/12
+  port_channel_mode: active
+- fabric: "{{ fabrics[0].name}}"
+  vpc_name: vpc2
+  vpc_port_id: vpi12
+  interface_mode: trunk
+  member_list:
+  - Ethernet1/12
+  port_channel_mode: active
+
+# f2
+- fabric: "{{ fabrics[1].name}}"
+  vpc_name: vpc1
+  vpc_port_id: vpi11
+  interface_mode: trunk
+  port_channel_mode: active
+  member_list:
+  - Ethernet1/11
+- fabric: "{{ fabrics[1].name}}"
+  vpc_name: vpc2
+  vpc_port_id: vpi11
+  interface_mode: trunk
+  member_list:
+  - Ethernet1/11
+  port_channel_mode: active
+
+- fabric: "{{ fabrics[1].name}}"
+  vpc_name: vpc1
+  vpc_port_id: vpi12
+  interface_mode: trunk
+  member_list:
+  - Ethernet1/12
+  port_channel_mode: active
+- fabric: "{{ fabrics[1].name}}"
+  vpc_name: vpc2
+  vpc_port_id: vpi12
+  interface_mode: trunk
+  member_list:
+  - Ethernet1/12
+  port_channel_mode: active

@@ -1,0 +1,8 @@
+# example_ndfc_config_deploy_all_rest.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_config_deploy_all_rest
+  vars:
+    fabric_name: f1

@@ -1,0 +1,9 @@
+# example_ndfc_device_query.yml
+# Query all NX-OS switches in fabric_name
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_device_query_all
+  vars:
+    fabric_name: f1

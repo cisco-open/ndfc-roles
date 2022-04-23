@@ -1,0 +1,5 @@
+# ndfc_policy_vrf_rt_import_loop/tasks/main.yml
+---
+- name: vrf route-target import/export
+  include_tasks: worker.yml
+  loop: "{{ devices }}"

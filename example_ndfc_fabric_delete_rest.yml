@@ -1,0 +1,8 @@
+# unit_test_ndfc_fabric_delete_rest.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_fabric_delete_rest
+  vars:
+    fabric_name: f1

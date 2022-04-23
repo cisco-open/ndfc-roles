@@ -1,0 +1,4 @@
+---
+# defaults file for ndfc_common
+device_password: "{{ nxos_password }}"
+device_username: admin

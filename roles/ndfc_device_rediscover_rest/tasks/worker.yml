@@ -1,0 +1,24 @@
+# ndfc_device_rediscover_rest/tasks/worker.yml
+- name: "query {{ item.fabric }} {{ item.role }} {{ item.name }} {{ item.ip }}"
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ item.fabric }}"
+    state: query
+    config:
+    - seed_ip: "{{ item.ip }}"
+  register: result
+
+- name: "set_fact device_id - {{ item.fabric }} {{ item.role }} {{ item.name }} {{ item.ip }}"
+  set_fact:
+     device_id: "{{ result.response | json_query(q2) | to_json }}"
+  vars:
+    q2: "[0].switchDbID"
+
+- name: "Rediscover Device {{ item.fabric }} {{ item.role }} {{ item.name }} {{ item.ip }} {{ device_id }}"
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-discovery/rediscoverSwitch"
+    json_data: "{{ vars_list | to_json }}"
+  when: "device_id != None"
+  vars:
+    vars_list:
+      - "{{ device_id }}"

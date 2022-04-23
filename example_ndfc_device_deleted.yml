@@ -1,0 +1,9 @@
+# example_ndfc_device_deleted.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_device_deleted
+  vars:
+    fabric_name: f1
+    device_name: spine_1

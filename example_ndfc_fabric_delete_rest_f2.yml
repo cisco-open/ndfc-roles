@@ -1,0 +1,30 @@
+# example_ndfc_fabric_delete_f2.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_network_deleted_all
+  vars:
+    fabric_name: f2
+
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_vrf_all
+  vars:
+    fabric_name: f2
+    state: deleted
+
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_device_deleted_all
+  vars:
+    fabric_name: f2
+
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_fabric_delete_rest
+  vars:
+    fabric_name: f2

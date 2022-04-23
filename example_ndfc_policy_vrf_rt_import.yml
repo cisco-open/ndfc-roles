@@ -1,0 +1,12 @@
+# example_ndfc_policy_vrf_rt_import.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_policy_vrf_rt_import
+  vars:
+    fabric_name: f1
+    device_name: leaf_2
+    vrf_name: v1
+    import_vrf_name: v2
+    state: merged

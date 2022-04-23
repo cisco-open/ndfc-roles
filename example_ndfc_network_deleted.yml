@@ -1,0 +1,9 @@
+# unit_test_ndfc_network_replaced.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_network
+  vars:
+    fabric_name: f1
+    state: deleted

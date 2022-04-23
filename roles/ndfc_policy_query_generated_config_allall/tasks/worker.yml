@@ -1,0 +1,18 @@
+# ndfc_policy_query_generated_config_all/worker.yml
+- name: "dcnm_policy query generated_config {{ item.name }} {{ item.ip }}"
+  cisco.dcnm.dcnm_policy:
+    fabric: "{{ fabric_name }}"
+    state: query
+    config:
+      - switch:
+          - ip: "{{ item.ip }}"
+  register: result
+
+- name: set_fact {{ item.name }} {{ item.ip }}
+  set_fact:
+     generated_configs: "{{ result.response | json_query(q2) }}"
+  vars:
+    q2: "[?generatedConfig != ''].{TemplateName: templateName GeneratedConfig: generatedConfig}"
+- name: show populated generated_configs {{ item.role}} {{ item.name }} {{ item.ip }}
+  debug:
+    var: generated_configs

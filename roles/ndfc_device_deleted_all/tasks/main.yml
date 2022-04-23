@@ -1,0 +1,5 @@
+# ndfc_device_deleted_all/tasks/main.yml
+- name: Delete all devices in fabric fabric_name
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ fabric_name }}"
+    state: deleted

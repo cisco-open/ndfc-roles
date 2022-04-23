@@ -1,0 +1,45 @@
+# ndfc_fabric_create_rest/tasks/main.yml
+---
+- name: Retrieve list of fabrics
+  cisco.dcnm.dcnm_rest:
+    method: GET
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
+  register: result
+- name: set_fact active_fabrics
+  set_fact:
+     active_fabrics: "{{ result.response.DATA | json_query(query) | to_json }}"
+  vars:
+    query: "[*].{FabricName: fabricName}"
+- name: set_fact for fabric
+  set_fact:
+     BGP_AS: "{{ fabrics | json_query(q1) }}"
+     ANYCAST_RP_IP_RANGE: "{{ fabrics | json_query(q2) }}"
+     LOOPBACK0_IP_RANGE: "{{ fabrics | json_query(q3) }}"
+     LOOPBACK1_IP_RANGE: "{{ fabrics | json_query(q4) }}"
+     SUBNET_RANGE: "{{ fabrics | json_query(q5) }}"
+     FABRIC_MTU: "{{ fabrics | json_query(q6) }}"
+     REPLICATION_MODE: "{{ fabrics | json_query(q7) }}"
+  vars:
+    q1: "[?name == '{{ fabric_name }}'].BGP_AS | [0]"
+    q2: "[?name == '{{ fabric_name }}'].ANYCAST_RP_IP_RANGE | [0]"
+    q3: "[?name == '{{ fabric_name }}'].LOOPBACK0_IP_RANGE | [0]"
+    q4: "[?name == '{{ fabric_name }}'].LOOPBACK1_IP_RANGE | [0]"
+    q5: "[?name == '{{ fabric_name }}'].SUBNET_RANGE | [0]"
+    q6: "[?name == '{{ fabric_name }}'].FABRIC_MTU | [0]"
+    q7: "[?name == '{{ fabric_name }}'].REPLICATION_MODE | [0]"
+
+- name: Easy_Fabric {{ fabric_name }} BGP_AS {{ BGP_AS }} ACTIVE_FABRICS {{ active_fabrics }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/Easy_Fabric"
+    json_data: "{{ vars_dict | to_json }}"
+  when: "fabric_name not in active_fabrics"
+  vars:
+    vars_dict:
+      BGP_AS: "{{ BGP_AS }}"
+      ANYCAST_RP_IP_RANGE: "{{ ANYCAST_RP_IP_RANGE }}"
+      LOOPBACK0_IP_RANGE: "{{ LOOPBACK0_IP_RANGE }}"
+      LOOPBACK1_IP_RANGE: "{{ LOOPBACK1_IP_RANGE }}"
+      SUBNET_RANGE: "{{ SUBNET_RANGE }}"
+      FABRIC_MTU: "{{ FABRIC_MTU }}"
+      REPLICATION_MODE: "{{ REPLICATION_MODE }}"
