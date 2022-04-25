@@ -4,6 +4,27 @@ This repo contains Ansible Roles and example playbooks that, together, implement
 
 The inventory contains two identical fabrics with non-overlapping underlay addressing to facilitate interconnection via a multi-site domain (MSD) fabric.  This repo will be updated soon to add Role(s) to create the MSD fabric and to connect each fabric to the MSD.
 
+The two main playbooks, which create the two fabrics are located in the top-level directory:
+
+```bash
+example_ndfc_fabric_create_rest_f1.yml
+example_ndfc_fabric_create_rest_f2.yml
+```
+
+These leverage the following included Roles:
+
+```bash
+ndfc_config_deploy_all_rest
+ndfc_device_merged
+ndfc_fabric_create_rest
+ndfc_network_replaced_all
+ndfc_policy_vrf_rt_import_loop
+ndfc_vpc_create_rest
+ndfc_vpc_interface_merged_all
+```
+
+The remaining Roles are provided as examples which facilitate various day2 ops.
+
 ### To clone this repo
 
 ```bash
@@ -51,14 +72,14 @@ connect_timeout=1800
 The characteristics of the resulting fabrics are as follows (see also the included PDF for a topology).
 
 1. 2 Spine acting as Route Reflectors for all Leaf and Border Gateway
-2. 4 Leaf (2 VPC pairs using fabric-peering for their virtual peer-link)
-3. 2 Border Gateway (Currently not connected to a MSD fabric. This will be added later.)
+2. 4 Leaf / VTEP (2 VPC pairs using fabric-peering for their virtual peer-link)
+3. 2 Border Gateway / VTEP (Currently not connected to a MSD fabric. This will be added later.)
 4. 2 VRF: v1 and v2
 5. L3 connectivity between VRF v1 and v2
 6. L2 connectivity within each VRF
+7. VXLAN/EVPN Replication Mode: Ingress
 
 Spines and Leafs can be added/removed by updating the Common Role Variables described below.
-
 
 ### Common Role Variables
 
