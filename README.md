@@ -75,15 +75,16 @@ The characteristics of the resulting fabrics are as follows (see also the includ
 2. 4 Leaf / VTEP (2 VPC pairs using fabric-peering for their virtual peer-link)
 3. 2 Border Gateway / VTEP (Currently not connected to a MSD fabric. This will be added later.)
 4. 2 VRF: v1 and v2
-5. L3 connectivity between VRF v1 and v2
+5. L3 (ipv4 / ipv6) connectivity between VRF v1 and v2
 6. L2 connectivity within each VRF
-7. VXLAN/EVPN Replication Mode: Ingress
+7. OSPF underlay
+8. VXLAN/EVPN Replication Mode: Ingress
 
 Spines and Leafs can be added/removed by updating the Common Role Variables described below.
 
 ### Common Role Variables
 
-To use these Roles, and example playbooks, you'll need to update some common variables used across all Roles.  These are maintained in ./ndfc_common/vars/main.yml and include things like: IP addresses of your switches, VRF names, VLAN identifiers, port attachments for networks, VPC peering info and other basic information.
+To use these Roles, and example playbooks, you'll need to update some common variables used across all Roles.  These are maintained in ``./ndfc_common/vars/main.yml`` and include things like: IP addresses of your switches, VRF names, VLAN identifiers, port attachments for networks, VPC peering info and other basic information.
 
 See the following for details around the modifications you'll need to make:
 
