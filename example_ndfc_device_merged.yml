@@ -1,4 +1,4 @@
-# unit_test_ndfc_device_merged.yml
+# example_ndfc_device_merged.yml
 ---
 - hosts: ndfc
   gather_facts: false

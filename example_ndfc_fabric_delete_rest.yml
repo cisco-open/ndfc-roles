@@ -1,4 +1,4 @@
-# unit_test_ndfc_fabric_delete_rest.yml
+# example_ndfc_fabric_delete_rest.yml
 ---
 - hosts: ndfc
   gather_facts: false
