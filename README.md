@@ -35,7 +35,7 @@ git clone https://github.com/allenrobel/ndfc-roles.git
 
 #### cisco.dcnm Ansible Collection
 
-The Ansible Roles in this repo require that the cisco.dcnm Collection be installed.  A ``requirements.yml`` file is included in the top-level directory which will install this collection.  Or you may do so explicitly.  It's recommended to use ``requirements.yml`` as this file will be updated with any other dependencies later.
+The Ansible Roles in this repo require that the cisco.dcnm Collection be installed.  A ``requirements.yml`` file is included in the top-level directory which will install this collection.  Or you may do so explicitly.  It's recommended to use ``requirements.yml`` as this file may be updated with other dependencies later.
 
 ##### Example using ``requirements.yml``
 
