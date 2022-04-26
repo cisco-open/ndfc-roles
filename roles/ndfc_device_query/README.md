@@ -21,8 +21,26 @@ See the following for details:
 
 ### Example Playbooks
 
-```
-example_ndfc_device_query.yml
+```yaml
+# Query NX-OS switch associated with fabric_name + device_name
+# Returns device_info JSON object (see ndfc_device_query/README.md for object format)
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_device_query
+  vars:
+    fabric_name: f2
+    device_name: leaf_1
+  tasks:
+  - block:
+    - debug:
+        msg: "uptime: {{ device_info.upTimeStr }}"
+    - debug:
+        msg: "serial: {{ device_info.serialNumber }}"
+    - debug:
+        msg: "version: {{ device_info.release }}"
+    when: "serial != ''"
 ```
 
 ### License

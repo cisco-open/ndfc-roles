@@ -40,9 +40,15 @@ device_username       | str()   | The username used to login to the device
 
 ### Example Playbooks
 
-```
-example_ndfc_fabric_create_rest_f1.yml
-example_ndfc_device_merged.yml
+```yaml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_device_merged
+  vars:
+    fabric_name: f1
+    device_name: spine_1
 ```
 
 ### License

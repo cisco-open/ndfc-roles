@@ -20,7 +20,16 @@ See the following for details:
 
 ### Example Playbook
 
-example_ndfc_device_deleted.yml
+```yaml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_device_deleted
+  vars:
+    fabric_name: f1
+    device_name: spine_1
+```
 
 ### License
 

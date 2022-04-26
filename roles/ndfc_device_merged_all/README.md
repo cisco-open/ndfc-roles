@@ -33,9 +33,9 @@ Variable              | Type    | Description
 device_password       | str()   | The password used to login to the device
 device_username       | str()   | The username used to login to the device
 
-### Example Playbooks
+### Example Playbook
 
-This Role is not currently reliable since it does not issue a config-save + config-deploy between devices.  Please use ``ndfc_device_merged`` instead.
+This Role is not currently reliable since it does not issue a config-save + config-deploy between devices.  Please use ``ndfc_device_merged`` instead, for now.
 
 ### License
 

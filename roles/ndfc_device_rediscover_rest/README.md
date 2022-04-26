@@ -1,20 +1,22 @@
-# ndfc_device_deleted_all
+# ndfc_device_query_all
 
-Delete all devices from fabric fabric_name
+Rediscover device ``device_name`` in fabric ``fabric_name``
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric from which the devices will be deleted
+device_name     | str() | The device's name (see below)
+fabric_name     | str() | The fabric in which device_name resides
 
-Fabric names are defined in the following file:
+Device and Fabric names are defined in the following file:
 
 ``./roles/ndfc_common/vars/main.yml``)
 
 See the following for details:
 
 [./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+
 
 ### Example Playbook
 
@@ -23,9 +25,10 @@ See the following for details:
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_device_deleted_all
+    - ndfc_device_rediscover_rest
   vars:
     fabric_name: f1
+    device_name: spine_1
 ```
 
 ### License

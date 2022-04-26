@@ -1,4 +1,4 @@
-# ndfc_config_deploy_all_reset
+# ndfc_config_deploy_all_rest
 
 Issue NDFC POST REST API calls to invoke config-save and config-deploy
 
@@ -11,11 +11,16 @@ Variable           | Type   | Description
 forceShowRun       | bool() | default, false
 inclAllMSDSwitches | bool() | default, false
 
-### Example Playbooks
+### Example Playbook
 
-```
-example_ndfc_fabric_create_rest_f1.yml
-example_ndfc_config_deploy_all_rest.yml
+```yaml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_config_deploy_all_rest
+  vars:
+    fabric_name: f1
 ```
 
 ### License
