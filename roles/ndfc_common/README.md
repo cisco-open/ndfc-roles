@@ -200,7 +200,7 @@ vlan_id                | 3031           | int()        | vrf associated vlan
 vrf_template           | TemplateVrf    | str()        | Name of the config template to be used
 vrf_extension_template | TemplateExVrf  | str()        | Name of the extension config template to be used
 service_vrf_template   | ServiceVrf     | str()        | Service vrf template
-attach                 | See example    | list of dict | List of dictionaries defining the attachment
+attach                 | See example    | list of dict | List of mgmt0 ip addresses of switches on which the VRF is configured
 attach.ip_address      | 192.168.1.1    | IP address   | mgmt0 address of the switch to which the vrf is attached
 
 
