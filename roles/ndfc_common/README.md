@@ -243,9 +243,36 @@ vpc_peers:
   peer_2_ip: "{{ leafs[3].ip }}"
 ```
 
-### Dependencies
+### vpc_interfaces
 
-None
+Variable               | Example          | Type   | Description
+-----------------------|------------------|--------|-------------------
+fabric                 | f1               | str()  | Fabric in which ``vpc_name`` resides
+vpc_name               | vpc_1            | str()  | name of the VPC peering relationship
+vpc_port_id            | vpi11            | str()  | User-provided name.  Can be used in playbooks to merge a specific vpc_port_id
+interface_mode         | trunk            | str()  | The switchport mode of the interface e.g. trunk, access
+port_channel_mode      | active           | str()  | The channel-group mode of the interface e.g. active, on, passive
+member_list            | [ Ethernet1/11 ] | list() | An Ansible list of NX-OS interface names
+
+##### Example
+
+```yaml
+vpc_interfaces:
+- fabric: "{{ fabrics[0].name}}"
+  vpc_name: vpc1
+  vpc_port_id: vpi11
+  interface_mode: trunk
+  port_channel_mode: active
+  member_list:
+  - Ethernet1/11
+- fabric: "{{ fabrics[0].name}}"
+  vpc_name: vpc2
+  vpc_port_id: vpi11
+  interface_mode: trunk
+  member_list:
+  - Ethernet1/11
+  port_channel_mode: active
+```
 
 ### Example Playbook
 
