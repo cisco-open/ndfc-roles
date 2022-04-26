@@ -1,6 +1,6 @@
 # ndfc_policy_vrf_rt_import_loop
 
-Import vrf ``import_vrf_name``'s route-targets into vrf ``vrf_name`` on device ``device_name`` in fabric ``fabric_name`` using Ansible state ``state``
+Import vrf ``import_vrf_name``'s route-targets into vrf ``vrf_name`` on multiple devices in fabric ``fabric_name`` using Ansible state ``state``
 
 
 ### Role Variables
