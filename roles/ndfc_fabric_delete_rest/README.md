@@ -6,7 +6,7 @@ Delete fabric ``fabric_name``
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric in which device_name resides
+fabric_name     | str() | The fabric to be deleted
 
 Fabric parameters, including ``fabric_name`, are defined in the following file:
 

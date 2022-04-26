@@ -1,14 +1,14 @@
 # ndfc_device_query
 
-Query a specific device, given fabric_name and device_name.
+Query device ``device_name`` in fabric ``fabric_name``.
 
-Return a device_info object as described below.
+A device_info object is returned, as described below.
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-device_name     | str() | The device's name (see below)
+device_name     | str() | The device to be queried
 fabric_name     | str() | The fabric in which device_name resides
 
 Device and Fabric names are defined in the following file:
@@ -19,11 +19,11 @@ See the following for details:
 
 [./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
 
-### Example Playbooks
+### Example Playbook
 
 ```yaml
 # Query NX-OS switch associated with fabric_name + device_name
-# Returns device_info JSON object (see ndfc_device_query/README.md for object format)
+# and print several items from the returned device_info dictionary
 ---
 - hosts: ndfc
   gather_facts: false

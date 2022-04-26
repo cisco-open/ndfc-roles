@@ -1,4 +1,4 @@
-# ndfc_device_query_all
+# ndfc_device_rediscover_rest
 
 Rediscover device ``device_name`` in fabric ``fabric_name``
 
@@ -6,8 +6,8 @@ Rediscover device ``device_name`` in fabric ``fabric_name``
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-device_name     | str() | The device's name (see below)
-fabric_name     | str() | The fabric in which device_name resides
+device_name     | str() | The device to be rediscovered
+fabric_name     | str() | The fabric in which ``device_name`` resides
 
 Device and Fabric names are defined in the following file:
 

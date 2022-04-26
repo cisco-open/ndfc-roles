@@ -1,15 +1,13 @@
 # ndfc_device_merged
 
-Merge an NX-OS device into the fabric using cisco.dcnm.dcnm_inventory.
-
-### Requirements
+Merge device ``device_name`` into fabric ``fabric_name`` using ``cisco.dcnm.dcnm_inventory``.
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-device_name     | str() | The device's name (see below)
-fabric_name     | str() | The fabric in which device_name resides
+device_name     | str() | The device to be merged
+fabric_name     | str() | The fabric in which ``device_name`` resides
 
 Device and Fabric names are defined in the following file:
 

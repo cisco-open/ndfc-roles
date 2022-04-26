@@ -1,6 +1,6 @@
 # ndfc_device_deleted_all
 
-Delete all devices from fabric fabric_name
+Delete all devices from fabric ``fabric_name``
 
 ### Role Variables
 

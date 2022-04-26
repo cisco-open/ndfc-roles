@@ -1,6 +1,6 @@
 # ndfc_config_deploy_all_rest
 
-Issue NDFC POST REST API calls to invoke config-save and config-deploy
+Issue NDFC POST REST API calls to invoke config-save and config-deploy in fabric ``fabric_name``
 
 ### Role Variables
 

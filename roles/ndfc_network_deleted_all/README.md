@@ -6,7 +6,7 @@ Delete all networks in fabric ``fabric_name``
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric in which device_name resides
+fabric_name     | str() | The fabric in which the networks reside
 
 Fabric parameters, including ``fabric_name`, are defined in the following file:
 
@@ -20,7 +20,6 @@ See the following for details:
 ### Example Playbook
 
 ```yaml
----
 ---
 - hosts: ndfc
   gather_facts: false

@@ -6,7 +6,7 @@ Merge all leaf, spine, border_gateway devices into fabric ``fabric_name`` using 
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric in which device_name resides
+fabric_name     | str() | The fabric in which the devices reside
 
 Fabric names are defined in the following file:
 
