@@ -106,7 +106,7 @@ It is recommended (but not mandatory) that you encrypt these passwords.  Below i
 
 Add ``ansible_password`` and ``device_password`` in encrypted format (or not, if you don't care about security).  These are the passwords you use to login to your DCNM/NDFC Controller, and NX-OS switches, respectively.
 
-To add encrypted passwords for the NDFC controller and NX-OS switches, issue the following from this repo's top-level directory.
+To add encrypted passwords for the NDFC controller and NX-OS devices, issue the following from this repo's top-level directory.
 
 ```bash
 ansible-vault encrypt_string 'mySuperSecretNdfcPassword' --name 'ansible_password' >> ./inventory/group_vars/ndfc
@@ -133,7 +133,7 @@ ansible_password: !vault |
 ```
 
 If you don't care about security, you can add a non-encrypted password by editing the file directly.
-The following is an example unencrypted password added to this file:
+The following are example unencrypted passwords for the NDFC controller and NX-OS devices added to this file:
 
 ```bash
 ansible_password: mySuperSecretNdfcPassword
