@@ -197,8 +197,8 @@ fabric                 | f1             | str()        | Fabric in which network
 vrf_name               | vrf_1          | str()        | vrf in which network resides
 vrf_id                 | 9003031        | int()        | vrf Layer3 VNI / vn-segment
 vlan_id                | 3031           | int()        | vrf associated vlan 
-vrf_template           | TemplateVrf    | str()        | Name of the config template to be used
-vrf_extension_template | TemplateExVrf  | str()        | Name of the extension config template to be used
+vrf_template           | TemplateVrf    | str()        | Overlay VRF Template For Leafs
+vrf_extension_template | TemplateExVrf  | str()        | Overlay VRF Template For Borders
 service_vrf_template   | ServiceVrf     | str()        | Service vrf template
 attach                 | See example    | list of dict | List of mgmt0 ip addresses of switches on which the VRF is configured
 attach.ip_address      | 192.168.1.1    | IP address   | mgmt0 address of the switch to which the vrf is attached
