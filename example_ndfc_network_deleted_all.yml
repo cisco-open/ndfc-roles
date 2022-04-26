@@ -1,9 +1,8 @@
-# example_ndfc_network_replaced.yml
+# example_ndfc_network_deleted_all.yml
 ---
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_network
+    - ndfc_network_deleted_all
   vars:
     fabric_name: f1
-    state: deleted
