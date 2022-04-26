@@ -114,7 +114,7 @@ ansible-vault encrypt_string 'mySuperSecretNdfcPassword' --name 'ansible_passwor
 ansible-vault encrypt_string 'mySuperSecretNxosPassword' --name 'device_password' >> ./inventory/group_vars/ndfc
 ```
 
-ansible-vault will prompt you for a vault password, which you'll use to decrypt these password (using ``ansible-playbook --ask-vault-pass``) when running the example playbooks.
+ansible-vault will prompt you for a vault password, which you'll use to decrypt these passwords (using ``ansible-playbook --ask-vault-pass``) when running the example playbooks.
 
 Example:
 
