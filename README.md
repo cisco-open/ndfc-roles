@@ -207,7 +207,7 @@ ndfc_network_replaced_all      | Replace all networks within a fabric, given fab
 ndfc_policy_query_generated_config_all* | Query and display all populated generated_configs on all devices, given fabric_name.
 ndfc_policy_query_interface*    | Query and display interface config on all devices in a fabric, given fabric_name, interface_name
 ndfc_policy_vrf_rt_import      | Import a vrf's route-targets into another vrf on a single device, given fabric_name, device_name
-ndfc_policy_vrf_rt_import_loop | Import a vrf's route-targets into another vrf on a list of devices in a fabric, given fabric_name, and a list of devices
+ndfc_policy_vrf_rt_import_loop | Import a vrf's route-targets into another vrf on a list of devices in a fabric, given fabric_name, and a list of device_name
 ndfc_vpc_create_rest           | Create a VPC pair, given fabric_name, vpc_name
 ndfc_vpc_interface_merged_all  | Create (merge) all vpc interfaces for a vpc pair, given fabric_name, vpc_name
 ndfc_vrf_all                   | merge/delete all vrfs in a fabric, given fabric_name
