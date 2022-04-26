@@ -5,6 +5,10 @@ ansible_httpapi_use_ssl: yes
 # Default NDFC Controller username.
 # Update ansible_user if you login as a different user
 ansible_user: admin
-# ansible_password : See README.md in top-level directory for usage
+# ansible_password : NDFC password. See README.md in top-level directory for usage
 ansible_password: YourNdfcControllerPasswordGoesHere
+# Username for the NX-OS switches
+device_username: admin
+# Password for the NX_OS switches. See README.md in top-level directory for usage
+device_password: YourNxosSwitchesPasswordGoestHere
 

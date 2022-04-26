@@ -92,27 +92,28 @@ See the following for details around the modifications you'll need to make
 
 ### Inventory
 
-Next, you'll need to edit the following to add your NDFC username and password.
+Next, you'll need to edit the following to add your NDFC username and password and the username/password for the switches comprising your fabric(s)
 
 ```bash
 ./inventory/group_vars/ndfc 
 ```
 
-It is recommended (but not mandatory) that you encrypt this password.  Below is one way to do this.
+It is recommended (but not mandatory) that you encrypt these passwords.  Below is one way to do this.
 
 #### Modify ./inventory/group_vars/ndfc
 
-##### Edit ``ansible_password``
+##### Edit ``ansible_password`` (password for NDFC controller) and ``device_password`` (password for NX-OS switches)
 
-Add ``ansible_password`` in encrypted format (or not, if you don't care about security).  This is the password you use to login to your DCNM/NDFC Controller.
+Add ``ansible_password`` and ``device_password`` in encrypted format (or not, if you don't care about security).  These are the passwords you use to login to your DCNM/NDFC Controller, and NX-OS switches, respectively.
 
-To add an encrypted password, issue the following from this repo's top-level directory:
+To add encrypted passwords, issue the following from this repo's top-level directory:
 
 ```bash
 ansible-vault encrypt_string 'mySuperSecretNdfcPassword' --name 'ansible_password' >> ./inventory/group_vars/ndfc
+ansible-vault encrypt_string 'mySuperSecretNxosPassword' --name 'device_password' >> ./inventory/group_vars/ndfc
 ```
 
-ansible-vault will prompt you for a vault password, which you'll use to decrypt the password (using ``ansible-playbook --ask-vault-pass``) when running the example playbooks.
+ansible-vault will prompt you for a vault password, which you'll use to decrypt these password (using ``ansible-playbook --ask-vault-pass``) when running the example playbooks.
 
 Example:
 
@@ -136,16 +137,19 @@ The following is an example unencrypted password added to this file:
 
 ```bash
 ansible_password: mySuperSecretNdfcPassword
+device_password: mySuperSecretNxosPassword
 ```
 
 ##### Edit ``ansible_user``
 
 Change ``ansible_user`` in the same file to the username associated with the above password that you're using on DCNM/NDFC.
+Change ``device_username`` in the same file to the username used to login to your NX-OS switches.
 
 Example:
 
 ```bash
 ansible_user: voldomort
+device_username: admin
 ```
 
 ##### Update ``./inventory/hosts/hosts`` with the IP address of your DCNM/NDFC Controller
