@@ -1,9 +1,9 @@
-# example_ndfc_policy_query_interface.yml
+# example_ndfc_policy_query_interface_all.yml
 ---
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_policy_query_interface
+    - ndfc_policy_query_interface_all
   vars:
     fabric_name: f1
     interface_name: Ethernet1/11
