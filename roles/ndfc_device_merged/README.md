@@ -38,10 +38,12 @@ preserve_config | bool() | If true, preserve the existing config on the device(s
 
 ### Dependencies
 
-### Example Playbook
+### Example Playbooks
 
+```
 example_ndfc_fabric_create_rest_f1.yml
 example_ndfc_device_merged.yml
+```
 
 ### License
 
