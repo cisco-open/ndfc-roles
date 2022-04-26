@@ -16,6 +16,7 @@ vpc_name        | str() | The name of the vpc peering to create
 Specifically:
 
 ``fabric_name`` is defined in the ``fabrics`` list
+
 ``vpc_name`` is defined in the ``vpc_peers`` list
 
 See the following for details:
