@@ -11,7 +11,7 @@ fabric_name     | str()  | The fabric in which ``device_name`` resides
 vrf_name        | str()  | The vrf into which ``import_vrf_name``'s route-targets will be imports
 import_vrf_name | str()  | The vrf whose route-targets will be imported into ``vrf_name``
 state           | str()  | The Ansible state to apply for the import. e.g. ``deleted`` to delete the import, ``merged`` to merge the import, etc.
-devices         | list() | An Ansible list of ``device_name``s to which ``vrf_name`` is attached
+devices         | list() | An Ansible list of ``device_name`` to which ``vrf_name`` is attached
 
 Fabric, device, and vrf names are are defined in the following file:
 
