@@ -8,7 +8,7 @@ Import vrf ``import_vrf_name``'s route-targets into vrf ``vrf_name`` on device `
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 device_name     | str() | The device to which vrf ``vrf_name`` is attached
-fabric_name     | str() | The fabric in which device_name resides
+fabric_name     | str() | The fabric in which ``device_name`` resides
 vrf_name        | str() | The vrf into which ``import_vrf_name``'s route-targets will be imports
 import_vrf_name | str() | The vrf whose route-targets will be imported into ``vrf_name``
 state           | str() | The Ansible state to apply for the import. e.g. ``deleted`` to delete the import, ``merged`` to merge the import, etc.
