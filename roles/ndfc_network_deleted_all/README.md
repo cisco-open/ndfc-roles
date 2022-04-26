@@ -1,4 +1,4 @@
-# ndfc_network_deleted_add
+# ndfc_network_deleted_all
 
 Delete all networks in fabric ``fabric_name``
 
