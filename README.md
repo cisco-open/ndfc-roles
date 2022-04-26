@@ -86,11 +86,9 @@ Spines and Leafs can be added/removed by updating the Common Role Variables desc
 
 To use these Roles, and example playbooks, you'll need to update some common variables used across all Roles.  These are maintained in ``./ndfc_common/vars/main.yml`` and include things like: IP addresses of your switches, VRF names, VLAN identifiers, port attachments for networks, VPC peering info and other basic information.
 
-See the following for details around the modifications you'll need to make:
+See the following for details around the modifications you'll need to make
 
-```bash
-./ndfc_common/vars/README.md
-```
+[./ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
 
 ### Inventory
 
