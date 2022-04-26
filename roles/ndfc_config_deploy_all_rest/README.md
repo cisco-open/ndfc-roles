@@ -2,8 +2,6 @@
 
 Issue NDFC POST REST API calls to invoke config-save and config-deploy
 
-### Requirements
-
 ### Role Variables
 
 Default values for the following variables are set in ``./roles/ndfc_config_deploy_all_rest/defaults/main.yml``:
@@ -12,8 +10,6 @@ Variable           | Type   | Description
 -------------------|--------|------------
 forceShowRun       | bool() | default, false
 inclAllMSDSwitches | bool() | default, false
-
-### Dependencies
 
 ### Example Playbooks
 

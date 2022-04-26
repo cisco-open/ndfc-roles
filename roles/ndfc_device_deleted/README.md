@@ -1,48 +1,33 @@
-ndfc_devices_delete
-=========
+# ndfc_device_deleted
 
-Loops over a list of device dictionaries, feeding them to cisco.dcnm.dcnm_inventory with state = deleted.
+Given fabric_name and device_name, delete device device_name from fabric fabric_name using cisco.dcnm.dcnm_inventory
 
-Requirements
-------------
+### Requirements
 
-Role Variables
---------------
+### Role Variables
 
-See the following dictionaries in ndfc_common/vars/main.yml
+Variable        | Type  | Description
+----------------|-------|----------------------------------------
+device_name     | str() | The device's name (see below)
+fabric_name     | str() | The fabric in which device_name resides
 
-leafs
-spines
-border_gateways
+Device and fabric names are defined in the following file:
 
-Format of each object in the list is:
+``./roles/ndfc_common/vars/main.yml``)
 
-      - name: leaf_1
-        ip: 10.168.0.23
-        role: leaf
+See the following for details:
 
-Where:
-   name: the device name
-   ip: the seed_ip (device's mgmt0 interface)
-   role: the device's position in the fabric topology (leaf, spine, border_gateway, etc)
+[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
 
 
-Dependencies
-------------
+### Example Playbook
 
-None
+example_ndfc_device_deleted.yml
 
-Example Playbook
-----------------
-
-unit_test_ndfc_devices_delete.yml
-
-License
--------
+### License
 
 BSD
 
-Author Information
-------------------
+### Author Information
 
 Allen Robel (@packetcalc)

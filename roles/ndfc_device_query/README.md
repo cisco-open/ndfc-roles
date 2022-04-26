@@ -1,57 +1,41 @@
-ndfc_devices_create
-=========
+# ndfc_device_query
 
-Query a specific device, denoted with fabric_name and device_name.
+Query a specific device, given fabric_name and device_name.
 
 Return a device_info object as described below.
 
-Requirements
-------------
+### Role Variables
 
-Role Variables
---------------
+Variable        | Type  | Description
+----------------|-------|----------------------------------------
+device_name     | str() | The device's name (see below)
+fabric_name     | str() | The fabric in which device_name resides
 
-See the following device dictionary lists in ndfc_common/vars/main.yml
+Device and Fabric names are defined in the following file:
 
-leafs
-spines
-border_gateways
+``./roles/ndfc_common/vars/main.yml``)
 
-Format of each object in the list is:
+See the following for details:
 
-      - name: leaf_1
-        ip: 172.22.150.102
-        role: leaf
+[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
 
-Where:
-   name: the device name
-   ip: the seed_ip (device's mgmt0 interface)
-   role: the device's position in the fabric topology (leaf, spine, border_gateway, etc)
+### Example Playbooks
 
-See also:
+```
+example_ndfc_device_query.yml
+```
 
-Dependencies
-------------
-
-None
-
-Example Playbook
-----------------
-
-unit_test_ndfc_devices_query.yml
-
-License
--------
+### License
 
 BSD
 
-Author Information
-------------------
+### Author Information
 
 Allen Robel (@packetcalc)
 
-Example returned object device_info
------------------------------------
+
+
+### Example returned object device_info (as of NDFC version 12.0.1)
 
 {
     "device_info": {

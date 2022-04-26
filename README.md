@@ -88,7 +88,8 @@ To use these Roles, and example playbooks, you'll need to update some common var
 
 See the following for details around the modifications you'll need to make
 
-[./ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+
+[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
 
 ### Inventory
 

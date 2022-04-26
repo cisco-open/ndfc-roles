@@ -7,12 +7,14 @@
     - seed_ip: "{{ item.ip }}"
   register: result
 
+# playbooks can cull information from device_info
 - name: set_fact device_info
   set_fact:
     device_info: "{{ result.response | json_query(q2) }}"
   vars:
     q2: "[0]"
 
+# used in playbooks to skip the query if serial is not defined
 - name: set_fact serial
   set_fact:
     serial: "{{ result.response | json_query(q3) }}"

@@ -1,53 +1,46 @@
-ndfc_devices_create
-=========
+# ndfc_device_merged_all
 
-Loops over a list of device dictionaries, feeding them to cisco.dcnm.dcnm_inventory with state = merged.
+Merge all leaf, spine, border_gateway devices into fabric ``fabric_name`` using ``cisco.dcnm.dcnm_inventory``.
 
-Requirements
-------------
+### Role Variables
 
-Role Variables
---------------
+Variable        | Type  | Description
+----------------|-------|----------------------------------------
+fabric_name     | str() | The fabric in which device_name resides
 
-See the following device dictionary lists in ndfc_common/vars/main.yml
+Fabric names are defined in the following file:
 
-fabrics[0].leafs
-fabrics[0].spines
-fabrics[0].border_gateways
+``./roles/ndfc_common/vars/main.yml``)
 
-Format of each object in the list is:
+See the following for details:
 
-      - name: leaf_1
-        ip: 172.22.150.102
-        role: leaf
+[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
 
-Where:
-   name: the device name
-   ip: the seed_ip (device's mgmt0 interface)
-   role: the device's position in the fabric topology (leaf, spine, border_gateway, etc)
+Other variables used in this Role:
 
-See also:
+From ``./roles/ndfc_devices_merged/defaults/main.yml``:
 
-ndfc_devices_create/defaults/main.yml
-    auth_proto - the protocol to use to authenticate to each device.  We assume all devices use the same protocol
-    max_hops - the number of CDP hops to traverse when discovering devices. We set this to 0 to discover one device at a time. 
+Variable        | Type   | Description
+----------------|--------|------------
+auth_proto      | str()  | the protocol to use to authenticate to each device.  We assume all devices use the same protocol
+max_hops        | int()  | the number of CDP hops to traverse when discovering devices. We set this to 0 to discover one device at a time
+preserve_config | bool() | If true, preserve the existing config on the device(s).  If false, do not preserve the configs.
 
-Dependencies
-------------
+From ``./inventory/group_vars/ndfc``:
 
-None
+Variable              | Type    | Description
+----------------------|---------|------------
+device_password       | str()   | The password used to login to the device
+device_username       | str()   | The username used to login to the device
 
-Example Playbook
-----------------
+### Example Playbooks
 
-fabric1_create.yml
+This Role is not currently reliable since it does not issue a config-save + config-deploy between devices.  Please use ``ndfc_device_merged`` instead.
 
-License
--------
+### License
 
 BSD
 
-Author Information
-------------------
+### Author Information
 
 Allen Robel (@packetcalc)

@@ -6,35 +6,35 @@ Merge an NX-OS device into the fabric using cisco.dcnm.dcnm_inventory.
 
 ### Role Variables
 
-See the following device dictionary lists in ndfc_common/vars/main.yml
+Variable        | Type  | Description
+----------------|-------|----------------------------------------
+device_name     | str() | The device's name (see below)
+fabric_name     | str() | The fabric in which device_name resides
 
-fabrics[0].leafs
-fabrics[0].spines
-fabrics[0].border_gateways
+Device and Fabric names are defined in the following file:
 
-The structure of each object in the list is:
+``./roles/ndfc_common/vars/main.yml``)
 
-```
-    - name: leaf_1
-      ip: 172.22.150.102
-      role: leaf
-```
+See the following for details:
 
-Where
+[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
 
-Variable              | Type       | Description
-----------------------|------------|------------
-name                  | str()      | The device name
-ip                    | ip address | The seed ip (device's mgmt0 interface address)
-role                  | str()      | the device's role in the fabric (leaf, spine, border_gateway, etc)
+Other variables used in this Role:
 
-See also variables whose defaults are set in ``./roles/ndfc_devices_merged/defaults/main.yml``:
+From ``./roles/ndfc_devices_merged/defaults/main.yml``:
 
 Variable        | Type   | Description
 ----------------|--------|------------
 auth_proto      | str()  | the protocol to use to authenticate to each device.  We assume all devices use the same protocol
 max_hops        | int()  | the number of CDP hops to traverse when discovering devices. We set this to 0 to discover one device at a time
 preserve_config | bool() | If true, preserve the existing config on the device(s).  If false, do not preserve the configs.
+
+From ``./inventory/group_vars/ndfc``:
+
+Variable              | Type    | Description
+----------------------|---------|------------
+device_password       | str()   | The password used to login to the device
+device_username       | str()   | The username used to login to the device
 
 ### Dependencies
 
