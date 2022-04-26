@@ -1,13 +1,10 @@
-ndfc_devices_create
-=========
+# ndfc_device_merged
 
-Loops over a list of device dictionaries, feeding them to cisco.dcnm.dcnm_inventory with state = merged.
+Merge an NX-OS device into the fabric using cisco.dcnm.dcnm_inventory.
 
-Requirements
-------------
+### Requirements
 
-Role Variables
---------------
+### Role Variables
 
 See the following device dictionary lists in ndfc_common/vars/main.yml
 
@@ -15,39 +12,41 @@ fabrics[0].leafs
 fabrics[0].spines
 fabrics[0].border_gateways
 
-Format of each object in the list is:
+The structure of each object in the list is:
 
-      - name: leaf_1
-        ip: 172.22.150.102
-        role: leaf
+```
+    - name: leaf_1
+      ip: 172.22.150.102
+      role: leaf
+```
 
-Where:
-   name: the device name
-   ip: the seed_ip (device's mgmt0 interface)
-   role: the device's position in the fabric topology (leaf, spine, border_gateway, etc)
+Where
 
-See also:
+Variable              | Type       | Description
+----------------------|------------|------------
+name                  | str()      | The device name
+ip                    | ip address | The seed ip (device's mgmt0 interface address)
+role                  | str()      | the device's role in the fabric (leaf, spine, border_gateway, etc)
 
-ndfc_devices_create/defaults/main.yml
-    auth_proto - the protocol to use to authenticate to each device.  We assume all devices use the same protocol
-    max_hops - the number of CDP hops to traverse when discovering devices. We set this to 0 to discover one device at a time. 
+See also variables whose defaults are set in ``./roles/ndfc_devices_merged/defaults/main.yml``:
 
-Dependencies
-------------
+Variable        | Type   | Description
+----------------|--------|------------
+auth_proto      | str()  | the protocol to use to authenticate to each device.  We assume all devices use the same protocol
+max_hops        | int()  | the number of CDP hops to traverse when discovering devices. We set this to 0 to discover one device at a time
+preserve_config | bool() | If true, preserve the existing config on the device(s).  If false, do not preserve the configs.
 
-None
+### Dependencies
 
-Example Playbook
-----------------
+### Example Playbook
 
-fabric1_create.yml
+example_ndfc_fabric_create_rest_f1.yml
+example_ndfc_device_merged.yml
 
-License
--------
+### License
 
 BSD
 
-Author Information
-------------------
+### Author Information
 
 Allen Robel (@packetcalc)
