@@ -1,0 +1,8 @@
+# ndfc_vrf_replaced/tasks/main.yml
+---
+- name: query {{ fabric_name }} {{ vrf_name }}
+  include_tasks: worker.yml
+  loop: "{{ rm1 }}"
+  vars:
+    qm1: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ vrf_name }}']"
+    rm1: "{{ vrfs | json_query(qm1) }}"

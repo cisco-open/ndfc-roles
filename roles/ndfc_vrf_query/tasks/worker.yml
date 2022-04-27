@@ -1,0 +1,13 @@
+# ndfc_vrf_query/tasks/worker.yml
+- name: "query FABRIC {{ item.fabric }} VRF {{ item.vrf_name }}"
+  cisco.dcnm.dcnm_vrf:
+    fabric: "{{ item.fabric }}"
+    state: query
+    config:
+    - vrf_name: "{{ item.vrf_name }}"
+  register: rw1
+
+# playbooks can cull information from the info object
+- name: set_fact info
+  set_fact:
+    info: "{{ rw1.response[0] }}"
