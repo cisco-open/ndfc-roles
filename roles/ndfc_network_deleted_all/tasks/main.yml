@@ -1,6 +1,6 @@
 # ndfc_network_deleted_all/tasks/main.yml
 ---
-- name: Delete Networks
+- name: delete all networks in fabric {{ fabric_name }}
   include_tasks: worker.yml
   loop: "{{ networks | json_query(q1) }}"
   vars:

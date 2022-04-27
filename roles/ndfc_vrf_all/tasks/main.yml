@@ -1,6 +1,6 @@
 # ndfc_vrf/tasks/main.yml
 ---
-- name: Update / Add VRFS
+- name: Update VRFs in fabric {{ fabric_name }}
   include_tasks: worker.yml
   loop: "{{ vrfs | json_query(query) }}"
   vars:
