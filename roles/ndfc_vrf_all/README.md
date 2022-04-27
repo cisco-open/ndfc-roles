@@ -1,6 +1,6 @@
 # ndfc_vrf_all
 
-Create, update, or delete all defined VRFs for a fabric.
+Create, update, or delete all defined VRFs in fabric ``fabric_name``.
 
 ### Role Dependencies
 
@@ -17,7 +17,45 @@ jmespath    | json_query() | pip install jmespath
 Variable     | Description
 ------------ | -----------
 fabric_name  | The name of the fabric in which the VRFs reside.<br>Typically defined in the playbook's vars: section.
-vrfs         | A list of dict containing NDFC vrf configuration.<br>See ~/ndfc_common/vars/main.yml
+state        | Ansible state.  One of merged, overridden, replaced, or deleted.
+
+### Other variables
+
+This role reads the ``vrfs`` list of dictionaries from ``~/ndfc_common/vars/main.yml``
+
+This list of dictionaries define VRFs and their attachment to devices.  Its property names are provided below.  See the following for details:
+
+[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+
+Variable               | Example        | Type         | Description
+-----------------------|----------------|--------------|-------------------
+fabric                 | f1             | str()        | Fabric in which vrf resides
+vrf_name               | vrf_1          | str()        | name of the vrf
+vrf_id                 | 9003031        | int()        | vrf Layer3 VNI / vn-segment
+vlan_id                | 3031           | int()        | vrf associated vlan 
+vrf_template           | TemplateVrf    | str()        | Overlay VRF Template For Leafs
+vrf_extension_template | TemplateExVrf  | str()        | Overlay VRF Template For Borders
+service_vrf_template   | ServiceVrf     | str()        | Service vrf template
+attach                 | See example    | list of dict | List of mgmt0 ip addresses of switches on which the VRF is configured
+attach.ip_address      | 192.168.1.1    | IP address   | mgmt0 address of the switch to which the vrf is attached
+
+Example entry in the ``vrfs`` list.
+
+```yaml
+vrfs:
+- fabric: "{{ fabrics[0].name }}"
+  vrf_name: v1
+  vrf_id: 9003031
+  vlan_id: 3031
+  vrf_template: Default_VRF_Universal
+  vrf_extension_template: Default_VRF_Extension_Universal
+  service_vrf_template: null
+  attach:
+    - ip_address: "{{ leafs[0].ip }}"
+    - ip_address: "{{ leafs[1].ip }}"
+    - ip_address: "{{ leafs[2].ip }}"
+    - ip_address: "{{ leafs[3].ip }}"
+```
 
 
 ### Example Playbooks
