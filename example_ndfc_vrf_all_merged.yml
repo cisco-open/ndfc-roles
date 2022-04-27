@@ -1,4 +1,4 @@
-# example_ndfc_vrf_merged.yml
+# example_ndfc_vrf_all_merged.yml
 ---
 - hosts: ndfc
   gather_facts: false
