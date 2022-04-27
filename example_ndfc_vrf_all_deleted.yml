@@ -1,4 +1,4 @@
-# example_ndfc_vrf_deleted.yml
+# example_ndfc_vrf_all_deleted.yml
 ---
 - hosts: ndfc
   gather_facts: false
