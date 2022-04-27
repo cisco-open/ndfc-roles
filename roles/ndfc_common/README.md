@@ -193,8 +193,8 @@ This follows the same property names and (more or less) the general structure as
 
 Variable               | Example        | Type         | Description
 -----------------------|----------------|--------------|-------------------
-fabric                 | f1             | str()        | Fabric in which network resides
-vrf_name               | vrf_1          | str()        | vrf in which network resides
+fabric                 | f1             | str()        | Fabric in which vrf resides
+vrf_name               | vrf_1          | str()        | name of the vrf
 vrf_id                 | 9003031        | int()        | vrf Layer3 VNI / vn-segment
 vlan_id                | 3031           | int()        | vrf associated vlan 
 vrf_template           | TemplateVrf    | str()        | Overlay VRF Template For Leafs

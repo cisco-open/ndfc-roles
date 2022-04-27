@@ -17,8 +17,8 @@ Specifically, vrfs are defined in the ``vrfs`` list in the above file.  User-def
 
 Variable               | Example        | Type         | Description
 -----------------------|----------------|--------------|-------------------
-fabric                 | f1             | str()        | Fabric in which network resides
-vrf_name               | vrf_1          | str()        | vrf in which network resides
+fabric                 | f1             | str()        | Fabric in which vrf resides
+vrf_name               | vrf_1          | str()        | name of the vrf
 vrf_id                 | 9003031        | int()        | vrf Layer3 VNI / vn-segment
 vlan_id                | 3031           | int()        | vrf associated vlan 
 vrf_template           | TemplateVrf    | str()        | Overlay VRF Template For Leafs
@@ -26,6 +26,24 @@ vrf_extension_template | TemplateExVrf  | str()        | Overlay VRF Template Fo
 service_vrf_template   | ServiceVrf     | str()        | Service vrf template
 attach                 | See example    | list of dict | List of mgmt0 ip addresses of switches on which the VRF is configured
 attach.ip_address      | 192.168.1.1    | IP address   | mgmt0 address of the switch to which the vrf is attached
+
+Example entry in vrfs list:
+
+```yaml
+vrfs:
+- fabric: "{{ fabrics[0].name }}"
+  vrf_name: v1
+  vrf_id: 9003031
+  vlan_id: 3031
+  vrf_template: Default_VRF_Universal
+  vrf_extension_template: Default_VRF_Extension_Universal
+  service_vrf_template: null
+  attach:
+    - ip_address: "{{ leafs[0].ip }}"
+    - ip_address: "{{ leafs[1].ip }}"
+    - ip_address: "{{ leafs[2].ip }}"
+    - ip_address: "{{ leafs[3].ip }}"
+```
 
 See the following for details:
 
