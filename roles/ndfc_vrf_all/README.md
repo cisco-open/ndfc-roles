@@ -22,9 +22,33 @@ vrfs         | A list of dict containing NDFC vrf configuration.<br>See ~/ndfc_c
 
 ### Example Playbooks
 
-~/example_ndfc_vrf_all_deleted.yml
-~/example_ndfc_vrf_all_merged.yml
-~/example_ndfc_vrf_all_query.yml
+##### delete all vrf in fabric f2
+```yaml
+---
+- hosts: ndfc
+  name: delete all vrf in fabric f2
+  gather_facts: false
+  roles:
+    - ndfc_vrf_all
+    - ndfc_config_deploy_all_rest
+  vars:
+    fabric_name: f2
+    state: deleted
+```
+
+##### merge all vrf in fabric f1
+```yaml
+---
+- hosts: ndfc
+  name: merge all vrf in fabric f1
+  gather_facts: false
+  roles:
+    - ndfc_vrf_all
+    - ndfc_config_deploy_all_rest
+  vars:
+    fabric_name: f1
+    state: merged
+```
 
 
 ## License
