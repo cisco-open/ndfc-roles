@@ -1,7 +1,7 @@
 # example_ndfc_device_list_by_fabric_rest.yml
 #
-# Query fabric fabric_name for list of switch information and print
-# specific items (model number and ip address) from each switch dictionary
+# Query fabric fabric_name for list of switch dictionaries and print
+# specific items from each switch dictionary.
 #
 # The Role ndfc_device_list_by_fabric_rest returns JSON object 'info' 
 # which contains a list of switch dictionaries
@@ -14,12 +14,9 @@
     fabric_name: f2
   tasks:
       - debug:
-          msg: "item.model: {{ item }}"
+          msg: "ipAddress: {{ item.ipAddress }} logicalName: {{ item.logicalName }} model {{ item.model }} release {{ item.release }}"
         loop: "{{ info | json_query(q1) }}"
         vars:
-          q1: "[*].model"
-      - debug:
-          msg: "item.ipAddress: {{ item }}"
-        loop: "{{ info | json_query(q2) }}"
-        vars:
-          q2: "[*].ipAddress"
+          q1: "[*].{ ipAddress: ipAddress, model: model, release: release, logicalName: logicalName }"
+        loop_control:
+          label: device_info
