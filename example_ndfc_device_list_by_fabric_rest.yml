@@ -14,9 +14,9 @@
     fabric_name: f2
   tasks:
       - debug:
-          msg: "ipAddress: {{ item.ipAddress }} logicalName: {{ item.logicalName }} model {{ item.model }} release {{ item.release }}"
+          msg: "ipAddress: {{ item.ipAddress }} logicalName: {{ item.logicalName }} model {{ item.model }} release {{ item.release }} serialNumber {{ item.serialNumber }}"
         loop: "{{ info | json_query(q1) }}"
         vars:
-          q1: "[*].{ ipAddress: ipAddress, model: model, release: release, logicalName: logicalName }"
+          q1: "[*].{ ipAddress: ipAddress, model: model, release: release, logicalName: logicalName serialNumber: serialNumber }"
         loop_control:
           label: device_info
