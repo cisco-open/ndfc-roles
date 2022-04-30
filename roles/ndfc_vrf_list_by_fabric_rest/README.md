@@ -2,7 +2,7 @@
 
 Retrieve list of VRFs in fabric ``fabric_name``
 
-Returns JSON object ``info`` which will be a list of switch dictionaries
+Returns JSON object ``info`` which will be a list of vrf dictionaries
 if the GET request succeeded, or an empty list if the GET request failed.
 
 ### Role Variables
