@@ -14,7 +14,7 @@ fabric_name     | str() | The fabric to be queried
 
 ### Example Playbook
 
-The playbook below prints the model number and ip address for every switch in fabric f2.
+The playbook below prints select information for every switch in fabric f2.
 
 ```yaml
 ---
@@ -26,15 +26,12 @@ The playbook below prints the model number and ip address for every switch in fa
     fabric_name: f2
   tasks:
       - debug:
-          msg: "item.model: {{ item }}"
+          msg: "ipAddress: {{ item.ipAddress }} logicalName: {{ item.logicalName }} model {{ item.model }} release {{ item.release }} serialNumber {{ item.serialNumber }}"
         loop: "{{ info | json_query(q1) }}"
         vars:
-          q1: "[*].model"
-      - debug:
-          msg: "item.ipAddress: {{ item }}"
-        loop: "{{ info | json_query(q2) }}"
-        vars:
-          q2: "[*].ipAddress"
+          q1: "[*].{ ipAddress: ipAddress, model: model, release: release, logicalName: logicalName serialNumber: serialNumber }"
+        loop_control:
+          label: device_info
 ```
 
 ### License
