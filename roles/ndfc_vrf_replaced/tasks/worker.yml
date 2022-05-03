@@ -1,5 +1,5 @@
 # ndfc_vrf_replaced/tasks/worker.yml
-- name: "replaced FABRIC {{ item.fabric }} VRF {{ item.vrf_name }} VLAN {{ item.vlan_id }}"
+- name: worker replaced FABRIC {{ item.fabric }} VRF {{ item.vrf_name }} VRF_ID {{ item.vrf_id }} VLAN {{ item.vlan_id }}
   cisco.dcnm.dcnm_vrf:
     fabric: "{{ item.fabric }}"
     state: replaced

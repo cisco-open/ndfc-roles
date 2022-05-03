@@ -1,6 +1,6 @@
 # ndfc_policy_vrf_rt_import/tasks/main.yml
 ---
-- name: vrf route-target import/export
+- name: main {{ state }} FABRIC {{ fabric_name }} DEVICE {{ device_name }} vrf route-target import/export
   include_tasks: worker.yml
   loop: "{{ r1 }}"
   vars:

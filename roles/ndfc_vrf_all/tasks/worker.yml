@@ -1,5 +1,5 @@
 # ndfc_vrf/tasks/update_vrf.yml
-- name: "{{ state }} FABRIC {{ item.fabric }} VRF {{ item.vrf_name }} VLAN {{ item.vlan_id }}"
+- name: worker {{ state }} FABRIC {{ item.fabric }} VRF {{ item.vrf_name }} VLAN {{ item.vlan_id }}
   cisco.dcnm.dcnm_vrf:
     fabric: "{{ item.fabric }}"
     state: "{{ state }}"

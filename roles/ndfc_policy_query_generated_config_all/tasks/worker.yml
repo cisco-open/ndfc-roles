@@ -1,5 +1,5 @@
 # ndfc_policy_query_generated_config_all/worker.yml
-- name: "dcnm_policy query generated_config {{ item.name }} {{ item.ip }}"
+- name: worker query FABRIC {{ fabric_name }} DEVICE {{ item.name }} IP {{ item.ip }} generated_config 
   cisco.dcnm.dcnm_policy:
     fabric: "{{ fabric_name }}"
     state: query
@@ -8,7 +8,7 @@
           - ip: "{{ item.ip }}"
   register: result
 
-- name: set_fact {{ item.name }} {{ item.ip }}
+- name: worker set_fact DEVICE {{ item.name }} IP {{ item.ip }}
   set_fact:
      generated_configs: "{{ result.response | json_query(q2) }}"
   vars:

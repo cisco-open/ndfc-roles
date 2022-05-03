@@ -1,6 +1,6 @@
 # ndfc_device_rediscover_rest/tasks/main.yml
 ---
-- name: "query {{ fabric_name }} {{ device_name }}"
+- name: main query FABRIC {{ fabric_name }} DEVICE {{ device_name }}
   include_tasks: worker.yml
   loop: "{{ r1 }}"
   vars:

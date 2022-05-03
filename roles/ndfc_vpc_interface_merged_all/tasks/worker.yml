@@ -6,7 +6,7 @@
 #     skip
 
 # set_fact for p1_serial, p1_vpc, p1_db_id
-- name: "query {{ item.fabric }} {{ item.vpc_name }} vpc_peer_1 {{ ip }}"
+- name: worker query {{ item.fabric }} {{ item.vpc_name }} vpc_peer_1 {{ ip }}
   cisco.dcnm.dcnm_inventory:
     fabric: "{{ item.fabric }}"
     state: query
@@ -16,7 +16,7 @@
   vars:
     q1: "[?fabric == '{{ item.fabric }}'] | [?vpc_name == '{{ item.vpc_name }}'].peer_1_ip | [0]"
     ip: "{{ vpc_peers | json_query(q1)}}"
-- name: set_fact {{ item.fabric }} {{ item.vpc_name }} {{ item.vpc_port_id }} - p1_serial, p1_vpc, p1_db_id, p1_ip
+- name: worker set_fact {{ item.fabric }} {{ item.vpc_name }} {{ item.vpc_port_id }} - p1_serial, p1_vpc, p1_db_id, p1_ip
   set_fact:
     p1_serial: "{{ p1_result.response | json_query(q2) }}"
     p1_vpc: "{{ p1_result.response | json_query(q3) }}"
@@ -29,7 +29,7 @@
     q5: "[0].ipAddress"
 
 # set_fact for p2_serial, p2_vpc, p2_db_id
-- name: "query {{ item.fabric }} {{ item.vpc_name }} vpc_peer_2 {{ ip }}"
+- name: worker query {{ item.fabric }} {{ item.vpc_name }} vpc_peer_2 {{ ip }}
   cisco.dcnm.dcnm_inventory:
     fabric: "{{ item.fabric }}"
     state: query
@@ -39,10 +39,8 @@
   vars:
     q6: "[?fabric == '{{ item.fabric }}'] | [?vpc_name == '{{ item.vpc_name }}'].peer_2_ip | [0]"
     ip: "{{ vpc_peers | json_query(q6)}}"
-# - name: p2_result
-#   debug:
-#     var: p2_result
-- name: set_fact {{ item.fabric }} {{ item.vpc_name }} {{ item.vpc_port_id }} - p2_serial, p2_vpc, p2_db_id, p2_ip
+
+- name: worker set_fact {{ item.fabric }} {{ item.vpc_name }} {{ item.vpc_port_id }} - p2_serial, p2_vpc, p2_db_id, p2_ip
   set_fact:
     p2_serial: "{{ p2_result.response | json_query(q7) }}"
     p2_vpc: "{{ p2_result.response | json_query(q8) }}"
@@ -54,7 +52,7 @@
     q9: "[0].switchDbID"
     q10: "[0].ipAddress"
 
-- name: "merged {{ item.fabric }} {{ item.vpc_name }} {{ item.vpc_port_id }} {{ item.interface_mode }} {{ p1_ip }}/{{p2_ip}}"
+- name: worker merged {{ item.fabric }} {{ item.vpc_name }} {{ item.vpc_port_id }} {{ item.interface_mode }} {{ p1_ip }}/{{p2_ip}}
   cisco.dcnm.dcnm_interface:
     fabric: "{{ item.fabric }}"
     state: merged

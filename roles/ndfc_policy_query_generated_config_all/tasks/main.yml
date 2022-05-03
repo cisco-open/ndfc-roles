@@ -1,16 +1,16 @@
 # ndfc_policy_query_generated_config_all/main.yml
 ---
-- name: Query Leaf Generated Configs
+- name: main query FABRIC {{ fabric_name }} Generated Configs leaf
   include_tasks: worker.yml
   loop: "{{ leafs | json_query(q1) }}"
   vars:
     q1: "[?fabric == '{{ fabric_name }}']"
-- name: Query Spine Generated Configs
+- name: main query FABRIC {{ fabric_name }} Generated Configs spine
   include_tasks: worker.yml
   loop: "{{ spines | json_query(q1) }}"
   vars:
     q1: "[?fabric == '{{ fabric_name }}']"
-- name: Query Border Gateway Generated Configs
+- name: main query FABRIC {{ fabric_name }} Generated Configs border_gateway
   include_tasks: worker.yml
   loop: "{{ border_gateways | json_query(q1) }}"
   vars:

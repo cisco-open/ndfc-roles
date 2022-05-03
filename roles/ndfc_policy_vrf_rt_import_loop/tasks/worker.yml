@@ -1,5 +1,5 @@
 # ndfc_policy_vrf_rt_import_loop/tasks/policy_vrf_rt_import.yml
-- name: "dcnm_policy {{ state }} {{ fabric_name }} {{ item }} {{ vrf_name }} importing {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}"
+- name: worker {{ state }} FABRIC {{ fabric_name }} ITEM {{ item }} VRF_NAME {{ vrf_name }} import VRF.ASN:INDEX {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}
   cisco.dcnm.dcnm_policy:
     state: "{{ state }}"
     deploy: true

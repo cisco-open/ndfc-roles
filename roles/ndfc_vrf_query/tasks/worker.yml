@@ -1,5 +1,5 @@
 # ndfc_vrf_query/tasks/worker.yml
-- name: "query FABRIC {{ item.fabric }} VRF {{ item.vrf_name }}"
+- name: worker query FABRIC {{ item.fabric }} VRF {{ item.vrf_name }}
   cisco.dcnm.dcnm_vrf:
     fabric: "{{ item.fabric }}"
     state: query

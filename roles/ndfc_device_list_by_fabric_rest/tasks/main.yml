@@ -3,18 +3,18 @@
 # Return JSON object 'info' which will be a list of switch dictionaries
 # if the GET request is successful, or an empty list if the GET request fails
 ---
-- name: Retrieve list of devices in fabric {{ fabric_name }}
+- name: main REST GET FABRIC {{ fabric_name }} switchesByFabric
   cisco.dcnm.dcnm_rest:
     method: GET
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/inventory/switchesByFabric"
   register: result
   ignore_errors: true
-- name: set_fact info on success
+- name: main set_fact info SUCCESS
   set_fact:
      info: "{{ result.response.DATA }}"
   when:
     result is succeeded
-- name: set_fact info on failed
+- name: main set_fact info FAILED
   set_fact:
      info: "{{ [] | to_json }}"
   when:

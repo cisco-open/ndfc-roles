@@ -1,6 +1,7 @@
 # ndfc_config_deploy_all_rest/tasks/main.yml
 ---
-- cisco.dcnm.dcnm_rest:
+- name: main REST POST config-save FABRIC {{ fabric_name }}
+  cisco.dcnm.dcnm_rest:
     method: POST
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/config-save"
     json_data: "{{ vars_dict | to_json }}"
@@ -8,7 +9,8 @@
     vars_dict:
       forceShowRun: "{{ forceShowRun }}"
       inclAllMSDSwitches: "{{ inclAllMSDSwitches }}"
-- cisco.dcnm.dcnm_rest:
+- name: main REST POST config-deploy FABRIC {{ fabric_name }}
+  cisco.dcnm.dcnm_rest:
     method: POST
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/config-deploy"
     json_data: "{{ vars_dict | to_json }}"

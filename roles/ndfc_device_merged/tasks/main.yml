@@ -1,6 +1,6 @@
 # ndfc_device_merged/tasks/main.yml
 ---
-- name: ndfc_device_merged
+- name: main merged FABRIC {{ fabric_name }} DEVICE {{ device_name }}
   include_tasks: worker.yml
   loop: "{{ r1 }}"
   vars:

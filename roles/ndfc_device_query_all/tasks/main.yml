@@ -1,6 +1,6 @@
 # ndfc_device_query_all/tasks/main.yml
 ---
-- name: "query {{ fabric_name }}"
+- name: main query FABRIC {{ fabric_name }}
   include_tasks: worker.yml
   loop: "{{ r1 }}"
   vars:

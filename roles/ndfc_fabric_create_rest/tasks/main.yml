@@ -1,16 +1,16 @@
 # ndfc_fabric_create_rest/tasks/main.yml
 ---
-- name: Retrieve list of fabrics
+- name: main REST GET fabrics
   cisco.dcnm.dcnm_rest:
     method: GET
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
   register: result
-- name: set_fact active_fabrics
+- name: main set_fact active_fabrics
   set_fact:
      active_fabrics: "{{ result.response.DATA | json_query(query) | to_json }}"
   vars:
     query: "[*].{FabricName: fabricName}"
-- name: set_fact for fabric
+- name: main set_fact FABRIC {{ fabric_name }}
   set_fact:
      BGP_AS: "{{ fabrics | json_query(q1) }}"
      ANYCAST_RP_IP_RANGE: "{{ fabrics | json_query(q2) }}"
@@ -28,7 +28,7 @@
     q6: "[?name == '{{ fabric_name }}'].FABRIC_MTU | [0]"
     q7: "[?name == '{{ fabric_name }}'].REPLICATION_MODE | [0]"
 
-- name: Easy_Fabric {{ fabric_name }} BGP_AS {{ BGP_AS }} ACTIVE_FABRICS {{ active_fabrics }}
+- name: main REST POST Easy_Fabric FABRIC {{ fabric_name }} BGP_AS {{ BGP_AS }} ACTIVE_FABRICS {{ active_fabrics }}
   cisco.dcnm.dcnm_rest:
     method: POST
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/Easy_Fabric"

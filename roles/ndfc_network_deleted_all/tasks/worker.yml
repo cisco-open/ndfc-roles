@@ -1,5 +1,5 @@
 # ndfc_network_deleted_all/tasks/worker.yml
-- name: "deleted FABRIC {{ fabric_name }} NETWORK {{ item.net_name }} VRF {{ item.vrf_name }} VLAN {{ item.vlan_id }} SUBNET {{ item.gw_ip_subnet }}"
+- name: worker deleted FABRIC {{ fabric_name }} NETWORK {{ item.net_name }} VRF {{ item.vrf_name }} VLAN {{ item.vlan_id }} SUBNET {{ item.gw_ip_subnet }}
   cisco.dcnm.dcnm_network:
     fabric: "{{ fabric_name }}"
     state: deleted

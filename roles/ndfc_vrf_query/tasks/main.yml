@@ -1,6 +1,6 @@
 # ndfc_vrf_replaced/tasks/main.yml
 ---
-- name: query {{ fabric_name }} {{ vrf_name }}
+- name: main query FABRIC {{ fabric_name }} VRF {{ vrf_name }}
   include_tasks: worker.yml
   loop: "{{ rm1 }}"
   vars:

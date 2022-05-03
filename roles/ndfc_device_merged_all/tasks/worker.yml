@@ -1,5 +1,5 @@
 # ndfc_device_merged_all/tasks/worker.yml
-- name: "query {{ item.fabric }} {{ item.name }} {{ item.ip }}"
+- name: worker query FABRIC {{ item.fabric }} NAME {{ item.name }} IP {{ item.ip }}
   cisco.dcnm.dcnm_inventory:
     fabric: "{{ item.fabric }}"
     state: query
@@ -8,13 +8,13 @@
   register: result
 
 # Use serialNumber to determine if device already exists
-- name: set_fact device serial number
+- name: worker set_fact device serial number
   set_fact:
     serial: "{{ result.response | json_query(q2) }}"
   vars:
     q2: "[0].serialNumber"
 
-- name: "merged {{ fabric_name }} {{ item.name }} serial ({{ serial }})"
+- name: worker merged FABRIC {{ item.fabric }} NAME {{ item.name }} SERIAL {{ serial }} IP {{ item.ip }} MAX_HOPS {{ max_hops }} AUTH_PROTO {{ auth_proto }}
   cisco.dcnm.dcnm_inventory:
     fabric: "{{ item.fabric }}"
     state: merged

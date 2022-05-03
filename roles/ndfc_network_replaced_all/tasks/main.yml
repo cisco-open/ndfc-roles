@@ -1,6 +1,6 @@
 # ndfc_network_replaced_all/tasks/main.yml
 ---
-- name: Update Network (replaced)
+- name: main replaced Network FABRIC {{ fabric_name }}
   include_tasks: worker.yml
   loop: "{{ networks | json_query(q1) }}"
   vars:

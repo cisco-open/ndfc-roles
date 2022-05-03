@@ -1,6 +1,6 @@
 # ndfc_vrf_replaced/tasks/main.yml
 ---
-- name: Update / Add VRFS
+- name: main replaced FABRIC {{ fabric_name }} VRF {{ vrf_name }}
   include_tasks: worker.yml
   loop: "{{ r1 }}"
   vars:

@@ -1,5 +1,5 @@
 # ndfc_device_query_all/tasks/worker.yml
-- name: "{{ item.fabric }} {{ item.name }} {{ item.ip }}"
+- name: worker query FABRIC {{ item.fabric }} NAME {{ item.name }} IP {{ item.ip }}
   cisco.dcnm.dcnm_inventory:
     fabric: "{{ item.fabric }}"
     state: query
@@ -7,7 +7,7 @@
     - seed_ip: "{{ item.ip }}"
   register: result
 
-- name: set_fact serial
+- name: worker set_fact serial
   set_fact:
     serial: "{{ result.response | json_query(q2) }}"
   vars:

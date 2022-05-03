@@ -1,5 +1,5 @@
 # ndfc_policy_vrf_rt_import/tasks/worker.yml
-- name: "dcnm_policy {{ state }} {{ item.fabric }} {{ item.name }} {{ vrf_name }} importing {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}"
+- name: worker {{ state }} {{ item.fabric }} {{ item.name }} {{ vrf_name }} importing {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}
   cisco.dcnm.dcnm_policy:
     state: "{{ state }}"
     deploy: true
