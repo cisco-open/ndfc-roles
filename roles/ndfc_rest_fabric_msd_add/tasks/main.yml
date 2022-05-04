@@ -1,0 +1,36 @@
+# ndfc_rest_fabric_msd_add/tasks/main.yml
+---
+- name: main REST GET fabrics
+  cisco.dcnm.dcnm_rest:
+    method: GET
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
+  register: result
+- name: main set_fact active_fabrics
+  set_fact:
+     active_fabrics: "{{ result.response.DATA | json_query(qm1) | to_json }}"
+  vars:
+    qm1: "[*].{FabricName: fabricName}"
+
+# query fabric-associations for add_fabric's fabric_parent
+- name: main REST GET fabric_associations
+  cisco.dcnm.dcnm_rest:
+    method: GET
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/msd/fabric-associations/"
+  register: result
+- name: main set_fact fabric_parent
+  set_fact:
+     fabric_parent: "{{ result.response.DATA | json_query(qm2) }}"
+  vars:
+    qm2: "[?fabricName == '{{ add_fabric }}'].{fabricParent: fabricParent}"
+
+# Add add_fabric to msd_fabric if add_fabric's fabric_parent != None and both msd_fabric and add_fabric exists
+- name: main REST POST msdAdd MSD_FABRIC {{ msd_fabric }} ADD_FABRIC {{ add_fabric }} FABRIC_PARENT {{ fabric_parent[0].fabricParent }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/msdAdd"
+    json_data: "{{ vars_dict | to_json }}"
+  when: "msd_fabric in active_fabrics and add_fabric in active_fabrics and fabric_parent[0].fabricParent == 'None'"
+  vars:
+    vars_dict:
+      destFabric: "{{ msd_fabric }}"
+      sourceFabric: "{{ add_fabric }}"

@@ -1,0 +1,80 @@
+# ndfc_rest_fabric_msd_create/tasks/main.yml
+---
+- name: main REST GET fabrics
+  cisco.dcnm.dcnm_rest:
+    method: GET
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
+  register: result
+- name: main set_fact active_fabrics
+  set_fact:
+     active_fabrics: "{{ result.response.DATA | json_query(query) | to_json }}"
+  vars:
+    query: "[*].{FabricName: fabricName}"
+# TODO: add relevant user-configurable parameters to common_vars and update the
+# below accordingly.
+# - name: main set_fact FABRIC {{ fabric_name }}
+#   set_fact:
+#      BGP_AS: "{{ fabrics | json_query(q1) }}"
+#      ANYCAST_RP_IP_RANGE: "{{ fabrics | json_query(q2) }}"
+#      LOOPBACK0_IP_RANGE: "{{ fabrics | json_query(q3) }}"
+#      LOOPBACK1_IP_RANGE: "{{ fabrics | json_query(q4) }}"
+#      SUBNET_RANGE: "{{ fabrics | json_query(q5) }}"
+#      FABRIC_MTU: "{{ fabrics | json_query(q6) }}"
+#      REPLICATION_MODE: "{{ fabrics | json_query(q7) }}"
+#   vars:
+#     q1: "[?name == '{{ fabric_name }}'].BGP_AS | [0]"
+#     q2: "[?name == '{{ fabric_name }}'].ANYCAST_RP_IP_RANGE | [0]"
+#     q3: "[?name == '{{ fabric_name }}'].LOOPBACK0_IP_RANGE | [0]"
+#     q4: "[?name == '{{ fabric_name }}'].LOOPBACK1_IP_RANGE | [0]"
+#     q5: "[?name == '{{ fabric_name }}'].SUBNET_RANGE | [0]"
+#     q6: "[?name == '{{ fabric_name }}'].FABRIC_MTU | [0]"
+#     q7: "[?name == '{{ fabric_name }}'].REPLICATION_MODE | [0]"
+
+- name: main REST POST MSD FABRIC {{ fabric_name }} ACTIVE_FABRICS {{ active_fabrics }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/"
+    json_data: "{{ vars_dict | to_json }}"
+  when: "fabric_name not in active_fabrics"
+  vars:
+    vars_dict:
+      fabricName: "{{ fabric_name }}"
+      templateName: "MSD_Fabric"
+      nvPairs:
+        FABRIC_NAME: "{{ fabric_name }}"
+        L2_SEGMENT_ID_RANGE: "30000-49000"
+        L3_PARTITION_ID_RANGE: "50000-59000"
+        default_vrf: "Default_VRF_Universal"
+        default_network: "Default_Network_Universal"
+        vrf_extension_template: "Default_VRF_Extension_Universal"
+        network_extension_template: "Default_Network_Extension_Universal"
+        ANYCAST_GW_MAC: 2020.0000.00aa
+        MS_LOOPBACK_ID: 100
+        TOR_AUTO_DEPLOY: false
+        FABRIC_TYPE: MFD
+        FF: MSD
+        MSO_CONTROLER_ID: ""
+        MSO_SITE_GROUP_NAME: ""
+        PREMSO_PARENT_FABRIC: ""
+        DCNM_ID: ""
+        MS_IFC_BGP_PASSWORD_ENABLE_PREV: ""
+        MS_IFC_BGP_AUTH_KEY_TYPE_PREV: ""
+        MS_IFC_BGP_PASSWORD_PREV: ""
+        BORDER_GWY_CONNECTIONS: "Direct_To_BGWS"
+        RP_SERVER_IP: ""
+        BGP_RP_ASN: ""
+        MS_UNDERLAY_AUTOCONFIG: false
+        DELAY_RESTORE: 300
+        CLOUDSEC_AUTOCONFIG: false
+        CLOUDSEC_KEY_STRING: ""
+        CLOUDSEC_ALGORITHM: ""
+        CLOUDSEC_ENFORCEMENT: ""
+        CLOUDSEC_REPORT_TIMER: ""
+        MS_IFC_BGP_PASSWORD_ENABLE: false
+        MS_IFC_BGP_PASSWORD: ""
+        MS_IFC_BGP_AUTH_KEY_TYPE: ""
+        LOOPBACK100_IP_RANGE: 10.100.0.0/24
+        DCI_SUBNET_RANGE: 10.100.1.0/24
+        DCI_SUBNET_TARGET_MASK: 30
+        enableScheduledBackup: ""
+        scheduledTime: ""
