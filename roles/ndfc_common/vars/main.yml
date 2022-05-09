@@ -1,4 +1,18 @@
 ---
+# Multi-Site Domains
+msd_fabrics:
+- name: MSD
+  L2_SEGMENT_ID_RANGE: 30000-49000
+  L3_PARTITION_ID_RANGE: 50000-59000
+  ANYCAST_GW_MAC: 2020.0000.00aa
+  MS_LOOPBACK_ID: 100
+  BORDER_GWY_CONNECTIONS: Direct_To_BGWS
+  MS_UNDERLAY_AUTOCONFIG: true
+  DELAY_RESTORE: 300
+  LOOPBACK100_IP_RANGE: 10.100.0.0/24
+  DCI_SUBNET_RANGE: 10.100.1.0/24
+  DCI_SUBNET_TARGET_MASK: 30
+
 # ndfc_common/vars/main.yml
 fabrics:
 - name: f1
@@ -17,6 +31,7 @@ fabrics:
   SUBNET_RANGE: 10.8.0.0/16
   FABRIC_MTU: 9216
   REPLICATION_MODE: Ingress
+
 leafs:
 - fabric: "{{ fabrics[0].name }}"
   name: leaf_1
@@ -167,6 +182,8 @@ vrfs:
     - ip_address: "{{ leafs[1].ip }}"
     - ip_address: "{{ leafs[2].ip }}"
     - ip_address: "{{ leafs[3].ip }}"
+    - ip_address: "{{ border_gateways[0].ip }}"
+    - ip_address: "{{ border_gateways[1].ip }}"
 - fabric: "{{ fabrics[0].name }}"
   vrf_name: v2
   vrf_id: 9003032
@@ -179,6 +196,8 @@ vrfs:
     - ip_address: "{{ leafs[1].ip }}"
     - ip_address: "{{ leafs[2].ip }}"
     - ip_address: "{{ leafs[3].ip }}"
+    - ip_address: "{{ border_gateways[0].ip }}"
+    - ip_address: "{{ border_gateways[1].ip }}"
 - fabric: "{{ fabrics[1].name }}"
   vrf_name: v1
   vrf_id: 9003031
@@ -191,6 +210,8 @@ vrfs:
     - ip_address: "{{ leafs[5].ip }}"
     - ip_address: "{{ leafs[6].ip }}"
     - ip_address: "{{ leafs[7].ip }}"
+    - ip_address: "{{ border_gateways[2].ip }}"
+    - ip_address: "{{ border_gateways[3].ip }}"
 - fabric: "{{ fabrics[1].name }}"
   vrf_name: v2
   vrf_id: 9003032
@@ -201,6 +222,10 @@ vrfs:
   attach:
     - ip_address: "{{ leafs[4].ip }}"
     - ip_address: "{{ leafs[5].ip }}"
+    - ip_address: "{{ leafs[6].ip }}"
+    - ip_address: "{{ leafs[7].ip }}"
+    - ip_address: "{{ border_gateways[2].ip }}"
+    - ip_address: "{{ border_gateways[3].ip }}"
 
 vpc_peers:
 - fabric: "{{ fabrics[0].name}}"

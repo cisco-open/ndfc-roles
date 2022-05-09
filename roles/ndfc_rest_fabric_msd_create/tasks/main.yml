@@ -12,23 +12,29 @@
     query: "[*].{FabricName: fabricName}"
 # TODO: add relevant user-configurable parameters to common_vars and update the
 # below accordingly.
-# - name: main set_fact FABRIC {{ fabric_name }}
-#   set_fact:
-#      BGP_AS: "{{ fabrics | json_query(q1) }}"
-#      ANYCAST_RP_IP_RANGE: "{{ fabrics | json_query(q2) }}"
-#      LOOPBACK0_IP_RANGE: "{{ fabrics | json_query(q3) }}"
-#      LOOPBACK1_IP_RANGE: "{{ fabrics | json_query(q4) }}"
-#      SUBNET_RANGE: "{{ fabrics | json_query(q5) }}"
-#      FABRIC_MTU: "{{ fabrics | json_query(q6) }}"
-#      REPLICATION_MODE: "{{ fabrics | json_query(q7) }}"
-#   vars:
-#     q1: "[?name == '{{ fabric_name }}'].BGP_AS | [0]"
-#     q2: "[?name == '{{ fabric_name }}'].ANYCAST_RP_IP_RANGE | [0]"
-#     q3: "[?name == '{{ fabric_name }}'].LOOPBACK0_IP_RANGE | [0]"
-#     q4: "[?name == '{{ fabric_name }}'].LOOPBACK1_IP_RANGE | [0]"
-#     q5: "[?name == '{{ fabric_name }}'].SUBNET_RANGE | [0]"
-#     q6: "[?name == '{{ fabric_name }}'].FABRIC_MTU | [0]"
-#     q7: "[?name == '{{ fabric_name }}'].REPLICATION_MODE | [0]"
+- name: main set_fact FABRIC {{ fabric_name }}
+  set_fact:
+     L2_SEGMENT_ID_RANGE: "{{ msd_fabrics | json_query(q1) }}"
+     L3_PARTITION_ID_RANGE: "{{ msd_fabrics | json_query(q2) }}"
+     ANYCAST_GW_MAC: "{{ msd_fabrics | json_query(q3) }}"
+     MS_LOOPBACK_ID: "{{ msd_fabrics | json_query(q4) }}"
+     BORDER_GWY_CONNECTIONS: "{{ msd_fabrics | json_query(q5) }}"
+     MS_UNDERLAY_AUTOCONFIG: "{{ msd_fabrics | json_query(q6) }}"
+     DELAY_RESTORE: "{{ msd_fabrics | json_query(q7) }}"
+     LOOPBACK100_IP_RANGE: "{{ msd_fabrics | json_query(q8) }}"
+     DCI_SUBNET_RANGE: "{{ msd_fabrics | json_query(q9) }}"
+     DCI_SUBNET_TARGET_MASK: "{{ msd_fabrics | json_query(q10) }}"
+  vars:
+    q1: "[?name == '{{ fabric_name }}'].L2_SEGMENT_ID_RANGE | [0]"
+    q2: "[?name == '{{ fabric_name }}'].L3_PARTITION_ID_RANGE | [0]"
+    q3: "[?name == '{{ fabric_name }}'].ANYCAST_GW_MAC | [0]"
+    q4: "[?name == '{{ fabric_name }}'].MS_LOOPBACK_ID | [0]"
+    q5: "[?name == '{{ fabric_name }}'].BORDER_GWY_CONNECTIONS | [0]"
+    q6: "[?name == '{{ fabric_name }}'].MS_UNDERLAY_AUTOCONFIG | [0]"
+    q7: "[?name == '{{ fabric_name }}'].DELAY_RESTORE | [0]"
+    q8: "[?name == '{{ fabric_name }}'].LOOPBACK100_IP_RANGE | [0]"
+    q9: "[?name == '{{ fabric_name }}'].DCI_SUBNET_RANGE | [0]"
+    q10: "[?name == '{{ fabric_name }}'].DCI_SUBNET_TARGET_MASK | [0]"
 
 - name: main REST POST MSD FABRIC {{ fabric_name }} ACTIVE_FABRICS {{ active_fabrics }}
   cisco.dcnm.dcnm_rest:
@@ -42,14 +48,14 @@
       templateName: "MSD_Fabric"
       nvPairs:
         FABRIC_NAME: "{{ fabric_name }}"
-        L2_SEGMENT_ID_RANGE: "30000-49000"
-        L3_PARTITION_ID_RANGE: "50000-59000"
+        L2_SEGMENT_ID_RANGE: "{{ L2_SEGMENT_ID_RANGE }}"
+        L3_PARTITION_ID_RANGE: "{{ L3_PARTITION_ID_RANGE }}"
         default_vrf: "Default_VRF_Universal"
         default_network: "Default_Network_Universal"
         vrf_extension_template: "Default_VRF_Extension_Universal"
         network_extension_template: "Default_Network_Extension_Universal"
-        ANYCAST_GW_MAC: 2020.0000.00aa
-        MS_LOOPBACK_ID: 100
+        ANYCAST_GW_MAC: "{{ ANYCAST_GW_MAC }}"
+        MS_LOOPBACK_ID: "{{ MS_LOOPBACK_ID }}"
         TOR_AUTO_DEPLOY: false
         FABRIC_TYPE: MFD
         FF: MSD
@@ -60,11 +66,11 @@
         MS_IFC_BGP_PASSWORD_ENABLE_PREV: ""
         MS_IFC_BGP_AUTH_KEY_TYPE_PREV: ""
         MS_IFC_BGP_PASSWORD_PREV: ""
-        BORDER_GWY_CONNECTIONS: "Direct_To_BGWS"
+        BORDER_GWY_CONNECTIONS: "{{ BORDER_GWY_CONNECTIONS }}"
         RP_SERVER_IP: ""
         BGP_RP_ASN: ""
-        MS_UNDERLAY_AUTOCONFIG: false
-        DELAY_RESTORE: 300
+        MS_UNDERLAY_AUTOCONFIG: "{{ MS_UNDERLAY_AUTOCONFIG }}"
+        DELAY_RESTORE: "{{ DELAY_RESTORE }}"
         CLOUDSEC_AUTOCONFIG: false
         CLOUDSEC_KEY_STRING: ""
         CLOUDSEC_ALGORITHM: ""
@@ -73,8 +79,8 @@
         MS_IFC_BGP_PASSWORD_ENABLE: false
         MS_IFC_BGP_PASSWORD: ""
         MS_IFC_BGP_AUTH_KEY_TYPE: ""
-        LOOPBACK100_IP_RANGE: 10.100.0.0/24
-        DCI_SUBNET_RANGE: 10.100.1.0/24
-        DCI_SUBNET_TARGET_MASK: 30
+        LOOPBACK100_IP_RANGE: "{{ LOOPBACK100_IP_RANGE }}"
+        DCI_SUBNET_RANGE: "{{ DCI_SUBNET_RANGE }}"
+        DCI_SUBNET_TARGET_MASK: "{{ DCI_SUBNET_TARGET_MASK }}"
         enableScheduledBackup: ""
         scheduledTime: ""

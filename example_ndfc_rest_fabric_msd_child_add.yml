@@ -1,0 +1,18 @@
+# example_ndfc_rest_fabric_msd_child_add.yml
+# Adds child_fabric (f1 and f2) as a children of msd_fabric (MSD)
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_msd_child_add
+  vars:
+    msd_fabric: MSD
+    child_fabric: f1
+
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_msd_child_add
+  vars:
+    msd_fabric: MSD
+    child_fabric: f2
