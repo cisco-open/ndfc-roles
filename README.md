@@ -219,4 +219,4 @@ ndfc_vpc_interface_merged_all  | Create (merge) all vpc interfaces for a vpc pai
 ndfc_vrf_all                   | merge/delete all vrfs in a fabric, given ``fabric_name``
 ndfc_vrf_replaced              | Update (replaced) a vrf, given ``fabric_name``, ``vrf_name``
 
-\* The Roles marked with \* are examples showing how one can use cisco.dcnm.dcnm_query to glean various information from devices.  There are not used within any of the other Roles.
+\* The Roles marked with \* are examples showing how one can use cisco.dcnm.dcnm_query to glean various information from devices.  These are not used within any of the other Roles.
