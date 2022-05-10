@@ -7,8 +7,8 @@ The inventory contains two identical child fabrics with non-overlapping underlay
 The main playbooks, which create the two fabrics and the MSD fabric are located in the top-level directory:
 
 ```bash
-example_ndfc_fabric_create_rest_f1.yml
-example_ndfc_fabric_create_rest_f2.yml
+example_ndfc_rest_fabric_create_f1.yml
+example_ndfc_rest_fabric_create_f2.yml
 example_ndfc_rest_fabric_create_msd_with_children.yml
 ```
 
