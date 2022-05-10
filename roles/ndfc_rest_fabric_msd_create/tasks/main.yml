@@ -12,7 +12,7 @@
     query: "[*].{FabricName: fabricName}"
 # TODO: add relevant user-configurable parameters to common_vars and update the
 # below accordingly.
-- name: main set_fact FABRIC {{ fabric_name }}
+- name: main set_fact FABRIC {{ msd_fabric }}
   set_fact:
      L2_SEGMENT_ID_RANGE: "{{ msd_fabrics | json_query(q1) }}"
      L3_PARTITION_ID_RANGE: "{{ msd_fabrics | json_query(q2) }}"
@@ -25,29 +25,29 @@
      DCI_SUBNET_RANGE: "{{ msd_fabrics | json_query(q9) }}"
      DCI_SUBNET_TARGET_MASK: "{{ msd_fabrics | json_query(q10) }}"
   vars:
-    q1: "[?name == '{{ fabric_name }}'].L2_SEGMENT_ID_RANGE | [0]"
-    q2: "[?name == '{{ fabric_name }}'].L3_PARTITION_ID_RANGE | [0]"
-    q3: "[?name == '{{ fabric_name }}'].ANYCAST_GW_MAC | [0]"
-    q4: "[?name == '{{ fabric_name }}'].MS_LOOPBACK_ID | [0]"
-    q5: "[?name == '{{ fabric_name }}'].BORDER_GWY_CONNECTIONS | [0]"
-    q6: "[?name == '{{ fabric_name }}'].MS_UNDERLAY_AUTOCONFIG | [0]"
-    q7: "[?name == '{{ fabric_name }}'].DELAY_RESTORE | [0]"
-    q8: "[?name == '{{ fabric_name }}'].LOOPBACK100_IP_RANGE | [0]"
-    q9: "[?name == '{{ fabric_name }}'].DCI_SUBNET_RANGE | [0]"
-    q10: "[?name == '{{ fabric_name }}'].DCI_SUBNET_TARGET_MASK | [0]"
+    q1: "[?name == '{{ msd_fabric }}'].L2_SEGMENT_ID_RANGE | [0]"
+    q2: "[?name == '{{ msd_fabric }}'].L3_PARTITION_ID_RANGE | [0]"
+    q3: "[?name == '{{ msd_fabric }}'].ANYCAST_GW_MAC | [0]"
+    q4: "[?name == '{{ msd_fabric }}'].MS_LOOPBACK_ID | [0]"
+    q5: "[?name == '{{ msd_fabric }}'].BORDER_GWY_CONNECTIONS | [0]"
+    q6: "[?name == '{{ msd_fabric }}'].MS_UNDERLAY_AUTOCONFIG | [0]"
+    q7: "[?name == '{{ msd_fabric }}'].DELAY_RESTORE | [0]"
+    q8: "[?name == '{{ msd_fabric }}'].LOOPBACK100_IP_RANGE | [0]"
+    q9: "[?name == '{{ msd_fabric }}'].DCI_SUBNET_RANGE | [0]"
+    q10: "[?name == '{{ msd_fabric }}'].DCI_SUBNET_TARGET_MASK | [0]"
 
-- name: main REST POST MSD FABRIC {{ fabric_name }} ACTIVE_FABRICS {{ active_fabrics }}
+- name: main REST POST MSD FABRIC {{ msd_fabric }} ACTIVE_FABRICS {{ active_fabrics }}
   cisco.dcnm.dcnm_rest:
     method: POST
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/"
     json_data: "{{ vars_dict | to_json }}"
-  when: "fabric_name not in active_fabrics"
+  when: "msd_fabric not in active_fabrics"
   vars:
     vars_dict:
-      fabricName: "{{ fabric_name }}"
+      fabricName: "{{ msd_fabric }}"
       templateName: "MSD_Fabric"
       nvPairs:
-        FABRIC_NAME: "{{ fabric_name }}"
+        FABRIC_NAME: "{{ msd_fabric }}"
         L2_SEGMENT_ID_RANGE: "{{ L2_SEGMENT_ID_RANGE }}"
         L3_PARTITION_ID_RANGE: "{{ L3_PARTITION_ID_RANGE }}"
         default_vrf: "Default_VRF_Universal"

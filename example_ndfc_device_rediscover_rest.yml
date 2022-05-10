@@ -1,9 +1,0 @@
-# example_ndfc_device_rediscover_rest.yml
----
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_device_rediscover_rest
-  vars:
-    fabric_name: f1
-    device_name: spine_1

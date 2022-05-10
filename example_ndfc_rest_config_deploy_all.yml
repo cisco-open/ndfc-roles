@@ -1,10 +1,8 @@
-# example_ndfc_vrf_all_merged.yml
+# example_ndfc_rest_config_deploy_all.yml
 ---
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_vrf_all
     - ndfc_rest_config_deploy_all
   vars:
     fabric_name: f1
-    state: merged

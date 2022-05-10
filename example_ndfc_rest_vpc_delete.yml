@@ -1,0 +1,11 @@
+# example_ndfc_rest_vpc_delete.yml
+# This does not work currently.  We're investigating it.
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_vpc_delete
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: f1
+    vpc_name: vpc1

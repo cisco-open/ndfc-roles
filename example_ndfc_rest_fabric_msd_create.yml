@@ -5,4 +5,4 @@
   roles:
     - ndfc_rest_fabric_msd_create
   vars:
-    fabric_name: MSD
+    msd_fabric: MSD

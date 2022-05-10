@@ -1,14 +1,14 @@
-# ndfc_fabric_create_msd_rest
+# ndfc_rest_fabric_create_msd
 
-Create Multi-Site Domain (MSD) fabric ``fabric_name``
+Create Multi-Site Domain (MSD) fabric ``msd_fabric``
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric to be created
+msd_fabric      | str() | The MSD fabric to be created
 
-Fabric parameters, including ``fabric_name`, are defined in the following file:
+MSD fabric parameters are defined in the following file under ``msd_fabrics``
 
 ``./roles/ndfc_common/vars/main.yml``)
 
@@ -24,9 +24,9 @@ See the following for details:
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_fabric_create_msd_rest
+    - ndfc_rest_fabric_create_msd
   vars:
-    fabric_name: MSD
+    msd_fabric: MSD
 ```
 
 ### License

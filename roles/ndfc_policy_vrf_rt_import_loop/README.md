@@ -49,7 +49,7 @@ The example below performs a bi-directional import of route-targets between vrfs
   name: deploy and save configs
   gather_facts: false
   roles:
-    - ndfc_config_deploy_all_rest
+    - ndfc_rest_config_deploy_all
   vars:
     fabric_name: f1
 
@@ -75,7 +75,7 @@ The example below performs a bi-directional import of route-targets between vrfs
   name: deploy and save configs
   gather_facts: false
   roles:
-    - ndfc_config_deploy_all_rest
+    - ndfc_rest_config_deploy_all
   vars:
     fabric_name: f1
 ```

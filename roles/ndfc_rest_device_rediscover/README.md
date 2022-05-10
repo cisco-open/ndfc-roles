@@ -1,15 +1,15 @@
-# ndfc_rest_fabric_msd_child_add
+# ndfc_rest_device_rediscover
 
-Add ``child_fabric`` to Multi-Site Domain (MSD) fabric ``msd_fabric``
+Rediscover device ``device_name`` in fabric ``fabric_name``
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-msd_fabric      | str() | The MSD fabric to which ``child_fabric`` will be added
-child_fabric    | str() | The fabric to be added to ``msd_fabric``
+device_name     | str() | The device to be rediscovered
+fabric_name     | str() | The fabric in which ``device_name`` resides
 
-Fabric parameters are defined in the following file:
+Device and Fabric names are defined in the following file:
 
 ``./roles/ndfc_common/vars/main.yml``)
 
@@ -20,17 +20,15 @@ See the following for details:
 
 ### Example Playbook
 
-Add ``child_fabric`` f1 to ``msd_fabric`` MSD
-
 ```yaml
 ---
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_rest_fabric_msd_child_add
+    - ndfc_rest_device_rediscover
   vars:
-    child_fabric: f1
-    msd_fabric: MSD
+    fabric_name: f1
+    device_name: spine_1
 ```
 
 ### License

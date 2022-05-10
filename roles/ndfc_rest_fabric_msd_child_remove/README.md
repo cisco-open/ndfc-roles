@@ -1,14 +1,15 @@
-# ndfc_fabric_create_msd_rest
+# ndfc_rest_fabric_msd_child_remove
 
-Create Multi-Site Domain (MSD) fabric ``fabric_name``
+Remove child fabric ``child_fabric`` from Multi-Site Domain (MSD) fabric ``msd_fabric``
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric to be created
+msd_fabric      | str() | The MSD fabric from which ``child_fabric`` will be removed
+child_fabric    | str() | The fabric to be removed from ``msd_fabric``
 
-Fabric parameters, including ``fabric_name`, are defined in the following file:
+Fabric parameters are defined in the following file:
 
 ``./roles/ndfc_common/vars/main.yml``)
 
@@ -19,14 +20,17 @@ See the following for details:
 
 ### Example Playbook
 
+Remove ``child_fabric`` f1 from ``msd_fabric`` MSD
+
 ```yaml
 ---
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_fabric_create_msd_rest
+    - ndfc_rest_fabric_msd_child_remove
   vars:
-    fabric_name: MSD
+    child_fabric: f1
+    msd_fabric: MSD
 ```
 
 ### License

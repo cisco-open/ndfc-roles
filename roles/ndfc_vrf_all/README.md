@@ -68,7 +68,7 @@ vrfs:
   gather_facts: false
   roles:
     - ndfc_vrf_all
-    - ndfc_config_deploy_all_rest
+    - ndfc_rest_config_deploy_all
   vars:
     fabric_name: f2
     state: deleted
@@ -82,7 +82,7 @@ vrfs:
   gather_facts: false
   roles:
     - ndfc_vrf_all
-    - ndfc_config_deploy_all_rest
+    - ndfc_config_rest_deploy_all
   vars:
     fabric_name: f1
     state: merged
