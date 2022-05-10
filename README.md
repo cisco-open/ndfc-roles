@@ -188,7 +188,7 @@ Role naming conventions used in this repo.
 
 1. If a Role pushes a specfic Ansible state, that state is included in the Role's name.
 2. If a Role requires the user to provide the Ansible state, the Role's name does not include the state.
-3. If a Role uses the NDFC/DCNM REST API, its name ends in _rest (e.g. ndfc_device_rediscover_rest)
+3. If a Role uses the NDFC/DCNM REST API, its name includes ``_rest_`` (e.g. ``ndfc_rest_rediscover``)
 
 
 Role                           | Description
@@ -207,13 +207,13 @@ ndfc_policy_query_interface*    | Query and display interface config on all devi
 ndfc_policy_vrf_rt_import      | Import a vrf's route-targets into another vrf on a single device, given ``fabric_name``, ``device_name``
 ndfc_policy_vrf_rt_import_loop | Import a vrf's route-targets into another vrf on a list of devices in a fabric, given ``fabric_name``, and a list of ``device_name``
 ndfc_rest_config_deploy_all    | NDFC REST API POST calls to config-save and config-deploy
-ndfc_rest_device_rediscover    | Rediscover a device, given ``fabric_name``, ``device_name``
 ndfc_rest_fabric_create        | Create a fabric, given ``fabric_name``
 ndfc_rest_fabric_delete        | Delete a fabric, given ``fabric_name``
 ndfc_rest_fabric_msd_create    | Create a multi-side domain fabric, given ``msd_fabric``
 ndfc_rest_fabric_msd_delete    | Delete a multi-side domain fabric, given ``msd_fabric``
 ndfc_rest_fabric_msd_child_add | Add a child fabric to an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 ndfc_rest_fabric_msd_child_remove | Remove a child fabric from an MSD fabric, given ``child_fabric``, and ``msd_fabric``
+ndfc_rest_rediscover           | Rediscover a device, given ``fabric_name``, ``device_name``
 ndfc_rest_vpc_create           | Create a VPC pair, given ``fabric_name``, ``vpc_name``
 ndfc_vpc_interface_merged_all  | Create (merge) all vpc interfaces for a vpc pair, given ``fabric_name``, ``vpc_name``
 ndfc_vrf_all                   | merge/delete all vrfs in a fabric, given ``fabric_name``
