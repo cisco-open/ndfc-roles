@@ -66,6 +66,42 @@ leafs:
   ip: 172.22.150.109
   role: leaf
 
+# Leafs need unique names across a MSD fabric.  
+# Below are duplicates of leafs above but for msd_fabrics
+
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: leaf_1
+  ip: 172.22.150.102
+  role: leaf
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: leaf_2
+  ip: 172.22.150.103
+  role: leaf
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: leaf_3
+  ip: 172.22.150.104
+  role: leaf
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: leaf_4
+  ip: 172.22.150.105
+  role: leaf
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: leaf_5
+  ip: 172.22.150.106
+  role: leaf
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: leaf_6
+  ip: 172.22.150.107
+  role: leaf
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: leaf_7
+  ip: 172.22.150.108
+  role: leaf
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: leaf_8
+  ip: 172.22.150.109
+  role: leaf
+
 spines:
 - fabric: "{{ fabrics[0].name }}"
   name: spine_1
@@ -84,6 +120,26 @@ spines:
   ip: 172.22.150.115
   role: spine
 
+# spines need unique names across a MSD fabric.  
+# Below are duplicates of spines above but for msd_fabrics
+
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: spine_1
+  ip: 172.22.150.112
+  role: spine
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: spine_2
+  ip: 172.22.150.113
+  role: spine
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: spine_3
+  ip: 172.22.150.114
+  role: spine
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: spine_4
+  ip: 172.22.150.115
+  role: spine
+
 border_gateways:
 - fabric: "{{ fabrics[0].name }}"
   name: border_gateway_1
@@ -99,6 +155,26 @@ border_gateways:
   role: border_gateway
 - fabric: "{{ fabrics[1].name }}"
   name: border_gateway_2
+  ip: 172.22.150.101
+  role: border_gateway
+
+# border_gateways need unique names across a MSD fabric.  
+# Below are duplicates of border_gateways above but for msd_fabrics
+
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: border_gateway_1
+  ip: 172.22.150.110
+  role: border_gateway
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: border_gateway_2
+  ip: 172.22.150.111
+  role: border_gateway
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: border_gateway_3
+  ip: 172.22.150.100
+  role: border_gateway
+- fabric: "{{ msd_fabrics[0].name }}"
+  name: border_gateway_4
   ip: 172.22.150.101
   role: border_gateway
 
@@ -123,6 +199,10 @@ networks:
     ports: "{{ port_groups.pg11 }}"
   - ip_address: "{{ leafs[3].ip }}"
     ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ border_gateways[0].ip }}"
+    ports: ""
+  - ip_address: "{{ border_gateways[1].ip }}"
+    ports: ""
 
 - fabric: "{{ fabrics[0].name }}"
   net_name: n1112
@@ -138,6 +218,10 @@ networks:
     ports: "{{ port_groups.pg12 }}"
   - ip_address: "{{ leafs[3].ip }}"
     ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ border_gateways[0].ip }}"
+    ports: ""
+  - ip_address: "{{ border_gateways[1].ip }}"
+    ports: ""
 
 - fabric: "{{ fabrics[1].name }}"
   net_name: n1111
@@ -153,6 +237,10 @@ networks:
     ports: "{{ port_groups.pg11 }}"
   - ip_address: "{{ leafs[7].ip }}"
     ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ border_gateways[2].ip }}"
+    ports: ""
+  - ip_address: "{{ border_gateways[3].ip }}"
+    ports: ""
 
 - fabric: "{{ fabrics[1].name }}"
   net_name: n1112
@@ -168,6 +256,77 @@ networks:
     ports: "{{ port_groups.pg12 }}"
   - ip_address: "{{ leafs[7].ip }}"
     ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ border_gateways[2].ip }}"
+    ports: ""
+  - ip_address: "{{ border_gateways[3].ip }}"
+    ports: ""
+
+### If using an MSD fabric to interconnect sites, we need to apply networks and
+### VRFs to the MSD fabric, rather than the individual site fabrics.  The
+### networks below are duplicates of the above site fabric networks and will
+### be used if the fabric name is an MSD fabric.
+
+- fabric: "{{ msd_fabrics[0].name }}"
+  net_name: n1111
+  vrf_name: v1
+  vlan_id: 1111
+  gw_ip_subnet: "10.21.1.1/24"
+  attach:
+  - ip_address: "{{ leafs[0].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[1].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[2].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[3].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[4].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[5].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[6].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ leafs[7].ip }}"
+    ports: "{{ port_groups.pg11 }}"
+  - ip_address: "{{ border_gateways[0].ip }}"
+    ports: ""
+  - ip_address: "{{ border_gateways[1].ip }}"
+    ports: ""
+  - ip_address: "{{ border_gateways[2].ip }}"
+    ports: ""
+  - ip_address: "{{ border_gateways[3].ip }}"
+    ports: ""
+
+- fabric: "{{ msd_fabrics[0].name }}"
+  net_name: n1112
+  vrf_name: v2
+  vlan_id: 1112
+  gw_ip_subnet: "10.22.1.1/24"
+  attach:
+  - ip_address: "{{ leafs[0].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[1].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[2].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[3].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[4].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[5].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[6].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ leafs[7].ip }}"
+    ports: "{{ port_groups.pg12 }}"
+  - ip_address: "{{ border_gateways[0].ip }}"
+    ports: ""
+  - ip_address: "{{ border_gateways[1].ip }}"
+    ports: ""
+  - ip_address: "{{ border_gateways[2].ip }}"
+    ports: ""
+  - ip_address: "{{ border_gateways[3].ip }}"
+    ports: ""
 
 vrfs:
 - fabric: "{{ fabrics[0].name }}"
@@ -224,6 +383,52 @@ vrfs:
     - ip_address: "{{ leafs[5].ip }}"
     - ip_address: "{{ leafs[6].ip }}"
     - ip_address: "{{ leafs[7].ip }}"
+    - ip_address: "{{ border_gateways[2].ip }}"
+    - ip_address: "{{ border_gateways[3].ip }}"
+
+### If using an MSD fabric to interconnect sites, we need to apply networks and
+### VRFs to the MSD fabric, rather than the individual site fabrics.  The
+### VRFs below are duplicates of the above site fabric VRFs and will
+### be used if the fabric name is an MSD fabric.
+
+- fabric: "{{ msd_fabrics[0].name }}"
+  vrf_name: v1
+  vrf_id: 9003031
+  vlan_id: 3031
+  vrf_template: Default_VRF_Universal
+  vrf_extension_template: Default_VRF_Extension_Universal
+  service_vrf_template: null
+  attach:
+    - ip_address: "{{ leafs[0].ip }}"
+    - ip_address: "{{ leafs[1].ip }}"
+    - ip_address: "{{ leafs[2].ip }}"
+    - ip_address: "{{ leafs[3].ip }}"
+    - ip_address: "{{ leafs[4].ip }}"
+    - ip_address: "{{ leafs[5].ip }}"
+    - ip_address: "{{ leafs[6].ip }}"
+    - ip_address: "{{ leafs[7].ip }}"
+    - ip_address: "{{ border_gateways[0].ip }}"
+    - ip_address: "{{ border_gateways[1].ip }}"
+    - ip_address: "{{ border_gateways[2].ip }}"
+    - ip_address: "{{ border_gateways[3].ip }}"
+- fabric: "{{ msd_fabrics[0].name }}"
+  vrf_name: v2
+  vrf_id: 9003032
+  vlan_id: 3032
+  vrf_template: Default_VRF_Universal
+  vrf_extension_template: Default_VRF_Extension_Universal
+  service_vrf_template: null
+  attach:
+    - ip_address: "{{ leafs[0].ip }}"
+    - ip_address: "{{ leafs[1].ip }}"
+    - ip_address: "{{ leafs[2].ip }}"
+    - ip_address: "{{ leafs[3].ip }}"
+    - ip_address: "{{ leafs[4].ip }}"
+    - ip_address: "{{ leafs[5].ip }}"
+    - ip_address: "{{ leafs[6].ip }}"
+    - ip_address: "{{ leafs[7].ip }}"
+    - ip_address: "{{ border_gateways[0].ip }}"
+    - ip_address: "{{ border_gateways[1].ip }}"
     - ip_address: "{{ border_gateways[2].ip }}"
     - ip_address: "{{ border_gateways[3].ip }}"
 
