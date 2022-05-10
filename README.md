@@ -76,11 +76,10 @@ The characteristics of the child/site fabrics are as follows (see also the inclu
 2. 4 Leaf / VTEP (2 VPC pairs using fabric-peering for their virtual peer-link)
 3. 2 Border Gateway / VTEP
 4. 2 VRF: v1 and v2
-5. L3 (ipv4 / ipv6) connectivity between VRF v1 and v2
+5. L3 (ipv4 / ipv6) connectivity between VRF v1 and v2 (import/export of route-targets)
 6. L2 connectivity within each VRF
-7. import/export of route-targets between VRFs v1 and v2
-8. OSPF underlay
-9. VXLAN/EVPN Replication Mode: Ingress
+7. OSPF underlay
+8. VXLAN/EVPN Replication Mode: Ingress
 
 Spines and Leafs can be added/removed by updating the Common Role Variables described below.
 
