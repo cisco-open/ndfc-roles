@@ -377,18 +377,15 @@
     fabric_name: f2
 
 # Create the MSD Fabric
+# NOTE: we do not add an ndfc_rest_config_deploy_all after
+# this because the newly-created MSD fabric will be in "freeze"
+# mode until a child fabric is added.
 - hosts: ndfc
   gather_facts: false
   roles:
     - ndfc_rest_fabric_msd_create
   vars:
     msd_fabric: MSD
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_rest_config_deploy_all
-  vars:
-    fabric_name: MSD
 
 # Add child_fabric f1 to MSD fabric
 - hosts: ndfc
