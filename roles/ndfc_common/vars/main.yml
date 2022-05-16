@@ -1,7 +1,8 @@
 ---
 # ndfc_common/vars/main.yml
 
-# Multi-Site Domain Fabrics
+# Multi-Site Domain Fabric parameters
+
 msd_fabrics:
 - name: MSD
   L2_SEGMENT_ID_RANGE: 30000-49000
@@ -15,12 +16,19 @@ msd_fabrics:
   DCI_SUBNET_RANGE: 10.100.1.0/24
   DCI_SUBNET_TARGET_MASK: 30
 
-# Site Fabrics
-# To switch a site fabric from Ingress Replication
-# to Multicast, comment REPLICATION_MODE and uncomment
-# ANYCAST_RP_IP_RANGE.  These two parameters are 
-# mutually-exclusive, so ensure only one of them
-# is uncommented.
+# Site Fabric parameters
+# Multicast replication mode requires the following: 
+#
+#   ANYCAST_RP_IP_RANGE: 10.254.1.0/24
+#   REPLICATION_MODE: Multicast
+#
+# Ingress replication mode, requires the following (note that
+# ANYCAST_RP_IP_RANGE needs to be commented, or removed, if 
+# REPLICATION_MODE is set to Ingress):
+#
+#   # ANYCAST_RP_IP_RANGE: COMMENTED OR REMOVED
+#   REPLICATION_MODE: Ingress
+
 fabrics:
 - name: f1
   BGP_AS: 65001
