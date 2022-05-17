@@ -1,0 +1,30 @@
+---
+# ndfc_network_deleted/tasks/worker.yml
+- name: worker query FABRIC {{ item.fabric }} NAME {{ item.net_name }} VLAN {{ item.vlan_id }}
+  cisco.dcnm.dcnm_network:
+    fabric: "{{ fabric_name }}"
+    state: query
+    config:
+    - net_name: "{{ item.net_name }}"
+  register: result
+- name: worker set_fact parent.networkName
+  set_fact:
+    f1: "{{ result.response | json_query(q2) }}"
+  vars:
+    q2: "[0].parent.networkName"
+- name: debug f1
+  debug:
+    var: f1
+- name: worker deleted FABRIC {{ item.fabric }} NETWORK {{ item.net_name }} networkName ({{ f1 }})
+  cisco.dcnm.dcnm_network:
+    fabric: "{{ item.fabric }}"
+    state: deleted
+    config:
+    - net_name: "{{ item.net_name }}"
+      # vrf_name: Tenant-1
+      # net_id: 7005
+      # net_template: Default_Network_Universal
+      # net_extension_template: Default_Network_Extension_Universal
+      # vlan_id: 150
+      # gw_ip_subnet: '192.168.30.1/24'
+  when: "f1 == network_name"
