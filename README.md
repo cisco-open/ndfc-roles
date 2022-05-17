@@ -200,7 +200,7 @@ ndfc_device_merged             | Merge a device into a fabric, given ``fabric_na
 ndfc_device_merged_all         | Merge all devices into a fabric, given ``fabric_name``
 ndfc_device_query              | Query a device, given ``fabric_name``, ``device_name``
 ndfc_device_query_all          | Query all devices in a fabric, given ``fabric_name``
-ndfc_network_deleted           | Delete a network within a fabric, given ``fabric_name``, ``network_name``
+ndfc_network_deleted           | Delete a network, given ``fabric_name``, ``network_name``
 ndfc_network_deleted_all       | Delete all networks within a fabric, given ``fabric_name``
 ndfc_network_replaced_all      | Replace all networks within a fabric, given ``fabric_name``
 ndfc_policy_query_generated_config_all* | Query and display all populated generated_configs on all devices, given ``fabric_name``
