@@ -1,8 +1,11 @@
 # example_ndfc_network_deleted_all.yml
+# NOTE: If the networks to be deleted are within 
+# child fabric(s) of an msd_fabric, fabric_name 
+# must be that of the msd_fabric
 ---
 - hosts: ndfc
   gather_facts: false
   roles:
     - ndfc_network_deleted_all
   vars:
-    fabric_name: f1
+    fabric_name: MSD
