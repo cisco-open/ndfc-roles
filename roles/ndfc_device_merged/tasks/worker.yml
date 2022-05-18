@@ -7,8 +7,8 @@
     - seed_ip: "{{ item.ip }}"
   register: result
 
-# serial is used below to skip device creation if the
-# device already exists
+# serial is used below to skip REST calls to config-save 
+# and config-deploy if the device already exists
 - name: worker set_fact device serial number
   set_fact:
     serial: "{{ result.response | json_query(q2) }}"
@@ -26,8 +26,7 @@
       password: "{{ device_password }}"
       max_hops: "{{ max_hops }}"
       role: "{{ item.role }}"
-      preserve_config: "{{ preserve_config }}" 
-  when: "serial == ''"
+      preserve_config: "{{ preserve_config }}"
 
 - name: worker REST POST config-save FABRIC {{ fabric_name }}
   cisco.dcnm.dcnm_rest:
@@ -36,9 +35,8 @@
     json_data: "{{ vars_dict | to_json }}"
   vars:
     vars_dict:
-      forceShowRun: "{{ forceShowRun }}"
-      inclAllMSDSwitches: "{{ inclAllMSDSwitches }}"
-  when: "serial == ''"
+  when: "serial == '' or config_deploy_for_existing_device == true"
+
 - name: worker REST POST config-deploy FABRIC {{ fabric_name }}
   cisco.dcnm.dcnm_rest:
     method: POST
@@ -48,4 +46,4 @@
     vars_dict:
       forceShowRun: "{{ forceShowRun }}"
       inclAllMSDSwitches: "{{ inclAllMSDSwitches }}"
-  when: "serial == ''"
+  when: "serial == '' or config_deploy_for_existing_device == true"

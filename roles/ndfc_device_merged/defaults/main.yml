@@ -1,6 +1,13 @@
 # ndfc_devices_create/defaults/main.yml
 auth_proto: MD5
 max_hops: 0
-preserve_config: False
+preserve_config: false
 forceShowRun: false
 inclAllMSDSwitches: false
+# config_deploy_for_existing_device determines whether to skip
+# config-save + config-deploy if the device already 
+# exists in the topology.  If set to false, the tasks will 
+# be skipped if the device already exists.  If set to true,
+# all tasks will run unconditionally (i.e. regardless whether
+# the device exists or not).
+config_deploy_for_existing_device: true
