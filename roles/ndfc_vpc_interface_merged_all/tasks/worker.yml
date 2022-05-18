@@ -69,10 +69,10 @@
           peer1_members: "{{ item.member_list }}"
           peer2_members: "{{ item.member_list }}"
           pc_mode: "{{ item.port_channel_mode }}"
-          bpdu_guard: true
-          port_type_fast: true
-          mtu: jumbo
-          peer1_allowed_vlans: all
-          peer2_allowed_vlans: all
-          peer1_description: "{{ item.vpc_port_id}} {{ item.interface_mode}}"
-          peer2_description: "{{ item.vpc_port_id}} {{ item.interface_mode}}"
+          bpdu_guard: "{{ item.bpdu_guard }}"
+          port_type_fast: "{{ item.port_type_fast }}"
+          mtu: "{{ item.mtu }}"
+          peer1_allowed_vlans: "{{ item.peer1_allowed_vlans }}"
+          peer2_allowed_vlans: "{{ item.peer2_allowed_vlans }}"
+          peer1_description: "{{ item.vpc_port_id }} {{ item.interface_mode }}"
+          peer2_description: "{{ item.vpc_port_id }} {{ item.interface_mode }}"
