@@ -12,9 +12,13 @@
   tasks:
   - block:
     - debug:
+        msg: "logicalName: {{ device_info.logicalName }}"
+    - debug:
         msg: "uptime: {{ device_info.upTimeStr }}"
     - debug:
         msg: "serial: {{ device_info.serialNumber }}"
     - debug:
         msg: "version: {{ device_info.release }}"
+    - debug:
+        msg: "switchDbId: {{ device_info.switchDbID }}"
     when: "serial != ''"
