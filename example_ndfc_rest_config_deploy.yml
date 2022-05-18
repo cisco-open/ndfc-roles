@@ -1,0 +1,11 @@
+# example_ndfc_rest_config_deploy.yml
+# Calls config-save on fabric_name and config_deploy on switch_id in fabric_name
+# NOTE: switch_id is the switchDbId, which can be queried using 
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy
+  vars:
+    fabric_name: f1
+    device_name: leaf_1

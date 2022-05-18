@@ -1,0 +1,3 @@
+# ndfc_config_deploy/defaults/main.yml
+forceShowRun: false
+inclAllMSDSwitches: false

@@ -1,0 +1,27 @@
+# ndfc_rest_config_deploy/tasks/main.yml
+---
+- name: main query FABRIC {{ fabric_name }} DEVICE {{ device_name }}
+  include_tasks: worker.yml
+  loop: "{{ r1 }}"
+  vars:
+    q1: "[?name == '{{ device_name }}'] | [?fabric == '{{ fabric_name }}']"
+    r1: "{{ leafs | json_query(q1) + spines | json_query(q1) + border_gateways | json_query(q1) }}"
+
+- name: main REST POST config-save FABRIC {{ fabric_name }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/config-save"
+    json_data: "{{ vars_dict | to_json }}"
+  vars:
+    vars_dict:
+      forceShowRun: "{{ forceShowRun }}"
+      inclAllMSDSwitches: "{{ inclAllMSDSwitches }}"
+
+- name: main REST POST config-deploy FABRIC {{ fabric_name }} device_name {{ device_name }} switchDbId {{ device_info.switchDbID }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/config-deploy/{{ device_info.switchDbID }}"
+    json_data: "{{ vars_dict | to_json }}"
+  vars:
+    vars_dict:
+      forceShowRun: "{{ forceShowRun }}"
