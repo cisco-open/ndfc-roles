@@ -8,6 +8,7 @@
   vars:
     fabric_name: f2
 
+# leaf_1
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -15,13 +16,8 @@
   vars:
     fabric_name: f2
     device_name: leaf_1
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_rest_config_deploy_all
-  vars:
-    fabric_name: f2
 
+# leaf_2
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -29,13 +25,8 @@
   vars:
     fabric_name: f2
     device_name: leaf_2
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_rest_config_deploy_all
-  vars:
-    fabric_name: f2
 
+# leaf_3
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -43,13 +34,8 @@
   vars:
     fabric_name: f2
     device_name: leaf_3
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_rest_config_deploy_all
-  vars:
-    fabric_name: f2
 
+# leaf_4
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -57,13 +43,8 @@
   vars:
     fabric_name: f2
     device_name: leaf_4
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_rest_config_deploy_all
-  vars:
-    fabric_name: f2
 
+# spine_1
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -71,13 +52,8 @@
   vars:
     fabric_name: f2
     device_name: spine_1
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_rest_config_deploy_all
-  vars:
-    fabric_name: f2
 
+# spine_2
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -85,13 +61,8 @@
   vars:
     fabric_name: f2
     device_name: spine_2
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_rest_config_deploy_all
-  vars:
-    fabric_name: f2
 
+# border_gateway_1
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -99,13 +70,8 @@
   vars:
     fabric_name: f2
     device_name: border_gateway_1
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_rest_config_deploy_all
-  vars:
-    fabric_name: f2
 
+# border_gateway_2
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -113,12 +79,6 @@
   vars:
     fabric_name: f2
     device_name: border_gateway_2
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_rest_config_deploy_all
-  vars:
-    fabric_name: f2
 
 # vpc1
 - hosts: ndfc

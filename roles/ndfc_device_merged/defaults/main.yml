@@ -2,3 +2,5 @@
 auth_proto: MD5
 max_hops: 0
 preserve_config: False
+forceShowRun: false
+inclAllMSDSwitches: false
