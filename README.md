@@ -207,7 +207,8 @@ ndfc_policy_query_generated_config_all* | Query and display all populated genera
 ndfc_policy_query_interface*    | Query and display interface config on all devices in a fabric, given ``fabric_name``, ``interface_name``
 ndfc_policy_vrf_rt_import      | Import a vrf's route-targets into another vrf on a single device, given ``fabric_name``, ``device_name``
 ndfc_policy_vrf_rt_import_loop | Import a vrf's route-targets into another vrf on a list of devices in a fabric, given ``fabric_name``, and a list of ``device_name``
-ndfc_rest_config_deploy_all    | NDFC REST API POST calls to config-save and config-deploy
+ndfc_rest_config_deploy        | NDFC REST API POST calls to config-save and config-deploy for a device, given ``fabric_name``, ``device_name``
+ndfc_rest_config_deploy_all    | NDFC REST API POST calls to config-save and config-deploy for a fabric, given ``fabric_name``
 ndfc_rest_fabric_create        | Create a fabric, given ``fabric_name``
 ndfc_rest_fabric_delete        | Delete a fabric, given ``fabric_name``
 ndfc_rest_fabric_msd_create    | Create a multi-side domain fabric, given ``msd_fabric``
