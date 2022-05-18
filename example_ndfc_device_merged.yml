@@ -7,3 +7,5 @@
   vars:
     fabric_name: f1
     device_name: spine_1
+    # Default is true. See README for ndfc_device_merged Role
+    config_deploy_for_existing_device: true

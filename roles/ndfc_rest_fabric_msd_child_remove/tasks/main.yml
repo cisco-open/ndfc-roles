@@ -24,7 +24,7 @@
     qm2: "[?fabricName == '{{ child_fabric }}'].{fabricParent: fabricParent}"
 
 # Remove child_fabric to msd_fabric if child_fabric's fabric_parent != None and both msd_fabric and child_fabric exists
-- name: main REST POST msdExit MSD_FABRIC {{ msd_fabric }} child_fabric {{ child_fabric }} FABRIC_PARENT {{ fabric_parent[0].fabricParent }}
+- name: main REST POST msdExit msd_fabric {{ msd_fabric }} child_fabric {{ child_fabric }} fabric_parent ({{ fabric_parent[0].fabricParent }})
   cisco.dcnm.dcnm_rest:
     method: POST
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/msdExit"
