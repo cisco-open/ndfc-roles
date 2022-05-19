@@ -7,8 +7,7 @@
     json_data: "{{ vars_dict | to_json }}"
   vars:
     vars_dict:
-      forceShowRun: "{{ forceShowRun }}"
-      inclAllMSDSwitches: "{{ inclAllMSDSwitches }}"
+
 - name: main REST POST config-deploy FABRIC {{ fabric_name }}
   cisco.dcnm.dcnm_rest:
     method: POST
