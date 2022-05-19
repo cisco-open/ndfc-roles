@@ -208,37 +208,37 @@ Role naming conventions used in this repo.
 
 Role                           | Description
 ------------                   | -----------
-ndfc_common[ndfc_common]       | Common variables used by all other Roles
-ndfc_device_deleted[ndfc_device_deleted] | Delete a device from a fabric, given ``fabric_name``, ``device_name``
-ndfc_device_deleted_all[ndfc_device_deleted_all] | Delete all devices in a fabric, given ``fabric_name``
-ndfc_device_merged[ndfc_device_merged] | Merge a device into a fabric, given ``fabric_name``, ``device_name``
-ndfc_device_merged_all[ndfc_device_merged_all] | Merge all devices into a fabric, given ``fabric_name``
-ndfc_device_query[ndfc_device_query] | Query a device, given ``fabric_name``, ``device_name``
-ndfc_device_query_all[ndfc_device_query_all] | Query all devices in a fabric, given ``fabric_name``
-ndfc_network_deleted[ndfc_network_deleted] | Delete a network, given ``fabric_name``, ``network_name``
-ndfc_network_deleted_all[ndfc_network_deleted_all] | Delete all networks within a fabric, given ``fabric_name``
-ndfc_network_replaced_all[ndfc_network_replaced_all] | Replace all networks within a fabric, given ``fabric_name``
-ndfc_policy_query_generated_config_all*[ndfc_policy_query_generated_config_all] | Query and display all populated generated_configs on all devices, given ``fabric_name``
-ndfc_policy_query_interface_all*[ndfc_policy_query_interface_all] | Query and display interface config on all devices in a fabric, given ``fabric_name``, ``interface_name``
-ndfc_policy_vrf_rt_import[ndfc_policy_vrf_rt_import] | Import a vrf's route-targets into another vrf on a single device, given ``fabric_name``, ``device_name``
-ndfc_policy_vrf_rt_import_loop[ndfc_policy_vrf_rt_import_loop] | Import a vrf's route-targets into another vrf on a list of devices in a fabric, given ``fabric_name``, and a list of ``device_name``
-ndfc_rest_config_deploy[ndfc_rest_config_deploy] | NDFC REST API POST calls to config-save and config-deploy for a device, given ``fabric_name``, ``device_name``
-ndfc_rest_config_deploy_all[ndfc_rest_config_deploy_all] | NDFC REST API POST calls to config-save and config-deploy for a fabric, given ``fabric_name``
-ndfc_rest_device_list_by_fabric[ndfc_rest_device_list_by_fabric] | Retrieve list of devices in fabric, given ``fabric_name``
-ndfc_rest_device_rediscover[ndfc_rest_device_rediscover] | Rediscover device, given ``fabric_name``, ``device_name``
-ndfc_rest_fabric_create[ndfc_rest_fabric_create] | Create a fabric, given ``fabric_name``
-ndfc_rest_fabric_delete[ndfc_rest_fabric_delete] | Delete a fabric, given ``fabric_name``
-ndfc_rest_fabric_msd_child_add[ndfc_rest_fabric_msd_child_add] | Add a child fabric to an MSD fabric, given ``child_fabric``, and ``msd_fabric``
-ndfc_rest_fabric_msd_child_remove[ndfc_rest_fabric_msd_child_remove] | Remove a child fabric from an MSD fabric, given ``child_fabric``, and ``msd_fabric``
-ndfc_rest_fabric_msd_create[ndfc_rest_fabric_msd_create] | Create a multi-side domain fabric, given ``msd_fabric``
-ndfc_rest_rediscover[ndfc_rest_rediscover] | Rediscover a device, given ``fabric_name``, ``device_name``
-ndfc_rest_vpc_create[ndfc_rest_vpc_create] | Create a VPC pair, given ``fabric_name``, ``vpc_name``
-ndfc_rest_vpc_delete[ndfc_rest_vpc_delete] | Delete a VPC pair, given ``fabric_name``, ``vpc_name``
-ndfc_rest_vrf_list_by_fabric[ndfc_rest_vrf_list_by_fabric] | List VRFs in a given fabric, given ``fabric_name``
-ndfc_vpc_interface_merged_all[ndfc_vpc_interface_merged_all] | Create (merge) all vpc interfaces for a vpc pair, given ``fabric_name``, ``vpc_name``
-ndfc_vrf_all[ndfc_vrf_all] | merge/delete all vrfs in a fabric, given ``fabric_name``
-ndfc_vrf_query[ndfc_vrf_query] | Query VRF and return json object ``info``, given ``fabric_name``, ``vrf_name``
-ndfc_vrf_replaced[ndfc_vrf_replaced] | Update (replaced) a vrf, given ``fabric_name``, ``vrf_name``
+[ndfc_common]       | Common variables used by all other Roles
+[ndfc_device_deleted] | Delete a device from a fabric, given ``fabric_name``, ``device_name``
+[ndfc_device_deleted_all] | Delete all devices in a fabric, given ``fabric_name``
+[ndfc_device_merged] | Merge a device into a fabric, given ``fabric_name``, ``device_name``
+[ndfc_device_merged_all] | Merge all devices into a fabric, given ``fabric_name``
+[ndfc_device_query] | Query a device, given ``fabric_name``, ``device_name``
+[ndfc_device_query_all] | Query all devices in a fabric, given ``fabric_name``
+[ndfc_network_deleted] | Delete a network, given ``fabric_name``, ``network_name``
+[ndfc_network_deleted_all] | Delete all networks within a fabric, given ``fabric_name``
+[ndfc_network_replaced_all] | Replace all networks within a fabric, given ``fabric_name``
+*[ndfc_policy_query_generated_config_all] | Query and display all populated generated_configs on all devices, given ``fabric_name``
+*[ndfc_policy_query_interface_all] | Query and display interface config on all devices in a fabric, given ``fabric_name``, ``interface_name``
+[ndfc_policy_vrf_rt_import] | Import a vrf's route-targets into another vrf on a single device, given ``fabric_name``, ``device_name``
+[ndfc_policy_vrf_rt_import_loop] | Import a vrf's route-targets into another vrf on a list of devices in a fabric, given ``fabric_name``, and a list of ``device_name``
+[ndfc_rest_config_deploy] | NDFC REST API POST calls to config-save and config-deploy for a device, given ``fabric_name``, ``device_name``
+[ndfc_rest_config_deploy_all] | NDFC REST API POST calls to config-save and config-deploy for a fabric, given ``fabric_name``
+[ndfc_rest_device_list_by_fabric] | Retrieve list of devices in fabric, given ``fabric_name``
+[ndfc_rest_device_rediscover] | Rediscover device, given ``fabric_name``, ``device_name``
+[ndfc_rest_fabric_create] | Create a fabric, given ``fabric_name``
+[ndfc_rest_fabric_delete] | Delete a fabric, given ``fabric_name``
+[ndfc_rest_fabric_msd_child_add] | Add a child fabric to an MSD fabric, given ``child_fabric``, and ``msd_fabric``
+[ndfc_rest_fabric_msd_child_remove] | Remove a child fabric from an MSD fabric, given ``child_fabric``, and ``msd_fabric``
+[ndfc_rest_fabric_msd_create] | Create a multi-side domain fabric, given ``msd_fabric``
+[ndfc_rest_rediscover] | Rediscover a device, given ``fabric_name``, ``device_name``
+[ndfc_rest_vpc_create] | Create a VPC pair, given ``fabric_name``, ``vpc_name``
+[ndfc_rest_vpc_delete] | Delete a VPC pair, given ``fabric_name``, ``vpc_name``
+[ndfc_rest_vrf_list_by_fabric] | List VRFs in a given fabric, given ``fabric_name``
+[ndfc_vpc_interface_merged_all] | Create (merge) all vpc interfaces for a vpc pair, given ``fabric_name``, ``vpc_name``
+[ndfc_vrf_all] | merge/delete all vrfs in a fabric, given ``fabric_name``
+[ndfc_vrf_query] | Query VRF and return json object ``info``, given ``fabric_name``, ``vrf_name``
+[ndfc_vrf_replaced] | Update (replaced) a vrf, given ``fabric_name``, ``vrf_name``
 
 \* The Roles marked with \* are examples showing how one can use cisco.dcnm.dcnm_query to glean various information from devices.  These are not used within any of the other Roles.
 
