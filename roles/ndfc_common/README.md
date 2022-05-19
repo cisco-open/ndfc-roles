@@ -45,6 +45,41 @@ fabrics:
   REPLICATION_MODE: Ingress
 ```
 
+#### msd_fabrics
+
+A list of dictionaries with the following structure:
+
+Variable              | Example        | Type       | Description
+----------------------|----------------|-----------|-------------------
+name                  | fabric_1       | str()     | Fabric name
+ANYCAST_GW_MAC        | 2020.0000.00aa | str()     | Shared mac-address for all leafs
+BORDER_GWY_CONNECTIONS | Direct_To_BGWS | str()    | The type of BGP peering within the MSD fabric.  Valid options: ``Manual``, ``Direct_To_BGWS``, ``Centralized_To_Route_Server``
+DCI_SUBNET_RANGE      | 10.100.1.0/24 | net/prefix | Range of IPv4 addresses to use for inter-device links within the MSD fabric
+DCI_SUBNET_TARGET_MASK | 30            | int()     | Subnet mask to use for inter-device links within the MSD fabric
+DELAY_RESTORE         | 300            | int()     | Multi-Site underlay and overlay control plane convergence time in seconds.  min: 30, max: 1000
+L2_SEGMENT_ID_RANGE   | 30000-49000    | str()      | Range for L2 VNIs. min: 1, max: 16777214
+L3_PARTITION_ID_RANGE | 50000-59000    | str()      | Range for L3 VNIs. min: 1, max: 16777214
+LOOPBACK100_IP_RANGE  | 10.100.0.0/24  | net/prefix | range for BGW loopback interfaces associated with multisite
+MS_LOOPBACK_ID        | 100            | int()      | loopback ID for the multisite loopback interface. min: 0, max: 1023
+MS_UNDERLAY_AUTOCONFIG | true          | bool()     | Enable ``true`` or disable ``false`` the multi-site underlay autoconfiguration
+
+##### Example
+
+```yaml
+msd_fabrics:
+- name: MSD
+  ANYCAST_GW_MAC: 2020.0000.00aa
+  BORDER_GWY_CONNECTIONS: Direct_To_BGWS
+  DELAY_RESTORE: 300
+  L2_SEGMENT_ID_RANGE: 30000-49000
+  L3_PARTITION_ID_RANGE: 50000-59000
+  MS_LOOPBACK_ID: 100
+  MS_UNDERLAY_AUTOCONFIG: true
+  LOOPBACK100_IP_RANGE: 10.100.0.0/24
+  DCI_SUBNET_RANGE: 10.100.1.0/24
+  DCI_SUBNET_TARGET_MASK: 30
+```
+
 ## Device dictionaries
 
 Each of the following, for leaf, spine, border_gateway, are lists of dictionaries.  The dictionaries all have the same format.
