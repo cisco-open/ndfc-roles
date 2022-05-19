@@ -1,4 +1,4 @@
-# ndfc_rest_device_rediscover
+# ndfc_rest_rediscover
 
 Rediscover device ``device_name`` in fabric ``fabric_name``
 
@@ -25,7 +25,7 @@ See the following for details:
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_rest_device_rediscover
+    - ndfc_rest_rediscover
   vars:
     fabric_name: f1
     device_name: spine_1
