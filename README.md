@@ -2,7 +2,7 @@
 
 This repo contains Ansible Roles and example playbooks that, together, implement a basic Spine/Leaf VXLAN/EVPN fabric using Cisco's DCNM/NDFC Controller.
 
-The inventory contains two identical child fabrics with non-overlapping underlay addressing to facilitate interconnection via a multi-site domain (MSD) fabric.
+Two identical child fabrics and a multisite domain (MSD) fabric are defined in the role ``ndfc_common``.  The two child fabrics use  non-overlapping underlay addressing to facilitate interconnection via a multi-site domain (MSD) fabric, which is also defined in ``ndfc_common``, specifically, in ``ndfc_common/vars/main.yml``
 
 The main playbooks, which create the two fabrics and the MSD fabric are located in the top-level directory:
 
@@ -185,7 +185,7 @@ ndfc:
 
 ```bash
 cd /top/level/directory/for/this/repo
-ansible-playbook example_fabric_create_f1.yml --ask-vault-pass -i inventory
+ansible-playbook example_ndfc_rest_fabric_create_f1.yml --ask-vault-pass -i inventory
 ```
 
 When prompted, enter the password you used in response to the ansible-vault command in step 1 above.
@@ -194,7 +194,7 @@ When prompted, enter the password you used in response to the ansible-vault comm
 
 ```bash
 cd /top/level/directory/for/this/repo
-ansible-playbook example_fabric_create_f1.yml -i inventory
+ansible-playbook example_ndfc_rest_fabric_create_f1.yml -i inventory
 ```
 
 ### Roles
