@@ -273,3 +273,13 @@ Role                           | Description
 [ndfc_vrf_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_all
 [ndfc_vrf_query]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_query
 [ndfc_vrf_replaced]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_replaced
+
+### Code of Conduct
+
+This repository follows the Ansible project's [Code of Conduct](https://docs.ansible.com/ansible/devel/community/code_of_conduct.html). Please read and familiarize yourself with this document.
+
+### Licensing
+
+GNU General Public License v3.0 or later.
+
+See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) to see the full text.
