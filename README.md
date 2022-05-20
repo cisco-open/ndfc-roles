@@ -240,7 +240,7 @@ Role                           | Description
 [ndfc_vrf_query] | Query VRF and return json object ``info``, given ``fabric_name``, ``vrf_name``
 [ndfc_vrf_replaced] | Update (replaced) a vrf, given ``fabric_name``, ``vrf_name``
 
-\* The Roles marked with \* are examples showing how one can use cisco.dcnm.dcnm_query to glean various information from devices.  These are not used within any of the other Roles.
+\* The Roles marked with ``*`` are examples showing how one can use cisco.dcnm.dcnm_query to glean various information from devices.  These are not used within any of the other Roles.
 
 [ndfc_common]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common
 [ndfc_device_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_deleted
