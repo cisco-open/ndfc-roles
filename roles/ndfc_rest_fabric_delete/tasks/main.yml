@@ -4,17 +4,19 @@
   cisco.dcnm.dcnm_rest:
     method: GET
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
-  register: result
+  register: mr1
+
 - name: main set_fact active_fabrics 
   set_fact:
-     active_fabrics: "{{ result.response.DATA | json_query(query) | to_json }}"
+     active_fabrics: "{{ mr1.response.DATA | json_query(mq1) | to_json }}"
   vars:
-    query: "[*].{FabricName: fabricName}"
-- name: main set_fact asn
-  set_fact:
-     asn: "{{ fabrics | json_query(query) }}"
-  vars:
-    query: "[?name == '{{ fabric_name }}'].asn | [0]"
+    mq1: "[*].{FabricName: fabricName}"
+
+# - name: main set_fact asn
+#   set_fact:
+#      asn: "{{ fabrics | json_query(mq2) }}"
+#   vars:
+#     mq2: "[?name == '{{ fabric_name }}'].asn | [0]"
 
 - name: main REST DELETE FABRIC {{ fabric_name }} from ACTIVE_FABRICS {{ active_fabrics }}
   cisco.dcnm.dcnm_rest:

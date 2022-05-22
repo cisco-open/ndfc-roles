@@ -2,7 +2,7 @@
 ---
 - name: main replaced FABRIC {{ fabric_name }} VRF {{ vrf_name }}
   include_tasks: worker.yml
-  loop: "{{ r1 }}"
+  loop: "{{ mr1 }}"
   vars:
-    q1: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ vrf_name }}']"
-    r1: "{{ vrfs | json_query(q1) }}"
+    mq1: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ vrf_name }}']"
+    mr1: "{{ vrfs | json_query(mq1) }}"

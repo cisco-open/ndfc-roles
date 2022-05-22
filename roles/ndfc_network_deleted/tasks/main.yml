@@ -2,7 +2,7 @@
 ---
 - name: main deleted FABRIC {{ fabric_name }} NETWORK {{ network_name }}
   include_tasks: worker.yml
-  loop: "{{ r1 }}"
+  loop: "{{ mr1 }}"
   vars:
-    q1: "[?net_name == '{{ network_name }}'] | [?fabric == '{{ fabric_name }}']"
-    r1: "{{ networks | json_query(q1) }}"
+    mq1: "[?net_name == '{{ network_name }}'] | [?fabric == '{{ fabric_name }}']"
+    mr1: "{{ networks | json_query(mq1) }}"

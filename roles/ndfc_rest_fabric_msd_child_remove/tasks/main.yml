@@ -1,27 +1,28 @@
 # ndfc_rest_fabric_msd_remove_child/tasks/main.yml
 ---
+# query active fabrics
 - name: main REST GET fabrics
   cisco.dcnm.dcnm_rest:
     method: GET
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
-  register: result
+  register: mr1
 - name: main set_fact active_fabrics
   set_fact:
-     active_fabrics: "{{ result.response.DATA | json_query(qm1) | to_json }}"
+     active_fabrics: "{{ mr1.response.DATA | json_query(mq1) | to_json }}"
   vars:
-    qm1: "[*].{FabricName: fabricName}"
+    mq1: "[*].{FabricName: fabricName}"
 
 # query fabric-associations for child_fabric's fabric_parent
 - name: main REST GET fabric_associations
   cisco.dcnm.dcnm_rest:
     method: GET
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/msd/fabric-associations/"
-  register: result
+  register: mr2
 - name: main set_fact fabric_parent
   set_fact:
-     fabric_parent: "{{ result.response.DATA | json_query(qm2) }}"
+     fabric_parent: "{{ mr2.response.DATA | json_query(mq2) }}"
   vars:
-    qm2: "[?fabricName == '{{ child_fabric }}'].{fabricParent: fabricParent}"
+    mq2: "[?fabricName == '{{ child_fabric }}'].{fabricParent: fabricParent}"
 
 # Remove child_fabric to msd_fabric if child_fabric's fabric_parent != None and both msd_fabric and child_fabric exists
 - name: main REST POST msdExit msd_fabric {{ msd_fabric }} child_fabric {{ child_fabric }} fabric_parent ({{ fabric_parent[0].fabricParent }})

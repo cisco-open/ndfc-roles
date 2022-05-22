@@ -7,15 +7,15 @@
   cisco.dcnm.dcnm_rest:
     method: GET
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/top-down/fabrics/{{ fabric_name }}/vrfs"
-  register: result
+  register: mr1
   ignore_errors: true
 - name: set_fact info on success
   set_fact:
-     info: "{{ result.response.DATA }}"
+     info: "{{ mr1.response.DATA }}"
   when:
-    result is succeeded
+    mr1 is succeeded
 - name: set_fact info on failed
   set_fact:
      info: "{{ [] | to_json }}"
   when:
-    result is failed
+    mr1 is failed

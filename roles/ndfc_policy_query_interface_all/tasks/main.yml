@@ -2,18 +2,18 @@
 ---
 - name: main query FABRIC {{ fabric_name }} Interface Policies leaf
   include_tasks: worker.yml
-  loop: "{{ leafs | json_query(qm1) }}"
+  loop: "{{ leafs | json_query(mq1) }}"
   vars:
-    qm1: "[?fabric == '{{ fabric_name }}']"
+    mq1: "[?fabric == '{{ fabric_name }}']"
 
 - name: main query FABRIC {{ fabric_name }} Interface Policies spine
   include_tasks: worker.yml
-  loop: "{{ spines | json_query(qm2) }}"
+  loop: "{{ spines | json_query(mq2) }}"
   vars:
-    qm2: "[?fabric == '{{ fabric_name }}']"
+    mq2: "[?fabric == '{{ fabric_name }}']"
 
 - name: main query FABRIC {{ fabric_name }} Interface Policies border_gateway
   include_tasks: worker.yml
-  loop: "{{ border_gateways | json_query(qm3) }}"
+  loop: "{{ border_gateways | json_query(mq3) }}"
   vars:
-    qm3: "[?fabric == '{{ fabric_name }}']"
+    mq3: "[?fabric == '{{ fabric_name }}']"

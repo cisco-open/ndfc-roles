@@ -5,18 +5,18 @@
     state: query
     config:
     - seed_ip: "{{ item.ip }}"
-  register: result
+  register: wr1
 
 # playbooks can cull information from device_info
 - name: worker set_fact device_info
   set_fact:
-    device_info: "{{ result.response | json_query(q2) }}"
+    device_info: "{{ wr1.response | json_query(wq1) }}"
   vars:
-    q2: "[0]"
+    wq1: "[0]"
 
 # used in playbooks to skip the query if serial is not defined
 - name: worker set_fact serial
   set_fact:
-    serial: "{{ result.response | json_query(q3) }}"
+    serial: "{{ wr1.response | json_query(wq2) }}"
   vars:
-    q3: "[0].serialNumber"
+    wq2: "[0].serialNumber"

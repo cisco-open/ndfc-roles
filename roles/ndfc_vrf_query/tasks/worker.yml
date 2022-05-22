@@ -5,9 +5,9 @@
     state: query
     config:
     - vrf_name: "{{ item.vrf_name }}"
-  register: rw1
+  register: mr1
 
 # playbooks can cull information from the info object
 - name: set_fact info
   set_fact:
-    info: "{{ rw1.response[0] }}"
+    info: "{{ mr1.response[0] }}"

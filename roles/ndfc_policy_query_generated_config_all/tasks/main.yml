@@ -2,17 +2,19 @@
 ---
 - name: main query FABRIC {{ fabric_name }} Generated Configs leaf
   include_tasks: worker.yml
-  loop: "{{ leafs | json_query(q1) }}"
+  loop: "{{ leafs | json_query(mq1) }}"
   vars:
-    q1: "[?fabric == '{{ fabric_name }}']"
+    mq1: "[?fabric == '{{ fabric_name }}']"
+
 - name: main query FABRIC {{ fabric_name }} Generated Configs spine
   include_tasks: worker.yml
-  loop: "{{ spines | json_query(q1) }}"
+  loop: "{{ spines | json_query(mq2) }}"
   vars:
-    q1: "[?fabric == '{{ fabric_name }}']"
+    mq2: "[?fabric == '{{ fabric_name }}']"
+
 - name: main query FABRIC {{ fabric_name }} Generated Configs border_gateway
   include_tasks: worker.yml
-  loop: "{{ border_gateways | json_query(q1) }}"
+  loop: "{{ border_gateways | json_query(mq3) }}"
   vars:
-    q1: "[?fabric == '{{ fabric_name }}']"
+    mq3: "[?fabric == '{{ fabric_name }}']"
 

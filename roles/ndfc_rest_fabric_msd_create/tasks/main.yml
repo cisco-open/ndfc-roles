@@ -4,39 +4,40 @@
   cisco.dcnm.dcnm_rest:
     method: GET
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
-  register: result
+  register: mr1
 - name: main set_fact active_fabrics
   set_fact:
-     active_fabrics: "{{ result.response.DATA | json_query(query) | to_json }}"
+     active_fabrics: "{{ mr1.response.DATA | json_query(mq1) | to_json }}"
   vars:
-    query: "[*].{FabricName: fabricName}"
+    mq1: "[*].{FabricName: fabricName}"
+
 # TODO: add relevant user-configurable parameters to common_vars and update the
 # below accordingly.
 - name: main set_fact FABRIC {{ msd_fabric }}
   set_fact:
-     L2_SEGMENT_ID_RANGE: "{{ msd_fabrics | json_query(q1) }}"
-     L3_PARTITION_ID_RANGE: "{{ msd_fabrics | json_query(q2) }}"
-     ANYCAST_GW_MAC: "{{ msd_fabrics | json_query(q3) }}"
-     MS_LOOPBACK_ID: "{{ msd_fabrics | json_query(q4) }}"
-     BORDER_GWY_CONNECTIONS: "{{ msd_fabrics | json_query(q5) }}"
-     MS_UNDERLAY_AUTOCONFIG: "{{ msd_fabrics | json_query(q6) }}"
-     DELAY_RESTORE: "{{ msd_fabrics | json_query(q7) }}"
-     LOOPBACK100_IP_RANGE: "{{ msd_fabrics | json_query(q8) }}"
-     DCI_SUBNET_RANGE: "{{ msd_fabrics | json_query(q9) }}"
-     DCI_SUBNET_TARGET_MASK: "{{ msd_fabrics | json_query(q10) }}"
+     L2_SEGMENT_ID_RANGE: "{{ msd_fabrics | json_query(mq2) }}"
+     L3_PARTITION_ID_RANGE: "{{ msd_fabrics | json_query(mq3) }}"
+     ANYCAST_GW_MAC: "{{ msd_fabrics | json_query(mq4) }}"
+     MS_LOOPBACK_ID: "{{ msd_fabrics | json_query(mq5) }}"
+     BORDER_GWY_CONNECTIONS: "{{ msd_fabrics | json_query(mq6) }}"
+     MS_UNDERLAY_AUTOCONFIG: "{{ msd_fabrics | json_query(mq7) }}"
+     DELAY_RESTORE: "{{ msd_fabrics | json_query(mq8) }}"
+     LOOPBACK100_IP_RANGE: "{{ msd_fabrics | json_query(mq9) }}"
+     DCI_SUBNET_RANGE: "{{ msd_fabrics | json_query(mq10) }}"
+     DCI_SUBNET_TARGET_MASK: "{{ msd_fabrics | json_query(mq11) }}"
   vars:
-    q1: "[?name == '{{ msd_fabric }}'].L2_SEGMENT_ID_RANGE | [0]"
-    q2: "[?name == '{{ msd_fabric }}'].L3_PARTITION_ID_RANGE | [0]"
-    q3: "[?name == '{{ msd_fabric }}'].ANYCAST_GW_MAC | [0]"
-    q4: "[?name == '{{ msd_fabric }}'].MS_LOOPBACK_ID | [0]"
-    q5: "[?name == '{{ msd_fabric }}'].BORDER_GWY_CONNECTIONS | [0]"
-    q6: "[?name == '{{ msd_fabric }}'].MS_UNDERLAY_AUTOCONFIG | [0]"
-    q7: "[?name == '{{ msd_fabric }}'].DELAY_RESTORE | [0]"
-    q8: "[?name == '{{ msd_fabric }}'].LOOPBACK100_IP_RANGE | [0]"
-    q9: "[?name == '{{ msd_fabric }}'].DCI_SUBNET_RANGE | [0]"
-    q10: "[?name == '{{ msd_fabric }}'].DCI_SUBNET_TARGET_MASK | [0]"
+    mq2: "[?name == '{{ msd_fabric }}'].L2_SEGMENT_ID_RANGE | [0]"
+    mq3: "[?name == '{{ msd_fabric }}'].L3_PARTITION_ID_RANGE | [0]"
+    mq4: "[?name == '{{ msd_fabric }}'].ANYCAST_GW_MAC | [0]"
+    mq5: "[?name == '{{ msd_fabric }}'].MS_LOOPBACK_ID | [0]"
+    mq6: "[?name == '{{ msd_fabric }}'].BORDER_GWY_CONNECTIONS | [0]"
+    mq7: "[?name == '{{ msd_fabric }}'].MS_UNDERLAY_AUTOCONFIG | [0]"
+    mq8: "[?name == '{{ msd_fabric }}'].DELAY_RESTORE | [0]"
+    mq9: "[?name == '{{ msd_fabric }}'].LOOPBACK100_IP_RANGE | [0]"
+    mq0: "[?name == '{{ msd_fabric }}'].DCI_SUBNET_RANGE | [0]"
+    mq11: "[?name == '{{ msd_fabric }}'].DCI_SUBNET_TARGET_MASK | [0]"
 
-- name: main REST POST MSD FABRIC {{ msd_fabric }} ACTIVE_FABRICS {{ active_fabrics }}
+- name: main REST POST msd_fabric {{ msd_fabric }} active_fabrics {{ active_fabrics }}
   cisco.dcnm.dcnm_rest:
     method: POST
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/"

@@ -2,6 +2,6 @@
 ---
 - name: main {{ state }} FABRIC {{ fabric_name }}
   include_tasks: worker.yml
-  loop: "{{ vrfs | json_query(query) }}"
+  loop: "{{ vrfs | json_query(mq1) }}"
   vars:
-    query: "[?fabric == '{{ fabric_name }}']"
+    mq1: "[?fabric == '{{ fabric_name }}']"

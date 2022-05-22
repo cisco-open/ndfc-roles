@@ -2,16 +2,16 @@
 ---
 - name: main merged leaf FABRIC {{ fabric_name }}
   include_tasks: worker.yml
-  loop: "{{ leafs | json_query(query) }}"
+  loop: "{{ leafs | json_query(mq1) }}"
   vars:
-    query: "[?fabric == '{{ fabric_name }}']"
+    mq1: "[?fabric == '{{ fabric_name }}']"
 - name: main merged spine FABRIC {{ fabric_name }}
   include_tasks: worker.yml
-  loop: "{{ spines | json_query(query) }}"
+  loop: "{{ spines | json_query(mq2) }}"
   vars:
-    query: "[?fabric == '{{ fabric_name }}']"
+    mq2: "[?fabric == '{{ fabric_name }}']"
 - name: main merged border_gateway FABRIC {{ fabric_name }}
   include_tasks: worker.yml
-  loop: "{{ border_gateways | json_query(query) }}"
+  loop: "{{ border_gateways | json_query(mq3) }}"
   vars:
-    query: "[?fabric == '{{ fabric_name }}']"
+    mq3: "[?fabric == '{{ fabric_name }}']"

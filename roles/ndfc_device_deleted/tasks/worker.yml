@@ -6,13 +6,13 @@
     state: query
     config:
     - seed_ip: "{{ item.ip }}"
-  register: result
+  register: wr1
 
 - name: worker set_fact serial
   set_fact:
-    serial: "{{ result.response | json_query(q2) }}"
+    serial: "{{ wr1.response | json_query(wq1) }}"
   vars:
-    q2: "[0].serialNumber"
+    wq1: "[0].serialNumber"
 
 - name: worker deleted FABRIC {{ item.fabric }} NAME {{ item.name }} IP {{ item.ip}} SERIAL ({{ serial }})
   cisco.dcnm.dcnm_inventory:

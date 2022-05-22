@@ -6,13 +6,13 @@
     config:
       - switch:
           - ip: "{{ item.ip }}"
-  register: result
+  register: wr1
 
 - name: worker set_fact interface_config
   set_fact:
-     interface_config: "{{ result.response | json_query(qw1) }}"
+     interface_config: "{{ wr1.response | json_query(wq1) }}"
   vars:
-    qw1: "[?contains(generatedConfig, '{{ interface_name }}') == `true`].{TemplateName: templateName GeneratedConfig: generatedConfig}"
+    wq1: "[?contains(generatedConfig, '{{ interface_name }}') == `true`].{TemplateName: templateName GeneratedConfig: generatedConfig}"
 
 - name: worker show interface policy INTERFACE {{ interface_name }}
   debug:

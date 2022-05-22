@@ -5,20 +5,20 @@
     state: query
     config:
     - seed_ip: "{{ item.ip }}"
-  register: result
+  register: wr1
 
 - name: worker set_fact serial
   set_fact:
-    serial: "{{ result.response | json_query(q2) }}"
+    serial: "{{ wr1.response | json_query(wq1) }}"
   vars:
-    q2: "[0].serialNumber"
+    wq1: "[0].serialNumber"
 
 - debug:
-    msg: "uptime: {{ result.response[0].upTime }} - {{ item.fabric }} {{ item.name }} {{ item.ip }}"
+    msg: "uptime: {{ wr1.response[0].upTime }} - {{ item.fabric }} {{ item.name }} {{ item.ip }}"
   when: "serial != ''"
 - debug:
-    msg: "serial: {{ result.response[0].serialNumber }} - {{ item.fabric }} {{ item.name }} {{ item.ip }}"
+    msg: "serial: {{ wr1.response[0].serialNumber }} - {{ item.fabric }} {{ item.name }} {{ item.ip }}"
   when: "serial != ''"
 - debug:
-    msg: "version: {{ result.response[0].release }} - {{ item.fabric }} {{ item.name }} {{ item.ip }}"
+    msg: "version: {{ wr1.response[0].release }} - {{ item.fabric }} {{ item.name }} {{ item.ip }}"
   when: "serial != ''"

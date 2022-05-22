@@ -5,14 +5,14 @@
     state: query
     config:
     - seed_ip: "{{ item.ip }}"
-  register: result
+  register: wr1
 
 # Use serialNumber to determine if device already exists
 - name: worker set_fact device serial number
   set_fact:
-    serial: "{{ result.response | json_query(q2) }}"
+    serial: "{{ wr1.response | json_query(wq1) }}"
   vars:
-    q2: "[0].serialNumber"
+    wq1: "[0].serialNumber"
 
 - name: worker merged FABRIC {{ item.fabric }} NAME {{ item.name }} SERIAL {{ serial }} IP {{ item.ip }} MAX_HOPS {{ max_hops }} AUTH_PROTO {{ auth_proto }}
   cisco.dcnm.dcnm_inventory:

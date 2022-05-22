@@ -7,15 +7,15 @@
   cisco.dcnm.dcnm_rest:
     method: GET
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/inventory/switchesByFabric"
-  register: result
+  register: mr1
   ignore_errors: true
 - name: main set_fact info SUCCESS
   set_fact:
-     info: "{{ result.response.DATA }}"
+     info: "{{ mr1.response.DATA }}"
   when:
-    result is succeeded
+    mr1 is succeeded
 - name: main set_fact info FAILED
   set_fact:
      info: "{{ [] | to_json }}"
   when:
-    result is failed
+    mr1 is failed
