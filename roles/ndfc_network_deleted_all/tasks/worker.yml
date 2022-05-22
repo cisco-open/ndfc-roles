@@ -5,7 +5,3 @@
     state: deleted
     config:
     - net_name: "{{ item.net_name }}"
-      vrf_name: "{{ item.vrf_name }}"
-      vlan_id: "{{ item.vlan_id }}"
-      gw_ip_subnet: "{{ item.gw_ip_subnet }}"
-      attach: "{{ item.attach }}"
