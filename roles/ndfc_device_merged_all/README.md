@@ -37,9 +37,11 @@ device_username       | str()   | The username used to login to the device
 
 This Role is not currently reliable since it does not issue a config-save + config-deploy between devices.  Please use ``ndfc_device_merged`` instead, for now.
 
-### License
+### Licensing
 
-BSD
+GNU General Public License v3.0 or later.
+
+See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
 ### Author Information
 

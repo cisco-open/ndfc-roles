@@ -30,9 +30,11 @@ This currently does not work.  We're investigating it and will update the repo o
 ```yaml
 ```
 
-### License
+### Licensing
 
-BSD
+GNU General Public License v3.0 or later.
+
+See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
 ### Author Information
 

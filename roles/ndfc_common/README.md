@@ -313,9 +313,11 @@ vpc_interfaces:
 
 This role is not called directly.  Other ndfc_* roles include this role in their meta/main.yml files.
 
-### License
+### Licensing
 
-BSD
+GNU General Public License v3.0 or later.
+
+See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
 ### Author Information
 

@@ -44,9 +44,11 @@ See the following for details:
     fabric_name: MSD
 ```
 
-### License
+### Licensing
 
-BSD
+GNU General Public License v3.0 or later.
+
+See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
 ### Author Information
 

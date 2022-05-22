@@ -33,9 +33,11 @@ Remove ``child_fabric`` f1 from ``msd_fabric`` MSD
     msd_fabric: MSD
 ```
 
-### License
+### Licensing
 
-BSD
+GNU General Public License v3.0 or later.
+
+See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
 ### Author Information
 

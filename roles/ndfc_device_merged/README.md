@@ -53,9 +53,11 @@ device_username       | str()   | The username used to login to the device
     device_name: spine_1
 ```
 
-### License
+### Licensing
 
-BSD
+GNU General Public License v3.0 or later.
+
+See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
 ### Author Information
 

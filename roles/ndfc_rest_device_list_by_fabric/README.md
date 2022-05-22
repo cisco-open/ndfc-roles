@@ -34,9 +34,11 @@ The playbook below prints select information for every switch in fabric f2.
           label: device_info
 ```
 
-### License
+### Licensing
 
-BSD
+GNU General Public License v3.0 or later.
+
+See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
 ### Author Information
 
