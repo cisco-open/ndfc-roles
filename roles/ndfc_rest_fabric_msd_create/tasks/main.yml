@@ -34,7 +34,7 @@
     mq7: "[?name == '{{ msd_fabric }}'].MS_UNDERLAY_AUTOCONFIG | [0]"
     mq8: "[?name == '{{ msd_fabric }}'].DELAY_RESTORE | [0]"
     mq9: "[?name == '{{ msd_fabric }}'].LOOPBACK100_IP_RANGE | [0]"
-    mq0: "[?name == '{{ msd_fabric }}'].DCI_SUBNET_RANGE | [0]"
+    mq10: "[?name == '{{ msd_fabric }}'].DCI_SUBNET_RANGE | [0]"
     mq11: "[?name == '{{ msd_fabric }}'].DCI_SUBNET_TARGET_MASK | [0]"
 
 - name: main REST POST msd_fabric {{ msd_fabric }} active_fabrics {{ active_fabrics }}
