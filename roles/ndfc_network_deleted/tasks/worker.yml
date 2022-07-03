@@ -1,5 +1,17 @@
 ---
 # ndfc_network_deleted/tasks/worker.yml
+- name: main REST GET fabrics
+  cisco.dcnm.dcnm_rest:
+    method: GET
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
+  register: mr1
+
+- name: main set_fact active_fabrics 
+  set_fact:
+     active_fabrics: "{{ mr1.response.DATA | json_query(mq1) | to_json }}"
+  vars:
+    mq1: "[*].{FabricName: fabricName}"
+
 - name: worker query FABRIC {{ item.fabric }} NAME {{ item.net_name }} VLAN {{ item.vlan_id }}
   cisco.dcnm.dcnm_network:
     fabric: "{{ fabric_name }}"
@@ -7,6 +19,7 @@
     config:
     - net_name: "{{ item.net_name }}"
   register: wr1
+
 - name: worker set_fact parent.networkName
   set_fact:
     wf1: "{{ wr1.response | json_query(wq1) }}"
@@ -21,4 +34,4 @@
     state: deleted
     config:
     - net_name: "{{ item.net_name }}"
-  when: "wf1 == network_name"
+  when: "wf1 == network_name and fabric_name in active_fabrics"
