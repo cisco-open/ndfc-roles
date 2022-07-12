@@ -1,15 +1,15 @@
 # ndfc_vrf/tasks/update_vrf.yml
-- name: main REST GET fabrics
-  cisco.dcnm.dcnm_rest:
-    method: GET
-    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
-  register: mr1
+# - name: main REST GET fabrics
+#   cisco.dcnm.dcnm_rest:
+#     method: GET
+#     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
+#   register: mr1
 
-- name: main set_fact active_fabrics 
-  set_fact:
-     active_fabrics: "{{ mr1.response.DATA | json_query(mq1) | to_json }}"
-  vars:
-    mq1: "[*].{FabricName: fabricName}"
+# - name: main set_fact active_fabrics 
+#   set_fact:
+#      active_fabrics: "{{ mr1.response.DATA | json_query(mq1) | to_json }}"
+#   vars:
+#     mq1: "[*].{FabricName: fabricName}"
 
 - name: worker {{ state }} FABRIC {{ item.fabric }} VRF {{ item.vrf_name }} VLAN {{ item.vlan_id }}
   cisco.dcnm.dcnm_vrf:
@@ -23,4 +23,4 @@
       vrf_extension_template: Default_VRF_Extension_Universal
       service_vrf_template: null
       attach: "{{ item.attach }}"
-  when: "fabric_name in active_fabrics"
+  #when: "fabric_name in active_fabrics"
