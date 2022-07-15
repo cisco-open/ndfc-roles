@@ -14,7 +14,7 @@
   vars:
     wq1: "[0]"
 
-# used in playbooks to skip the query if serial is not defined
+# Device serial number
 - name: worker set_fact serial
   set_fact:
     serial: "{{ wr1.response | json_query(wq2) }}"
