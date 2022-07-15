@@ -5,13 +5,13 @@
     state: query
     config:
     - seed_ip: "{{ item.ip }}"
-  register: result
+  register: wr1
 
 # serial is used below to skip REST calls to config-save 
 # and config-deploy if the device already exists
 - name: worker set_fact device serial number
   set_fact:
-    serial: "{{ result.response | json_query(q2) }}"
+    serial: "{{ wr1.response | json_query(q2) }}"
   vars:
     q2: "[0].serialNumber"
 
