@@ -1,0 +1,12 @@
+# example_ndfc_rest_fabric_access_mode.yml
+# NOTE:
+# ndfc_rest_fabric_access_mode is not intended for use
+# within playbooks (rather, it is used within other roles).
+#
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_access_mode
+  vars:
+    fabric_name: f1
