@@ -1,16 +1,7 @@
 # ndfc_rest_fabric_msd_remove_child/tasks/main.yml
 ---
-# query active fabrics
-- name: main REST GET fabrics
-  cisco.dcnm.dcnm_rest:
-    method: GET
-    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
-  register: mr1
-- name: main set_fact active_fabrics
-  set_fact:
-     active_fabrics: "{{ mr1.response.DATA | json_query(mq1) | to_json }}"
-  vars:
-    mq1: "[*].{FabricName: fabricName}"
+- ansible.builtin.include_role:
+    name: ndfc_rest_fabric_active_fabrics
 
 # query fabric-associations for child_fabric's fabric_parent
 - name: main REST GET fabric_associations
