@@ -1,0 +1,10 @@
+# example_ndfc_rest_device_set_role.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_device_set_role
+  vars:
+    fabric_name: f1
+    device_name: leaf_1
+    role: leaf

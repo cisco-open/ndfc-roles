@@ -1,0 +1,45 @@
+# ndfc_device_merged/tasks/worker.yml
+- name: worker query FABRIC {{ item.fabric }} NAME {{ item.name }} IP {{ item.ip }}
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ item.fabric }}"
+    state: query
+    config:
+    - seed_ip: "{{ item.ip }}"
+  register: wr1
+
+- name: worker set_fact device serial number
+  set_fact:
+    serial: "{{ wr1.response | json_query(q2) }}"
+  vars:
+    q2: "[0].serialNumber"
+
+- name: worker REST POST set device role FABRIC {{ item.fabric }} NAME {{ item.name }} IP {{ item.ip }} SERIAL {{ serial }} payload {{ payload }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/switches/roles"
+    json_data: "{{ payload | to_json }}"
+  when: "serial != ''"
+  vars:
+    - payload:
+      - serialNumber: "{{ serial }}"
+        role: "{{ role }}"
+
+- name: worker REST POST config-save FABRIC {{ fabric_name }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/config-save"
+    json_data: "{{ vars_dict | to_json }}"
+  vars:
+    vars_dict:
+  when: "serial != ''"
+
+- name: worker REST POST config-deploy FABRIC {{ fabric_name }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/config-deploy"
+    json_data: "{{ vars_dict | to_json }}"
+  vars:
+    vars_dict:
+      forceShowRun: "{{ forceShowRun }}"
+      inclAllMSDSwitches: "{{ inclAllMSDSwitches }}"
+  when: "serial != ''"
