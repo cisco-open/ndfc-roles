@@ -12,7 +12,7 @@ fabric_name     | str() | The fabric to be queried
 
 Fabric parameters, including ``fabric_name`, are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``)
+``./roles/ndfc_common/vars/main.yml``
 
 See the following for details:
 
