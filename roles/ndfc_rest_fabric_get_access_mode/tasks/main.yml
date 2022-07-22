@@ -1,4 +1,4 @@
-# ndfc_rest_fabric_access_mode
+# ndfc_rest_fabric_get_access_mode
 # Returns the current fabric access mode in var 'read_only'
 # if fabric exists, read_only will be either true or false
 # if fabric does not exist, read_only will be null

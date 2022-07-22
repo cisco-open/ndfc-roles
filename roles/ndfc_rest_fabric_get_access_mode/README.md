@@ -1,4 +1,4 @@
-# ndfc_rest_fabric_access_mode
+# ndfc_rest_fabric_get_access_mode
 
 Give ``fabric_name`` return fabric access_mode in var ``read_only``
 
