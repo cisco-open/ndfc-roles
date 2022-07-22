@@ -225,7 +225,6 @@ Role                           | Description
 [ndfc_rest_config_deploy] | NDFC REST API POST calls to config-save and config-deploy for a device, given ``fabric_name``, ``device_name``
 [ndfc_rest_config_deploy_all] | NDFC REST API POST calls to config-save and config-deploy for a fabric, given ``fabric_name``
 [ndfc_rest_device_list_by_fabric] | Retrieve list of devices in fabric, given ``fabric_name``
-[ndfc_rest_device_rediscover] | Rediscover device, given ``fabric_name``, ``device_name``
 [ndfc_rest_device_set_role] | Set a device's role, given ``fabric_name``, ``device_name``, and ``role``
 [ndfc_rest_fabric_create] | Create a fabric, given ``fabric_name``
 [ndfc_rest_fabric_delete] | Delete a fabric, given ``fabric_name``
