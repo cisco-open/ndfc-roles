@@ -1,4 +1,4 @@
 ---
 collections:
   - name: cisco.dcnm
-
+    version: 2.1.0
