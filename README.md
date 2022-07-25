@@ -51,11 +51,20 @@ git clone https://github.com/allenrobel/ndfc-roles.git
 
 ### Dependencies
 
+#### Cisco Nexus Dashboard (ND) + Nexus Dashboard Fabric Controller (NDFC)
+
+ndfc-roles has been tested with the following ND+NDFC versions
+
+Tested | ND       | NDFC
+------ | -------- | -----------
+Yes    | 2.2(1h)  | 12.1.1e
+Yes    | 2.1(2d)  | 12.0.2f
+
 #### cisco.dcnm Ansible Collection Version 2.1.0
 
 The Ansible Roles in this repo require that version 2.1.0 of the cisco.dcnm Collection be installed.  A ``requirements.yml`` file is included in the top-level directory which will install this collection.  Or you may do so explicitly.  It's recommended to use ``requirements.yml`` as this file may be updated with other dependencies later.
 
-NOTE: Some earlier versions of cisco.dcnm are known not to work due to API changes involving VPC interfaces.
+NOTE: Some earlier versions of the cisco.dcnm Ansible Collection are known not to work due to NDFC API changes involving VPC interfaces.
 
 ##### Example using ``requirements.yml``
 
