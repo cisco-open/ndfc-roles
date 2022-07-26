@@ -2,6 +2,8 @@
 
 # ndfc-roles
 
+## Getting started
+
 This repo contains Ansible Roles and example playbooks that, together, implement a basic Spine/Leaf VXLAN/EVPN fabric using Cisco's DCNM/NDFC Controller.
 
 Two identical child fabrics and a multisite domain (MSD) fabric are defined in the role ``ndfc_common``.  The two child fabrics use  non-overlapping underlay addressing to facilitate interconnection via a multi-site domain (MSD) fabric, which is also defined in ``ndfc_common``; specifically, in ``ndfc_common/vars/main.yml``
@@ -43,15 +45,15 @@ msdc_rest_fabric_msd_child_add
 
 The remaining Roles are provided as examples which facilitate various day2 ops.
 
-### To clone this repo
+## To clone this repo
 
 ```bash
 git clone https://github.com/allenrobel/ndfc-roles.git
 ```
 
-### Dependencies
+## Dependencies
 
-#### Cisco Nexus Dashboard (ND) + Nexus Dashboard Fabric Controller (NDFC)
+### Cisco Nexus Dashboard (ND) + Nexus Dashboard Fabric Controller (NDFC)
 
 ndfc-roles has been tested with the following ND+NDFC versions
 
@@ -60,25 +62,25 @@ Tested | ND       | NDFC
 Yes    | 2.2(1h)  | 12.1.1e
 Yes    | 2.1(2d)  | 12.0.2f
 
-#### cisco.dcnm Ansible Collection Version 2.1.0
+### cisco.dcnm Ansible Collection Version 2.1.0
 
 The Ansible Roles in this repo require that version 2.1.0 of the cisco.dcnm Collection be installed.  A ``requirements.yml`` file is included in the top-level directory which will install this collection.  Or you may do so explicitly.  It's recommended to use ``requirements.yml`` as this file may be updated with other dependencies later.
 
 NOTE: Some earlier versions of the cisco.dcnm Ansible Collection are known not to work due to NDFC API changes involving VPC interfaces.
 
-##### Example using ``requirements.yml``
+#### Example using ``requirements.yml``
 
 ```bash
 ansible-galaxy collection install --requirements-file /path/to/this/repo/top-level/requirements.yml
 ```
 
-##### Example using explicit Collection
+#### Example using explicit Collection
 
 ```bash
 ansible-galaxy collection install cisco.dcnm
 ```
 
-#### jmespath
+### jmespath
 
 The Ansible Roles in this repo make extensive use of ``json_query()`` which requires that [jmespath](https://jmespath.org) be installed.  To install (preferably, you're running Ansible within a python virtual environment):
 
@@ -86,7 +88,7 @@ The Ansible Roles in this repo make extensive use of ``json_query()`` which requ
 pip install jmespath
 ```
 
-### Ansible Custom Configuration
+## Ansible Custom Configuration
 
 DCNM/NDFC requires increasing the default timeout for persistent connections from the default of 30 seconds to >= 1000 seconds.  We have provided an ansible.cfg file with the requisite changes in this repo's top-level directory.  If you would rather edit your existing ansible.cfg file (where ever it is), the changes are shown below.
 
@@ -111,7 +113,7 @@ The characteristics of the child/site fabrics are as follows (see also the inclu
 
 Spines and Leafs can be added/removed by updating the Common Role Variables described below.
 
-### Common Role Variables
+## Common Role Variables
 
 To use these Roles, and example playbooks, you'll need to update some common variables used across all Roles.  These are maintained in ``./ndfc_common/vars/main.yml`` and include things like: IP addresses of your switches, VRF names, VLAN identifiers, port attachments for networks, VPC peering info and other basic information.
 
@@ -120,7 +122,7 @@ See the following for details around the modifications you'll need to make
 
 [./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
 
-### Inventory
+## Inventory
 
 Next, you'll need to edit the following to add your NDFC username and password and the username/password for the switches comprising your fabric(s)
 
@@ -130,9 +132,9 @@ Next, you'll need to edit the following to add your NDFC username and password a
 
 It is recommended (but not mandatory) that you encrypt these passwords.  Below is one way to do this.
 
-#### Modify ./inventory/group_vars/ndfc
+### Modify ./inventory/group_vars/ndfc
 
-##### Edit ``ansible_password`` (password for NDFC controller) and ``device_password`` (password for NX-OS switches)
+#### Edit ``ansible_password`` (password for NDFC controller) and ``device_password`` (password for NX-OS switches)
 
 Add ``ansible_password`` and ``device_password`` in encrypted format (or non-encrypted, if you don't care about security).  These are the passwords you use to login to your DCNM/NDFC Controller, and NX-OS switches, respectively.
 
@@ -170,7 +172,7 @@ ansible_password: mySuperSecretNdfcPassword
 device_password: mySuperSecretNxosPassword
 ```
 
-##### Edit ``ansible_user``
+#### Edit ``ansible_user``
 
 Change ``ansible_user`` in the same file to the username associated with the above password that you're using on DCNM/NDFC.
 Change ``device_username`` in the same file to the username used to login to your NX-OS switches.
@@ -182,7 +184,7 @@ ansible_user: voldomort
 device_username: admin
 ```
 
-##### Update ``./inventory/hosts/hosts`` with the IP address of your DCNM/NDFC Controller
+#### Update ``./inventory/hosts/hosts`` with the IP address of your DCNM/NDFC Controller
 
 ```bash
 % cat ./inventory/hosts/hosts 
@@ -194,7 +196,7 @@ ndfc:
 ```
 
 
-##### To run a playbook if you encrypted your NDFC password
+#### To run a playbook if you encrypted your NDFC password
 
 ```bash
 cd /top/level/directory/for/this/repo
@@ -203,14 +205,14 @@ ansible-playbook example_ndfc_rest_fabric_create_f1.yml --ask-vault-pass -i inve
 
 When prompted, enter the password you used in response to the ansible-vault command in step 1 above.
 
-##### Or, to run a playbook if you didn't encrypt the NDFC password
+#### Or, to run a playbook if you didn't encrypt the NDFC password
 
 ```bash
 cd /top/level/directory/for/this/repo
 ansible-playbook example_ndfc_rest_fabric_create_f1.yml -i inventory
 ```
 
-### Roles
+## Roles
 
 Role naming conventions used in this repo.
 
