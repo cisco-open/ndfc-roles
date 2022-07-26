@@ -1,0 +1,31 @@
+# ndfc_rest_interface_shutdown/tasks/worker.yml
+- name: worker query FABRIC {{ item.fabric }} NAME {{ item.name }} IP {{ item.ip }}
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ item.fabric }}"
+    state: query
+    config:
+    - seed_ip: "{{ item.ip }}"
+  register: wr1
+
+- name: worker set_fact device serial number
+  set_fact:
+    serial: "{{ wr1.response | json_query(q2) }}"
+  vars:
+    q2: "[0].serialNumber"
+
+- name: worker REST POST interface shutdown FABRIC {{ item.fabric }} NAME {{ item.name }} IP {{ item.ip }} SERIAL {{ serial }} INTERFACE {{ interface_name }} payload {{ payload }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/interface/adminstatus"
+    json_data: "{{ payload | to_json }}"
+  when: "serial != ''"
+  vars:
+  - payload:
+      operation: "shut"
+      interfaces:
+      - serialNumber: "{{ serial }}"
+        ifName: "{{ interface_name }}"
+
+- ansible.builtin.include_role:
+    name: ndfc_rest_config_deploy_all
+  when: "serial != ''"

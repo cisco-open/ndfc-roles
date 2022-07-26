@@ -1,0 +1,3 @@
+# ndfc_devices_create/defaults/main.yml
+forceShowRun: false
+inclAllMSDSwitches: false
