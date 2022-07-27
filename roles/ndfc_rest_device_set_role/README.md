@@ -38,9 +38,9 @@ inclAllMSDSwitches | bool() | Default: ``false`` Included in the config-deploy R
   roles:
     - ndfc_rest_device_set_role
   vars:
-    fabric_name: f1
-    device_name: spine_1
-    role: spine
+    - fabric_name: f1
+      device_name: spine_1
+      role: spine
 ```
 
 ### Licensing
