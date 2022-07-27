@@ -1,6 +1,6 @@
-# ndfc_rest_interface_shutdown/tasks/main.yml
+# ndfc_rest_interface_no_shutdown/tasks/main.yml
 ---
-- name: main rest_interface_shutdown FABRIC {{ fabric_name }} DEVICE {{ device_name }} INTERFACE {{ interface_name }}
+- name: main rest_interface_no_shutdown FABRIC {{ fabric_name }} DEVICE {{ device_name }} INTERFACE {{ interface_name }}
   include_tasks: worker.yml
   loop: "{{ mr1 }}"
   vars:
