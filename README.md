@@ -284,8 +284,8 @@ Role                           | Description
 [ndfc_rest_fabric_msd_child_add]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_add
 [ndfc_rest_fabric_msd_child_remove]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_remove
 [ndfc_rest_fabric_msd_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_create
-ndfc_rest_interface_no_shutdown] https:////github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_interface_no_shutdown
-ndfc_rest_interface_shutdown] https:////github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_interface_shutdown
+[ndfc_rest_interface_no_shutdown]: https:////github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_interface_no_shutdown
+[ndfc_rest_interface_shutdown]: https:////github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_interface_shutdown
 [ndfc_rest_rediscover]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_rediscover
 [ndfc_rest_vpc_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_vpc_create
 [ndfc_rest_vpc_delete]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_vpc_delete
