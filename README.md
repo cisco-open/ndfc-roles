@@ -247,6 +247,8 @@ Role                           | Description
 [ndfc_rest_fabric_msd_child_add] | Add a child fabric to an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_child_remove] | Remove a child fabric from an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_create] | Create a multi-side domain fabric, given ``msd_fabric``
+[ndfc_rest_interface_no_shutdown] | Administratively no shutdown interface, given ``fabric_name``, ``device_name``, ``interface_name``
+[ndfc_rest_interface_shutdown] | Administratively shutdown interface, given ``fabric_name``, ``device_name``, ``interface_name``
 [ndfc_rest_rediscover] | Rediscover a device, given ``fabric_name``, ``device_name``
 [ndfc_rest_vpc_create] | Create a VPC pair, given ``fabric_name``, ``vpc_name``
 [ndfc_rest_vpc_delete] | Delete a VPC pair, given ``fabric_name``, ``vpc_name``
@@ -282,6 +284,8 @@ Role                           | Description
 [ndfc_rest_fabric_msd_child_add]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_add
 [ndfc_rest_fabric_msd_child_remove]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_remove
 [ndfc_rest_fabric_msd_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_create
+ndfc_rest_interface_no_shutdown] https:////github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_interface_no_shutdown
+ndfc_rest_interface_shutdown] https:////github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_interface_shutdown
 [ndfc_rest_rediscover]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_rediscover
 [ndfc_rest_vpc_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_vpc_create
 [ndfc_rest_vpc_delete]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_vpc_delete
