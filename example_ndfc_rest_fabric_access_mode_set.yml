@@ -1,0 +1,11 @@
+# example_ndfc_rest_fabric_access_mode_set.yml
+# fabric_name: the name of the fabric whose read_only mode will be set
+# read_only: the fabric access_mode.  Either true or false
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_access_mode_set
+  vars:
+    fabric_name: f1
+    read_only: true

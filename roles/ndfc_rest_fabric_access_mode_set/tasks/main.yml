@@ -1,0 +1,17 @@
+# ndfc_rest_fabric_access_mode_set
+# Sets fabric access mode var 'read_only' to true or false
+# if fabric exists, read_only will be set
+# if fabric does not exist, the role is skipped and no action is taken
+---
+- ansible.builtin.include_role:
+    name: ndfc_rest_fabric_active_fabrics
+
+- name: set fabric access_mode fabric {{ fabric_name }} active_fabrics {{ active_fabrics }} read_only {{ read_only }}
+  cisco.dcnm.dcnm_rest:
+    method: PUT
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/fabricfreezeMode"
+    json_data: "{{ payload | to_json }}"
+  vars:
+    - payload:
+      readOnly: "{{ read_only }}"
+  when: fabric_name in active_fabrics

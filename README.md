@@ -243,7 +243,8 @@ Role                           | Description
 [ndfc_rest_device_set_role] | Set a device's role, given ``fabric_name``, ``device_name``, and ``role``
 [ndfc_rest_fabric_create] | Create a fabric, given ``fabric_name``
 [ndfc_rest_fabric_delete] | Delete a fabric, given ``fabric_name``
-[ndfc_rest_fabric_get_access_mode] | Retrieve a fabric's access mode, given ``fabric_name``
+[ndfc_rest_fabric_access_mode_get] | Retrieve a fabric's access mode, given ``fabric_name``
+[ndfc_rest_fabric_access_mode_set] | Set a fabric's access mode, given ``fabric_name``, and ``read_only``
 [ndfc_rest_fabric_msd_child_add] | Add a child fabric to an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_child_remove] | Remove a child fabric from an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_create] | Create a multi-side domain fabric, given ``msd_fabric``
@@ -280,7 +281,8 @@ Role                           | Description
 [ndfc_rest_device_list_by_fabric]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_device_list_by_fabric
 [ndfc_rest_fabric_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_create
 [ndfc_rest_fabric_delete]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_delete
-[ndfc_rest_fabric_get_access_mode]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_get_access_mode
+[ndfc_rest_fabric_access_mode_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_access_mode_get
+[ndfc_rest_fabric_access_mode_set]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_access_mode_set
 [ndfc_rest_fabric_msd_child_add]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_add
 [ndfc_rest_fabric_msd_child_remove]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_remove
 [ndfc_rest_fabric_msd_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_create
