@@ -346,7 +346,7 @@ networks:
 vrfs:
 - fabric: "{{ fabrics[0].name }}"
   vrf_name: v1
-  vrf_id: 9003031
+  vrf_id: 63031
   vlan_id: 3031
   vrf_template: Default_VRF_Universal
   vrf_extension_template: Default_VRF_Extension_Universal
@@ -360,7 +360,7 @@ vrfs:
     - ip_address: "{{ border_gateways[1].ip }}"
 - fabric: "{{ fabrics[0].name }}"
   vrf_name: v2
-  vrf_id: 9003032
+  vrf_id: 63032
   vlan_id: 3032
   vrf_template: Default_VRF_Universal
   vrf_extension_template: Default_VRF_Extension_Universal
@@ -374,7 +374,7 @@ vrfs:
     - ip_address: "{{ border_gateways[1].ip }}"
 - fabric: "{{ fabrics[1].name }}"
   vrf_name: v1
-  vrf_id: 9003031
+  vrf_id: 63031
   vlan_id: 3031
   vrf_template: Default_VRF_Universal
   vrf_extension_template: Default_VRF_Extension_Universal
@@ -388,7 +388,7 @@ vrfs:
     - ip_address: "{{ border_gateways[3].ip }}"
 - fabric: "{{ fabrics[1].name }}"
   vrf_name: v2
-  vrf_id: 9003032
+  vrf_id: 63032
   vlan_id: 3032
   vrf_template: Default_VRF_Universal
   vrf_extension_template: Default_VRF_Extension_Universal
@@ -408,7 +408,7 @@ vrfs:
 
 - fabric: "{{ msd_fabrics[0].name }}"
   vrf_name: v1
-  vrf_id: 9003031
+  vrf_id: 63031
   vlan_id: 3031
   vrf_template: Default_VRF_Universal
   vrf_extension_template: Default_VRF_Extension_Universal
@@ -428,7 +428,7 @@ vrfs:
     - ip_address: "{{ border_gateways[3].ip }}"
 - fabric: "{{ msd_fabrics[0].name }}"
   vrf_name: v2
-  vrf_id: 9003032
+  vrf_id: 63032
   vlan_id: 3032
   vrf_template: Default_VRF_Universal
   vrf_extension_template: Default_VRF_Extension_Universal
