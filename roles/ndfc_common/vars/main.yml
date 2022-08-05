@@ -214,10 +214,10 @@ networks:
     ports: "{{ port_groups.pg11 }}"
   - ip_address: "{{ leafs[3].ip }}"
     ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ border_gateways[0].ip }}"
-    ports: ""
-  - ip_address: "{{ border_gateways[1].ip }}"
-    ports: ""
+  # - ip_address: "{{ border_gateways[0].ip }}"
+  #   ports: ""
+  # - ip_address: "{{ border_gateways[1].ip }}"
+  #   ports: ""
 
 - fabric: "{{ fabrics[0].name }}"
   net_name: n1112
@@ -233,10 +233,10 @@ networks:
     ports: "{{ port_groups.pg12 }}"
   - ip_address: "{{ leafs[3].ip }}"
     ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ border_gateways[0].ip }}"
-    ports: ""
-  - ip_address: "{{ border_gateways[1].ip }}"
-    ports: ""
+  # - ip_address: "{{ border_gateways[0].ip }}"
+  #   ports: ""
+  # - ip_address: "{{ border_gateways[1].ip }}"
+  #   ports: ""
 
 - fabric: "{{ fabrics[1].name }}"
   net_name: n1111
@@ -252,10 +252,10 @@ networks:
     ports: "{{ port_groups.pg11 }}"
   - ip_address: "{{ leafs[7].ip }}"
     ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ border_gateways[2].ip }}"
-    ports: ""
-  - ip_address: "{{ border_gateways[3].ip }}"
-    ports: ""
+  # - ip_address: "{{ border_gateways[2].ip }}"
+  #   ports: ""
+  # - ip_address: "{{ border_gateways[3].ip }}"
+  #   ports: ""
 
 - fabric: "{{ fabrics[1].name }}"
   net_name: n1112
@@ -271,15 +271,16 @@ networks:
     ports: "{{ port_groups.pg12 }}"
   - ip_address: "{{ leafs[7].ip }}"
     ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ border_gateways[2].ip }}"
-    ports: ""
-  - ip_address: "{{ border_gateways[3].ip }}"
-    ports: ""
+  # - ip_address: "{{ border_gateways[2].ip }}"
+  #   ports: ""
+  # - ip_address: "{{ border_gateways[3].ip }}"
+  #   ports: ""
 
 ### If using an MSD fabric to interconnect sites, we need to apply networks and
 ### VRFs to the MSD fabric, rather than the individual site fabrics.  The
-### networks below are duplicates of the above site fabric networks and will
-### be used if the fabric name is an MSD fabric.
+### networks below are duplicates of the above site fabric networks but 
+### additionally define attachments for the border_gateway roles, and will be
+### used if the fabric name is an MSD fabric.
 
 - fabric: "{{ msd_fabrics[0].name }}"
   net_name: n1111
@@ -356,8 +357,8 @@ vrfs:
     - ip_address: "{{ leafs[1].ip }}"
     - ip_address: "{{ leafs[2].ip }}"
     - ip_address: "{{ leafs[3].ip }}"
-    - ip_address: "{{ border_gateways[0].ip }}"
-    - ip_address: "{{ border_gateways[1].ip }}"
+    # - ip_address: "{{ border_gateways[0].ip }}"
+    # - ip_address: "{{ border_gateways[1].ip }}"
 - fabric: "{{ fabrics[0].name }}"
   vrf_name: v2
   vrf_id: 63032
@@ -370,8 +371,8 @@ vrfs:
     - ip_address: "{{ leafs[1].ip }}"
     - ip_address: "{{ leafs[2].ip }}"
     - ip_address: "{{ leafs[3].ip }}"
-    - ip_address: "{{ border_gateways[0].ip }}"
-    - ip_address: "{{ border_gateways[1].ip }}"
+    # - ip_address: "{{ border_gateways[0].ip }}"
+    # - ip_address: "{{ border_gateways[1].ip }}"
 - fabric: "{{ fabrics[1].name }}"
   vrf_name: v1
   vrf_id: 63031
@@ -384,8 +385,8 @@ vrfs:
     - ip_address: "{{ leafs[5].ip }}"
     - ip_address: "{{ leafs[6].ip }}"
     - ip_address: "{{ leafs[7].ip }}"
-    - ip_address: "{{ border_gateways[2].ip }}"
-    - ip_address: "{{ border_gateways[3].ip }}"
+    # - ip_address: "{{ border_gateways[2].ip }}"
+    # - ip_address: "{{ border_gateways[3].ip }}"
 - fabric: "{{ fabrics[1].name }}"
   vrf_name: v2
   vrf_id: 63032
@@ -398,13 +399,14 @@ vrfs:
     - ip_address: "{{ leafs[5].ip }}"
     - ip_address: "{{ leafs[6].ip }}"
     - ip_address: "{{ leafs[7].ip }}"
-    - ip_address: "{{ border_gateways[2].ip }}"
-    - ip_address: "{{ border_gateways[3].ip }}"
+    # - ip_address: "{{ border_gateways[2].ip }}"
+    # - ip_address: "{{ border_gateways[3].ip }}"
 
 ### If using an MSD fabric to interconnect sites, we need to apply networks and
 ### VRFs to the MSD fabric, rather than the individual site fabrics.  The
-### VRFs below are duplicates of the above site fabric VRFs and will
-### be used if the fabric name is an MSD fabric.
+### VRFs below are duplicates of the above site fabric VRFs but additionally define
+### attachments for the border_gateway roles, and will be used if the fabric name
+### is an MSD fabric.
 
 - fabric: "{{ msd_fabrics[0].name }}"
   vrf_name: v1
