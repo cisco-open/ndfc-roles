@@ -369,7 +369,7 @@
       - leaf_3
       - leaf_4
   roles:
-    - ndfc_policy_vrf_rt_import_loop
+    - ndfc_policy_vrf_rt_import_evpn_loop
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -391,7 +391,7 @@
       - leaf_3
       - leaf_4
   roles:
-    - ndfc_policy_vrf_rt_import_loop
+    - ndfc_policy_vrf_rt_import_evpn_loop
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -413,7 +413,7 @@
       - leaf_3
       - leaf_4
   roles:
-    - ndfc_policy_vrf_rt_import_loop
+    - ndfc_policy_vrf_rt_import_evpn_loop
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -435,7 +435,7 @@
       - leaf_3
       - leaf_4
   roles:
-    - ndfc_policy_vrf_rt_import_loop
+    - ndfc_policy_vrf_rt_import_evpn_loop
 - hosts: ndfc
   gather_facts: false
   roles:

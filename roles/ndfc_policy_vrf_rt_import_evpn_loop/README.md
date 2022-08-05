@@ -1,17 +1,17 @@
-# ndfc_policy_vrf_rt_import_loop
+# ndfc_policy_vrf_rt_import_evpn_loop
 
 Import vrf ``import_vrf_name``'s route-targets into vrf ``vrf_name`` on multiple devices in fabric ``fabric_name`` using Ansible state ``state``
 
-NOTE: This role doesn't work for inter-vrf route-target import/export and may be deprecated in the future.  Please use ``ndfc_policy_vrf_rt_import_evpn`` or ``ndfc_policy_vrf_rt_import_evpn_loop`` instead.
+NOTE: This role will fail the first time it's run, but is written to retry and will succeed on the second retry.  This is offered as a hack until the DCNM Ansible Collection provides a way to configure route-target import/export within the dcnm_vrf module (or some other yet-to-be-created module).
 
 ### Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
-fabric_name     | str()  | The fabric in which ``device_name`` resides
+fabric_name     | str()  | The fabric in which ``device_name`` resides (see devices list below).  NOTE: if ``device_name`` resides in a child fabric of an MSD fabric, then ``fabric_name`` must be the name of the MSD fabric. 
 vrf_name        | str()  | The vrf into which ``import_vrf_name``'s route-targets will be imports
 import_vrf_name | str()  | The vrf whose route-targets will be imported into ``vrf_name``
-state           | str()  | The Ansible state to apply for the import. e.g. ``deleted`` to delete the import, ``merged`` to merge the import, etc.
+state           | str() | The Ansible state to apply for the import. e.g. ``deleted`` to delete the import, ``merged`` to merge the import.  NOTE: ``replaced`` is not a valid state for this module.
 devices         | list() | An Ansible list of ``device_name`` to which ``vrf_name`` is attached
 
 Fabric, device, and vrf names are are defined in the following file:
@@ -43,7 +43,7 @@ The example below performs a bi-directional import of route-targets between vrfs
       - leaf_3
       - leaf_4
   roles:
-    - ndfc_policy_vrf_rt_import_loop
+    - ndfc_policy_vrf_rt_import_evpn_loop
 
 # Deploy
 - hosts: ndfc
@@ -69,7 +69,7 @@ The example below performs a bi-directional import of route-targets between vrfs
       - leaf_3
       - leaf_4
   roles:
-    - ndfc_policy_vrf_rt_import_loop
+    - ndfc_policy_vrf_rt_import_evpn_loop
 
 # Deploy
 - hosts: ndfc

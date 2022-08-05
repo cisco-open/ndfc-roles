@@ -1,4 +1,5 @@
 # example_ndfc_rest_fabric_create_f1.yml
+# This creates a standalone fabric (i.e. not MSD child).  As such, it provisions only the leaf and spine layers (does not provision border-gateways)
 ---
 # Fabric and devices
 - hosts: ndfc
@@ -62,24 +63,6 @@
     fabric_name: f1
     device_name: spine_2
 
-# border_gateway_1
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_device_merged
-  vars:
-    fabric_name: f1
-    device_name: border_gateway_1
-
-# border_gateway_2
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_device_merged
-  vars:
-    fabric_name: f1
-    device_name: border_gateway_2
-
 # vpc1
 - hosts: ndfc
   gather_facts: false
@@ -140,7 +123,7 @@
     fabric_name: f1
 
 - hosts: ndfc
-  name: Import vrf v2 route-targets into vrf v1
+  name: fabric {{ fabric_name }} vrf {{ vrf_name }} import vrf {{ import_vrf_name }} route-targets
   gather_facts: false
   vars:
     state: merged
@@ -153,7 +136,7 @@
       - leaf_3
       - leaf_4
   roles:
-    - ndfc_policy_vrf_rt_import_loop
+    - ndfc_policy_vrf_rt_import_evpn_loop
 
 # Deploy
 - hosts: ndfc
@@ -164,7 +147,7 @@
     fabric_name: f1
 
 - hosts: ndfc
-  name: Import vrf v1 route-targets into vrf v2
+  name: fabric {{ fabric_name }} vrf {{ vrf_name }} import vrf {{ import_vrf_name }} route-targets
   gather_facts: false
   vars:
     state: merged
@@ -177,7 +160,7 @@
       - leaf_3
       - leaf_4
   roles:
-    - ndfc_policy_vrf_rt_import_loop
+    - ndfc_policy_vrf_rt_import_evpn_loop
 
 # Deploy
 - hosts: ndfc
