@@ -1,6 +1,6 @@
-# ndfc_rest_fabric_get_access_mode
+# ndfc_rest_fabric_access_mode_get
 
-Give ``fabric_name`` return fabric access_mode in var ``read_only``
+Given ``fabric_name`` return fabric access_mode in var ``read_only``
 
 This role is intended to be used within other roles, rather than within playbooks.
 
