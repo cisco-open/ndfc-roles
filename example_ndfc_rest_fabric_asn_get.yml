@@ -10,4 +10,4 @@
   - block:
     - debug:
         msg: "fabric_name {{ fabric_name }} fabric_asn: {{ fabric_asn }}"
-    when: "fabric_asn != ''"
+    when: "fabric_asn is not none"
