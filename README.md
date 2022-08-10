@@ -230,6 +230,7 @@ Role                           | Description
 [ndfc_device_merged_all] | Merge all devices into a fabric, given ``fabric_name``
 [ndfc_device_query] | Query a device, given ``fabric_name``, ``device_name``
 [ndfc_device_query_all] | Query all devices in a fabric, given ``fabric_name``
+[ndfc_device_serial_number_get] | Retrieve device serial number info ``device_serial_number``, given ``fabric_name``, ``device_name``
 [ndfc_network_deleted] | Delete a network, given ``fabric_name``, ``network_name``
 [ndfc_network_deleted_all] | Delete all networks within a fabric, given ``fabric_name``
 [ndfc_network_replaced_all] | Replace all networks within a fabric, given ``fabric_name``
@@ -243,16 +244,18 @@ Role                           | Description
 [ndfc_rest_config_deploy_all] | NDFC REST API POST calls to config-save and config-deploy for a fabric, given ``fabric_name``
 [ndfc_rest_device_list_by_fabric] | Retrieve list of devices in fabric, given ``fabric_name``
 [ndfc_rest_device_set_role] | Set a device's role, given ``fabric_name``, ``device_name``, and ``role``
-[ndfc_rest_fabric_create] | Create a fabric, given ``fabric_name``
-[ndfc_rest_fabric_delete] | Delete a fabric, given ``fabric_name``
 [ndfc_rest_fabric_access_mode_get] | Retrieve a fabric's access mode, given ``fabric_name``
 [ndfc_rest_fabric_access_mode_set] | Set a fabric's access mode, given ``fabric_name``, and ``read_only``
+[ndfc_rest_fabric_create] | Create a fabric, given ``fabric_name``
+[ndfc_rest_fabric_delete] | Delete a fabric, given ``fabric_name``
+[ndfc_rest_fabric_external_create] | Create an external fabric, given ``fabric_name``
 [ndfc_rest_fabric_msd_child_add] | Add a child fabric to an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_child_remove] | Remove a child fabric from an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_create] | Create a multi-side domain fabric, given ``msd_fabric``
 [ndfc_rest_interface_no_shutdown] | Administratively no shutdown interface, given ``fabric_name``, ``device_name``, ``interface_name``
 [ndfc_rest_interface_shutdown] | Administratively shutdown interface, given ``fabric_name``, ``device_name``, ``interface_name``
 [ndfc_rest_rediscover] | Rediscover a device, given ``fabric_name``, ``device_name``
+[ndfc_rest_service_node_add] | Add a service node, given ``service_node_name``
 [ndfc_rest_vpc_create] | Create a VPC pair, given ``fabric_name``, ``vpc_name``
 [ndfc_rest_vpc_delete] | Delete a VPC pair, given ``fabric_name``, ``vpc_name``
 [ndfc_rest_vrf_list_by_fabric] | List VRFs in a given fabric, given ``fabric_name``
@@ -270,6 +273,7 @@ Role                           | Description
 [ndfc_device_merged_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_merged_all
 [ndfc_device_query]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_query
 [ndfc_device_query_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_query_all
+[ndfc_device_serial_number_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_serial_number_get
 [ndfc_network_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_deleted
 [ndfc_network_deleted_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_deleted_all
 [ndfc_network_replaced_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_replaced_all
@@ -283,16 +287,18 @@ Role                           | Description
 [ndfc_rest_config_deploy_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_config_deploy_all
 [ndfc_rest_device_set_role]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_device_set_role
 [ndfc_rest_device_list_by_fabric]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_device_list_by_fabric
-[ndfc_rest_fabric_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_create
-[ndfc_rest_fabric_delete]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_delete
 [ndfc_rest_fabric_access_mode_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_access_mode_get
 [ndfc_rest_fabric_access_mode_set]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_access_mode_set
+[ndfc_rest_fabric_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_create
+[ndfc_rest_fabric_delete]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_delete
+[ndfc_rest_fabric_external_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_external_create
 [ndfc_rest_fabric_msd_child_add]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_add
 [ndfc_rest_fabric_msd_child_remove]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_remove
 [ndfc_rest_fabric_msd_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_create
 [ndfc_rest_interface_no_shutdown]: https:////github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_interface_no_shutdown
 [ndfc_rest_interface_shutdown]: https:////github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_interface_shutdown
 [ndfc_rest_rediscover]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_rediscover
+[ndfc_rest_service_node_add]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_service_node_add
 [ndfc_rest_vpc_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_vpc_create
 [ndfc_rest_vpc_delete]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_vpc_delete
 [ndfc_rest_vrf_list_by_fabric]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_vrf_list_by_fabric
