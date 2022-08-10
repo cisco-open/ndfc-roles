@@ -1,0 +1,74 @@
+# ndfc_rest_fabric_msd_create/tasks/main.yml
+---
+- ansible.builtin.include_role:
+    name: ndfc_rest_fabric_active_fabrics
+
+- name: worker set_fact service_node {{ service_node_name }}
+  set_fact:
+     external_fabric_name: "{{ service_nodes | json_query(mq2) }}"
+     service_node_type: "{{ service_nodes | json_query(mq3) }}"
+     service_node_form_factor: "{{ service_nodes | json_query(mq4) }}"
+     service_node_peer_name: "{{ service_nodes | json_query(mq5) }}"
+     service_node_interface_name: "{{ service_nodes | json_query(mq6) }}"
+     attached_fabric_name: "{{ service_nodes | json_query(mq7) }}"
+     attached_switch_name: "{{ service_nodes | json_query(mq8) }}"
+     attached_switch_interface_name: "{{ service_nodes | json_query(mq9) }}"
+     vpc_switches_attached: "{{ service_nodes | json_query(mq10) }}"
+     link_template_name: "{{ service_nodes | json_query(mq11) }}"
+     interface_speed: "{{ service_nodes | json_query(mq12) }}"
+     interface_mtu: "{{ service_nodes | json_query(mq13) }}"
+     interface_allowed_vlans: "{{ service_nodes | json_query(mq14) }}"
+     interface_bpduguard_enabled: "{{ service_nodes | json_query(mq15) }}"
+     interface_porttype_fast_enabled: "{{ service_nodes | json_query(mq16) }}"
+     interface_admin_state: "{{ service_nodes | json_query(mq17) }}"
+  vars:
+    mq2: "[?service_node_name == '{{ service_node_name }}'].external_fabric_name | [0]"
+    mq3: "[?service_node_name == '{{ service_node_name }}'].service_node_type | [0]"
+    mq4: "[?service_node_name == '{{ service_node_name }}'].service_node_form_factor | [0]"
+    mq5: "[?service_node_name == '{{ service_node_name }}'].service_node_peer_name | [0]"
+    mq6: "[?service_node_name == '{{ service_node_name }}'].service_node_interface_name | [0]"
+    mq7: "[?service_node_name == '{{ service_node_name }}'].attached_fabric_name | [0]"
+    mq8: "[?service_node_name == '{{ service_node_name }}'].attached_switch_name | [0]"
+    mq9: "[?service_node_name == '{{ service_node_name }}'].attached_switch_interface_name | [0]"
+    mq10: "[?service_node_name == '{{ service_node_name }}'].vpc_switches_attached | [0]"
+    mq11: "[?service_node_name == '{{ service_node_name }}'].link_template_name | [0]"
+    mq12: "[?service_node_name == '{{ service_node_name }}'].interface_speed | [0]"
+    mq13: "[?service_node_name == '{{ service_node_name }}'].interface_mtu | [0]"
+    mq14: "[?service_node_name == '{{ service_node_name }}'].interface_allowed_vlans | [0]"
+    mq15: "[?service_node_name == '{{ service_node_name }}'].interface_bpduguard_enabled | [0]"
+    mq16: "[?service_node_name == '{{ service_node_name }}'].interface_porttype_fast_enabled | [0]"
+    mq17: "[?service_node_name == '{{ service_node_name }}'].interface_admin_state | [0]"
+
+# See attachedSwitchSn in next task
+- ansible.builtin.include_role:
+    name: ndfc_device_serial_number_get
+  vars:
+    device_name: "{{ attached_switch_name }}"
+    fabric_name: "{{ attached_fabric_name }}"
+
+- name: main REST POST service_node_add attached_fabric_name {{ attached_fabric_name }} active_fabrics {{ active_fabrics }} service_node {{ service_node_name }} device_serial {{ device_serial_number }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/elastic-service/fabrics/{{ external_fabric_name }}/service-nodes"
+    json_data: "{{ vars_dict | to_json }}"
+  when: "attached_fabric_name in active_fabrics"
+  vars:
+    vars_dict:
+      fabricName: "{{ external_fabric_name }}"           # required e.g. "myExtFabric"
+      name: "{{ service_node_name }}"                    # required e.g. "myServiceNode1"
+      type: "{{ service_node_type }}"                    # required: "Firewall" "ADC" "VNF"
+      formFactor: "{{ service_node_form_factor }}"       # required: "Physical" "Virtual"
+      peerName: "{{ service_node_peer_name }}"           # optional
+      interfaceName: "{{ service_node_interface_name }}" # required e.g. Ethernet1/1
+      attachedFabricName: "{{ attached_fabric_name }}"   # required e.g. "f1"
+      attachedSwitchSn: "{{ device_serial_number }}"     # required e.g FDO123456AB
+      attachedSwitchInterfaceName: "{{ attached_switch_interface_name }}" # required e.g. "Ethernet1/1"
+      vpcSwitchesAttached: "{{ vpc_switches_attached }}" # optional: boolean e.g. true, false, default: false
+      linkTemplateName: "{{ link_template_name }}"       # required: default is "service_link_trunk"
+      nvPairs:
+        SPEED: "{{ interface_speed }}"                                 # required, string, default: "Auto"
+        MTU: "{{ interface_mtu }}"                                     # required, string, default: "jumbo"
+        ALLOWED_VLANS: "{{ interface_allowed_vlans }} "                # required, string, default: "none"
+        BPDUGUARD_ENABLED: "{{ interface_bpduguard_enabled }}"         # required boolean, default: true
+        PORTTYPE_FAST_ENABLED: "{{ interface_porttype_fast_enabled }}" # required boolean, default: true
+        ADMIN_STATE: "{{ interface_admin_state }}"                     # required boolean, default:true

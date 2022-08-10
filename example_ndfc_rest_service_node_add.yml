@@ -1,0 +1,11 @@
+# ndfc_rest_service_node_add.yml
+# Adds a service node.
+# NOTE: The external fabric to which the service node belongs must already exist.
+# See-also: example_ndfc_rest_fabric_external_create.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_service_node_add
+  vars:
+    service_node_name: sn_1
