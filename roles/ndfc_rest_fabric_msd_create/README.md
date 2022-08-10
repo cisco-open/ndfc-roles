@@ -1,4 +1,4 @@
-# ndfc_rest_fabric_create_msd
+# ndfc_rest_fabric_msd_create
 
 Create Multi-Site Domain (MSD) fabric ``msd_fabric``
 
@@ -24,7 +24,7 @@ See the following for details:
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_rest_fabric_create_msd
+    - ndfc_rest_fabric_msd_create
   vars:
     msd_fabric: MSD
 ```
