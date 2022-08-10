@@ -93,6 +93,18 @@ LOOPBACK0_IP_RANGE     | 10.201.0.0/22  | str()     | prefix/mask defining DCI l
 POWER_REDUNDANCY_MODE  | ps-redundant   | str()     | ps-redundant,combined,insrc-redundant
 SUBINTERFACE_RANGE     | 2-512          | str()     | Per Border Dot1q Range For VRF Lite Connectivity (Min:2, Max:4093)
 
+#### Example
+
+```yaml
+external_fabrics:
+- name: sn_fabric_1
+  BGP_AS: 65201
+  DCI_SUBNET_RANGE: 10.101.1.0/24
+  DCI_SUBNET_TARGET_MASK: 30
+  LOOPBACK0_IP_RANGE: 10.201.0.0/22
+  POWER_REDUNDANCY_MODE: ps-redundant
+  SUBINTERFACE_RANGE: 2-511
+```
 
 ## Device dictionaries
 
@@ -261,6 +273,7 @@ interface_admin_state | true               | bool() | Admin state for ``attached
 ##### Example
 
 ```yaml
+service_nodes:
 - service_node_name: "sn_1"
   external_fabric_name: "ext_fabric_1"
   service_node_type: "Firewall"
