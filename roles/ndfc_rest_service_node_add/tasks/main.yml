@@ -1,4 +1,4 @@
-# ndfc_rest_fabric_msd_create/tasks/main.yml
+# ndfc_rest_service_node_add/tasks/main.yml
 ---
 - ansible.builtin.include_role:
     name: ndfc_rest_fabric_active_fabrics
