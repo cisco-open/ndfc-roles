@@ -47,7 +47,32 @@ fabrics:
   FABRIC_MTU: 9216
   REPLICATION_MODE: Ingress
 
+# External fabric parameters
+external_fabrics:
+- name: sn_fabric_1
+  BGP_AS: 65201
+  DCI_SUBNET_RANGE: 10.101.1.0/24
+  DCI_SUBNET_TARGET_MASK: 30
+  LOOPBACK0_IP_RANGE: 10.201.0.0/22
+  POWER_REDUNDANCY_MODE: ps-redundant
+  SUBINTERFACE_RANGE: 2-511
+- name: sn_fabric_2
+  BGP_AS: 65202
+  DCI_SUBNET_RANGE: 10.102.1.0/24
+  DCI_SUBNET_TARGET_MASK: 30
+  LOOPBACK0_IP_RANGE: 10.202.0.0/22
+  POWER_REDUNDANCY_MODE: ps-redundant
+  SUBINTERFACE_RANGE: 2-511
+- name: sn_fabric_3
+  BGP_AS: 65203
+  DCI_SUBNET_RANGE: 10.103.1.0/24
+  DCI_SUBNET_TARGET_MASK: 30
+  LOOPBACK0_IP_RANGE: 10.203.0.0/22
+  POWER_REDUNDANCY_MODE: ps-redundant
+  SUBINTERFACE_RANGE: 2-511
+
 leafs:
+  # site_fabric f1
 - fabric: "{{ fabrics[0].name }}"
   name: leaf_1
   ip: 172.22.150.102
@@ -64,6 +89,7 @@ leafs:
   name: leaf_4
   ip: 172.22.150.105
   role: leaf
+  # site_fabric f2
 - fabric: "{{ fabrics[1].name }}"
   name: leaf_1
   ip: 172.22.150.106
@@ -118,6 +144,7 @@ leafs:
   role: leaf
 
 spines:
+  # site_fabric f1
 - fabric: "{{ fabrics[0].name }}"
   name: spine_1
   ip: 172.22.150.112
@@ -126,6 +153,7 @@ spines:
   name: spine_2
   ip: 172.22.150.113
   role: spine
+  # site_fabric f2
 - fabric: "{{ fabrics[1].name }}"
   name: spine_1
   ip: 172.22.150.114
@@ -214,10 +242,6 @@ networks:
     ports: "{{ port_groups.pg11 }}"
   - ip_address: "{{ leafs[3].ip }}"
     ports: "{{ port_groups.pg11 }}"
-  # - ip_address: "{{ border_gateways[0].ip }}"
-  #   ports: ""
-  # - ip_address: "{{ border_gateways[1].ip }}"
-  #   ports: ""
 
 - fabric: "{{ fabrics[0].name }}"
   net_name: n1112
@@ -233,10 +257,6 @@ networks:
     ports: "{{ port_groups.pg12 }}"
   - ip_address: "{{ leafs[3].ip }}"
     ports: "{{ port_groups.pg12 }}"
-  # - ip_address: "{{ border_gateways[0].ip }}"
-  #   ports: ""
-  # - ip_address: "{{ border_gateways[1].ip }}"
-  #   ports: ""
 
 - fabric: "{{ fabrics[1].name }}"
   net_name: n1111
@@ -252,10 +272,6 @@ networks:
     ports: "{{ port_groups.pg11 }}"
   - ip_address: "{{ leafs[7].ip }}"
     ports: "{{ port_groups.pg11 }}"
-  # - ip_address: "{{ border_gateways[2].ip }}"
-  #   ports: ""
-  # - ip_address: "{{ border_gateways[3].ip }}"
-  #   ports: ""
 
 - fabric: "{{ fabrics[1].name }}"
   net_name: n1112
@@ -271,10 +287,6 @@ networks:
     ports: "{{ port_groups.pg12 }}"
   - ip_address: "{{ leafs[7].ip }}"
     ports: "{{ port_groups.pg12 }}"
-  # - ip_address: "{{ border_gateways[2].ip }}"
-  #   ports: ""
-  # - ip_address: "{{ border_gateways[3].ip }}"
-  #   ports: ""
 
 ### If using an MSD fabric to interconnect sites, we need to apply networks and
 ### VRFs to the MSD fabric, rather than the individual site fabrics.  The
@@ -357,8 +369,7 @@ vrfs:
     - ip_address: "{{ leafs[1].ip }}"
     - ip_address: "{{ leafs[2].ip }}"
     - ip_address: "{{ leafs[3].ip }}"
-    # - ip_address: "{{ border_gateways[0].ip }}"
-    # - ip_address: "{{ border_gateways[1].ip }}"
+
 - fabric: "{{ fabrics[0].name }}"
   vrf_name: v2
   vrf_id: 63032
@@ -371,8 +382,7 @@ vrfs:
     - ip_address: "{{ leafs[1].ip }}"
     - ip_address: "{{ leafs[2].ip }}"
     - ip_address: "{{ leafs[3].ip }}"
-    # - ip_address: "{{ border_gateways[0].ip }}"
-    # - ip_address: "{{ border_gateways[1].ip }}"
+
 - fabric: "{{ fabrics[1].name }}"
   vrf_name: v1
   vrf_id: 63031
@@ -385,8 +395,7 @@ vrfs:
     - ip_address: "{{ leafs[5].ip }}"
     - ip_address: "{{ leafs[6].ip }}"
     - ip_address: "{{ leafs[7].ip }}"
-    # - ip_address: "{{ border_gateways[2].ip }}"
-    # - ip_address: "{{ border_gateways[3].ip }}"
+
 - fabric: "{{ fabrics[1].name }}"
   vrf_name: v2
   vrf_id: 63032
@@ -399,8 +408,6 @@ vrfs:
     - ip_address: "{{ leafs[5].ip }}"
     - ip_address: "{{ leafs[6].ip }}"
     - ip_address: "{{ leafs[7].ip }}"
-    # - ip_address: "{{ border_gateways[2].ip }}"
-    # - ip_address: "{{ border_gateways[3].ip }}"
 
 ### If using an MSD fabric to interconnect sites, we need to apply networks and
 ### VRFs to the MSD fabric, rather than the individual site fabrics.  The
@@ -451,27 +458,27 @@ vrfs:
 
 # VPC Peers
 vpc_peers:
-- fabric: "{{ fabrics[0].name}}"
+- fabric: "{{ fabrics[0].name }}"
   vpc_name: "vpc1"
   peer_1_ip: "{{ leafs[0].ip }}"
   peer_2_ip: "{{ leafs[1].ip }}"
-- fabric: "{{ fabrics[0].name}}"
+- fabric: "{{ fabrics[0].name }}"
   vpc_name: "vpc2"
   peer_1_ip: "{{ leafs[2].ip }}"
   peer_2_ip: "{{ leafs[3].ip }}"
 
-- fabric: "{{ fabrics[1].name}}"
+- fabric: "{{ fabrics[1].name }}"
   vpc_name: "vpc1"
   peer_1_ip: "{{ leafs[4].ip }}"
   peer_2_ip: "{{ leafs[5].ip }}"
-- fabric: "{{ fabrics[1].name}}"
+- fabric: "{{ fabrics[1].name }}"
   vpc_name: "vpc2"
   peer_1_ip: "{{ leafs[6].ip }}"
   peer_2_ip: "{{ leafs[7].ip }}"
 
 # VPC Interfaces
 vpc_interfaces:
-- fabric: "{{ fabrics[0].name}}"
+- fabric: "{{ fabrics[0].name }}"
   vpc_name: vpc1
   vpc_port_id: vpi11
   interface_mode: trunk
@@ -497,7 +504,7 @@ vpc_interfaces:
   member_list:
   - Ethernet1/11
 
-- fabric: "{{ fabrics[0].name}}"
+- fabric: "{{ fabrics[0].name }}"
   vpc_name: vpc1
   vpc_port_id: vpi12
   interface_mode: trunk
@@ -510,7 +517,7 @@ vpc_interfaces:
   member_list:
   - Ethernet1/12
 
-- fabric: "{{ fabrics[0].name}}"
+- fabric: "{{ fabrics[0].name }}"
   vpc_name: vpc2
   vpc_port_id: vpi12
   interface_mode: trunk
@@ -524,7 +531,7 @@ vpc_interfaces:
   - Ethernet1/12
 
 # f2
-- fabric: "{{ fabrics[1].name}}"
+- fabric: "{{ fabrics[1].name }}"
   vpc_name: vpc1
   vpc_port_id: vpi11
   interface_mode: trunk
@@ -537,7 +544,7 @@ vpc_interfaces:
   member_list:
   - Ethernet1/11
 
-- fabric: "{{ fabrics[1].name}}"
+- fabric: "{{ fabrics[1].name }}"
   vpc_name: vpc2
   vpc_port_id: vpi11
   interface_mode: trunk
@@ -550,7 +557,7 @@ vpc_interfaces:
   member_list:
   - Ethernet1/11
 
-- fabric: "{{ fabrics[1].name}}"
+- fabric: "{{ fabrics[1].name }}"
   vpc_name: vpc1
   vpc_port_id: vpi12
   interface_mode: trunk
@@ -563,7 +570,7 @@ vpc_interfaces:
   member_list:
   - Ethernet1/12
 
-- fabric: "{{ fabrics[1].name}}"
+- fabric: "{{ fabrics[1].name }}"
   vpc_name: vpc2
   vpc_port_id: vpi12
   interface_mode: trunk
@@ -575,3 +582,58 @@ vpc_interfaces:
   peer2_allowed_vlans: 1112
   member_list:
   - Ethernet1/12
+
+service_nodes:
+- service_node_name: "sn_1"
+  external_fabric_name: "{{ external_fabrics[0].name }}"
+  service_node_type: "Firewall"
+  service_node_form_factor: "Virtual"
+  service_node_peer_name: "foo"
+  service_node_interface_name: "Ethernet1/1"
+  attached_fabric_name: "{{ fabrics[0].name }}"
+  attached_switch_name: "leaf_1"
+  attached_switch_interface_name: "Ethernet1/1"
+  vpc_switches_attached: false
+  link_template_name: "service_link_trunk"
+  interface_speed: "Auto"
+  interface_mtu: "jumbo"
+  interface_allowed_vlans: "all"
+  interface_bpduguard_enabled: true
+  interface_porttype_fast_enabled: true
+  interface_admin_state: true
+
+- service_node_name: "sn_2"
+  external_fabric_name: "{{ external_fabrics[1].name }}"
+  service_node_type: "Firewall"
+  service_node_form_factor: "Virtual"
+  service_node_peer_name: "bar"
+  service_node_interface_name: "Ethernet1/1"
+  attached_fabric_name: "{{ fabrics[0].name }}"
+  attached_switch_name: "leaf_2"
+  attached_switch_interface_name: "Ethernet1/1"
+  vpc_switches_attached: false
+  link_template_name: "service_link_trunk"
+  interface_speed: "Auto"
+  interface_mtu: "jumbo"
+  interface_allowed_vlans: "all"
+  interface_bpduguard_enabled: true
+  interface_porttype_fast_enabled: true
+  interface_admin_state: true
+
+- service_node_name: "sn_3"
+  external_fabric_name: "{{ external_fabrics[2].name }}"
+  service_node_type: "Firewall"
+  service_node_form_factor: "Virtual"
+  service_node_peer_name: "foobar"
+  service_node_interface_name: "Ethernet1/1"
+  attached_fabric_name: "{{ fabrics[1].name }}"
+  attached_switch_name: "leaf_1"
+  attached_switch_interface_name: "Ethernet1/1"
+  vpc_switches_attached: false
+  link_template_name: "service_link_trunk"
+  interface_speed: "Auto"
+  interface_mtu: "jumbo"
+  interface_allowed_vlans: "all"
+  interface_bpduguard_enabled: true
+  interface_porttype_fast_enabled: true
+  interface_admin_state: true
