@@ -1,0 +1,8 @@
+# example_ndfc_rest_fabric_external_create.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_external_create
+  vars:
+    fabric_name: sn_fabric_1

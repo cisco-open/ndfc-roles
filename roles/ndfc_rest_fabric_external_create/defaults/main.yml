@@ -1,0 +1,3 @@
+# ndfc_rest_fabric_external_create/defaults/main.yml
+greenfield_debug_flag: Enable
+IS_READ_ONLY: false
