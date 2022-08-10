@@ -8,8 +8,6 @@ Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 device_name     | str() | The device to be merged
 fabric_name     | str() | The fabric in which ``device_name`` resides
-config_deploy_for_existing_device | bool() | Default: ``true``. Determines whether to skip config-save + config-deploy if the device already exists in the topology.  If set to ``false``, the config-save and config-deploy tasks will be skipped if the device already exists.  If set to ``true``, the tasks will run unconditionally (i.e. regardless whether the device exists or not).
-
 
 Device and Fabric names are defined in the following file:
 

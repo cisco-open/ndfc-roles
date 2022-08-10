@@ -1,21 +1,6 @@
 # ndfc_device_merged/tasks/worker.yml
-- name: worker query FABRIC {{ item.fabric }} NAME {{ item.name }} IP {{ item.ip }}
-  cisco.dcnm.dcnm_inventory:
-    fabric: "{{ item.fabric }}"
-    state: query
-    config:
-    - seed_ip: "{{ item.ip }}"
-  register: wr1
 
-# serial is used below to skip REST calls to config-save 
-# and config-deploy if the device already exists
-- name: worker set_fact device serial number
-  set_fact:
-    serial: "{{ wr1.response | json_query(q2) }}"
-  vars:
-    q2: "[0].serialNumber"
-
-- name: worker merged FABRIC {{ item.fabric }} NAME {{ item.name }} IP {{ item.ip }} SERIAL ({{ serial }})
+- name: worker merged FABRIC {{ item.fabric }} NAME {{ item.name }} IP {{ item.ip }}
   cisco.dcnm.dcnm_inventory:
     fabric: "{{ item.fabric }}"
     state: merged
@@ -28,22 +13,5 @@
       role: "{{ item.role }}"
       preserve_config: "{{ preserve_config }}"
 
-- name: worker REST POST config-save FABRIC {{ fabric_name }}
-  cisco.dcnm.dcnm_rest:
-    method: POST
-    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/config-save"
-    json_data: "{{ vars_dict | to_json }}"
-  vars:
-    vars_dict:
-  when: "serial == '' or config_deploy_for_existing_device == true"
-
-- name: worker REST POST config-deploy FABRIC {{ fabric_name }}
-  cisco.dcnm.dcnm_rest:
-    method: POST
-    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/config-deploy"
-    json_data: "{{ vars_dict | to_json }}"
-  vars:
-    vars_dict:
-      forceShowRun: "{{ forceShowRun }}"
-      inclAllMSDSwitches: "{{ inclAllMSDSwitches }}"
-  when: "serial == '' or config_deploy_for_existing_device == true"
+- ansible.builtin.include_role:
+    name: ndfc_rest_config_deploy_all
