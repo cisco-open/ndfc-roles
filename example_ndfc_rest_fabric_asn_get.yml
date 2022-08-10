@@ -1,0 +1,13 @@
+# example_ndfc_rest_fabric_asn_get.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_asn_get
+  vars:
+    fabric_name: f1
+  tasks:
+  - block:
+    - debug:
+        msg: "fabric_name {{ fabric_name }} fabric_asn: {{ fabric_asn }}"
+    when: "fabric_asn != ''"
