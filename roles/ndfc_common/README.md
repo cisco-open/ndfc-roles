@@ -79,6 +79,20 @@ msd_fabrics:
   DCI_SUBNET_RANGE: 10.100.1.0/24
   DCI_SUBNET_TARGET_MASK: 30
 ```
+#### external_fabrics
+
+A list of dictionaries with the following structure:
+
+Variable               | Example        | Type       | Description
+-----------------------|----------------|-----------|-------------------
+name                   | ext_fabric_1   | str()     | Fabric name
+BGP_AS                 | 65201          | str()     | Fabric BGP ASN
+DCI_SUBNET_RANGE       | 10.101.1.0/24  | str()     | prefix/mask defining DCI subnet address range
+DCI_SUBNET_TARGET_MASK | 30             | int()     | subnet mask for DCI subnets
+LOOPBACK0_IP_RANGE     | 10.201.0.0/22  | str()     | prefix/mask defining DCI loopback address range
+POWER_REDUNDANCY_MODE  | ps-redundant   | str()     | ps-redundant,combined,insrc-redundant
+SUBINTERFACE_RANGE     | 2-512          | str()     | Per Border Dot1q Range For VRF Lite Connectivity (Min:2, Max:4093)
+
 
 ## Device dictionaries
 
@@ -221,6 +235,51 @@ networks:
     ports: "{{ port_groups.pg12 }}"
 ```
 
+### service_nodes
+
+List of dictionaries which define Service Nodes
+
+Variable              | Example            | Type   | Description
+----------------------|--------------------|--------------|-------------------
+external_fabric_name  | ext_fabric_1       | str()  | External Fabric in which service node resides
+service_node_type     | Firewall           | str()  | Valid values: Firewall, ADC, VNF
+service_node_form_factor | Virtual         | str()  | Valid values: Physical, Virtual
+service_node_peer_name | foo               | str()  | Name of the service node peer
+service_node_interface_name | Eth1/1       | str()  | interface on the service node used for peering
+attached_fabric_name   | f1                | str()  | fabric in which ``attached_switch_name`` resides
+attached_switch_name   | leaf_1            | str()  | name of the switch attached to service node
+attached_switch_interface_name | Eth1/5    | str()  | name of the interface on ``attached_switch_name`` connecting to service node
+vpc_switches_attached | false              | bool() | Is service node attached to VPC switches?
+link_template_name    | service_link_trunk | str()  | Template used to configure ``attached_switch_interface_name`` 
+interface_speed       | Auto               | str()  | Speed of ``attached_switch_interface_name``
+interface_mtu         | jumbo              | str()  | MTU of ``attached_switch_interface_name``
+interface_allowed_vlans | all              | str()  | Valid values: all, none. Allowed vlans on ``attached_switch_interface_name``
+interface_bpduguard_enabled | true         | bool() | Enable BPDU guard on ``attached_switch_interface_name``
+interface_porttype_fast_enabled | false    | bool() | Enable port fast on ``attached_switch_interface_name``
+interface_admin_state | true               | bool() | Admin state for ``attached_switch_interface_name``
+
+##### Example
+
+```yaml
+- service_node_name: "sn_1"
+  external_fabric_name: "ext_fabric_1"
+  service_node_type: "Firewall"
+  service_node_form_factor: "Virtual"
+  service_node_peer_name: "foo"
+  service_node_interface_name: "eth0"
+  attached_fabric_name: "f1"
+  attached_switch_name: "leaf_1"
+  attached_switch_interface_name: "Ethernet1/5"
+  vpc_switches_attached: false
+  link_template_name: "service_link_trunk"
+  interface_speed: "Auto"
+  interface_mtu: "jumbo"
+  interface_allowed_vlans: "all"
+  interface_bpduguard_enabled: true
+  interface_porttype_fast_enabled: true
+  interface_admin_state: true
+```
+
 ### vrfs
 
 List of dictionaries which define VRFs and their attachments (device).
@@ -241,7 +300,7 @@ attach.ip_address      | 192.168.1.1    | IP address   | mgmt0 address of the sw
 
 ```yaml
 vrfs:
-- fabric: "{{ fabrics[0].name }}"
+- fabric: "f1"
   vrf_name: v1
   vrf_id: 9003031
   vlan_id: 3031
@@ -249,10 +308,10 @@ vrfs:
   vrf_extension_template: Default_VRF_Extension_Universal
   service_vrf_template: null
   attach:
-    - ip_address: "{{ leafs[0].ip }}"
-    - ip_address: "{{ leafs[1].ip }}"
-    - ip_address: "{{ leafs[2].ip }}"
-    - ip_address: "{{ leafs[3].ip }}"
+    - ip_address: "10.1.1.1"
+    - ip_address: "10.1.1.2"
+    - ip_address: "10.1.1.3"
+    - ip_address: "10.1.1.4"
 ```
 
 ### vpc_peers
