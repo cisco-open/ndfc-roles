@@ -15,3 +15,6 @@
   loop: "{{ border_gateways | json_query(mq3) }}"
   vars:
     mq3: "[?fabric == '{{ fabric_name }}']"
+
+- ansible.builtin.include_role:
+    name: ndfc_rest_config_deploy_all
