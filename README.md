@@ -216,9 +216,9 @@ ansible-playbook example_ndfc_rest_fabric_create_f1.yml -i inventory
 
 Role naming conventions used in this repo.
 
-1. If a Role pushes a specfic Ansible state, that state is included in the Role's name.
+1. If a Role pushes a specific Ansible state, that state is included in the Role's name.
 2. If a Role requires the user to provide the Ansible state, the Role's name does not include the state.
-3. If a Role uses the NDFC/DCNM REST API, its name includes ``_rest_`` (e.g. ``ndfc_rest_rediscover``)
+3. If a Role uses the NDFC REST API, its name includes ``_rest_`` (e.g. ``ndfc_rest_rediscover``)
 
 
 Role                           | Description
