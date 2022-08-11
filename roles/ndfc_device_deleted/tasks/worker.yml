@@ -12,3 +12,6 @@
     config:
     - seed_ip: "{{ item.ip }}"
   when: "device_serial_number != ''"
+
+- ansible.builtin.include_role:
+    name: ndfc_rest_config_deploy_all
