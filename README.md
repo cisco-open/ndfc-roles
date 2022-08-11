@@ -228,9 +228,10 @@ Role                           | Description
 [ndfc_device_deleted_all] | Delete all devices in a fabric, given ``fabric_name``
 [ndfc_device_merged] | Merge a device into a fabric, given ``fabric_name``, ``device_name``
 [ndfc_device_merged_all] | Merge all devices into a fabric, given ``fabric_name``
+[ndfc_device_model_number_get] | Retrieve device model number ``device_model_number``, given ``fabric_name``, ``device_name``
 [ndfc_device_query] | Query a device, given ``fabric_name``, ``device_name``
 [ndfc_device_query_all] | Query all devices in a fabric, given ``fabric_name``
-[ndfc_device_serial_number_get] | Retrieve device serial number info ``device_serial_number``, given ``fabric_name``, ``device_name``
+[ndfc_device_serial_number_get] | Retrieve device serial number ``device_serial_number``, given ``fabric_name``, ``device_name``
 [ndfc_network_deleted] | Delete a network, given ``fabric_name``, ``network_name``
 [ndfc_network_deleted_all] | Delete all networks within a fabric, given ``fabric_name``
 [ndfc_network_replaced_all] | Replace all networks within a fabric, given ``fabric_name``
@@ -272,6 +273,7 @@ Role                           | Description
 [ndfc_device_deleted_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_deleted_all
 [ndfc_device_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_merged
 [ndfc_device_merged_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_merged_all
+[ndfc_device_model_number_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_model_number_get
 [ndfc_device_query]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_query
 [ndfc_device_query_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_query_all
 [ndfc_device_serial_number_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_serial_number_get
