@@ -234,6 +234,7 @@ Role                           | Description
 [ndfc_device_serial_number_get] | Retrieve device serial number ``device_serial_number``, given ``fabric_name``, ``device_name``
 [ndfc_network_deleted] | Delete a network, given ``fabric_name``, ``network_name``
 [ndfc_network_deleted_all] | Delete all networks within a fabric, given ``fabric_name``
+[ndfc_network_info_get] | Retrieve ``network_info`` dictionary, given ``fabric_name``, ``network_name``
 [ndfc_network_replaced_all] | Replace all networks within a fabric, given ``fabric_name``
 *[ndfc_policy_query_generated_config_all] | Query and display all populated generated_configs on all devices, given ``fabric_name``
 *[ndfc_policy_query_interface_all] | Query and display interface config on all devices in a fabric, given ``fabric_name``, ``interface_name``
@@ -279,6 +280,7 @@ Role                           | Description
 [ndfc_device_serial_number_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_serial_number_get
 [ndfc_network_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_deleted
 [ndfc_network_deleted_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_deleted_all
+[ndfc_network_info_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_info_get
 [ndfc_network_replaced_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_replaced_all
 [ndfc_policy_query_generated_config_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_query_generated_config_all
 [ndfc_policy_query_interface_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_query_interface_all
