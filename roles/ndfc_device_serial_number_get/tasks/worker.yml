@@ -7,13 +7,6 @@
     - seed_ip: "{{ device.ip }}"
   register: wr1
 
-# device_info
-- name: worker set_fact device_info
-  set_fact:
-    device_info: "{{ wr1.response | json_query(wq1) }}"
-  vars:
-    wq1: "[0]"
-
 # Device serial number
 - name: worker set_fact device_serial_number
   set_fact:
