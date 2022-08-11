@@ -1,20 +1,12 @@
 # ndfc_device_merged_all/tasks/worker.yml
-- name: worker query FABRIC {{ item.fabric }} NAME {{ item.name }} IP {{ item.ip }}
-  cisco.dcnm.dcnm_inventory:
-    fabric: "{{ item.fabric }}"
-    state: query
-    config:
-    - seed_ip: "{{ item.ip }}"
-  register: wr1
 
-# Use serialNumber to determine if device already exists
-- name: worker set_fact device serial number
-  set_fact:
-    serial: "{{ wr1.response | json_query(wq1) }}"
+- ansible.builtin.include_role:
+    name: ndfc_device_serial_number_get
   vars:
-    wq1: "[0].serialNumber"
+    device_name: "{{ item.name }}"
+    fabric_name: "{{ item.fabric }}"
 
-- name: worker merged FABRIC {{ item.fabric }} NAME {{ item.name }} SERIAL {{ serial }} IP {{ item.ip }} MAX_HOPS {{ max_hops }} AUTH_PROTO {{ auth_proto }}
+- name: worker merged FABRIC {{ item.fabric }} NAME {{ item.name }} device_serial_number {{ device_serial_number }} IP {{ item.ip }} MAX_HOPS {{ max_hops }} AUTH_PROTO {{ auth_proto }}
   cisco.dcnm.dcnm_inventory:
     fabric: "{{ item.fabric }}"
     state: merged
@@ -26,4 +18,4 @@
       max_hops: "{{ max_hops }}"
       role: "{{ item.role }}"
       preserve_config: "{{ preserve_config }}" 
-  when: "serial == ''"
+  when: "device_serial_number == ''"
