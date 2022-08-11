@@ -1,11 +1,8 @@
 # ndfc_rest_config_deploy/tasks/main.yml
 ---
-- name: main query FABRIC {{ fabric_name }} DEVICE {{ device_name }}
-  include_tasks: worker.yml
-  loop: "{{ mr1 }}"
-  vars:
-    mq1: "[?name == '{{ device_name }}'] | [?fabric == '{{ fabric_name }}']"
-    mr1: "{{ leafs | json_query(mq1) + spines | json_query(mq1) + border_gateways | json_query(mq1) }}"
+
+- ansible.builtin.include_role:
+    name: ndfc_device_info_get
 
 - name: main REST POST config-save FABRIC {{ fabric_name }}
   cisco.dcnm.dcnm_rest:
