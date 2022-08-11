@@ -1,4 +1,4 @@
-# ndfc_network_deleted
+# ndfc_network_info_get
 
 Retrieve ``network_info`` dictionary given ``fabric_name`` and ``network_name``
 
