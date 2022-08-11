@@ -1,0 +1,16 @@
+# example_ndfc_device_model_number_get.yml
+# Query NX-OS switch associated with fabric_name and device_name
+# and print the switch's model number
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_device_model_number_get
+  vars:
+    fabric_name: f2
+    device_name: leaf_1
+  tasks:
+  - block:
+    - debug:
+        msg: "device_model_number: {{ device_model_number }}"
+    when: "device_model_number != ''"
