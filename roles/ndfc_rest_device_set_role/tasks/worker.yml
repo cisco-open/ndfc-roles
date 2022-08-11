@@ -18,5 +18,8 @@
       role: "{{ role }}"
 
 - ansible.builtin.include_role:
-    name: ndfc_rest_config_deploy_all
+    name: ndfc_rest_config_deploy
+  vars:
+    device_name: "{{ item.name }}"
+    fabric_name: "{{ item.fabric }}"
   when: "device_serial_number != ''"
