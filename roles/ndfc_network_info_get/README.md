@@ -20,7 +20,7 @@ See the following for details:
 
 ### Example Playbooks
 
-# Retrieve network_info for fabric_name f1 and network_name n1111
+Retrieve ``network_info`` for ``fabric_name`` f1 and ``network_name`` n1111
 
 ```yaml
 ---
@@ -29,7 +29,7 @@ See the following for details:
   roles:
     - ndfc_network_info_get
   vars:
-    fabric_name: f2
+    fabric_name: f1
     network_name: n1111
   tasks:
   - block:
@@ -37,7 +37,7 @@ See the following for details:
         msg: "network_info: {{ network_info | default('unable to find network. Check network_name.', true) }}"
 ```
 
-# Retrieve network_info for fabric_name f1 and network_name n1111, which is a child of msd_fabric MSD.
+Retrieve network_info for ``fabric_name`` MSD and ``network_name`` n1111, where ``network_name`` is located in a child-fabric of fabric MSD.
 
 ```yaml
 ---
