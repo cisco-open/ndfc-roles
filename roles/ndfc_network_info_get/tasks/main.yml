@@ -1,0 +1,9 @@
+# ndfc_network_info_get/tasks/main.yml
+---
+- name: main network_info_get FABRIC {{ fabric_name }} NETWORK {{ network_name }}
+  include_tasks: worker.yml
+  loop: "{{ mr2 }}"
+  vars:
+    mq2: "[?net_name == '{{ network_name }}'] | [?fabric == '{{ fabric_name }}']"
+    mr2: "{{ networks | json_query(mq2) }}"
+

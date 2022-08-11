@@ -1,0 +1,11 @@
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_network_info_get
+  vars:
+    fabric_name: f2
+    network_name: n1111
+  tasks:
+  - block:
+    - debug:
+        msg: "network_info: {{ network_info | default('unable to find network. Check network_name.', true) }}"
