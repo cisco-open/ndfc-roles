@@ -27,7 +27,7 @@
     fabric_name: "{{ attached_fabric_name }}"
     device_name: "{{ attached_switch_name }}"
 
-- name: main service_node_create attached_fabric_name {{ attached_fabric_name }} service_node {{ service_node_name }} type {{ service_node_type | lower }} form_factor {{ service_node_form_factor | lower }} ipv4 {{ device_ipv4_address }}
+- name: main service_node_merged attached_fabric_name {{ attached_fabric_name }} service_node {{ service_node_name }} type {{ service_node_type | lower }} form_factor {{ service_node_form_factor | lower }} ipv4 {{ device_ipv4_address }}
   cisco.dcnm.dcnm_service_node:
     fabric: "{{ attached_fabric_name }}"
     service_fabric: "{{ external_fabric_name }}"
