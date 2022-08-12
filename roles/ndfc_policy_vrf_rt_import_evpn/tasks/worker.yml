@@ -30,6 +30,9 @@
     vrf_vlan_id: "{{ vrfs | json_query(wq2) }}"
     vrf_index: "{{ vrfs | json_query(wq3) }}"
     import_vrf_asn: "{{ fabrics | json_query(wq4) }}"
-    devices: "{{ leafs | json_query(wq5) + spines | json_query(wq5) + border_gateways | json_query(wq5) }}"
+
 - ansible.builtin.include_role:
-    name: ndfc_rest_config_deploy_all
+    name: ndfc_rest_config_deploy
+  vars:
+    device_name: "{{ item.name }}"
+    fabric_name: "{{ item.fabric }}"
