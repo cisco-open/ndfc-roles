@@ -1,4 +1,4 @@
-# ndfc_device_ipv4_address_get/tasks/main.yml
+# ndfc_device_ipv4_address_local_get/tasks/main.yml
 # Return device_ipv4_address, given fabric_name and device_name
 ---
 - name: main device_model_number_get FABRIC {{ fabric_name }} DEVICE {{ device_name }}
