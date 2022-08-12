@@ -10,7 +10,7 @@
 
 - name: worker set_fact network_info
   set_fact:
-    network_info: "{{ wr1.response | json_query(wq1) }}"
+    network_info: "{{ wr1.response | json_query(wq1) | default('', true) }}"
   vars:
     wq1: "[0].parent"
   # when: "item.net_name is not none"
