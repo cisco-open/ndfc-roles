@@ -1,4 +1,4 @@
-# ndfc_rest_service_node_merged/tasks/main.yml
+# ndfc_rest_service_node_deleted/tasks/main.yml
 ---
 - ansible.builtin.include_role:
     name: ndfc_rest_fabric_active_fabrics
