@@ -25,7 +25,7 @@
     wq2: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ vrf_name }}'].vlan_id | [0]"
     wq3: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ vrf_name }}'].vrf_id | [0]"
     wq4: "[?name == '{{ fabric_name }}'].BGP_AS | [0]"
-    wq5: "[?name == '{{ item }}'] | [?fabric == '{{ fabric_name }}']"
+    #wq5: "[?name == '{{ item }}'] | [?fabric == '{{ fabric_name }}']"
     import_vrf_index: "{{ vrfs | json_query(wq1) }}"
     vrf_vlan_id: "{{ vrfs | json_query(wq2) }}"
     vrf_index: "{{ vrfs | json_query(wq3) }}"
