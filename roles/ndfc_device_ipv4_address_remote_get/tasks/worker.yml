@@ -1,0 +1,15 @@
+# ndfc_device_ipv4_address_remote_get/tasks/worker.yml
+- name: worker device_ipv4_address_get FABRIC {{ device.fabric }} NAME {{ device.name }} local (inventory) IP {{ device.ip }}
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ device.fabric }}"
+    state: query
+    config:
+    - seed_ip: "{{ device.ip }}"
+  register: wr1
+
+# Device ipv4 address
+- name: worker set_fact device_ipv4_address
+  set_fact:
+    device_ipv4_address: "{{ wr1.response | json_query(wq2) }}"
+  vars:
+    wq2: "[0].ipAddress"

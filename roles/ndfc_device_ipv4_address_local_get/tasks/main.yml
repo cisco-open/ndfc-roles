@@ -1,0 +1,11 @@
+# ndfc_device_ipv4_address_get/tasks/main.yml
+# Return device_ipv4_address, given fabric_name and device_name
+---
+- name: main device_model_number_get FABRIC {{ fabric_name }} DEVICE {{ device_name }}
+  include_tasks: worker.yml
+  loop: "{{ mr1 }}"
+  loop_control:
+    loop_var: device
+  vars:
+    mq1: "[?name == '{{ device_name }}'] | [?fabric == '{{ fabric_name }}']"
+    mr1: "{{ leafs | json_query(mq1) + spines | json_query(mq1) + border_gateways | json_query(mq1) }}"
