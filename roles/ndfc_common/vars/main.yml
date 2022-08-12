@@ -586,7 +586,13 @@ vpc_interfaces:
 service_nodes:
 - service_node_name: "sn_1"
   external_fabric_name: "{{ external_fabrics[0].name }}"
-  service_node_type: "Firewall"
+  # NOTE, service_node_type values are different between Ansible module
+  # dcnm_service_node and the REST API.  Since ndfc-roles offers roles
+  # based on both, you need to ensure that you're using the correct
+  # service_node_type values, per below (these are case-sensitive):
+  # REST: "Firewall" "ADC" "VNF" 
+  # dcnm_service_node: firewall, load_balancer, virtual_network_function
+  service_node_type: "firewall"
   service_node_form_factor: "Virtual"
   service_node_peer_name: "foo"
   service_node_interface_name: "Ethernet1/1"
@@ -604,7 +610,8 @@ service_nodes:
 
 - service_node_name: "sn_2"
   external_fabric_name: "{{ external_fabrics[1].name }}"
-  service_node_type: "Firewall"
+  # see note for service_node_type above
+  service_node_type: "firewall"
   service_node_form_factor: "Virtual"
   service_node_peer_name: "bar"
   service_node_interface_name: "Ethernet1/1"
