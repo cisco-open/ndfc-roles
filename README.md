@@ -227,7 +227,7 @@ Role                           | Description
 [ndfc_device_deleted] | Delete a device from a fabric, given ``fabric_name``, ``device_name``
 [ndfc_device_deleted_all] | Delete all devices in a fabric, given ``fabric_name``
 [ndfc_device_ipv4_address_local_get] | Retrieve device ipv4 address from local vars, given ``fabric_name``, ``device_name``
-[ndfc_device_ipv4_address_local_get] | Retrieve device ipv4 address from NDFC controller, given ``fabric_name``, ``device_name``
+[ndfc_device_ipv4_address_remote_get] | Retrieve device ipv4 address from NDFC controller, given ``fabric_name``, ``device_name``
 [ndfc_device_merged] | Merge a device into a fabric, given ``fabric_name``, ``device_name``
 [ndfc_device_merged_all] | Merge all devices into a fabric, given ``fabric_name``
 [ndfc_device_model_number_get] | Retrieve device model number ``device_model_number``, given ``fabric_name``, ``device_name``
