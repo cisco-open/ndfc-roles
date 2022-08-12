@@ -1,6 +1,6 @@
-# ndfc_service_node_create
+# ndfc_service_node_merged
 
-Create service node ``service_node_name``
+Create service node ``service_node_name`` using ansible merge operation
 
 NOTE: The ansible module ``cisco.dcnm.dcnm_service_node`` does not provide control over the attach interface's configuration, and a few other parameters.  If you require these, see ``ndfc_rest_service_node_add`` instead.
 
@@ -14,13 +14,13 @@ per below (these are case-sensitive):
 Role                        | service_node_type
 ----------------------------|----------------------------------------
 ndfc_rest_service_node_add  | Firewall, ADC, VNF
-ndfc_service_node_create    | firewall, load_balancer, virtual_network_function
+ndfc_service_node_merged    | firewall, load_balancer, virtual_network_function
 
 ### Role Variables
 
 Variable          | Type  | Description
 ------------------|-------|----------------------------------------
-service_node_name | str() | The service node to create
+service_node_name | str() | The service node to merge
 
 Service node parameters are defined in the following file under ``service_nodes`
 
@@ -38,7 +38,7 @@ See the following for details:
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_service_node_create
+    - ndfc_service_node_merged
   vars:
     service_node_name: sn_1
 ```
