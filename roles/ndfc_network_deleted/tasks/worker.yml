@@ -1,38 +1,26 @@
 ---
-# ndfc_network_deleted/tasks/worker.yml
-# - name: main REST GET fabrics
-#   cisco.dcnm.dcnm_rest:
-#     method: GET
-#     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
-#   register: mr1
-
-# - name: main set_fact active_fabrics 
-#   set_fact:
-#      active_fabrics: "{{ mr1.response.DATA | json_query(mq1) | to_json }}"
-#   vars:
-#     mq1: "[*].{FabricName: fabricName}"
-
-- name: worker query FABRIC {{ item.fabric }} NAME {{ item.net_name }} VLAN {{ item.vlan_id }}
-  cisco.dcnm.dcnm_network:
-    fabric: "{{ fabric_name }}"
-    state: query
-    config:
-    - net_name: "{{ item.net_name }}"
-  register: wr1
-
-- name: worker set_fact parent.networkName
-  set_fact:
-    wf1: "{{ wr1.response | json_query(wq1) }}"
+- ansible.builtin.include_role:
+    name: ndfc_network_info_get
   vars:
-    wq1: "[0].parent.networkName"
-- name: debug wf1
-  debug:
-    var: wf1
-- name: worker deleted FABRIC {{ item.fabric }} NETWORK {{ item.net_name }} networkName ({{ f1 }})
+    fabric_name: "{{ dn.fabric }}"
+    network_name: "{{ dn.net_name }}"
+
+# We set wf1 to '' so that we can skip the last task below if it's still equal to ''
+- name: set fact wf1 temp
+  set_fact:
+    wf1: ''
+
+- name: worker set_fact wf1 networkName
+  set_fact:
+    wf1: "{{ network_info | json_query(wq1) | default('', true) }}"
+  vars:
+    wq1: "networkName"
+  when: "network_info != ''"
+
+- name: worker deleted FABRIC {{ dn.fabric }} NETWORK {{ dn.net_name }} networkName ({{ wf1 }})
   cisco.dcnm.dcnm_network:
-    fabric: "{{ item.fabric }}"
+    fabric: "{{ dn.fabric }}"
     state: deleted
     config:
-    - net_name: "{{ item.net_name }}"
+    - net_name: "{{ dn.net_name }}"
   when: "wf1 == network_name"
-  #when: "wf1 == network_name and fabric_name in active_fabrics"
