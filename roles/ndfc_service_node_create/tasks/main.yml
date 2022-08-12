@@ -1,0 +1,42 @@
+# ndfc_rest_service_node_add/tasks/main.yml
+---
+- ansible.builtin.include_role:
+    name: ndfc_rest_fabric_active_fabrics
+
+- name: worker set_fact service_node {{ service_node_name }}
+  set_fact:
+     external_fabric_name: "{{ service_nodes | json_query(mq2) }}"
+     service_node_type: "{{ service_nodes | json_query(mq3) }}"
+     service_node_form_factor: "{{ service_nodes | json_query(mq4) }}"
+     service_node_interface_name: "{{ service_nodes | json_query(mq6) }}"
+     attached_fabric_name: "{{ service_nodes | json_query(mq7) }}"
+     attached_switch_name: "{{ service_nodes | json_query(mq8) }}"
+     attached_switch_interface_name: "{{ service_nodes | json_query(mq9) }}"
+  vars:
+    mq2: "[?service_node_name == '{{ service_node_name }}'].external_fabric_name | [0]"
+    mq3: "[?service_node_name == '{{ service_node_name }}'].service_node_type | [0]"
+    mq4: "[?service_node_name == '{{ service_node_name }}'].service_node_form_factor | [0]"
+    mq6: "[?service_node_name == '{{ service_node_name }}'].service_node_interface_name | [0]"
+    mq7: "[?service_node_name == '{{ service_node_name }}'].attached_fabric_name | [0]"
+    mq8: "[?service_node_name == '{{ service_node_name }}'].attached_switch_name | [0]"
+    mq9: "[?service_node_name == '{{ service_node_name }}'].attached_switch_interface_name | [0]"
+
+- ansible.builtin.include_role:
+    name: ndfc_device_ipv4_address_get
+  vars:
+    fabric_name: "{{ attached_fabric_name }}"
+    device_name: "{{ attached_switch_name }}"
+
+- name: main service_node_create attached_fabric_name {{ attached_fabric_name }} service_node {{ service_node_name }} type {{ service_node_type | lower }} form_factor {{ service_node_form_factor | lower }} ipv4 {{ device_ipv4_address }}
+  cisco.dcnm.dcnm_service_node:
+    fabric: "{{ attached_fabric_name }}"
+    service_fabric: "{{ external_fabric_name }}"
+    state: merged
+    config:
+    - name: "{{ service_node_name }}"
+      type: "{{ service_node_type }}"
+      form_factor: "{{ service_node_form_factor | lower }}"
+      svc_int_name: "{{ service_node_interface_name }}"
+      attach_interface: "{{ attached_switch_interface_name }}"
+      switches:
+      - "{{ device_ipv4_address }}"
