@@ -1,0 +1,15 @@
+# ndfc_device_generated_configs_get/worker.yml
+- name: worker query FABRIC {{ item.fabric }} DEVICE {{ item.name }} IP {{ item.ip }} generated_config 
+  cisco.dcnm.dcnm_policy:
+    fabric: "{{ item.fabric }}"
+    state: query
+    config:
+      - switch:
+          - ip: "{{ item.ip }}"
+  register: wr1
+
+- name: worker set_fact generated_config DEVICE {{ item.name }} IP {{ item.ip }}
+  set_fact:
+     device_generated_configs: "{{ wr1.response | json_query(wq1) }}"
+  vars:
+    wq1: "[?generatedConfig != ''].{TemplateName: templateName GeneratedConfig: generatedConfig}"

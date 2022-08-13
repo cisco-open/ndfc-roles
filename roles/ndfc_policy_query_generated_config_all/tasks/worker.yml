@@ -8,11 +8,11 @@
           - ip: "{{ item.ip }}"
   register: wr1
 
-- name: worker set_fact DEVICE {{ item.name }} IP {{ item.ip }}
+- name: worker set_fact generated_configs DEVICE {{ item.name }} IP {{ item.ip }}
   set_fact:
      generated_configs: "{{ wr1.response | json_query(wq1) }}"
   vars:
     wq1: "[?generatedConfig != ''].{TemplateName: templateName GeneratedConfig: generatedConfig}"
-- name: show populated generated_configs {{ item.role}} {{ item.name }} {{ item.ip }}
+- name: show populated generated_configs {{ item.role }} {{ item.name }} {{ item.ip }}
   debug:
     var: generated_configs
