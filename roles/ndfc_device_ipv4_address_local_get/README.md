@@ -6,7 +6,9 @@ The device's ipv4 address is returned in the variable ``device_ipv4_address``.
 
 ``device_ipv4_address`` is gleaned locally from ``ndfc_common/vars/main.yml``.
 
-SEE ALSO: ndfc_device_ipv4_address_remote_get
+Since this operation is local, the result is returned faster than ``ndfc_device_ipv4_address_remote_get``
+
+SEE ALSO: ``ndfc_device_ipv4_address_remote_get``
 
 ### Role Variables
 
