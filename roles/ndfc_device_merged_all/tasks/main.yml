@@ -1,5 +1,8 @@
 # ndfc_device_merged_all/tasks/main.yml
 ---
-- name: all devices merged
+- name: merged FABRIC {{ fabric_name }} all devices
   include_tasks: worker.yml
-  loop: "{{ devices.values() | list }}"
+  loop: "{{ lookup('ansible.builtin.dict', devices) }}"
+  when: "fabric_name in device.value.switch_fabric"
+  loop_control:
+    loop_var: device

@@ -1,0 +1,8 @@
+# example_ndfc_device_merged_all.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_device_merged_all
+  vars:
+    fabric_name: f1

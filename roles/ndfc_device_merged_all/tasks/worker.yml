@@ -1,20 +1,16 @@
 # ndfc_device_merged_all/tasks/worker.yml
 
-- name: debug item
-  debug:
-    var: item
-
-- name: worker merged FABRIC {{ item.switch_fabric }} NAME {{ item.name }} IP {{ item.ip }} MAX_HOPS {{ max_hops }} AUTH_PROTO {{ auth_proto }}
+- name: worker merged FABRIC {{ device.value.switch_fabric }} NAME {{ device.value.name }} IP {{ device.value.ip }} MAX_HOPS {{ max_hops }} AUTH_PROTO {{ auth_proto }}
   cisco.dcnm.dcnm_inventory:
-    fabric: "{{ item.switch_fabric }}"
+    fabric: "{{ device.value.switch_fabric }}"
     state: merged
     config:
-    - seed_ip: "{{ item.ip }}"
+    - seed_ip: "{{ device.value.ip }}"
       auth_proto: "{{ auth_proto }}"
       user_name: "{{ device_username }}"
       password: "{{ device_password }}"
       max_hops: "{{ max_hops }}"
-      role: "{{ item.role }}"
+      role: "{{ device.value.role }}"
       preserve_config: "{{ preserve_config }}" 
   vars:
     ansible_connection: httpapi
@@ -22,5 +18,5 @@
 - ansible.builtin.include_role:
     name: ndfc_rest_config_deploy
   vars:
-    fabric: "{{ item.switch_fabric }}"
-    device_name: "{{ item.name }}"
+    fabric: "{{ device.value.switch_fabric }}"
+    device_name: "{{ device.value.name }}"
