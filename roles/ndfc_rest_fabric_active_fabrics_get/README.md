@@ -1,6 +1,6 @@
 # ndfc_rest_fabric_active_fabrics_get
 
-Returns a list of active fabrics in var ``active_fabrics``
+Queries NDFC controller for list of active fabrics
 
 ### Returned Variables
 
