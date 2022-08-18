@@ -33,7 +33,7 @@ See the following for details:
 
 # Delete network_name msd_n1111, which resides in fabric MSD (an msd fabric)
 
-This will delete network_name msd_n1111 from ALL child fabrics of fabric MSD.
+This will delete network_name msd_n1111 from all child fabrics of fabric MSD.
 
 ```yaml
 ---

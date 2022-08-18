@@ -1,7 +1,4 @@
 # example_ndfc_network_deleted.yml
-# NOTE: If network_name is within a child fabric of 
-# an msd_fabric, fabric_name must be that of the
-# msd_fabric
 ---
 - hosts: ndfc
   gather_facts: false
