@@ -1,13 +1,12 @@
 # ndfc_device_merged
 
-Merge device ``device_name`` into fabric ``fabric_name`` using ``cisco.dcnm.dcnm_inventory``.
+Merge device ``device_name`` into the topology.
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 device_name     | str() | The device to be merged
-fabric_name     | str() | The fabric in which ``device_name`` resides
 
 Device and Fabric names are defined in the following file:
 
@@ -47,7 +46,6 @@ device_username       | str()   | The username used to login to the device
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: spine_1
 ```
 

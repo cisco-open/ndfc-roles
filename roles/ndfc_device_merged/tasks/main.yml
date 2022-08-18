@@ -3,7 +3,7 @@
 - ansible.builtin.include_role:
     name: ndfc_device_config_get
 
-- name: worker merged FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }}
+- name: merged FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }}
   cisco.dcnm.dcnm_inventory:
     fabric: "{{ device_config.switch_fabric }}"
     state: merged
