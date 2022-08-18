@@ -229,11 +229,11 @@ Role                           | Description
 [ndfc_device_deleted_all] | Delete all devices in a fabric, given ``fabric_name``
 [ndfc_device_generated_configs_get] | Retrieve device generated configs, given ``device_name``
 [ndfc_device_info_get] | Query device on the NDFC controller, given ``device_name``
-[ndfc_device_ipv4_address_local_get] | Retrieve device ipv4 address from local vars, given ``fabric_name``, ``device_name``
-[ndfc_device_ipv4_address_remote_get] | Retrieve device ipv4 address from NDFC controller, given ``fabric_name``, ``device_name``
+[ndfc_device_ipv4_address_local_get] | Retrieve device ipv4 address from local vars, given ``device_name``
+[ndfc_device_ipv4_address_remote_get] | Retrieve device ipv4 address from NDFC controller, given ``device_name``
 [ndfc_device_merged] | Merge a device into the topology, given ``device_name``
 [ndfc_device_merged_all] | Merge all devices into a fabric, given ``fabric_name``
-[ndfc_device_model_number_get] | Retrieve device model number ``device_model_number``, given ``fabric_name``, ``device_name``
+[ndfc_device_model_number_get] | Retrieve device model number ``device_model_number``, given ``device_name``
 [ndfc_device_query] | Query a device, given ``fabric_name``, ``device_name``
 [ndfc_device_query_all] | Query all devices in a fabric, given ``fabric_name``
 [ndfc_device_serial_number_get] | Retrieve device serial number ``device_serial_number``, given ``fabric_name``, ``device_name``

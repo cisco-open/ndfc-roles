@@ -1,6 +1,6 @@
 # ndfc_device_model_number_get
 
-Return ``device_model_number`` given ``device_name`` and fabric ``fabric_name``.
+Retrieve ``device_model_number`` from NDFC controller, given ``device_name``.
 
 The device's model number is returned in variable ``device_model_number``.
 
@@ -9,7 +9,6 @@ The device's model number is returned in variable ``device_model_number``.
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 device_name     | str() | The device to be queried
-fabric_name     | str() | The fabric in which device_name resides
 
 Device and Fabric names are defined in the following file:
 
@@ -30,7 +29,6 @@ See the following for details:
   roles:
     - ndfc_device_model_number_get
   vars:
-    fabric_name: f2
     device_name: leaf_1
   tasks:
   - block:
