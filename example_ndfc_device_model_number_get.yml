@@ -7,7 +7,6 @@
   roles:
     - ndfc_device_model_number_get
   vars:
-    fabric_name: f2
     device_name: leaf_1
   tasks:
   - block:
