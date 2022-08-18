@@ -1,6 +1,6 @@
 # ndfc_network_config_get
 
-Retrieve config for ``network_name`` from the ``networks`` portion of ``./roles/ndfc_common/vars/main.yml``
+Retrieve local configuration for ``network_name`` from the ``networks`` portion of ``./roles/ndfc_common/vars/main.yml``
 
 ### Role Variables
 
@@ -15,7 +15,6 @@ network names are defined in the following file:
 See the following for details:
 
 [./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
-
 
 ### Example Playbook
 
