@@ -4,7 +4,7 @@ Retrieve config for ``fabric_name`` from the following sections of ``./roles/ndf
 
 - msd_fabrics
 - switch_fabrics
-- external fabrics
+- external_fabrics
 
 ### Role Variables
 
