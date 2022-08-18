@@ -16,8 +16,3 @@
      active_fabrics: "{{ mr1.response.DATA | json_query(mq1) | to_json }}"
   vars:
     mq1: "[*].{FabricName: fabricName}"
-
-- name: debug active_fabrics
-  debug:
-    var: active_fabrics
-

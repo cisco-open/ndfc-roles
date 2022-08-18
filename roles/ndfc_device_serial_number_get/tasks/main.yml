@@ -1,4 +1,4 @@
-#ndfc_device_serial_number_get/tasks/main.yml
+# ndfc_device_serial_number_get/tasks/main.yml
 
 - ansible.builtin.include_role:
     name: ndfc_device_config_get
