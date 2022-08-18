@@ -1,13 +1,12 @@
 # ndfc_device_deleted
 
-Delete device ``device_name`` from fabric ``fabric_name`` using ``cisco.dcnm.dcnm_inventory``
+Delete device ``device_name``
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 device_name     | str() | The device to be deleted
-fabric_name     | str() | The fabric in which device_name resides
 
 Device and fabric names are defined in the following file:
 
@@ -27,7 +26,6 @@ See the following for details:
   roles:
     - ndfc_device_deleted
   vars:
-    fabric_name: f1
     device_name: spine_1
 ```
 

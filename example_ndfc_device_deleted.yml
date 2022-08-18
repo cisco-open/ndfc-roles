@@ -5,5 +5,4 @@
   roles:
     - ndfc_device_deleted
   vars:
-    fabric_name: f1
     device_name: spine_1

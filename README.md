@@ -224,7 +224,7 @@ Role naming conventions used in this repo.
 Role                           | Description
 ------------                   | -----------
 [ndfc_common]       | Common variables used by all other Roles
-[ndfc_device_deleted] | Delete a device from a fabric, given ``fabric_name``, ``device_name``
+[ndfc_device_deleted] | Delete a device from a fabric, given ``device_name``
 [ndfc_device_deleted_all] | Delete all devices in a fabric, given ``fabric_name``
 [ndfc_device_generated_configs_get] | Retrieve device generated configs given ``fabric_name``, ``device_name``
 [ndfc_device_ipv4_address_local_get] | Retrieve device ipv4 address from local vars, given ``fabric_name``, ``device_name``
