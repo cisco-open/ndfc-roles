@@ -10,6 +10,7 @@
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/config-save"
     json_data: "{{ vars_dict | to_json }}"
   vars:
+    ansible_connection: httpapi
     vars_dict:
 
 - name: main REST POST config-deploy FABRIC {{ fabric_name }} device_name {{ device_name }} switchDbId {{ device_info.switchDbID }}
@@ -18,5 +19,6 @@
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/config-deploy/{{ device_info.switchDbID }}"
     json_data: "{{ vars_dict | to_json }}"
   vars:
+    ansible_connection: httpapi
     vars_dict:
       forceShowRun: "{{ forceShowRun }}"

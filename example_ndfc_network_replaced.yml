@@ -1,0 +1,7 @@
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_network_replaced
+  vars:
+    network_name: f1_n1111

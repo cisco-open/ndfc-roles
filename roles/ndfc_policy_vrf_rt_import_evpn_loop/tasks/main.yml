@@ -2,4 +2,4 @@
 ---
 - name: main {{ state }} VRF route-target import/export
   include_tasks: worker.yml
-  loop: "{{ devices }}"
+  loop: "{{ device_list }}"

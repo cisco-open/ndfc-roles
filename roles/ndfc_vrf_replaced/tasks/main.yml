@@ -1,8 +1,16 @@
-# ndfc_vrf_replaced/tasks/main.yml
----
-- name: main replaced FABRIC {{ fabric_name }} VRF {{ vrf_name }}
-  include_tasks: worker.yml
-  loop: "{{ mr1 }}"
-  vars:
-    mq1: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ vrf_name }}']"
-    mr1: "{{ vrfs | json_query(mq1) }}"
+# ndfc_vrf_replaced/tasks/worker.yml
+- ansible.builtin.include_role:
+    name: ndfc_vrf_config_get
+
+- name: replaced FABRIC {{ vrf_config.fabric }} VRF {{ vrf_config.vrf_name }} VRF_ID {{ vrf_config.vrf_id }} VLAN {{ vrf_config.vlan_id }}
+  cisco.dcnm.dcnm_vrf:
+    fabric: "{{ vrf_config.fabric }}"
+    state: replaced
+    config:
+    - vrf_name: "{{ vrf_config.vrf_name }}"
+      vrf_id: "{{ vrf_config.vrf_id }}"
+      vlan_id: "{{ vrf_config.vlan_id }}"
+      vrf_template: Default_VRF_Universal
+      vrf_extension_template: Default_VRF_Extension_Universal
+      service_vrf_template: null
+      attach: "{{ vrf_config.attach }}"

@@ -5,12 +5,11 @@
   roles:
     - ndfc_vrf_query
   vars:
-    fabric_name: f1
-    vrf_name: v1
+    vrf_name: msd_v1
   tasks:
   - debug:
-      msg: "info.parent.fabric: {{ info.parent.fabric }}"
+      msg: "vrf_info.parent.fabric: {{ vrf_info.parent.fabric }}"
   - debug:
-      msg: "info.parent.vrfId: {{ info.parent.vrfId }}"
+      msg: "vrf_info.parent.vrfId: {{ vrf_info.parent.vrfId }}"
   - debug:
-      msg: "info.parent.vrfStatus: {{ info.parent.vrfStatus }}"
+      msg: "vrf_info.parent.vrfStatus: {{ vrf_info.parent.vrfStatus }}"

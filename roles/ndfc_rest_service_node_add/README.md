@@ -18,7 +18,7 @@ ndfc_service_node_create    | firewall, load_balancer, virtual_network_function
 
 Variable          | Type  | Description
 ------------------|-------|----------------------------------------
-service_node_name | str() | The service node to create
+service_node_name | str() | The service node to add
 
 Service node parameters are defined in the following file under ``service_nodes`
 

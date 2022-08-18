@@ -1,0 +1,7 @@
+# ndfc_vrf_config_get/tasks/main.yml
+---
+- name: set_fact vrf_config {{ vrf_name }}
+  ansible.builtin.set_fact:
+     vrf_config: "{{ vrfs | json_query(vrf_config_get_q1) }}"
+  vars:
+    vrf_config_get_q1: "{{ vrf_name }}"

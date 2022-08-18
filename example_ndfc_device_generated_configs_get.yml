@@ -1,0 +1,14 @@
+# example_ndfc_device_generated_configs_get.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_device_generated_configs_get
+  vars:
+    fabric_name: f1
+    device_name: leaf_1
+  tasks:
+  - block:
+    - debug:
+        var: device_generated_configs
+    when: "device_generated_configs != ''"

@@ -1,0 +1,14 @@
+# ndfc_network_replaced/tasks/main.yml
+- ansible.builtin.include_role:
+    name: ndfc_network_config_get
+
+- name: worker replaced FABRIC {{ network_config.fabric }} NETWORK {{ network_config.net_name }} VRF {{ network_config.vrf_name }} VLAN {{ network_config.vlan_id }} SUBNET {{ network_config.gw_ip_subnet }}"
+  cisco.dcnm.dcnm_network:
+    fabric: "{{ network_config.fabric }}"
+    state: replaced
+    config:
+    - net_name: "{{ network_config.net_name }}"
+      vrf_name: "{{ network_config.vrf_name }}"
+      vlan_id: "{{ network_config.vlan_id }}"
+      gw_ip_subnet: "{{ network_config.gw_ip_subnet }}"
+      attach: "{{ network_config.attach }}"

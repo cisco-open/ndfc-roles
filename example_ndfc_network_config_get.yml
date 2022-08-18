@@ -1,0 +1,13 @@
+# example_ndfc_network_config_get.yml
+# Retrieve configuration of network_name from vars defined in ndfc_common
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_network_config_get
+  vars:
+    network_name: f1_n1111
+  tasks:
+  - block:
+    - debug:
+        msg: "network_config: {{ network_config }}"

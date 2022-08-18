@@ -26,7 +26,7 @@ See the following for details:
   roles:
     - ndfc_network_replaced_all
   vars:
-    fabric_name: f1
+    fabric_name: MSD
 ```
 
 ### Licensing

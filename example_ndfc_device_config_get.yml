@@ -1,0 +1,13 @@
+# example_ndfc_device_config_get.yml
+# Query local vars for device configuration
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_device_config_get
+  vars:
+    device_name: leaf_1
+  tasks:
+  - block:
+    - debug:
+        msg: "device_config: {{ device_config }}"

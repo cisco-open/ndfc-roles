@@ -1,23 +1,17 @@
 # ndfc_vpc_interface_merged_all
 
-Merge all vpc interfaces for vpc peer ``vpc_name`` in fabric ``fabric_name``
+Merge all vpc interfaces for vpc peer ``vpc_name``
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric in which ``vpc_name`` resides
-vpc_name        | str() | The name of the vpc peering to create
+vpc_name        | str() | The name of the vpc peer for which interfaces will be merged
 
-``fabric_name`` and ``vpc_name`` are defined in the following file:
+``vpc_name`` is defined in the following file within the ``vpc_peers`` dictionary:
 
 ``./roles/ndfc_common/vars/main.yml``
 
-Specifically:
-
-``fabric_name`` is defined in the ``fabrics`` list
-
-``vpc_name`` is defined in the ``vpc_peers`` list
 
 See the following for details:
 

@@ -5,4 +5,4 @@
   roles:
     - ndfc_rest_fabric_delete
   vars:
-    fabric_name: f1
+    fabric_name: f3

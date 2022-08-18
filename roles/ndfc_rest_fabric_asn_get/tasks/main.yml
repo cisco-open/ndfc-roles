@@ -4,7 +4,7 @@
 # if fabric does not exist, fabric_asn will be null
 ---
 - ansible.builtin.include_role:
-    name: ndfc_rest_fabric_active_fabrics
+    name: ndfc_rest_fabric_active_fabrics_get
 
 - name: get fabric info fabric {{ fabric_name }}
   cisco.dcnm.dcnm_rest:
@@ -12,6 +12,8 @@
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}"
   register: mr1
   when: fabric_name in active_fabrics
+  vars:
+    ansible_connection: httpapi
 
 - name: "main set_fact fabric_asn {{ mr1.response.DATA.asn }} if fabric exists"
   set_fact:

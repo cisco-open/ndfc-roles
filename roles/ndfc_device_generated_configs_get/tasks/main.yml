@@ -1,8 +1,19 @@
-# ndfc_device_generated_configs_get/main.yml
----
-- name: main query FABRIC {{ fabric_name }} DEVICE {{ device_name }}
-  include_tasks: worker.yml
-  loop: "{{ mr1 }}"
+# ndfc_device_generated_configs_get/worker.yml
+
+- ansible.builtin.include_role:
+    name: ndfc_device_config_get
+
+- name: main query FABRIC {{ device_config.switch_fabric }} DEVICE {{ device_config.name }} IP {{ device_config.ip }} generated_config 
+  cisco.dcnm.dcnm_policy:
+    fabric: "{{ device_config.switch_fabric }}"
+    state: query
+    config:
+      - switch:
+          - ip: "{{ device_config.ip }}"
+  register: wr1
+
+- name: worker set_fact generated_config DEVICE {{ device_config.name }} IP {{ device_config.ip }}
+  set_fact:
+     device_generated_configs: "{{ wr1.response | json_query(wq1) }}"
   vars:
-    mq1: "[?name == '{{ device_name }}'] | [?fabric == '{{ fabric_name }}']"
-    mr1: "{{ leafs | json_query(mq1) + spines | json_query(mq1) + border_gateways | json_query(mq1) }}"
+    wq1: "[?generatedConfig != ''].{TemplateName: templateName GeneratedConfig: generatedConfig}"

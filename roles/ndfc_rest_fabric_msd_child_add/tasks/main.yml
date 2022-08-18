@@ -1,7 +1,7 @@
 # ndfc_rest_fabric_msd_add_child/tasks/main.yml
 ---
 - ansible.builtin.include_role:
-    name: ndfc_rest_fabric_active_fabrics
+    name: ndfc_rest_fabric_active_fabrics_get
 
 # query fabric-associations for child_fabric's fabric_parent
 - name: main REST GET fabric_associations
@@ -9,6 +9,8 @@
     method: GET
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/msd/fabric-associations/"
   register: mr2
+  vars:
+    ansible_connection: httpapi
 - name: main set_fact fabric_parent
   set_fact:
      fabric_parent: "{{ mr2.response.DATA | json_query(mq2) }}"
@@ -23,6 +25,7 @@
     json_data: "{{ vars_dict | to_json }}"
   when: "msd_fabric in active_fabrics and child_fabric in active_fabrics and fabric_parent[0].fabricParent == 'None'"
   vars:
+    ansible_connection: httpapi
     vars_dict:
       destFabric: "{{ msd_fabric }}"
       sourceFabric: "{{ child_fabric }}"

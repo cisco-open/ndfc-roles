@@ -1,8 +1,0 @@
-# ndfc_device_query_all/tasks/main.yml
----
-- name: main query FABRIC {{ fabric_name }}
-  include_tasks: worker.yml
-  loop: "{{ mr1 }}"
-  vars:
-    mq1: "[?fabric == '{{ fabric_name }}']"
-    mr1: "{{ leafs | json_query(mq1) + spines | json_query(mq1) + border_gateways | json_query(mq1) }}"

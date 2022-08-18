@@ -1,18 +1,21 @@
 # ndfc_policy_query_generated_config_all/worker.yml
-- name: worker query FABRIC {{ fabric_name }} DEVICE {{ item.name }} IP {{ item.ip }} generated_config 
+- name: worker query WANT FABRIC {{ fabric_name }} CURRENT FABRIC {{ device.value.switch_fabric }} DEVICE {{ device.value.name }} IP {{ device.value.ip }} generated_config 
   cisco.dcnm.dcnm_policy:
-    fabric: "{{ fabric_name }}"
+    fabric: "{{ device.value.switch_fabric }}"
     state: query
     config:
       - switch:
-          - ip: "{{ item.ip }}"
+          - ip: "{{ device.value.ip }}"
   register: wr1
+  vars:
+    ansible_connection: httpapi
 
-- name: worker set_fact generated_configs DEVICE {{ item.name }} IP {{ item.ip }}
+- name: worker set_fact generated_configs DEVICE {{ device.value.name }} IP {{ device.value.ip }}
   set_fact:
-     generated_configs: "{{ wr1.response | json_query(wq1) }}"
+    generated_configs: "{{ wr1.response | json_query(wq1) }}"
   vars:
     wq1: "[?generatedConfig != ''].{TemplateName: templateName GeneratedConfig: generatedConfig}"
-- name: show populated generated_configs {{ item.role }} {{ item.name }} {{ item.ip }}
+
+- name: show populated generated_configs {{ device.value.role }} {{ device.value.name }} {{ device.value.ip }}
   debug:
     var: generated_configs

@@ -1,6 +1,6 @@
 # ndfc_device_serial_number_get
 
-Return ``device_serial_number`` given ``device_name`` and fabric ``fabric_name``.
+Return ``device_serial_number`` given ``device_name``.
 
 The device's serial number is returned in variable ``device_serial_number``.
 
@@ -9,9 +9,8 @@ The device's serial number is returned in variable ``device_serial_number``.
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 device_name     | str() | The device to be queried
-fabric_name     | str() | The fabric in which device_name resides
 
-Device and Fabric names are defined in the following file:
+Device names are defined in the following file:
 
 ``./roles/ndfc_common/vars/main.yml``)
 
@@ -30,7 +29,6 @@ See the following for details:
   roles:
     - ndfc_device_serial_get
   vars:
-    fabric_name: f2
     device_name: leaf_1
   tasks:
   - block:

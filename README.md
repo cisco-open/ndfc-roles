@@ -11,16 +11,16 @@ Two identical child fabrics and a multisite domain (MSD) fabric are defined in t
 The main playbooks, which create the two fabrics and the MSD fabric are located in the top-level directory:
 
 ```bash
-example_ndfc_rest_fabric_create_f1.yml
-example_ndfc_rest_fabric_create_f2.yml
-example_ndfc_rest_fabric_create_msd_with_children.yml
+example_ndfc_rest_fabric_switch_create_f1.yml
+example_ndfc_rest_fabric_switch_create_f2.yml
+example_ndfc_rest_fabric_msd_create_with_children.yml
 ```
 
 Ref | Playbook | Description
 --- | -------- | -----------
-1 | ``example_ndfc_rest_fabric_create_f1.yml`` | creates VXLAN/EVPN fabric f1 without connectivity to an MSD fabric
-2 | ``example_ndfc_rest_fabric_create_f2.yml`` | creates VXLAN/EVPN fabric f2 without connectivity to an MSD fabric
-3 | ``example_ndfc_rest_fabric_create_msd_with_children.yml`` | creates VXLAN/EVPN fabrics f1 and f2, connecting them through an MSD fabric
+1 | ``example_ndfc_rest_fabric_switch_create_f1.yml`` | creates VXLAN/EVPN fabric f1 without connectivity to an MSD fabric
+2 | ``example_ndfc_rest_fabric_switch_create_f2.yml`` | creates VXLAN/EVPN fabric f2 without connectivity to an MSD fabric
+3 | ``example_ndfc_rest_fabric_msd_create_with_children.yml`` | creates VXLAN/EVPN fabrics f1 and f2, connecting them through an MSD fabric
 
 Hence, you should use either (1 and 2) OR 3 (which creates 1 and 2, but with MSD connectivity).  That is, (1 and 2) are mutually exclusive to 3.
 
@@ -29,7 +29,7 @@ These playbooks leverage the following included Roles:
 ```bash
 ndfc_rest_config_deploy_all
 ndfc_device_merged
-ndfc_rest_fabric_create
+ndfc_rest_fabric_switch_create
 ndfc_network_replaced_all
 ndfc_policy_vrf_rt_import_loop
 ndfc_rest_vpc_create
@@ -200,7 +200,7 @@ ndfc:
 
 ```bash
 cd /top/level/directory/for/this/repo
-ansible-playbook example_ndfc_rest_fabric_create_f1.yml --ask-vault-pass -i inventory
+ansible-playbook example_ndfc_rest_fabric_switch_create_f1.yml --ask-vault-pass -i inventory
 ```
 
 When prompted, enter the password you used in response to the ansible-vault command in step 1 above.
@@ -209,7 +209,7 @@ When prompted, enter the password you used in response to the ansible-vault comm
 
 ```bash
 cd /top/level/directory/for/this/repo
-ansible-playbook example_ndfc_rest_fabric_create_f1.yml -i inventory
+ansible-playbook example_ndfc_rest_fabric_switch_create_f1.yml -i inventory
 ```
 
 ## Roles
@@ -253,7 +253,7 @@ Role                           | Description
 [ndfc_rest_fabric_access_mode_get] | Retrieve a fabric's access mode, given ``fabric_name``
 [ndfc_rest_fabric_access_mode_set] | Set a fabric's access mode, given ``fabric_name``, and ``read_only``
 [ndfc_rest_fabric_asn_get] | Retrieve a fabric's BGP ASN, given ``fabric_name``
-[ndfc_rest_fabric_create] | Create a fabric, given ``fabric_name``
+[ndfc_rest_fabric_switch_create] | Create a switch fabric, given ``fabric_name``
 [ndfc_rest_fabric_delete] | Delete a fabric, given ``fabric_name``
 [ndfc_rest_fabric_external_create] | Create an external fabric, given ``fabric_name``
 [ndfc_rest_fabric_msd_child_add] | Add a child fabric to an MSD fabric, given ``child_fabric``, and ``msd_fabric``
@@ -305,7 +305,7 @@ Role                           | Description
 [ndfc_rest_fabric_access_mode_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_access_mode_get
 [ndfc_rest_fabric_access_mode_set]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_access_mode_set
 [ndfc_rest_fabric_asn_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_asn_get
-[ndfc_rest_fabric_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_create
+[ndfc_rest_fabric_switch_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_switch_create
 [ndfc_rest_fabric_delete]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_delete
 [ndfc_rest_fabric_external_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_external_create
 [ndfc_rest_fabric_msd_child_add]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_add

@@ -5,5 +5,4 @@
   roles:
     - ndfc_vrf_replaced
   vars:
-    fabric_name: f1
-    vrf_name: v2
+    vrf_name: f2_v2

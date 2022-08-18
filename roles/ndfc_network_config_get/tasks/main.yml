@@ -1,0 +1,7 @@
+# roles/ndfc_network_config_get/tasks/main.yml
+---
+- name: set_fact network_config {{ network_name }}
+  ansible.builtin.set_fact:
+     network_config: "{{ networks | json_query(mq1) }}"
+  vars:
+    mq1: "{{ network_name }}"

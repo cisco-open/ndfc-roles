@@ -1,8 +1,28 @@
-# ndfc_device_merged/tasks/main.yml
----
-- name: main merged FABRIC {{ fabric_name }} DEVICE {{ device_name }}
-  include_tasks: worker.yml
-  loop: "{{ mr1 }}"
+# ndfc_rest_device_set_role/tasks/worker.yml
+- ansible.builtin.include_role:
+    name: ndfc_device_config_get
+
+- ansible.builtin.include_role:
+    name: ndfc_device_serial_number_get
   vars:
-    mq1: "[?name == '{{ device_name }}'] | [?fabric == '{{ fabric_name }}']"
-    mr1: "{{ leafs | json_query(mq1) + spines | json_query(mq1) + border_gateways | json_query(mq1) }}"
+    device_name: "{{ device_config.name }}"
+    fabric_name: "{{ device_config.switch_fabric }}"
+
+- name: worker REST POST set device role FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }} SERIAL {{ device_serial_number }} payload {{ payload }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/switches/roles"
+    json_data: "{{ payload | to_json }}"
+  when: "device_serial_number != ''"
+  vars:
+    ansible_connection: httpapi
+    payload:
+    - serialNumber: "{{ device_serial_number }}"
+      role: "{{ role }}"
+
+- ansible.builtin.include_role:
+    name: ndfc_rest_config_deploy
+  vars:
+    device_name: "{{ device_config.name }}"
+    fabric_name: "{{ device_config.switch_fabric }}"
+  when: "device_serial_number != ''"

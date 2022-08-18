@@ -7,7 +7,6 @@ Set role for device ``device_name``.
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 device_name     | str() | The device to be merged
-fabric_name     | str() | The fabric in which ``device_name`` resides
 role            | str() | The desired role for ``device_name`` e.g. leaf, spine, border_gateway, etc
 
 Device and Fabric names are defined in the following file:

@@ -5,5 +5,4 @@
   roles:
     - ndfc_vpc_interface_merged_all
   vars:
-    fabric_name: f1
     vpc_name: vpc1

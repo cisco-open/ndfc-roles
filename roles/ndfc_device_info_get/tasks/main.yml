@@ -1,10 +1,17 @@
-# ndfc_device_info_get/tasks/main.yml
----
-- name: main device_info_get FABRIC {{ fabric_name }} DEVICE {{ device_name }}
-  include_tasks: worker.yml
-  loop: "{{ mr1 }}"
-  loop_control:
-    loop_var: d
+# ndfc_device_info_get/tasks/worker.yml
+- ansible.builtin.include_role:
+    name: ndfc_device_config_get
+
+- name: query FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }}
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ device_config.switch_fabric }}"
+    state: query
+    config:
+    - seed_ip: "{{ device_config.ip }}"
+  register: wr1
+
+- name: worker set_fact device_info
+  set_fact:
+    device_info: "{{ wr1.response | json_query(wq1) }}"
   vars:
-    mq1: "[?name == '{{ device_name }}'] | [?fabric == '{{ fabric_name }}']"
-    mr1: "{{ leafs | json_query(mq1) + spines | json_query(mq1) + border_gateways | json_query(mq1) }}"
+    wq1: "[0]"

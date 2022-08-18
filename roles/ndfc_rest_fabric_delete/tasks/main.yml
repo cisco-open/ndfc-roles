@@ -1,10 +1,12 @@
 # ndfc_rest_fabric_delete/tasks/main.yml
 ---
 - ansible.builtin.include_role:
-    name: ndfc_rest_fabric_active_fabrics
+    name: ndfc_rest_fabric_active_fabrics_get
 
 - name: main REST DELETE FABRIC {{ fabric_name }} from ACTIVE_FABRICS {{ active_fabrics }}
   cisco.dcnm.dcnm_rest:
     method: DELETE
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}"
   when: "fabric_name in active_fabrics"
+  vars:
+    ansible_connection: httpapi

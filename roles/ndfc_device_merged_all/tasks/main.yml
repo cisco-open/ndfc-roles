@@ -1,20 +1,5 @@
 # ndfc_device_merged_all/tasks/main.yml
 ---
-- name: main merged leaf FABRIC {{ fabric_name }}
+- name: all devices merged
   include_tasks: worker.yml
-  loop: "{{ leafs | json_query(mq1) }}"
-  vars:
-    mq1: "[?fabric == '{{ fabric_name }}']"
-- name: main merged spine FABRIC {{ fabric_name }}
-  include_tasks: worker.yml
-  loop: "{{ spines | json_query(mq2) }}"
-  vars:
-    mq2: "[?fabric == '{{ fabric_name }}']"
-- name: main merged border_gateway FABRIC {{ fabric_name }}
-  include_tasks: worker.yml
-  loop: "{{ border_gateways | json_query(mq3) }}"
-  vars:
-    mq3: "[?fabric == '{{ fabric_name }}']"
-
-- ansible.builtin.include_role:
-    name: ndfc_rest_config_deploy_all
+  loop: "{{ devices.values() | list }}"

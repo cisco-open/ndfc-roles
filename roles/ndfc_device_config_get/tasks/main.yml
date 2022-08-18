@@ -1,0 +1,6 @@
+---
+- name: set_fact device_config {{ device_name }}
+  ansible.builtin.set_fact:
+     device_config: "{{ devices | json_query(device_config_get_q1) }}"
+  vars:
+    device_config_get_q1: "{{ device_name }}"

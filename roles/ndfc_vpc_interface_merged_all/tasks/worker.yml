@@ -14,8 +14,10 @@
     - seed_ip: "{{ ip }}"
   register: wr1
   vars:
+    ansible_connection: httpapi
     wq1: "[?fabric == '{{ item.fabric }}'] | [?vpc_name == '{{ item.vpc_name }}'].peer_1_ip | [0]"
-    ip: "{{ vpc_peers | json_query(wq1)}}"
+    ip: "{{ vpc_peers.values() | list | json_query(wq1)}}"
+
 - name: worker set_fact {{ item.fabric }} {{ item.vpc_name }} {{ item.vpc_port_id }} - p1_serial, p1_vpc, p1_db_id, p1_ip
   set_fact:
     p1_serial: "{{ wr1.response | json_query(wq2) }}"
@@ -37,8 +39,9 @@
     - seed_ip: "{{ ip }}"
   register: wr2
   vars:
+    ansible_connection: httpapi
     wq6: "[?fabric == '{{ item.fabric }}'] | [?vpc_name == '{{ item.vpc_name }}'].peer_2_ip | [0]"
-    ip: "{{ vpc_peers | json_query(wq6)}}"
+    ip: "{{ vpc_peers.values() | list  | json_query(wq6)}}"
 
 - name: worker set_fact {{ item.fabric }} {{ item.vpc_name }} {{ item.vpc_port_id }} - p2_serial, p2_vpc, p2_db_id, p2_ip
   set_fact:
@@ -76,3 +79,5 @@
           peer2_allowed_vlans: "{{ item.peer2_allowed_vlans }}"
           peer1_description: "{{ item.vpc_port_id }} {{ item.interface_mode }}"
           peer2_description: "{{ item.vpc_port_id }} {{ item.interface_mode }}"
+  vars:
+    ansible_connection: httpapi

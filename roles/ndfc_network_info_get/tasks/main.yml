@@ -1,9 +1,36 @@
-# ndfc_network_info_get/tasks/main.yml
+# roles/ndfc_network_info_get/tasks/main.yml
 ---
-- name: main network_info_get FABRIC {{ fabric_name }} NETWORK {{ network_name }}
-  include_tasks: worker.yml
-  loop: "{{ mr2 }}"
+- ansible.builtin.include_role:
+    name: ndfc_network_config_get
   vars:
-    mq2: "[?net_name == '{{ network_name }}'] | [?fabric == '{{ fabric_name }}']"
-    mr2: "{{ networks | json_query(mq2) }}"
+    ansible_connection: local
+  when: network_config == ''
 
+- name: network_info_get debug network_config
+  debug:
+    var: network_config
+
+- name: worker query network_name {{ network_config.name }} FABRIC {{ network_config.fabric }} NETWORK {{ network_config.net_name }}
+  cisco.dcnm.dcnm_network:
+    fabric: "{{ network_config.fabric }}"
+    state: query
+    config:
+    - net_name: "{{ network_config.net_name }}"
+  register: wr1
+  vars:
+    ansible_connection: httpapi
+  # when: "item.net_name is not none"
+
+- name: worker set_fact network_info
+  set_fact:
+    network_info: "{{ wr1.response | json_query(wq1) | default('', true) }}"
+  vars:
+    wq1: "[0].parent"
+  # when: "item.net_name is not none"
+
+# - name: worker set_fact network_info null
+#   set_fact:
+#     network_info: "{{ wr1.response | json_query(wq1) }}"
+#   vars:
+#     wq1: "[0].parent"
+#   when: "item.net_name is none"

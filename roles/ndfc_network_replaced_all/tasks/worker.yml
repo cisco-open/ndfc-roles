@@ -1,11 +1,13 @@
 # ndfc_network_replaced_all/tasks/worker.yml
-- name: worker replaced FABRIC {{ fabric_name }} NETWORK {{ item.net_name }} VRF {{ item.vrf_name }} VLAN {{ item.vlan_id }} SUBNET {{ item.gw_ip_subnet }}"
+- name: worker replaced FABRIC {{ network.value.fabric }} NETWORK {{ network.value.net_name }} VRF {{ network.value.vrf_name }} VLAN {{ network.value.vlan_id }} SUBNET {{ network.value.gw_ip_subnet }}"
   cisco.dcnm.dcnm_network:
     fabric: "{{ fabric_name }}"
     state: replaced
     config:
-    - net_name: "{{ item.net_name }}"
-      vrf_name: "{{ item.vrf_name }}"
-      vlan_id: "{{ item.vlan_id }}"
-      gw_ip_subnet: "{{ item.gw_ip_subnet }}"
-      attach: "{{ item.attach }}"
+    - net_name: "{{ network.value.net_name }}"
+      vrf_name: "{{ network.value.vrf_name }}"
+      vlan_id: "{{ network.value.vlan_id }}"
+      gw_ip_subnet: "{{ network.value.gw_ip_subnet }}"
+      attach: "{{ network.value.attach }}"
+  vars:
+    ansible_connection: httpapi

@@ -7,8 +7,7 @@
   roles:
     - ndfc_device_serial_number_get
   vars:
-    fabric_name: f2
-    device_name: leaf_1
+    device_name: leaf_5
   tasks:
   - block:
     - debug:

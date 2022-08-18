@@ -1,7 +1,0 @@
-# ndfc_network_deleted_all/tasks/main.yml
----
-- name: main deleted FABRIC {{ fabric_name }} networks 
-  include_tasks: worker.yml
-  loop: "{{ networks | json_query(mq1) }}"
-  vars:
-    mq1: "[?fabric == '{{ fabric_name }}']"

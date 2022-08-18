@@ -1,6 +1,6 @@
 # ndfc_vpc_interface_merged_all/tasks/main.yml
 - name: main merged FABRIC {{ fabric_name }} VPC {{ vpc_name }} vpc_interface
   include_tasks: worker.yml
-  loop: "{{ vpc_interfaces | json_query(mq1) }}"
+  loop: "{{ vpc_interfaces.values() | list | json_query(mq1) }}"
   vars:
-    mq1: "[?fabric == '{{ fabric_name }}'] | [?vpc_name == '{{ vpc_name }}']"
+    mq1: "[?vpc_name == '{{ vpc_name }}']"

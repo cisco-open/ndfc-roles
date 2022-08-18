@@ -1,0 +1,13 @@
+# example_ndfc_device_serial_number_get.yml
+# Query NX-OS switch associated with fabric_name and device_name
+# and print the switch's serial number
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_active_fabrics_get
+  tasks:
+  - block:
+    - debug:
+        msg: "active_fabrics: {{ active_fabrics }}"
+    when: "active_fabrics != ''"

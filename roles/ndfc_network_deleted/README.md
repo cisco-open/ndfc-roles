@@ -1,15 +1,14 @@
 # ndfc_network_deleted
 
-Delete network ``network_name`` from fabric ``fabric_name`` using ``cisco.dcnm.dcnm_network``
+Delete network ``network_name`` where ``network_name`` matches the ``name`` key in the ``networks`` dictionary in ``roles/ndfc_common/vars/main.yml``
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 network_name    | str() | The network to be deleted
-fabric_name     | str() | The fabric in which ``network_name`` resides.  If ``network_name`` resides in a child fabric to an msd_fabric, then ``fabric_name`` must be that of the msd_fabric.
 
-Network and fabric names are defined in the following file:
+Network names are defined in the following file:
 
 ``./roles/ndfc_common/vars/main.yml``)
 
@@ -20,7 +19,7 @@ See the following for details:
 
 ### Example Playbooks
 
-# Delete network_name n1111 from fabric_name f1.
+# Delete network_name f1_n1111
 
 ```yaml
 ---
@@ -29,13 +28,12 @@ See the following for details:
   roles:
     - ndfc_network_deleted
   vars:
-    fabric_name: f1
-    network_name: n1111
+    network_name: f1_n1111
 ```
 
-# Delete network_name n1111 from fabric_name f1, which is a child of msd_fabric MSD.
+# Delete network_name msd_n1111, which resides in fabric MSD (an msd fabric)
 
-This will delete network_name n1111 from ALL child fabrics of msd_fabric MSD.
+This will delete network_name msd_n1111 from ALL child fabrics of fabric MSD.
 
 ```yaml
 ---
@@ -44,8 +42,7 @@ This will delete network_name n1111 from ALL child fabrics of msd_fabric MSD.
   roles:
     - ndfc_network_deleted
   vars:
-    fabric_name: MSD
-    network_name: n1111
+    network_name: msd_n1111
 ```
 
 ### License

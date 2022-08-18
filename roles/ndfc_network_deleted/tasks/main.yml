@@ -1,10 +1,36 @@
-# ndfc_network_deleted/tasks/main.yml
 ---
-- name: main deleted FABRIC {{ fabric_name }} NETWORK {{ network_name }}
-  include_tasks: worker.yml
-  loop: "{{ mr1 }}"
-  loop_control:
-    loop_var: dn
+
+- ansible.builtin.include_role:
+    name: ndfc_network_config_get
+- name: debug network_config
+  debug:
+    var: network_config
+
+- ansible.builtin.include_role:
+    name: ndfc_network_info_get
   vars:
-    mq1: "[?net_name == '{{ network_name }}'] | [?fabric == '{{ fabric_name }}']"
-    mr1: "{{ networks | json_query(mq1) }}"
+    fabric_name: "{{ network_config.fabric }}"
+    network_name: "{{ network_config.net_name }}"
+
+# We set wf1 to '' so that we can skip the last task below if it's still equal to ''
+- name: set fact wf1 temp
+  set_fact:
+    wf1: ''
+
+- name: worker set_fact wf1 networkName
+  set_fact:
+    wf1: "{{ network_info | json_query(wq1) | default('', true) }}"
+  vars:
+    wq1: "networkName"
+  when: "network_info != ''"
+
+- name: worker deleted FABRIC {{ network_config.fabric }} NETWORK {{ network_config.net_name }} networkName ({{ wf1 }})
+  cisco.dcnm.dcnm_network:
+    fabric: "{{ network_config.fabric }}"
+    state: deleted
+    config:
+    - net_name: "{{ network_config.net_name }}"
+  when: "wf1 == network_config.net_name"
+  vars:
+    ansible_connection: httpapi
+

@@ -2,6 +2,7 @@
 ---
 - name: main replaced Network FABRIC {{ fabric_name }}
   include_tasks: worker.yml
-  loop: "{{ networks | json_query(mq1) }}"
-  vars:
-    mq1: "[?fabric == '{{ fabric_name }}']"
+  loop: "{{ lookup('ansible.builtin.dict', networks) }}"
+  when: "fabric_name in network.value.fabric"
+  loop_control:
+    loop_var: network

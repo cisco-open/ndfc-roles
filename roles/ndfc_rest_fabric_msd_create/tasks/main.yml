@@ -1,33 +1,14 @@
 # ndfc_rest_fabric_msd_create/tasks/main.yml
 ---
 - ansible.builtin.include_role:
-    name: ndfc_rest_fabric_active_fabrics
+    name: ndfc_rest_fabric_active_fabrics_get
 
-# TODO: add relevant user-configurable parameters to common_vars and update the
-# below accordingly.
-- name: main set_fact FABRIC {{ msd_fabric }}
+- name: worker set_fact msd_fabric name {{ fabric_name }}
   set_fact:
-     L2_SEGMENT_ID_RANGE: "{{ msd_fabrics | json_query(mq2) }}"
-     L3_PARTITION_ID_RANGE: "{{ msd_fabrics | json_query(mq3) }}"
-     ANYCAST_GW_MAC: "{{ msd_fabrics | json_query(mq4) }}"
-     MS_LOOPBACK_ID: "{{ msd_fabrics | json_query(mq5) }}"
-     BORDER_GWY_CONNECTIONS: "{{ msd_fabrics | json_query(mq6) }}"
-     MS_UNDERLAY_AUTOCONFIG: "{{ msd_fabrics | json_query(mq7) }}"
-     DELAY_RESTORE: "{{ msd_fabrics | json_query(mq8) }}"
-     LOOPBACK100_IP_RANGE: "{{ msd_fabrics | json_query(mq9) }}"
-     DCI_SUBNET_RANGE: "{{ msd_fabrics | json_query(mq10) }}"
-     DCI_SUBNET_TARGET_MASK: "{{ msd_fabrics | json_query(mq11) }}"
+     _config: "{{ msd_fabrics | json_query(mq2) }}"
   vars:
-    mq2: "[?name == '{{ msd_fabric }}'].L2_SEGMENT_ID_RANGE | [0]"
-    mq3: "[?name == '{{ msd_fabric }}'].L3_PARTITION_ID_RANGE | [0]"
-    mq4: "[?name == '{{ msd_fabric }}'].ANYCAST_GW_MAC | [0]"
-    mq5: "[?name == '{{ msd_fabric }}'].MS_LOOPBACK_ID | [0]"
-    mq6: "[?name == '{{ msd_fabric }}'].BORDER_GWY_CONNECTIONS | [0]"
-    mq7: "[?name == '{{ msd_fabric }}'].MS_UNDERLAY_AUTOCONFIG | [0]"
-    mq8: "[?name == '{{ msd_fabric }}'].DELAY_RESTORE | [0]"
-    mq9: "[?name == '{{ msd_fabric }}'].LOOPBACK100_IP_RANGE | [0]"
-    mq10: "[?name == '{{ msd_fabric }}'].DCI_SUBNET_RANGE | [0]"
-    mq11: "[?name == '{{ msd_fabric }}'].DCI_SUBNET_TARGET_MASK | [0]"
+    mq2: "{{ msd_fabric }}"
+
 
 - name: main REST POST msd_fabric {{ msd_fabric }} active_fabrics {{ active_fabrics }}
   cisco.dcnm.dcnm_rest:
@@ -36,19 +17,20 @@
     json_data: "{{ vars_dict | to_json }}"
   when: "msd_fabric not in active_fabrics"
   vars:
+    ansible_connection: httpapi
     vars_dict:
       fabricName: "{{ msd_fabric }}"
       templateName: "MSD_Fabric"
       nvPairs:
         FABRIC_NAME: "{{ msd_fabric }}"
-        L2_SEGMENT_ID_RANGE: "{{ L2_SEGMENT_ID_RANGE }}"
-        L3_PARTITION_ID_RANGE: "{{ L3_PARTITION_ID_RANGE }}"
+        L2_SEGMENT_ID_RANGE: "{{ _config.L2_SEGMENT_ID_RANGE }}"
+        L3_PARTITION_ID_RANGE: "{{ _config.L3_PARTITION_ID_RANGE }}"
         default_vrf: "Default_VRF_Universal"
         default_network: "Default_Network_Universal"
         vrf_extension_template: "Default_VRF_Extension_Universal"
         network_extension_template: "Default_Network_Extension_Universal"
-        ANYCAST_GW_MAC: "{{ ANYCAST_GW_MAC }}"
-        MS_LOOPBACK_ID: "{{ MS_LOOPBACK_ID }}"
+        ANYCAST_GW_MAC: "{{ _config.ANYCAST_GW_MAC }}"
+        MS_LOOPBACK_ID: "{{ _config.MS_LOOPBACK_ID }}"
         TOR_AUTO_DEPLOY: false
         FABRIC_TYPE: MFD
         FF: MSD
@@ -59,11 +41,11 @@
         MS_IFC_BGP_PASSWORD_ENABLE_PREV: ""
         MS_IFC_BGP_AUTH_KEY_TYPE_PREV: ""
         MS_IFC_BGP_PASSWORD_PREV: ""
-        BORDER_GWY_CONNECTIONS: "{{ BORDER_GWY_CONNECTIONS }}"
+        BORDER_GWY_CONNECTIONS: "{{ _config.BORDER_GWY_CONNECTIONS }}"
         RP_SERVER_IP: ""
         BGP_RP_ASN: ""
-        MS_UNDERLAY_AUTOCONFIG: "{{ MS_UNDERLAY_AUTOCONFIG }}"
-        DELAY_RESTORE: "{{ DELAY_RESTORE }}"
+        MS_UNDERLAY_AUTOCONFIG: "{{ _config.MS_UNDERLAY_AUTOCONFIG }}"
+        DELAY_RESTORE: "{{ _config.DELAY_RESTORE }}"
         CLOUDSEC_AUTOCONFIG: false
         CLOUDSEC_KEY_STRING: ""
         CLOUDSEC_ALGORITHM: ""
@@ -72,8 +54,8 @@
         MS_IFC_BGP_PASSWORD_ENABLE: false
         MS_IFC_BGP_PASSWORD: ""
         MS_IFC_BGP_AUTH_KEY_TYPE: ""
-        LOOPBACK100_IP_RANGE: "{{ LOOPBACK100_IP_RANGE }}"
-        DCI_SUBNET_RANGE: "{{ DCI_SUBNET_RANGE }}"
-        DCI_SUBNET_TARGET_MASK: "{{ DCI_SUBNET_TARGET_MASK }}"
+        LOOPBACK100_IP_RANGE: "{{ _config.LOOPBACK100_IP_RANGE }}"
+        DCI_SUBNET_RANGE: "{{ _config.DCI_SUBNET_RANGE }}"
+        DCI_SUBNET_TARGET_MASK: "{{ _config.DCI_SUBNET_TARGET_MASK }}"
         enableScheduledBackup: ""
         scheduledTime: ""

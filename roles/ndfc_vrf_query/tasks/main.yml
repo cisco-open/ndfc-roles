@@ -1,8 +1,20 @@
-# ndfc_vrf_replaced/tasks/main.yml
+# ndfc_vrf_query/tasks/worker.yml
 ---
-- name: main query FABRIC {{ fabric_name }} VRF {{ vrf_name }}
-  include_tasks: worker.yml
-  loop: "{{ mr1 }}"
+- ansible.builtin.include_role:
+    name: ndfc_vrf_config_get
+
+- name: worker query FABRIC {{ vrf_config.fabric }} VRF {{ vrf_config.vrf_name }}
+  cisco.dcnm.dcnm_vrf:
+    fabric: "{{ vrf_config.fabric }}"
+    state: query
+    config:
+    - vrf_name: "{{ vrf_config.vrf_name }}"
+  register: mr1
   vars:
-    mq1: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ vrf_name }}']"
-    mr1: "{{ vrfs | json_query(mq1) }}"
+    ansible_connection: httpapi
+
+# playbooks can cull information from the vrf_info object
+- name: set_fact info
+  set_fact:
+    vrf_info: "{{ mr1.response[0] }}"
+

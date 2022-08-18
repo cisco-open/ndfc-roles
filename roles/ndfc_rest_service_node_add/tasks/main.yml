@@ -1,26 +1,26 @@
 # ndfc_rest_service_node_add/tasks/main.yml
 ---
 - ansible.builtin.include_role:
-    name: ndfc_rest_fabric_active_fabrics
+    name: ndfc_rest_fabric_active_fabrics_get
 
 - name: worker set_fact service_node {{ service_node_name }}
   set_fact:
-     external_fabric_name: "{{ service_nodes | json_query(mq2) }}"
-     service_node_type: "{{ service_nodes | json_query(mq3) }}"
-     service_node_form_factor: "{{ service_nodes | json_query(mq4) }}"
-     service_node_peer_name: "{{ service_nodes | json_query(mq5) }}"
-     service_node_interface_name: "{{ service_nodes | json_query(mq6) }}"
-     attached_fabric_name: "{{ service_nodes | json_query(mq7) }}"
-     attached_switch_name: "{{ service_nodes | json_query(mq8) }}"
-     attached_switch_interface_name: "{{ service_nodes | json_query(mq9) }}"
-     vpc_switches_attached: "{{ service_nodes | json_query(mq10) }}"
-     link_template_name: "{{ service_nodes | json_query(mq11) }}"
-     interface_speed: "{{ service_nodes | json_query(mq12) }}"
-     interface_mtu: "{{ service_nodes | json_query(mq13) }}"
-     interface_allowed_vlans: "{{ service_nodes | json_query(mq14) }}"
-     interface_bpduguard_enabled: "{{ service_nodes | json_query(mq15) }}"
-     interface_porttype_fast_enabled: "{{ service_nodes | json_query(mq16) }}"
-     interface_admin_state: "{{ service_nodes | json_query(mq17) }}"
+     external_fabric_name: "{{ service_nodes.values() | list | json_query(mq2) }}"
+     service_node_type: "{{ service_nodes.values() | list  | json_query(mq3) }}"
+     service_node_form_factor: "{{ service_nodes.values() | list  | json_query(mq4) }}"
+     service_node_peer_name: "{{ service_nodes.values() | list  | json_query(mq5) }}"
+     service_node_interface_name: "{{ service_nodes.values() | list  | json_query(mq6) }}"
+     attached_fabric_name: "{{ service_nodes.values() | list  | json_query(mq7) }}"
+     attached_switch_name: "{{ service_nodes.values() | list  | json_query(mq8) }}"
+     attached_switch_interface_name: "{{ service_nodes.values() | list  | json_query(mq9) }}"
+     vpc_switches_attached: "{{ service_nodes.values() | list  | json_query(mq10) }}"
+     link_template_name: "{{ service_nodes.values() | list  | json_query(mq11) }}"
+     interface_speed: "{{ service_nodes.values() | list  | json_query(mq12) }}"
+     interface_mtu: "{{ service_nodes.values() | list  | json_query(mq13) }}"
+     interface_allowed_vlans: "{{ service_nodes.values() | list  | json_query(mq14) }}"
+     interface_bpduguard_enabled: "{{ service_nodes.values() | list  | json_query(mq15) }}"
+     interface_porttype_fast_enabled: "{{ service_nodes.values() | list  | json_query(mq16) }}"
+     interface_admin_state: "{{ service_nodes.values() | list  | json_query(mq17) }}"
   vars:
     mq2: "[?service_node_name == '{{ service_node_name }}'].external_fabric_name | [0]"
     mq3: "[?service_node_name == '{{ service_node_name }}'].service_node_type | [0]"
@@ -53,6 +53,7 @@
     json_data: "{{ vars_dict | to_json }}"
   when: "attached_fabric_name in active_fabrics"
   vars:
+    ansible_connection: httpapi
     vars_dict:
       fabricName: "{{ external_fabric_name }}"           # required e.g. "myExtFabric"
       name: "{{ service_node_name }}"                    # required e.g. "myServiceNode1"

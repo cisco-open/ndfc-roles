@@ -1,0 +1,13 @@
+# example_ndfc_vrf_config_get.yml
+# Query local vars for vrf configuration
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_vrf_config_get
+  vars:
+    vrf_name: msd_v1
+  tasks:
+  - block:
+    - debug:
+        msg: "vrf_config: {{ vrf_config }}"

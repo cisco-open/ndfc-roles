@@ -1,0 +1,16 @@
+# example_ndfc_device_ipv4_address_remote_get.yml
+# Query NX-OS switch associated with fabric_name and device_name
+# and print the switch's ipv4 address based on remote device's configuration
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_device_ipv4_address_remote_get
+  vars:
+    fabric_name: f2
+    device_name: leaf_1
+  tasks:
+  - block:
+    - debug:
+        msg: "device_ipv4_address: {{ device_ipv4_address }}"
+    when: "device_ipv4_address != ''"

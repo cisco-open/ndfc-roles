@@ -4,7 +4,7 @@
 # if fabric does not exist, the role is skipped and no action is taken
 ---
 - ansible.builtin.include_role:
-    name: ndfc_rest_fabric_active_fabrics
+    name: ndfc_rest_fabric_active_fabrics_get
 
 - name: set fabric access_mode fabric {{ fabric_name }} active_fabrics {{ active_fabrics }} read_only {{ read_only }}
   cisco.dcnm.dcnm_rest:

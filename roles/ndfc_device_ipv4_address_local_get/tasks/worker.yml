@@ -1,6 +1,0 @@
-# ndfc_device_ipv4_address_local_get/tasks/worker.yml
-
-# Device ipv4 address
-- name: worker set_fact device_ipv4_address
-  set_fact:
-    device_ipv4_address: "{{ device.ip }}"

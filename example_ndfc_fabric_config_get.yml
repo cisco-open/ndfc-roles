@@ -1,0 +1,13 @@
+# example_ndfc_fabric_config_get.yml
+# Query local vars for fabric configuration
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_fabric_config_get
+  vars:
+    fabric_name: f1
+  tasks:
+  - block:
+    - debug:
+        msg: "fabric_config: {{ fabric_config }}"

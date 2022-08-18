@@ -1,19 +1,8 @@
 # ndfc_policy_query_interface/tasks/main.yml
 ---
-- name: main query FABRIC {{ fabric_name }} Interface Policies leaf
+- name: main query generated config
   include_tasks: worker.yml
-  loop: "{{ leafs | json_query(mq1) }}"
-  vars:
-    mq1: "[?fabric == '{{ fabric_name }}']"
-
-- name: main query FABRIC {{ fabric_name }} Interface Policies spine
-  include_tasks: worker.yml
-  loop: "{{ spines | json_query(mq2) }}"
-  vars:
-    mq2: "[?fabric == '{{ fabric_name }}']"
-
-- name: main query FABRIC {{ fabric_name }} Interface Policies border_gateway
-  include_tasks: worker.yml
-  loop: "{{ border_gateways | json_query(mq3) }}"
-  vars:
-    mq3: "[?fabric == '{{ fabric_name }}']"
+  loop: "{{ lookup('ansible.builtin.dict', devices) }}"
+  when: "fabric_name in device.value.switch_fabric"
+  loop_control:
+    loop_var: device

@@ -1,12 +1,14 @@
 # ndfc_policy_query_interface/tasks/worker.yml
-- name: worker query FABRIC {{ fabric_name }} ROLE {{ item.role}} DEVICE {{ item.name }} INTERFACE {{ interface_name }}"
+- name: worker query FABRIC {{ fabric_name }} ROLE {{ device.value.role}} DEVICE {{ device.value.name }} INTERFACE {{ interface_name }}"
   cisco.dcnm.dcnm_policy:
     fabric: "{{ fabric_name }}"
     state: query
     config:
       - switch:
-          - ip: "{{ item.ip }}"
+          - ip: "{{ device.value.ip }}"
   register: wr1
+  vars:
+    ansible_connection: httpapi
 
 - name: worker set_fact interface_config
   set_fact:

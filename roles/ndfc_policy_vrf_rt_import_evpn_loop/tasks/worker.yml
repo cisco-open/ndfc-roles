@@ -1,4 +1,13 @@
 # ndfc_policy_vrf_rt_import_evpn_loop/tasks/worker.yml
+
+- ansible.builtin.include_role:
+    name: ndfc_device_config_get
+  vars:
+    device_name: "{{ item }}"
+- name: set_fact all_fabrics
+  ansible.builtin.set_fact:
+     all_fabrics: "{{ msd_fabrics | combine(switch_fabrics, external_fabrics) }}"
+
 - name: worker {{ state }} FABRIC {{ fabric_name }} ITEM {{ item }} VRF.VLAN.ASN.INDEX {{ vrf_name }}.{{ vrf_vlan_id }}.{{ import_vrf_asn }}.{{ vrf_index }} import VRF.ASN:INDEX {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}
   retries: 3
   register: result
@@ -19,17 +28,19 @@
           routeTargetImport: "{{ import_vrf_asn }}:{{ import_vrf_index }}"
           routeTargetImportEvpn: "{{ import_vrf_asn }}:{{ import_vrf_index }}"
       - switch:
-        - ip: "{{ devices[0].ip }}"
+        - ip: "{{ device_config.ip }}"
   vars:
+    ansible_connection: httpapi
     wq1: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ import_vrf_name }}'].vrf_id | [0]"
     wq2: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ vrf_name }}'].vlan_id | [0]"
     wq3: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ vrf_name }}'].vrf_id | [0]"
     wq4: "[?name == '{{ fabric_name }}'].BGP_AS | [0]"
     wq5: "[?name == '{{ item }}'] | [?fabric == '{{ fabric_name }}']"
-    import_vrf_index: "{{ vrfs | json_query(wq1) }}"
-    vrf_vlan_id: "{{ vrfs | json_query(wq2) }}"
-    vrf_index: "{{ vrfs | json_query(wq3) }}"
-    import_vrf_asn: "{{ fabrics | json_query(wq4) }}"
-    devices: "{{ leafs | json_query(wq5) + spines | json_query(wq5) + border_gateways | json_query(wq5) }}"
+    import_vrf_index: "{{ vrfs.values() | list | json_query(wq1) }}"
+    vrf_vlan_id: "{{ vrfs.values() | list | json_query(wq2) }}"
+    vrf_index: "{{ vrfs.values() | list | json_query(wq3) }}"
+    import_vrf_asn: "{{ all_fabrics.values() | list | json_query(wq4) }}"
 - ansible.builtin.include_role:
     name: ndfc_rest_config_deploy_all
+  vars:
+    ansible_connection: httpapi

@@ -1,22 +1,37 @@
 ---
 # ndfc_common/vars/main.yml
 
-# Multi-Site Domain Fabric parameters
+# Multi-Site Domain (MSD) Fabric parameters
 
 msd_fabrics:
-- name: MSD
-  L2_SEGMENT_ID_RANGE: 30000-49000
-  L3_PARTITION_ID_RANGE: 50000-59000
-  ANYCAST_GW_MAC: 2020.0000.00aa
-  MS_LOOPBACK_ID: 100
-  BORDER_GWY_CONNECTIONS: Direct_To_BGWS
-  MS_UNDERLAY_AUTOCONFIG: true
-  DELAY_RESTORE: 300
-  LOOPBACK100_IP_RANGE: 10.100.0.0/24
-  DCI_SUBNET_RANGE: 10.100.1.0/24
-  DCI_SUBNET_TARGET_MASK: 30
+  MSD:
+    name: MSD
+    type: msd
+    L2_SEGMENT_ID_RANGE: 30000-49000
+    L3_PARTITION_ID_RANGE: 50000-59000
+    ANYCAST_GW_MAC: 2020.0000.00aa
+    MS_LOOPBACK_ID: 100
+    BORDER_GWY_CONNECTIONS: Direct_To_BGWS
+    MS_UNDERLAY_AUTOCONFIG: true
+    DELAY_RESTORE: 300
+    LOOPBACK100_IP_RANGE: 10.100.0.0/24
+    DCI_SUBNET_RANGE: 10.100.1.0/24
+    DCI_SUBNET_TARGET_MASK: 30
+  msd_test_1:
+    name: msd_test_1
+    type: msd
+    L2_SEGMENT_ID_RANGE: 30000-49000
+    L3_PARTITION_ID_RANGE: 50000-59000
+    ANYCAST_GW_MAC: 2020.0000.00aa
+    MS_LOOPBACK_ID: 100
+    BORDER_GWY_CONNECTIONS: Direct_To_BGWS
+    MS_UNDERLAY_AUTOCONFIG: true
+    DELAY_RESTORE: 300
+    LOOPBACK100_IP_RANGE: 10.100.0.0/24
+    DCI_SUBNET_RANGE: 10.100.1.0/24
+    DCI_SUBNET_TARGET_MASK: 30
 
-# Site Fabric parameters
+# Switch Fabric parameters
 # Multicast replication mode requires the following: 
 #
 #   ANYCAST_RP_IP_RANGE: 10.254.1.0/24
@@ -29,197 +44,179 @@ msd_fabrics:
 #   # ANYCAST_RP_IP_RANGE: COMMENTED OR REMOVED
 #   REPLICATION_MODE: Ingress
 
-fabrics:
-- name: f1
-  BGP_AS: 65001
-  #ANYCAST_RP_IP_RANGE: 10.254.1.0/24
-  LOOPBACK0_IP_RANGE: 10.2.0.0/22
-  LOOPBACK1_IP_RANGE: 10.3.0.0/22
-  SUBNET_RANGE: 10.4.0.0/16
-  FABRIC_MTU: 9216
-  REPLICATION_MODE: Ingress
-- name: f2
-  BGP_AS: 65002
-  #ANYCAST_RP_IP_RANGE: 10.254.2.0/24
-  LOOPBACK0_IP_RANGE: 10.6.0.0/22
-  LOOPBACK1_IP_RANGE: 10.7.0.0/22
-  SUBNET_RANGE: 10.8.0.0/16
-  FABRIC_MTU: 9216
-  REPLICATION_MODE: Ingress
+switch_fabrics:
+  f1:
+    name: f1
+    type: switch
+    BGP_AS: 65001
+    #ANYCAST_RP_IP_RANGE: 10.254.1.0/24
+    LOOPBACK0_IP_RANGE: 10.2.0.0/22
+    LOOPBACK1_IP_RANGE: 10.3.0.0/22
+    SUBNET_RANGE: 10.4.0.0/16
+    FABRIC_MTU: 9216
+    REPLICATION_MODE: Ingress
+  f2:
+    name: f2
+    type: switch
+    BGP_AS: 65002
+    #ANYCAST_RP_IP_RANGE: 10.254.1.0/24
+    LOOPBACK0_IP_RANGE: 10.6.0.0/22
+    LOOPBACK1_IP_RANGE: 10.7.0.0/22
+    SUBNET_RANGE: 10.8.0.0/16
+    FABRIC_MTU: 9216
+    REPLICATION_MODE: Ingress
+
+  f3:
+    name: f3
+    type: switch
+    BGP_AS: 65003
+    #ANYCAST_RP_IP_RANGE: 10.254.1.0/24
+    LOOPBACK0_IP_RANGE: 10.36.0.0/22
+    LOOPBACK1_IP_RANGE: 10.37.0.0/22
+    SUBNET_RANGE: 10.38.0.0/16
+    FABRIC_MTU: 9216
+    REPLICATION_MODE: Ingress
 
 # External fabric parameters
 external_fabrics:
-- name: sn_fabric_1
-  BGP_AS: 65201
-  DCI_SUBNET_RANGE: 10.101.1.0/24
-  DCI_SUBNET_TARGET_MASK: 30
-  LOOPBACK0_IP_RANGE: 10.201.0.0/22
-  POWER_REDUNDANCY_MODE: ps-redundant
-  SUBINTERFACE_RANGE: 2-511
-- name: sn_fabric_2
-  BGP_AS: 65202
-  DCI_SUBNET_RANGE: 10.102.1.0/24
-  DCI_SUBNET_TARGET_MASK: 30
-  LOOPBACK0_IP_RANGE: 10.202.0.0/22
-  POWER_REDUNDANCY_MODE: ps-redundant
-  SUBINTERFACE_RANGE: 2-511
-- name: sn_fabric_3
-  BGP_AS: 65203
-  DCI_SUBNET_RANGE: 10.103.1.0/24
-  DCI_SUBNET_TARGET_MASK: 30
-  LOOPBACK0_IP_RANGE: 10.203.0.0/22
-  POWER_REDUNDANCY_MODE: ps-redundant
-  SUBINTERFACE_RANGE: 2-511
+  sn_fabric_1:
+    name: sn_fabric_1
+    type: external
+    BGP_AS: 65201
+    DCI_SUBNET_RANGE: 10.101.1.0/24
+    DCI_SUBNET_TARGET_MASK: 30
+    LOOPBACK0_IP_RANGE: 10.201.0.0/22
+    POWER_REDUNDANCY_MODE: ps-redundant
+    SUBINTERFACE_RANGE: 2-511
+  sn_fabric_2:
+    name: sn_fabric_2
+    type: external
+    BGP_AS: 65202
+    DCI_SUBNET_RANGE: 10.102.1.0/24
+    DCI_SUBNET_TARGET_MASK: 30
+    LOOPBACK0_IP_RANGE: 10.202.0.0/22
+    POWER_REDUNDANCY_MODE: ps-redundant
+    SUBINTERFACE_RANGE: 2-511
+  sn_fabric_3:
+    name: sn_fabric_3
+    type: external
+    BGP_AS: 65203
+    DCI_SUBNET_RANGE: 10.103.1.0/24
+    DCI_SUBNET_TARGET_MASK: 30
+    LOOPBACK0_IP_RANGE: 10.203.0.0/22
+    POWER_REDUNDANCY_MODE: ps-redundant
+    SUBINTERFACE_RANGE: 2-511
+  ext_fabric_test:
+    name: ext_fabric_test
+    type: external
+    BGP_AS: 65204
+    DCI_SUBNET_RANGE: 10.104.1.0/24
+    DCI_SUBNET_TARGET_MASK: 30
+    LOOPBACK0_IP_RANGE: 10.204.0.0/22
+    POWER_REDUNDANCY_MODE: ps-redundant
+    SUBINTERFACE_RANGE: 2-511
 
-leafs:
-  # site_fabric f1
-- fabric: "{{ fabrics[0].name }}"
-  name: leaf_1
-  ip: 172.22.150.102
-  role: leaf
-- fabric: "{{ fabrics[0].name }}"
-  name: leaf_2
-  ip: 172.22.150.103
-  role: leaf
-- fabric: "{{ fabrics[0].name }}"
-  name: leaf_3
-  ip: 172.22.150.104
-  role: leaf
-- fabric: "{{ fabrics[0].name }}"
-  name: leaf_4
-  ip: 172.22.150.105
-  role: leaf
-  # site_fabric f2
-- fabric: "{{ fabrics[1].name }}"
-  name: leaf_1
-  ip: 172.22.150.106
-  role: leaf
-- fabric: "{{ fabrics[1].name }}"
-  name: leaf_2
-  ip: 172.22.150.107
-  role: leaf
-- fabric: "{{ fabrics[1].name }}"
-  name: leaf_3
-  ip: 172.22.150.108
-  role: leaf
-- fabric: "{{ fabrics[1].name }}"
-  name: leaf_4
-  ip: 172.22.150.109
-  role: leaf
+devices:
+  leaf_1:
+    name: leaf_1
+    switch_fabric: "{{ switch_fabrics.f1.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.102
+    role: leaf
+  leaf_2:
+    name: leaf_2
+    switch_fabric: "{{ switch_fabrics.f1.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.103
+    role: leaf
+  leaf_3:
+    name: leaf_3
+    switch_fabric: "{{ switch_fabrics.f1.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.104
+    role: leaf
+  leaf_4:
+    name: leaf_4
+    switch_fabric: "{{ switch_fabrics.f1.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.105
+    role: leaf
+  # switch_fabric f2
+  leaf_5:
+    name: leaf_5
+    switch_fabric: "{{ switch_fabrics.f2.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.106
+    role: leaf
+  leaf_6:
+    name: leaf_6
+    switch_fabric: "{{ switch_fabrics.f2.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.107
+    role: leaf
+  leaf_7:
+    name: leaf_7
+    switch_fabric: "{{ switch_fabrics.f2.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.108
+    role: leaf
+  leaf_8:
+    name: leaf_8
+    switch_fabric: "{{ switch_fabrics.f2.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.109
+    role: leaf
 
-# Leafs need unique names across a MSD fabric.  
-# Below are duplicates of leafs above but for msd_fabrics
+  spine_1:
+    name: spine_1
+    switch_fabric: "{{ switch_fabrics.f1.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.112
+    role: spine
+  spine_2:
+    name: spine_2
+    switch_fabric: "{{ switch_fabrics.f1.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.113
+    role: spine
+  spine_3:
+    name: spine_3
+    switch_fabric: "{{ switch_fabrics.f2.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.114
+    role: spine
+  spine_4:
+    name: spine_4
+    switch_fabric: "{{ switch_fabrics.f2.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.115
+    role: spine
 
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: leaf_1
-  ip: 172.22.150.102
-  role: leaf
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: leaf_2
-  ip: 172.22.150.103
-  role: leaf
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: leaf_3
-  ip: 172.22.150.104
-  role: leaf
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: leaf_4
-  ip: 172.22.150.105
-  role: leaf
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: leaf_5
-  ip: 172.22.150.106
-  role: leaf
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: leaf_6
-  ip: 172.22.150.107
-  role: leaf
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: leaf_7
-  ip: 172.22.150.108
-  role: leaf
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: leaf_8
-  ip: 172.22.150.109
-  role: leaf
+  border_gateway_1:
+    name: border_gateway_1
+    switch_fabric: "{{ switch_fabrics.f1.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.110
+    role: border_gateway
+  border_gateway_2:
+    name: border_gateway_2
+    switch_fabric: "{{ switch_fabrics.f1.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.111
+    role: border_gateway
+  border_gateway_3:
+    name: border_gateway_3
+    switch_fabric: "{{ switch_fabrics.f2.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.100
+    role: border_gateway
+  border_gateway_4:
+    name: border_gateway_4
+    switch_fabric: "{{ switch_fabrics.f2.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.101
+    role: border_gateway
 
-spines:
-  # site_fabric f1
-- fabric: "{{ fabrics[0].name }}"
-  name: spine_1
-  ip: 172.22.150.112
-  role: spine
-- fabric: "{{ fabrics[0].name }}"
-  name: spine_2
-  ip: 172.22.150.113
-  role: spine
-  # site_fabric f2
-- fabric: "{{ fabrics[1].name }}"
-  name: spine_1
-  ip: 172.22.150.114
-  role: spine
-- fabric: "{{ fabrics[1].name }}"
-  name: spine_2
-  ip: 172.22.150.115
-  role: spine
-
-# spines need unique names across a MSD fabric.  
-# Below are duplicates of spines above but for msd_fabrics
-
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: spine_1
-  ip: 172.22.150.112
-  role: spine
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: spine_2
-  ip: 172.22.150.113
-  role: spine
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: spine_3
-  ip: 172.22.150.114
-  role: spine
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: spine_4
-  ip: 172.22.150.115
-  role: spine
-
-border_gateways:
-- fabric: "{{ fabrics[0].name }}"
-  name: border_gateway_1
-  ip: 172.22.150.110
-  role: border_gateway
-- fabric: "{{ fabrics[0].name }}"
-  name: border_gateway_2
-  ip: 172.22.150.111
-  role: border_gateway
-- fabric: "{{ fabrics[1].name }}"
-  name: border_gateway_1
-  ip: 172.22.150.100
-  role: border_gateway
-- fabric: "{{ fabrics[1].name }}"
-  name: border_gateway_2
-  ip: 172.22.150.101
-  role: border_gateway
-
-# border_gateways need unique names across a MSD fabric.  
-# Below are duplicates of border_gateways above but for msd_fabrics
-
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: border_gateway_1
-  ip: 172.22.150.110
-  role: border_gateway
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: border_gateway_2
-  ip: 172.22.150.111
-  role: border_gateway
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: border_gateway_3
-  ip: 172.22.150.100
-  role: border_gateway
-- fabric: "{{ msd_fabrics[0].name }}"
-  name: border_gateway_4
-  ip: 172.22.150.101
-  role: border_gateway
 
 port_groups:
   pg11:
@@ -228,186 +225,200 @@ port_groups:
   - Port-channel12
 
 networks:
-- fabric: "{{ fabrics[0].name }}"
-  net_name: n1111
-  vrf_name: v1
-  vlan_id: 1111
-  gw_ip_subnet: "10.21.1.1/24"
-  attach:
-  - ip_address: "{{ leafs[0].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[1].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[2].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[3].ip }}"
-    ports: "{{ port_groups.pg11 }}"
+  f1_n1111:
+    name: f1_n1111 # name must be unique across all fabrics
+    fabric: "{{ switch_fabrics.f1.name }}"
+    net_name: n1111 # can be the same across fabrics
+    vrf_name: v1
+    vlan_id: 1111
+    gw_ip_subnet: "10.21.1.1/24"
+    attach:
+      - ip_address: "{{ devices.leaf_1.ip }}"
+        ports: "{{ port_groups.pg11 }}"
+      - ip_address: "{{ devices.leaf_2.ip }}"
+        ports: "{{ port_groups.pg11 }}"
+      - ip_address: "{{ devices.leaf_3.ip }}"
+        ports: "{{ port_groups.pg11 }}"
+      - ip_address: "{{ devices.leaf_4.ip }}"
+        ports: "{{ port_groups.pg11 }}"
 
-- fabric: "{{ fabrics[0].name }}"
-  net_name: n1112
-  vrf_name: v2
-  vlan_id: 1112
-  gw_ip_subnet: "10.22.1.1/24"
-  attach:
-  - ip_address: "{{ leafs[0].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[1].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[2].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[3].ip }}"
-    ports: "{{ port_groups.pg12 }}"
+  f1_n1112:
+    name: f1_n1112
+    fabric: "{{ switch_fabrics.f1.name }}"
+    net_name: n1112
+    vrf_name: v2
+    vlan_id: 1112
+    gw_ip_subnet: "10.22.1.1/24"
+    attach:
+      - ip_address: "{{ devices.leaf_1.ip }}"
+        ports: "{{ port_groups.pg12 }}"
+      - ip_address: "{{ devices.leaf_2.ip }}"
+        ports: "{{ port_groups.pg12 }}"
+      - ip_address: "{{ devices.leaf_3.ip }}"
+        ports: "{{ port_groups.pg12 }}"
+      - ip_address: "{{ devices.leaf_4.ip }}"
+        ports: "{{ port_groups.pg12 }}"
 
-- fabric: "{{ fabrics[1].name }}"
-  net_name: n1111
-  vrf_name: v1
-  vlan_id: 1111
-  gw_ip_subnet: "10.21.1.1/24"
-  attach:
-  - ip_address: "{{ leafs[4].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[5].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[6].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[7].ip }}"
-    ports: "{{ port_groups.pg11 }}"
+  f2_n1111:
+    name: f2_n1111
+    fabric: "{{ switch_fabrics.f2.name }}"
+    net_name: n1111
+    vrf_name: v1
+    vlan_id: 1111
+    gw_ip_subnet: "10.21.1.1/24"
+    attach:
+    - ip_address: "{{ devices.leaf_5.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_6.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_7.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_8.ip }}"
+      ports: "{{ port_groups.pg11 }}"
 
-- fabric: "{{ fabrics[1].name }}"
-  net_name: n1112
-  vrf_name: v2
-  vlan_id: 1112
-  gw_ip_subnet: "10.22.1.1/24"
-  attach:
-  - ip_address: "{{ leafs[4].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[5].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[6].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[7].ip }}"
-    ports: "{{ port_groups.pg12 }}"
+  f2_n1112:
+    name: f2_n1112
+    fabric: "{{ switch_fabrics.f2.name }}"
+    net_name: n1112
+    vrf_name: v2
+    vlan_id: 1112
+    gw_ip_subnet: "10.22.1.1/24"
+    attach:
+    - ip_address: "{{ devices.leaf_5.ip }}"
+      ports: "{{ port_groups.pg12 }}"
+    - ip_address: "{{ devices.leaf_6.ip }}"
+      ports: "{{ port_groups.pg12 }}"
+    - ip_address: "{{ devices.leaf_7.ip }}"
+      ports: "{{ port_groups.pg12 }}"
+    - ip_address: "{{ devices.leaf_8.ip }}"
+      ports: "{{ port_groups.pg12 }}"
 
-### If using an MSD fabric to interconnect sites, we need to apply networks and
-### VRFs to the MSD fabric, rather than the individual site fabrics.  The
-### networks below are duplicates of the above site fabric networks but 
-### additionally define attachments for the border_gateway roles, and will be
-### used if the fabric name is an MSD fabric.
+  msd_n1111:
+    name: msd_n1111
+    fabric: "{{ msd_fabrics.MSD.name }}"
+    net_name: n1111
+    vrf_name: v1
+    vlan_id: 1111
+    gw_ip_subnet: "10.21.1.1/24"
+    attach:
+    - ip_address: "{{ devices.leaf_1.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_2.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_3.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_4.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_5.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_6.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_7.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_8.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.border_gateway_1.ip }}"
+      ports: ""
+    - ip_address: "{{ devices.border_gateway_2.ip }}"
+      ports: ""
+    - ip_address: "{{ devices.border_gateway_3.ip }}"
+      ports: ""
+    - ip_address: "{{ devices.border_gateway_4.ip }}"
+      ports: ""
 
-- fabric: "{{ msd_fabrics[0].name }}"
-  net_name: n1111
-  vrf_name: v1
-  vlan_id: 1111
-  gw_ip_subnet: "10.21.1.1/24"
-  attach:
-  - ip_address: "{{ leafs[0].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[1].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[2].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[3].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[4].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[5].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[6].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ leafs[7].ip }}"
-    ports: "{{ port_groups.pg11 }}"
-  - ip_address: "{{ border_gateways[0].ip }}"
-    ports: ""
-  - ip_address: "{{ border_gateways[1].ip }}"
-    ports: ""
-  - ip_address: "{{ border_gateways[2].ip }}"
-    ports: ""
-  - ip_address: "{{ border_gateways[3].ip }}"
-    ports: ""
-
-- fabric: "{{ msd_fabrics[0].name }}"
-  net_name: n1112
-  vrf_name: v2
-  vlan_id: 1112
-  gw_ip_subnet: "10.22.1.1/24"
-  attach:
-  - ip_address: "{{ leafs[0].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[1].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[2].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[3].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[4].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[5].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[6].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ leafs[7].ip }}"
-    ports: "{{ port_groups.pg12 }}"
-  - ip_address: "{{ border_gateways[0].ip }}"
-    ports: ""
-  - ip_address: "{{ border_gateways[1].ip }}"
-    ports: ""
-  - ip_address: "{{ border_gateways[2].ip }}"
-    ports: ""
-  - ip_address: "{{ border_gateways[3].ip }}"
-    ports: ""
+  msd_n1112:
+    name: msd_n1112
+    fabric: "{{ msd_fabrics.MSD.name }}"
+    net_name: n1112
+    vrf_name: v2
+    vlan_id: 1112
+    gw_ip_subnet: "10.22.1.1/24"
+    attach:
+    - ip_address: "{{ devices.leaf_1.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_2.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_3.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_4.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_5.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_6.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_7.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_8.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.border_gateway_1.ip }}"
+      ports: ""
+    - ip_address: "{{ devices.border_gateway_2.ip }}"
+      ports: ""
+    - ip_address: "{{ devices.border_gateway_3.ip }}"
+      ports: ""
+    - ip_address: "{{ devices.border_gateway_4.ip }}"
+      ports: ""
 
 vrfs:
-- fabric: "{{ fabrics[0].name }}"
-  vrf_name: v1
-  vrf_id: 63031
-  vlan_id: 3031
-  vrf_template: Default_VRF_Universal
-  vrf_extension_template: Default_VRF_Extension_Universal
-  service_vrf_template: null
-  attach:
-    - ip_address: "{{ leafs[0].ip }}"
-    - ip_address: "{{ leafs[1].ip }}"
-    - ip_address: "{{ leafs[2].ip }}"
-    - ip_address: "{{ leafs[3].ip }}"
+  f1_v1:
+    name: f1_v1
+    fabric: "{{ switch_fabrics.f1.name }}"
+    vrf_name: v1
+    vrf_id: 63031
+    vlan_id: 3031
+    vrf_template: Default_VRF_Universal
+    vrf_extension_template: Default_VRF_Extension_Universal
+    service_vrf_template: null
+    attach:
+    - ip_address: "{{ devices.leaf_1.ip }}"
+    - ip_address: "{{ devices.leaf_2.ip }}"
+    - ip_address: "{{ devices.leaf_3.ip }}"
+    - ip_address: "{{ devices.leaf_4.ip }}"
 
-- fabric: "{{ fabrics[0].name }}"
-  vrf_name: v2
-  vrf_id: 63032
-  vlan_id: 3032
-  vrf_template: Default_VRF_Universal
-  vrf_extension_template: Default_VRF_Extension_Universal
-  service_vrf_template: null
-  attach:
-    - ip_address: "{{ leafs[0].ip }}"
-    - ip_address: "{{ leafs[1].ip }}"
-    - ip_address: "{{ leafs[2].ip }}"
-    - ip_address: "{{ leafs[3].ip }}"
+  f1_v2:
+    name: f1_v2
+    fabric: "{{ switch_fabrics.f1.name }}"
+    vrf_name: v2
+    vrf_id: 63032
+    vlan_id: 3032
+    vrf_template: Default_VRF_Universal
+    vrf_extension_template: Default_VRF_Extension_Universal
+    service_vrf_template: null
+    attach:
+    - ip_address: "{{ devices.leaf_1.ip }}"
+    - ip_address: "{{ devices.leaf_2.ip }}"
+    - ip_address: "{{ devices.leaf_3.ip }}"
+    - ip_address: "{{ devices.leaf_4.ip }}"
 
-- fabric: "{{ fabrics[1].name }}"
-  vrf_name: v1
-  vrf_id: 63031
-  vlan_id: 3031
-  vrf_template: Default_VRF_Universal
-  vrf_extension_template: Default_VRF_Extension_Universal
-  service_vrf_template: null
-  attach:
-    - ip_address: "{{ leafs[4].ip }}"
-    - ip_address: "{{ leafs[5].ip }}"
-    - ip_address: "{{ leafs[6].ip }}"
-    - ip_address: "{{ leafs[7].ip }}"
+  f2_v1:
+    name: f2_v1
+    fabric: "{{ switch_fabrics.f2.name }}"
+    vrf_name: v1
+    vrf_id: 63031
+    vlan_id: 3031
+    vrf_template: Default_VRF_Universal
+    vrf_extension_template: Default_VRF_Extension_Universal
+    service_vrf_template: null
+    attach:
+    - ip_address: "{{ devices.leaf_5.ip }}"
+    - ip_address: "{{ devices.leaf_6.ip }}"
+    - ip_address: "{{ devices.leaf_7.ip }}"
+    - ip_address: "{{ devices.leaf_8.ip }}"
 
-- fabric: "{{ fabrics[1].name }}"
-  vrf_name: v2
-  vrf_id: 63032
-  vlan_id: 3032
-  vrf_template: Default_VRF_Universal
-  vrf_extension_template: Default_VRF_Extension_Universal
-  service_vrf_template: null
-  attach:
-    - ip_address: "{{ leafs[4].ip }}"
-    - ip_address: "{{ leafs[5].ip }}"
-    - ip_address: "{{ leafs[6].ip }}"
-    - ip_address: "{{ leafs[7].ip }}"
+  f2_v2:
+    name: f2_v2
+    fabric: "{{ switch_fabrics.f2.name }}"
+    vrf_name: v2
+    vrf_id: 63032
+    vlan_id: 3032
+    vrf_template: Default_VRF_Universal
+    vrf_extension_template: Default_VRF_Extension_Universal
+    service_vrf_template: null
+    attach:
+    - ip_address: "{{ devices.leaf_5.ip }}"
+    - ip_address: "{{ devices.leaf_6.ip }}"
+    - ip_address: "{{ devices.leaf_7.ip }}"
+    - ip_address: "{{ devices.leaf_8.ip }}"
 
 ### If using an MSD fabric to interconnect sites, we need to apply networks and
 ### VRFs to the MSD fabric, rather than the individual site fabrics.  The
@@ -415,232 +426,287 @@ vrfs:
 ### attachments for the border_gateway roles, and will be used if the fabric name
 ### is an MSD fabric.
 
-- fabric: "{{ msd_fabrics[0].name }}"
-  vrf_name: v1
-  vrf_id: 63031
-  vlan_id: 3031
-  vrf_template: Default_VRF_Universal
-  vrf_extension_template: Default_VRF_Extension_Universal
-  service_vrf_template: null
-  attach:
-    - ip_address: "{{ leafs[0].ip }}"
-    - ip_address: "{{ leafs[1].ip }}"
-    - ip_address: "{{ leafs[2].ip }}"
-    - ip_address: "{{ leafs[3].ip }}"
-    - ip_address: "{{ leafs[4].ip }}"
-    - ip_address: "{{ leafs[5].ip }}"
-    - ip_address: "{{ leafs[6].ip }}"
-    - ip_address: "{{ leafs[7].ip }}"
-    - ip_address: "{{ border_gateways[0].ip }}"
-    - ip_address: "{{ border_gateways[1].ip }}"
-    - ip_address: "{{ border_gateways[2].ip }}"
-    - ip_address: "{{ border_gateways[3].ip }}"
-- fabric: "{{ msd_fabrics[0].name }}"
-  vrf_name: v2
-  vrf_id: 63032
-  vlan_id: 3032
-  vrf_template: Default_VRF_Universal
-  vrf_extension_template: Default_VRF_Extension_Universal
-  service_vrf_template: null
-  attach:
-    - ip_address: "{{ leafs[0].ip }}"
-    - ip_address: "{{ leafs[1].ip }}"
-    - ip_address: "{{ leafs[2].ip }}"
-    - ip_address: "{{ leafs[3].ip }}"
-    - ip_address: "{{ leafs[4].ip }}"
-    - ip_address: "{{ leafs[5].ip }}"
-    - ip_address: "{{ leafs[6].ip }}"
-    - ip_address: "{{ leafs[7].ip }}"
-    - ip_address: "{{ border_gateways[0].ip }}"
-    - ip_address: "{{ border_gateways[1].ip }}"
-    - ip_address: "{{ border_gateways[2].ip }}"
-    - ip_address: "{{ border_gateways[3].ip }}"
+  msd_v1:
+    name: msd_v1
+    fabric: "{{ msd_fabrics.MSD.name }}"
+    vrf_name: v1
+    vrf_id: 63031
+    vlan_id: 3031
+    vrf_template: Default_VRF_Universal
+    vrf_extension_template: Default_VRF_Extension_Universal
+    service_vrf_template: null
+    attach:
+    - ip_address: "{{ devices.leaf_1.ip }}"
+    - ip_address: "{{ devices.leaf_2.ip }}"
+    - ip_address: "{{ devices.leaf_3.ip }}"
+    - ip_address: "{{ devices.leaf_4.ip }}"
+    - ip_address: "{{ devices.leaf_5.ip }}"
+    - ip_address: "{{ devices.leaf_6.ip }}"
+    - ip_address: "{{ devices.leaf_7.ip }}"
+    - ip_address: "{{ devices.leaf_8.ip }}"
+    - ip_address: "{{ devices.border_gateway_1.ip }}"
+    - ip_address: "{{ devices.border_gateway_2.ip }}"
+    - ip_address: "{{ devices.border_gateway_3.ip }}"
+    - ip_address: "{{ devices.border_gateway_4.ip }}"
+
+  msd_v2:
+    name: msd_v2
+    fabric: "{{ msd_fabrics.MSD.name }}"
+    vrf_name: v2
+    vrf_id: 63032
+    vlan_id: 3032
+    vrf_template: Default_VRF_Universal
+    vrf_extension_template: Default_VRF_Extension_Universal
+    service_vrf_template: null
+    attach:
+    - ip_address: "{{ devices.leaf_1.ip }}"
+    - ip_address: "{{ devices.leaf_2.ip }}"
+    - ip_address: "{{ devices.leaf_3.ip }}"
+    - ip_address: "{{ devices.leaf_4.ip }}"
+    - ip_address: "{{ devices.leaf_5.ip }}"
+    - ip_address: "{{ devices.leaf_6.ip }}"
+    - ip_address: "{{ devices.leaf_7.ip }}"
+    - ip_address: "{{ devices.leaf_8.ip }}"
+    - ip_address: "{{ devices.border_gateway_1.ip }}"
+    - ip_address: "{{ devices.border_gateway_2.ip }}"
+    - ip_address: "{{ devices.border_gateway_3.ip }}"
+    - ip_address: "{{ devices.border_gateway_4.ip }}"
 
 # VPC Peers
 vpc_peers:
-- fabric: "{{ fabrics[0].name }}"
-  vpc_name: "vpc1"
-  peer_1_ip: "{{ leafs[0].ip }}"
-  peer_2_ip: "{{ leafs[1].ip }}"
-- fabric: "{{ fabrics[0].name }}"
-  vpc_name: "vpc2"
-  peer_1_ip: "{{ leafs[2].ip }}"
-  peer_2_ip: "{{ leafs[3].ip }}"
-
-- fabric: "{{ fabrics[1].name }}"
-  vpc_name: "vpc1"
-  peer_1_ip: "{{ leafs[4].ip }}"
-  peer_2_ip: "{{ leafs[5].ip }}"
-- fabric: "{{ fabrics[1].name }}"
-  vpc_name: "vpc2"
-  peer_1_ip: "{{ leafs[6].ip }}"
-  peer_2_ip: "{{ leafs[7].ip }}"
+  vpc1:
+    fabric: "{{ switch_fabrics.f1.name }}"
+    vpc_name: "vpc1"
+    peer_1_ip: "{{ devices.leaf_1.ip }}"
+    peer_2_ip: "{{ devices.leaf_2.ip }}"
+  vpc2:
+    fabric: "{{ switch_fabrics.f1.name }}"
+    vpc_name: "vpc2"
+    peer_1_ip: "{{ devices.leaf_3.ip }}"
+    peer_2_ip: "{{ devices.leaf_4.ip }}"
+  vpc3:
+    fabric: "{{ switch_fabrics.f2.name }}"
+    vpc_name: "vpc3"
+    peer_1_ip: "{{ devices.leaf_5.ip }}"
+    peer_2_ip: "{{ devices.leaf_6.ip }}"
+  vpc4:
+    fabric: "{{ switch_fabrics.f2.name }}"
+    vpc_name: "vpc4"
+    peer_1_ip: "{{ devices.leaf_7.ip }}"
+    peer_2_ip: "{{ devices.leaf_8.ip }}"
 
 # VPC Interfaces
 vpc_interfaces:
-- fabric: "{{ fabrics[0].name }}"
-  vpc_name: vpc1
-  vpc_port_id: vpi11
-  interface_mode: trunk
-  mtu: jumbo
-  port_type_fast: true
-  bpdu_guard: true 
-  port_channel_mode: active 
-  peer1_allowed_vlans: 1111
-  peer2_allowed_vlans: 1111
-  member_list:
-  - Ethernet1/11
+  vpci_1111:
+    fabric: "{{ switch_fabrics.f1.name }}"
+    vpc_name: vpc1
+    vpc_port_id: vpi11
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true 
+    port_channel_mode: active 
+    peer1_allowed_vlans: 1111
+    peer2_allowed_vlans: 1111
+    member_list:
+    - Ethernet1/11
 
-- fabric: "{{ fabrics[0].name}}"
-  vpc_name: vpc2
-  vpc_port_id: vpi11
-  interface_mode: trunk
-  mtu: jumbo
-  port_type_fast: true
-  bpdu_guard: true
-  port_channel_mode: active
-  peer1_allowed_vlans: 1111
-  peer2_allowed_vlans: 1111
-  member_list:
-  - Ethernet1/11
+  vpci_1112:
+    fabric: "{{ switch_fabrics.f1.name }}"
+    vpc_name: vpc1
+    vpc_port_id: vpi12
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1112
+    peer2_allowed_vlans: 1112
+    member_list:
+    - Ethernet1/12
 
-- fabric: "{{ fabrics[0].name }}"
-  vpc_name: vpc1
-  vpc_port_id: vpi12
-  interface_mode: trunk
-  mtu: jumbo
-  port_type_fast: true
-  bpdu_guard: true
-  port_channel_mode: active
-  peer1_allowed_vlans: 1112
-  peer2_allowed_vlans: 1112
-  member_list:
-  - Ethernet1/12
+  vpci_1211:
+    fabric: "{{ switch_fabrics.f1.name }}"
+    vpc_name: vpc2
+    vpc_port_id: vpi11
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1111
+    peer2_allowed_vlans: 1111
+    member_list:
+    - Ethernet1/11
 
-- fabric: "{{ fabrics[0].name }}"
-  vpc_name: vpc2
-  vpc_port_id: vpi12
-  interface_mode: trunk
-  mtu: jumbo
-  port_type_fast: true
-  bpdu_guard: true
-  port_channel_mode: active
-  peer1_allowed_vlans: 1112
-  peer2_allowed_vlans: 1112
-  member_list:
-  - Ethernet1/12
+  vpci_1212:
+    fabric: "{{ switch_fabrics.f1.name }}"
+    vpc_name: vpc2
+    vpc_port_id: vpi12
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1112
+    peer2_allowed_vlans: 1112
+    member_list:
+    - Ethernet1/12
 
 # f2
-- fabric: "{{ fabrics[1].name }}"
-  vpc_name: vpc1
-  vpc_port_id: vpi11
-  interface_mode: trunk
-  mtu: jumbo
-  port_type_fast: true
-  bpdu_guard: true
-  port_channel_mode: active
-  peer1_allowed_vlans: 1111
-  peer2_allowed_vlans: 1111
-  member_list:
-  - Ethernet1/11
+  vpci_2111:
+    fabric: "{{ switch_fabrics.f2.name }}"
+    vpc_name: vpc3
+    vpc_port_id: vpi11
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1111
+    peer2_allowed_vlans: 1111
+    member_list:
+    - Ethernet1/11
 
-- fabric: "{{ fabrics[1].name }}"
-  vpc_name: vpc2
-  vpc_port_id: vpi11
-  interface_mode: trunk
-  mtu: jumbo
-  port_type_fast: true
-  bpdu_guard: true
-  port_channel_mode: active
-  peer1_allowed_vlans: 1111
-  peer2_allowed_vlans: 1111
-  member_list:
-  - Ethernet1/11
+  vpci_2112:
+    fabric: "{{ switch_fabrics.f2.name }}"
+    vpc_name: vpc3
+    vpc_port_id: vpi12
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1112
+    peer2_allowed_vlans: 1112
+    member_list:
+    - Ethernet1/12
 
-- fabric: "{{ fabrics[1].name }}"
-  vpc_name: vpc1
-  vpc_port_id: vpi12
-  interface_mode: trunk
-  mtu: jumbo
-  port_type_fast: true
-  bpdu_guard: true
-  port_channel_mode: active
-  peer1_allowed_vlans: 1112
-  peer2_allowed_vlans: 1112
-  member_list:
-  - Ethernet1/12
+  vpci_2211:
+    fabric: "{{ switch_fabrics.f2.name }}"
+    vpc_name: vpc4
+    vpc_port_id: vpi11
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1111
+    peer2_allowed_vlans: 1111
+    member_list:
+    - Ethernet1/11
 
-- fabric: "{{ fabrics[1].name }}"
-  vpc_name: vpc2
-  vpc_port_id: vpi12
-  interface_mode: trunk
-  mtu: jumbo
-  port_type_fast: true
-  bpdu_guard: true
-  port_channel_mode: active
-  peer1_allowed_vlans: 1112
-  peer2_allowed_vlans: 1112
-  member_list:
-  - Ethernet1/12
+  vpci_2212:
+    fabric: "{{ switch_fabrics.f2.name }}"
+    vpc_name: vpc4
+    vpc_port_id: vpi12
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1112
+    peer2_allowed_vlans: 1112
+    member_list:
+    - Ethernet1/12
 
 service_nodes:
-- service_node_name: "sn_1"
-  external_fabric_name: "{{ external_fabrics[0].name }}"
-  # NOTE, service_node_type values are different between Ansible module
-  # dcnm_service_node and the REST API.  Since ndfc-roles offers roles
-  # based on both, you need to ensure that you're using the correct
-  # service_node_type values, per below (these are case-sensitive):
-  # REST: "Firewall" "ADC" "VNF" 
-  # dcnm_service_node: firewall, load_balancer, virtual_network_function
-  service_node_type: "firewall"
-  service_node_form_factor: "Virtual"
-  service_node_peer_name: "foo"
-  service_node_interface_name: "Ethernet1/1"
-  attached_fabric_name: "{{ fabrics[0].name }}"
-  attached_switch_name: "leaf_1"
-  attached_switch_interface_name: "Ethernet1/1"
-  vpc_switches_attached: false
-  link_template_name: "service_link_trunk"
-  interface_speed: "Auto"
-  interface_mtu: "jumbo"
-  interface_allowed_vlans: "all"
-  interface_bpduguard_enabled: true
-  interface_porttype_fast_enabled: true
-  interface_admin_state: true
+  sn_1:
+    service_node_name: "sn_1"
+    external_fabric_name: "{{ external_fabrics.sn_fabric_1.name }}"
+    # NOTE, service_node_type values are different between Ansible module
+    # dcnm_service_node and the REST API.  Since ndfc-roles offers roles
+    # based on both, you need to ensure that you're using the correct
+    # service_node_type values, per below (these are case-sensitive):
+    # REST: "Firewall" "ADC" "VNF" 
+    # dcnm_service_node: firewall, load_balancer, virtual_network_function
+    service_node_type: "firewall" # dcnm_service_node
+    # service_node_type: "Firewall" # REST
+    service_node_form_factor: "Virtual"
+    service_node_peer_name: "foo"
+    service_node_interface_name: "Ethernet1/1"
+    attached_fabric_name: "{{ switch_fabrics.f1.name }}"
+    attached_switch_name: "leaf_1"
+    attached_switch_interface_name: "Ethernet1/1"
+    vpc_switches_attached: false
+    link_template_name: "service_link_trunk"
+    interface_speed: "Auto"
+    interface_mtu: "jumbo"
+    interface_allowed_vlans: "all"
+    interface_bpduguard_enabled: true
+    interface_porttype_fast_enabled: true
+    interface_admin_state: true
 
-- service_node_name: "sn_2"
-  external_fabric_name: "{{ external_fabrics[1].name }}"
-  # see note for service_node_type above
-  service_node_type: "firewall"
-  service_node_form_factor: "Virtual"
-  service_node_peer_name: "bar"
-  service_node_interface_name: "Ethernet1/1"
-  attached_fabric_name: "{{ fabrics[0].name }}"
-  attached_switch_name: "leaf_2"
-  attached_switch_interface_name: "Ethernet1/1"
-  vpc_switches_attached: false
-  link_template_name: "service_link_trunk"
-  interface_speed: "Auto"
-  interface_mtu: "jumbo"
-  interface_allowed_vlans: "all"
-  interface_bpduguard_enabled: true
-  interface_porttype_fast_enabled: true
-  interface_admin_state: true
+  sn_2:
+    service_node_name: "sn_2"
+    external_fabric_name: "{{ external_fabrics.sn_fabric_2.name }}"
+    # see note for service_node_type above
+    service_node_type: "firewall"
+    service_node_form_factor: "Virtual"
+    service_node_peer_name: "bar"
+    service_node_interface_name: "Ethernet1/1"
+    attached_fabric_name: "{{ switch_fabrics.f1.name }}"
+    attached_switch_name: "leaf_2"
+    attached_switch_interface_name: "Ethernet1/1"
+    vpc_switches_attached: false
+    link_template_name: "service_link_trunk"
+    interface_speed: "Auto"
+    interface_mtu: "jumbo"
+    interface_allowed_vlans: "all"
+    interface_bpduguard_enabled: true
+    interface_porttype_fast_enabled: true
+    interface_admin_state: true
 
-- service_node_name: "sn_3"
-  external_fabric_name: "{{ external_fabrics[2].name }}"
-  service_node_type: "Firewall"
-  service_node_form_factor: "Virtual"
-  service_node_peer_name: "foobar"
-  service_node_interface_name: "Ethernet1/1"
-  attached_fabric_name: "{{ fabrics[1].name }}"
-  attached_switch_name: "leaf_1"
-  attached_switch_interface_name: "Ethernet1/1"
-  vpc_switches_attached: false
-  link_template_name: "service_link_trunk"
-  interface_speed: "Auto"
-  interface_mtu: "jumbo"
-  interface_allowed_vlans: "all"
-  interface_bpduguard_enabled: true
-  interface_porttype_fast_enabled: true
-  interface_admin_state: true
+  sn_3:
+    service_node_name: "sn_3"
+    external_fabric_name: "{{ external_fabrics.sn_fabric_3.name }}"
+    service_node_type: "Firewall"
+    service_node_form_factor: "Virtual"
+    service_node_peer_name: "foobar"
+    service_node_interface_name: "Ethernet1/1"
+    attached_fabric_name: "{{ switch_fabrics.f2.name }}"
+    attached_switch_name: "leaf_1"
+    attached_switch_interface_name: "Ethernet1/1"
+    vpc_switches_attached: false
+    link_template_name: "service_link_trunk"
+    interface_speed: "Auto"
+    interface_mtu: "jumbo"
+    interface_allowed_vlans: "all"
+    interface_bpduguard_enabled: true
+    interface_porttype_fast_enabled: true
+    interface_admin_state: true
+
+service_route_peerings:
+  srp_1:
+    state: merged
+    fabric: "{{ switch_fabrics.f1.name }}"
+    foo: "{{ switch_fabrics.f2.name}}"
+    service_fabric: "{{ external_fabrics.sn_fabric_2.name }}"
+    attach: true
+    deploy: true
+    config:
+      - name: IT-FW-RP1                                  # mandatory
+        node_name: sn_2                                  # mandatory
+        deploy_mode: intra_tenant_fw                     # mandatory, choices=[intra_tenant_fw, inter_tenant_fw]
+        inside_network:                                  #
+          vrf: v1                                 # mandatory
+          name: rp1-sn1-inside-net                       # mandatory
+          vlan_id: 1111                                   # optional
+          profile:
+            ipv4_gw: 10.21.1.1/24                       # mandatory
+            #ipv6_gw: 2001:db01::1/64                     # optional, default is ''
+            #vlan_name: rp1-sn1-inside                    # optional, default is ''
+            int_descr: "RP1 SN1 inside interface"        # optional, default is ''
+            tag: 12345                                   # optional, default is 12345
+        next_hop: 10.21.1.100                            # mandatory
+        outside_network:                                 #
+          vrf: v1                                        # mandatory
+          name: rp1-sn1-outside-net                      # mandatory
+          vlan_id: 1112                                   # optional
+          profile:
+            ipv4_gw: 10.22.1.1/24                      # mandatory
+            #ipv6_gw: 2001:db02::1/64                     # optional, default is ''
+            #vlan_name: rp1-sn1-outside                   # optional, default is ''
+            int_descr: "RP1 SN1 outside interface"       # optionL, default is ''
+            tag: 12345                                   # optional, default is 12345
+        reverse_next_hop: 10.22.1.100                    # optional, default is ''

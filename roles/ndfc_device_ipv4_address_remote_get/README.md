@@ -1,6 +1,6 @@
 # ndfc_device_ipv4_address_remote_get
 
-Return device's ipv4 address, given ``device_name`` and fabric ``fabric_name``.
+Return device's ipv4 address, given ``device_name``.
 
 The device's ipv4 address is returned in the variable ``device_ipv4_address``.
 
@@ -15,9 +15,8 @@ SEE ALSO: ``ndfc_device_ipv4_address_local_get``
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 device_name     | str() | The device to be queried
-fabric_name     | str() | The fabric in which device_name resides
 
-Device and Fabric names are defined in the following file:
+Device names are defined in the following file:
 
 ``./roles/ndfc_common/vars/main.yml``)
 
@@ -36,7 +35,6 @@ See the following for details:
   roles:
     - ndfc_device_ipv4_address_remote_get
   vars:
-    fabric_name: f2
     device_name: leaf_1
   tasks:
   - block:

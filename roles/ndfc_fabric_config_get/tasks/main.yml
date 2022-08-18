@@ -1,0 +1,11 @@
+# roles/ndfc_fabric_config_get/tasks/main.yml
+---
+- name: set_fact all_fabrics
+  ansible.builtin.set_fact:
+     all_fabrics: "{{ msd_fabrics | combine(switch_fabrics, external_fabrics) }}"
+
+- name: set_fact fabric_config {{ fabric_name }}
+  ansible.builtin.set_fact:
+     fabric_config: "{{ all_fabrics | json_query(mq1) }}"
+  vars:
+    mq1: "{{ fabric_name }}"
