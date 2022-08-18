@@ -31,7 +31,7 @@ ndfc_rest_config_deploy_all
 ndfc_device_merged
 ndfc_rest_fabric_switch_create
 ndfc_network_replaced_all
-ndfc_policy_vrf_rt_import_loop
+ndfc_policy_vrf_rt_import_evpn_loop
 ndfc_rest_vpc_create
 ndfc_vpc_interface_merged_all
 ```
@@ -244,8 +244,6 @@ Role                           | Description
 *[ndfc_policy_query_interface_all] | Query and display interface config on all devices in a fabric, given ``fabric_name``, ``interface_name``
 [ndfc_policy_vrf_rt_import_evpn] | Import a vrf's route-targets into another vrf on a single device, given ``fabric_name``, ``device_name``
 [ndfc_policy_vrf_rt_import_evpn_loop] | Import a vrf's route-targets into another vrf on a list of devices in a fabric, given ``fabric_name``, and a list of ``device_name``
-[ndfc_policy_vrf_rt_import] | DEPRECATED Import a vrf's route-targets into another vrf on a single device, given ``fabric_name``, ``device_name``
-[ndfc_policy_vrf_rt_import_loop] | DEPRECATED Import a vrf's route-targets into another vrf on a list of devices in a fabric, given ``fabric_name``, and a list of ``device_name``
 [ndfc_rest_config_deploy] | NDFC REST API POST calls to config-save and config-deploy for a device, given ``fabric_name``, ``device_name``
 [ndfc_rest_config_deploy_all] | NDFC REST API POST calls to config-save and config-deploy for a fabric, given ``fabric_name``
 [ndfc_rest_device_list_by_fabric] | Retrieve list of devices in fabric, given ``fabric_name``
@@ -296,8 +294,6 @@ Role                           | Description
 [ndfc_policy_query_interface_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_query_interface_all
 [ndfc_policy_vrf_rt_import_evpn]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_vrf_rt_import_evpn
 [ndfc_policy_vrf_rt_import_evpn_loop]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_vrf_rt_import_evpn_loop
-[ndfc_policy_vrf_rt_import]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_vrf_rt_import
-[ndfc_policy_vrf_rt_import_loop]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_vrf_rt_import_loop
 [ndfc_rest_config_deploy]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_config_deploy
 [ndfc_rest_config_deploy_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_config_deploy_all
 [ndfc_rest_device_set_role]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_device_set_role
