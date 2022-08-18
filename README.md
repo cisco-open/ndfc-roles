@@ -228,6 +228,7 @@ Role                           | Description
 [ndfc_device_deleted] | Delete a device from a fabric, given ``device_name``
 [ndfc_device_deleted_all] | Delete all devices in a fabric, given ``fabric_name``
 [ndfc_device_generated_configs_get] | Retrieve device generated configs, given ``device_name``
+[ndfc_device_info_get] | Query device on the NDFC controller, given ``device_name``
 [ndfc_device_ipv4_address_local_get] | Retrieve device ipv4 address from local vars, given ``fabric_name``, ``device_name``
 [ndfc_device_ipv4_address_remote_get] | Retrieve device ipv4 address from NDFC controller, given ``fabric_name``, ``device_name``
 [ndfc_device_merged] | Merge a device into the topology, given ``device_name``
@@ -279,6 +280,7 @@ Role                           | Description
 [ndfc_device_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_deleted
 [ndfc_device_deleted_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_deleted_all
 [ndfc_device_generated_configs_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_generated_configs_get
+[ndfc_device_info_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_info_get
 [ndfc_device_ipv4_address_local_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_ipv4_address_local_get
 [ndfc_device_ipv4_address_remote_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_ipv4_address_remote_get
 [ndfc_device_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_merged

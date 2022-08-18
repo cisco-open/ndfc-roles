@@ -1,6 +1,6 @@
 # ndfc_device_info_get
 
-Query device ``device_name`` in fabric ``fabric_name`` and return ``device_info`` dictionary
+Query device ``device_name`` on the NDFC controller
 
 A ``device_info`` dictionary is returned, as described below.
 
@@ -9,7 +9,6 @@ A ``device_info`` dictionary is returned, as described below.
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 device_name     | str() | The device to be queried
-fabric_name     | str() | The fabric in which device_name resides
 
 Device and Fabric names are defined in the following file:
 
@@ -30,7 +29,6 @@ See the following for details:
   roles:
     - ndfc_device_info_get
   vars:
-    fabric_name: f2
     device_name: leaf_1
   tasks:
   - block:
