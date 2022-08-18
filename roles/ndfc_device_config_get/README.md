@@ -1,15 +1,14 @@
-# ndfc_device_deleted
+# ndfc_device_config_get
 
-Delete device ``device_name`` from fabric ``fabric_name`` using ``cisco.dcnm.dcnm_inventory``
+Retrieve local configuration for ``device_name``
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 device_name     | str() | The device to be deleted
-fabric_name     | str() | The fabric in which device_name resides
 
-Device and fabric names are defined in the following file:
+Device names are defined in the following file:
 
 ``./roles/ndfc_common/vars/main.yml``)
 
@@ -25,9 +24,8 @@ See the following for details:
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_device_deleted
+    - ndfc_device_config_get
   vars:
-    fabric_name: f1
     device_name: spine_1
 ```
 

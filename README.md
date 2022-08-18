@@ -224,12 +224,13 @@ Role naming conventions used in this repo.
 Role                           | Description
 ------------                   | -----------
 [ndfc_common]       | Common variables used by all other Roles
+[ndfc_device_config_get] | Retrieve local configuration for device, given ``device_name``
 [ndfc_device_deleted] | Delete a device from a fabric, given ``device_name``
 [ndfc_device_deleted_all] | Delete all devices in a fabric, given ``fabric_name``
 [ndfc_device_generated_configs_get] | Retrieve device generated configs given ``fabric_name``, ``device_name``
 [ndfc_device_ipv4_address_local_get] | Retrieve device ipv4 address from local vars, given ``fabric_name``, ``device_name``
 [ndfc_device_ipv4_address_remote_get] | Retrieve device ipv4 address from NDFC controller, given ``fabric_name``, ``device_name``
-[ndfc_device_merged] | Merge a device into a fabric, given ``fabric_name``, ``device_name``
+[ndfc_device_merged] | Merge a device into the topology, given ``device_name``
 [ndfc_device_merged_all] | Merge all devices into a fabric, given ``fabric_name``
 [ndfc_device_model_number_get] | Retrieve device model number ``device_model_number``, given ``fabric_name``, ``device_name``
 [ndfc_device_query] | Query a device, given ``fabric_name``, ``device_name``
@@ -274,6 +275,7 @@ Role                           | Description
 \* The Roles marked with ``*`` are examples showing how one can use cisco.dcnm.dcnm_query to glean various information from devices.  These are not used within any of the other Roles.
 
 [ndfc_common]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common
+[ndfc_device_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_config_get
 [ndfc_device_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_deleted
 [ndfc_device_deleted_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_deleted_all
 [ndfc_device_generated_configs_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_generated_configs_get
