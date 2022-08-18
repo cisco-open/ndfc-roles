@@ -1,6 +1,6 @@
 # ndfc_device_ipv4_address_remote_get
 
-Return device's ipv4 address, given ``device_name``.
+Query the NDFC controller for device's ipv4 address, given ``device_name``.
 
 The device's ipv4 address is returned in the variable ``device_ipv4_address``.
 
