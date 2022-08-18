@@ -8,10 +8,9 @@ Store in variable ``device_generated_configs``
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-device_name     | str() | The device in ``fabric_name`` to query
-fabric_name     | str() | The fabric in which ``device_name`` resides
+device_name     | str() | The device to query
 
-Fabric and device parameters are defined in the following file:
+Device parameters are defined in the following file:
 
 ``./roles/ndfc_common/vars/main.yml``
 
@@ -29,7 +28,6 @@ See the following for details:
   roles:
     - ndfc_device_generated_configs_get
   vars:
-    fabric_name: f1
     device_name: leaf_1
   tasks:
   - block:
