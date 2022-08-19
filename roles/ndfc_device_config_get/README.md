@@ -6,7 +6,7 @@ Retrieve local configuration for ``device_name``
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-device_name     | str() | The device to be deleted
+device_name     | str() | The device for which local configuration information is retrieved
 
 Device names are defined in the following file:
 

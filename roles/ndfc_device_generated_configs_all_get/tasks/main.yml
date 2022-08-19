@@ -1,6 +1,6 @@
 # ndfc_device_generated_configs_all_get/main.yml
 ---
-- name: main query generated config
+- name: main query generated configs
   include_tasks: worker.yml
   loop: "{{ lookup('ansible.builtin.dict', devices) }}"
   when: "fabric_name in device.value.switch_fabric"
