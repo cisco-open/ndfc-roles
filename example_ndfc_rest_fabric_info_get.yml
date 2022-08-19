@@ -1,0 +1,14 @@
+# example_ndfc_rest_fabric_info_get.yml
+# Query NDFC controller for fabric_info
+
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_info_get
+  vars:
+    fabric_name: MSD
+  tasks:
+  - block:
+    - name: debug fabric_info
+      debug:
+        var: fabric_info
