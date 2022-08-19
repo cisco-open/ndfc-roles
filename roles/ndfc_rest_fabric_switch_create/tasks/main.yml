@@ -7,17 +7,6 @@
 - ansible.builtin.include_role:
     name: ndfc_rest_fabric_active_fabrics_get
 
-# - name: set_fact BGP_AS
-#   ansible.builtin.set_fact:
-#     BGP_AS: "{{ all_fabrics.values() | list | json_query(mq1) }}"
-#     # BGP_AS: "{{ all_fabrics.values() | list }}"
-#   vars:
-#     mq1: "[?name == '{{ fabric_name }}'].BGP_AS | [0]"
-
-# - name: debug BGP_AS
-#   debug:
-#     var: BGP_AS
-
 - name: main set_fact FABRIC {{ fabric_name }}
   set_fact:
      BGP_AS: "{{ all_fabrics.values() | list | json_query(mq1) }}"
