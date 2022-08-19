@@ -257,6 +257,7 @@ Role                           | Description
 [ndfc_rest_fabric_switch_create] | Create a switch fabric, given ``fabric_name``
 [ndfc_rest_fabric_delete] | Delete a fabric, given ``fabric_name``
 [ndfc_rest_fabric_external_create] | Create an external fabric, given ``fabric_name``
+[ndfc_rest_fabric_info_get] | Retrieve a fabric's information from the NDFC controller, given ``fabric_name``
 [ndfc_rest_fabric_msd_child_add] | Add a child fabric to an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_child_remove] | Remove a child fabric from an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_create] | Create a multi-side domain fabric, given ``msd_fabric``
@@ -309,6 +310,7 @@ Role                           | Description
 [ndfc_rest_fabric_switch_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_switch_create
 [ndfc_rest_fabric_delete]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_delete
 [ndfc_rest_fabric_external_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_external_create
+[ndfc_rest_fabric_info_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_info_get
 [ndfc_rest_fabric_msd_child_add]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_add
 [ndfc_rest_fabric_msd_child_remove]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_remove
 [ndfc_rest_fabric_msd_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_create
