@@ -15,6 +15,7 @@
       max_hops: "{{ max_hops }}"
       role: "{{ device_config.role }}"
       preserve_config: "{{ preserve_config }}"
+  ansible_connection: httpapi
 
 - ansible.builtin.include_role:
     name: ndfc_rest_config_deploy
