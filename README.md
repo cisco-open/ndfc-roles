@@ -236,6 +236,7 @@ Role                           | Description
 [ndfc_device_model_number_get] | Retrieve device model number ``device_model_number``, given ``device_name``
 [ndfc_device_serial_number_get] | Retrieve device serial number ``device_serial_number``, given ``fabric_name``, ``device_name``
 [ndfc_fabric_config_get] | Retrieve local configuration for fabric, given ``fabric_name``
+[ndfc_network_config_get] | Retrieve local configuration for network, given ``network_name``
 [ndfc_network_deleted] | Delete a network, given ``fabric_name``, ``network_name``
 [ndfc_network_deleted_all] | Delete all networks within a fabric, given ``fabric_name``
 [ndfc_network_info_get] | Retrieve ``network_info`` dictionary, given ``fabric_name``, ``network_name``
@@ -288,6 +289,7 @@ Role                           | Description
 [ndfc_device_model_number_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_model_number_get
 [ndfc_device_serial_number_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_serial_number_get
 [ndfc_fabric_config_get]:  https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_fabric_config_get
+[ndfc_network_config_get]:  https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_config_get
 [ndfc_network_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_deleted
 [ndfc_network_deleted_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_deleted_all
 [ndfc_network_info_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_info_get
