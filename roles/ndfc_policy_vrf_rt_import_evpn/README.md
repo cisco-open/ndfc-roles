@@ -1,20 +1,17 @@
 # ndfc_policy_vrf_rt_import_evpn
 
-Import vrf ``import_vrf_name``'s route-targets into vrf ``vrf_name`` on device ``device_name`` in fabric ``fabric_name`` using Ansible state ``state``
-
-NOTE: This role will fail the first time it's run, but is written to retry and will succeed on the second retry.  This is offered as a hack until the DCNM Ansible Collection provides a way to configure route-target import/export within the dcnm_vrf module (or some other yet-to-be-created module).
+Import vrf ``import_vrf_name``'s route-targets into vrf ``vrf_name`` on device ``device_name`` using Ansible state ``state``
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 device_name     | str() | The device to which vrf ``vrf_name`` is attached
-fabric_name     | str() | The fabric in which ``device_name`` resides.  NOTE: if ``device_name`` resides in a child fabric of an MSD fabric, then ``fabric_name`` must be the name of the MSD fabric. 
 vrf_name        | str() | The vrf into which ``import_vrf_name``'s route-targets will be imports
 import_vrf_name | str() | The vrf whose route-targets will be imported into ``vrf_name``
 state           | str() | The Ansible state to apply for the import. e.g. ``deleted`` to delete the import, ``merged`` to merge the import.  NOTE: ``replaced`` is not a valid state for this module.
 
-Fabric, device, and vrf names are are defined in the following file:
+Device and vrf names are are defined in the following file:
 
 ``./roles/ndfc_common/vars/main.yml``
 

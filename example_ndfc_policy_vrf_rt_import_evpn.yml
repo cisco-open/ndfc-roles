@@ -7,7 +7,6 @@
   roles:
     - ndfc_policy_vrf_rt_import_evpn
   vars:
-    fabric_name: f1
     device_name: leaf_1
     vrf_name: v1
     import_vrf_name: v2
