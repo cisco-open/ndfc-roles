@@ -8,14 +8,14 @@
   ansible.builtin.set_fact:
      all_fabrics: "{{ msd_fabrics | combine(switch_fabrics, external_fabrics) }}"
 
-- name: worker {{ state }} FABRIC {{ fabric_name }} ITEM {{ item }} VRF.VLAN.ASN.INDEX {{ vrf_name }}.{{ vrf_vlan_id }}.{{ import_vrf_asn }}.{{ vrf_index }} import VRF.ASN:INDEX {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}
+- name: worker {{ state }} FABRIC {{ device_config.switch_fabric }} DEVICE {{ item }} VRF.VLAN.ASN.INDEX {{ vrf_name }}.{{ vrf_vlan_id }}.{{ import_vrf_asn }}.{{ vrf_index }} import VRF.ASN:INDEX {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}
   retries: 3
   register: result
   until: result is not failed
   cisco.dcnm.dcnm_policy:
     state: "{{ state }}"
     deploy: true
-    fabric: "{{ fabric_name }}"
+    fabric: "{{ device_config.switch_fabric }}"
     config:
       - name: Default_VRF_Universal
         create_additional_policy: false
@@ -31,16 +31,17 @@
         - ip: "{{ device_config.ip }}"
   vars:
     ansible_connection: httpapi
-    wq1: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ import_vrf_name }}'].vrf_id | [0]"
-    wq2: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ vrf_name }}'].vlan_id | [0]"
-    wq3: "[?fabric == '{{ fabric_name }}'] | [?vrf_name == '{{ vrf_name }}'].vrf_id | [0]"
-    wq4: "[?name == '{{ fabric_name }}'].BGP_AS | [0]"
-    wq5: "[?name == '{{ item }}'] | [?fabric == '{{ fabric_name }}']"
+    wq1: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ import_vrf_name }}'].vrf_id | [0]"
+    wq2: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ vrf_name }}'].vlan_id | [0]"
+    wq3: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ vrf_name }}'].vrf_id | [0]"
+    wq4: "[?name == '{{ device_config.switch_fabric }}'].BGP_AS | [0]"
     import_vrf_index: "{{ vrfs.values() | list | json_query(wq1) }}"
     vrf_vlan_id: "{{ vrfs.values() | list | json_query(wq2) }}"
     vrf_index: "{{ vrfs.values() | list | json_query(wq3) }}"
     import_vrf_asn: "{{ all_fabrics.values() | list | json_query(wq4) }}"
 - ansible.builtin.include_role:
-    name: ndfc_rest_config_deploy_all
+    name: ndfc_rest_config_deploy
   vars:
     ansible_connection: httpapi
+    fabric_name: "{{ device_config.switch_fabric }}"
+    device_name: "{{ device_config.name }}"
