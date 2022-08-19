@@ -2,7 +2,7 @@
 
 Retrieve list of devices in fabric ``fabric_name``
 
-Returns JSON object ``info`` which will be a list of switch dictionaries
+Returns JSON object ``switch_list`` which will be a list of switch dictionaries
 if the GET request succeeded, or an empty list if the GET request failed.
 
 ### Role Variables
@@ -27,7 +27,7 @@ The playbook below prints select information for every switch in fabric f2.
   tasks:
       - debug:
           msg: "ipAddress: {{ item.ipAddress }} logicalName: {{ item.logicalName }} model {{ item.model }} release {{ item.release }} serialNumber {{ item.serialNumber }}"
-        loop: "{{ info | json_query(q1) }}"
+        loop: "{{ switch_list | json_query(q1) }}"
         vars:
           q1: "[*].{ ipAddress: ipAddress, model: model, release: release, logicalName: logicalName serialNumber: serialNumber }"
         loop_control:

@@ -9,13 +9,13 @@
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/inventory/switchesByFabric"
   register: mr1
   ignore_errors: true
-- name: main set_fact info SUCCESS
+- name: main set_fact switch_list SUCCESS
   set_fact:
-     info: "{{ mr1.response.DATA }}"
+     switch_list: "{{ mr1.response.DATA }}"
   when:
     mr1 is succeeded
-- name: main set_fact info FAILED
+- name: main set_fact switch_list FAILED
   set_fact:
-     info: "{{ [] | to_json }}"
+     switch_list: "{{ [] | to_json }}"
   when:
     mr1 is failed
