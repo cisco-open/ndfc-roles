@@ -28,6 +28,20 @@ See the following for details:
 
 [./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
 
+### Default Variables
+
+Defaults for the following are in ``./roles/ndfc_rest_service_node_add/defaults/main.yml``:
+
+Variable                        | Type   | Description
+--------------------------------|--------|----------------------------------------
+link_template_name              | str()  | Default: service_link_trunk
+vpc_switches_attached           | bool() | Default: false
+interface_speed                 | str()  | Default: Auto
+interface_mtu                   | str()  | Default: jumbo
+interface_allowed_vlans         | str()  | Default: all
+interface_bpduguard_enabled     | bool() | Default: true
+interface_porttype_fast_enabled | bool() | Default: true
+interface_admin_state           | bool() | true
 
 ### Example Playbook
 
