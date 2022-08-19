@@ -16,6 +16,14 @@ See the following for details:
 
 [./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
 
+### Default Variables
+
+Defaults for the following are in ``./roles/ndfc_rest_fabric_external_create/defaults/main.yml``:
+
+Variable              | Type   | Description
+----------------------|--------|----------------------------------------
+greenfield_debug_flag | str()  | Default: enable
+IS_READ_ONLY          | bool() | Default: false
 
 ### Example Playbook
 

@@ -51,6 +51,7 @@
         CLOUDSEC_ALGORITHM: ""
         CLOUDSEC_ENFORCEMENT: ""
         CLOUDSEC_REPORT_TIMER: ""
+        IS_READ_ONLY: "{{ IS_READ_ONLY }}"
         MS_IFC_BGP_PASSWORD_ENABLE: false
         MS_IFC_BGP_PASSWORD: ""
         MS_IFC_BGP_AUTH_KEY_TYPE: ""
