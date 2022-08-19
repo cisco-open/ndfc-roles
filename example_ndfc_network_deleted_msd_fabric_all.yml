@@ -1,8 +1,0 @@
-# example_ndfc_network_deleted_msd_fabric_all.yml
----
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_network_deleted_msd_fabric_all
-  vars:
-    fabric_name: MSD
