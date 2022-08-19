@@ -1,6 +1,6 @@
 # ndfc_rest_device_list_by_fabric/tasks/main.yml
 #
-# Return JSON object 'info' which will be a list of switch dictionaries
+# Return JSON object 'switch_list' which will be a list of switch dictionaries
 # if the GET request is successful, or an empty list if the GET request fails
 ---
 - name: main REST GET FABRIC {{ fabric_name }} switchesByFabric
