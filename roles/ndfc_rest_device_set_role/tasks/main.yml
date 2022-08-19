@@ -24,5 +24,4 @@
     name: ndfc_rest_config_deploy
   vars:
     device_name: "{{ device_config.name }}"
-    fabric_name: "{{ device_config.switch_fabric }}"
   when: "device_serial_number != ''"

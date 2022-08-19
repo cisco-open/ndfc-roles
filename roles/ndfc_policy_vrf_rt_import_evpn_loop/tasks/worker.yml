@@ -43,5 +43,4 @@
     name: ndfc_rest_config_deploy
   vars:
     ansible_connection: httpapi
-    fabric_name: "{{ device_config.switch_fabric }}"
     device_name: "{{ device_config.name }}"

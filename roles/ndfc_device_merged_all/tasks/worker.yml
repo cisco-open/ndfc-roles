@@ -18,5 +18,4 @@
 - ansible.builtin.include_role:
     name: ndfc_rest_config_deploy
   vars:
-    fabric: "{{ device.value.switch_fabric }}"
     device_name: "{{ device.value.name }}"
