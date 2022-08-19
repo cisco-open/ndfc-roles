@@ -1,10 +1,10 @@
+---
 - hosts: ndfc
   gather_facts: false
   roles:
     - ndfc_network_info_get
   vars:
-    fabric_name: f2
-    network_name: n1111
+    network_name: msd_n1111
   tasks:
   - block:
     - debug:
