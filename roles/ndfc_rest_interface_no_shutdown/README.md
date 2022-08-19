@@ -7,7 +7,6 @@ Administratively no shutdown interface ``interface_name`` on ``device_name`` in 
 Variable        | Type  | Description
 ----------------|-------|------------------------------------------------
 device_name     | str() | The device on which ``interface_name`` resides
-fabric_name     | str() | The fabric in which ``device_name`` resides
 interface_name  | str() | The interface on ``device_name`` to no shutdown
 
 Device and Fabric names are defined in the following file:

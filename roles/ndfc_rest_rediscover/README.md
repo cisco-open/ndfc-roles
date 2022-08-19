@@ -26,7 +26,6 @@ See the following for details:
   roles:
     - ndfc_rest_rediscover
   vars:
-    fabric_name: f1
     device_name: spine_1
 ```
 
