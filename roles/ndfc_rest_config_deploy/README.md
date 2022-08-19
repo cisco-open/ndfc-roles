@@ -4,13 +4,16 @@ Issue NDFC POST REST API calls to invoke config-save on ``fabric_name`` and conf
 
 ### Role Variables
 
-Default values for the following variables are set in ``./roles/ndfc_config_deploy_all_rest/defaults/main.yml``:
+Variable           | Type   | Description
+-------------------|--------|------------
+device_name        | str()  | Device ``name`` in devices dictionary in ndfc_common/vars/main.yml
+
+Default values for the following variables are set in ``./roles/ndfc_rest_config_deploy/defaults/main.yml``:
 
 Variable           | Type   | Description
 -------------------|--------|------------
 forceShowRun       | bool() | default, false
 inclAllMSDSwitches | bool() | default, false
-device_name        | str()  | Device ``name`` in ndfc_common/vars/main.yml
 
 ### Example Playbook
 
@@ -21,7 +24,6 @@ device_name        | str()  | Device ``name`` in ndfc_common/vars/main.yml
   roles:
     - ndfc_rest_config_deploy
   vars:
-    fabric_name: f1
     device_name: leaf_1
 ```
 
