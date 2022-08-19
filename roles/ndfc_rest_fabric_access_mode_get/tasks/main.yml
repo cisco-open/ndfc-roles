@@ -1,6 +1,6 @@
-# ndfc_rest_fabric_get_access_mode
+# ndfc_rest_fabric_access_mode_get
 # Returns the current fabric access mode in var 'read_only'
-# if fabric exists, read_only will be either true or false
+# if fabric exists, read_only will be either true (read only mode) or false (read/write mode)
 # if fabric does not exist, read_only will be null
 ---
 - ansible.builtin.include_role:
@@ -12,6 +12,8 @@
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/accessmode"
   register: mr2
   when: fabric_name in active_fabrics
+  vars:
+    ansible_connection: httpapi
 
 - name: "main set_fact read_only {{ mr2.response.DATA.readonly }} if fabric exists"
   set_fact:
