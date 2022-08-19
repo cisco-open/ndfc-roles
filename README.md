@@ -244,12 +244,12 @@ Role                           | Description
 [ndfc_network_info_get] | Retrieve ``network_info`` dictionary, given ``fabric_name``, ``network_name``
 [ndfc_network_replaced] | Replace network on the NDFC controller with its current local definition, given ``network_name``
 [ndfc_network_replaced_all] | Replace all networks within a fabric with their current local definitions, given ``fabric_name``
-[ndfc_policy_vrf_rt_import_evpn] | Import a vrf's route-targets into another vrf on a single device, given ``fabric_name``, ``device_name``
-[ndfc_policy_vrf_rt_import_evpn_loop] | Import a vrf's route-targets into another vrf on a list of devices in a fabric, given ``fabric_name``, and a list of ``device_name``
+[ndfc_policy_vrf_rt_import_evpn] | Import a vrf's route-targets into another vrf on a single device, given ``device_name``
+[ndfc_policy_vrf_rt_import_evpn_loop] | Import a vrf's route-targets into another vrf on a list of devices, given a list of ``device_name``
 [ndfc_rest_config_deploy] | NDFC REST API POST calls to config-save and config-deploy for a device, given ``device_name``
 [ndfc_rest_config_deploy_all] | NDFC REST API POST calls to config-save and config-deploy for a fabric, given ``fabric_name``
 [ndfc_rest_device_list_by_fabric] | Retrieve list of devices in fabric, given ``fabric_name``
-[ndfc_rest_device_set_role] | Set a device's role, given ``fabric_name``, ``device_name``, and ``role``
+[ndfc_rest_device_set_role] | Set a device's role, given ``device_name``, and ``role``
 [ndfc_rest_fabric_access_mode_get] | Retrieve a fabric's access mode, given ``fabric_name``
 [ndfc_rest_fabric_access_mode_set] | Set a fabric's access mode, given ``fabric_name``, and ``read_only``
 [ndfc_rest_fabric_active_fabrics_get] | Queries NDFC controller for list of active fabrics
@@ -260,19 +260,19 @@ Role                           | Description
 [ndfc_rest_fabric_msd_child_add] | Add a child fabric to an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_child_remove] | Remove a child fabric from an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_create] | Create a multi-side domain fabric, given ``msd_fabric``
-[ndfc_rest_interface_no_shutdown] | Administratively no shutdown interface, given ``fabric_name``, ``device_name``, ``interface_name``
-[ndfc_rest_interface_shutdown] | Administratively shutdown interface, given ``fabric_name``, ``device_name``, ``interface_name``
-[ndfc_rest_rediscover] | Rediscover a device, given ``fabric_name``, ``device_name``
+[ndfc_rest_interface_no_shutdown] | Administratively no shutdown interface, given ``device_name``, ``interface_name``
+[ndfc_rest_interface_shutdown] | Administratively shutdown interface, given ``device_name``, ``interface_name``
+[ndfc_rest_rediscover] | Rediscover a device, given ``device_name``
 [ndfc_rest_service_node_add] | Add a service node, given ``service_node_name``
 [ndfc_rest_vpc_create] | Create a VPC pair, given ``fabric_name``, ``vpc_name``
 [ndfc_rest_vpc_delete] | Delete a VPC pair, given ``fabric_name``, ``vpc_name``
 [ndfc_rest_vrf_list_by_fabric] | List VRFs in a given fabric, given ``fabric_name``
 [ndfc_service_node_deleted] | Delete a service node, given ``service_node_name``
 [ndfc_service_node_merged] | Create a service node, given ``service_node_name``
-[ndfc_vpc_interface_merged_all] | Create (merge) all vpc interfaces for a vpc pair, given ``fabric_name``, ``vpc_name``
+[ndfc_vpc_interface_merged_all] | Create (merge) all vpc interfaces for a vpc pair, given ``vpc_name``
 [ndfc_vrf_all] | merge/delete all vrfs in a fabric, given ``fabric_name``
-[ndfc_vrf_query] | Query VRF and return json object ``info``, given ``fabric_name``, ``vrf_name``
-[ndfc_vrf_replaced] | Update (replaced) a vrf, given ``fabric_name``, ``vrf_name``
+[ndfc_vrf_query] | Query VRF and return json object ``vrf_info``, given ``vrf_name``
+[ndfc_vrf_replaced] | Update (replaced) a vrf, given ``vrf_name``
 
 
 [ndfc_common]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common
