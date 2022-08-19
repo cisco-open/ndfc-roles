@@ -240,6 +240,7 @@ Role                           | Description
 [ndfc_network_deleted] | Delete a network, given ``fabric_name``, ``network_name``
 [ndfc_network_deleted_all] | Delete all networks within a fabric, given ``fabric_name``
 [ndfc_network_info_get] | Retrieve ``network_info`` dictionary, given ``fabric_name``, ``network_name``
+[ndfc_network_replaced] | Replace network on the NDFC controller with its current local definition, given ``network_name``
 [ndfc_network_replaced_all] | Replace all networks within a fabric, given ``fabric_name``
 *[ndfc_policy_query_generated_config] | Query and display all populated generated_configs on device ``device_name``, given ``fabric_name``, ``device_name``
 *[ndfc_policy_query_generated_config_all] | Query and display all populated generated_configs on all devices, given ``fabric_name``
@@ -293,6 +294,7 @@ Role                           | Description
 [ndfc_network_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_deleted
 [ndfc_network_deleted_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_deleted_all
 [ndfc_network_info_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_info_get
+[ndfc_network_replaced]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_replaced
 [ndfc_network_replaced_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_replaced_all
 [ndfc_policy_query_generated_config]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_query_generated_config
 [ndfc_policy_query_generated_config_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_query_generated_config_all

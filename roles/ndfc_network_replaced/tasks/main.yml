@@ -12,3 +12,5 @@
       vlan_id: "{{ network_config.vlan_id }}"
       gw_ip_subnet: "{{ network_config.gw_ip_subnet }}"
       attach: "{{ network_config.attach }}"
+  vars:
+    ansible_connection: httpapi

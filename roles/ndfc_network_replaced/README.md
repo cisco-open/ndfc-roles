@@ -1,6 +1,6 @@
 # ndfc_network_replaced
 
-Replace network ``network_name`` with its current definitions in ``./roles/ndfc_common/vars/main.yml``
+Replace network ``network_name`` with its current definition in ``./roles/ndfc_common/vars/main.yml``
 
 ### Role Variables
 
