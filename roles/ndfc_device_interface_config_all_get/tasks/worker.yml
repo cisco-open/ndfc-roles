@@ -1,4 +1,5 @@
-# ndfc_policy_query_interface/tasks/worker.yml
+# ndfc_device_interface_config_all_get/tasks/worker.yml
+
 - name: worker query FABRIC {{ fabric_name }} ROLE {{ device.value.role}} DEVICE {{ device.value.name }} INTERFACE {{ interface_name }}"
   cisco.dcnm.dcnm_policy:
     fabric: "{{ fabric_name }}"

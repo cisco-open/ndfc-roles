@@ -1,0 +1,8 @@
+# example_ndfc_device_generated_configs_all_get.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_device_generated_configs_all_get
+  vars:
+    fabric_name: f1

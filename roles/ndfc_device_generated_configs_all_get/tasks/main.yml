@@ -1,4 +1,4 @@
-# ndfc_policy_query_generated_config_all/main.yml
+# ndfc_device_generated_configs_all_get/main.yml
 ---
 - name: main query generated config
   include_tasks: worker.yml

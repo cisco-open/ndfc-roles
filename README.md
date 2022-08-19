@@ -227,8 +227,10 @@ Role                           | Description
 [ndfc_device_config_get] | Retrieve local configuration for device, given ``device_name``
 [ndfc_device_deleted] | Delete a device from a fabric, given ``device_name``
 [ndfc_device_deleted_all] | Delete all devices in a fabric, given ``fabric_name``
+[ndfc_device_generated_configs_all_get] | Query and display all populated generated_configs on all devices, given ``fabric_name``
 [ndfc_device_generated_configs_get] | Retrieve device generated configs, given ``device_name``
 [ndfc_device_info_get] | Query device on the NDFC controller, given ``device_name``
+[ndfc_device_interface_config_all_get] | Retrieve and display interface configuration on all devices in a fabric, given ``fabric_name``, ``interface_name``
 [ndfc_device_ipv4_address_local_get] | Retrieve device ipv4 address from local vars, given ``device_name``
 [ndfc_device_ipv4_address_remote_get] | Retrieve device ipv4 address from NDFC controller, given ``device_name``
 [ndfc_device_merged] | Merge a device into the topology, given ``device_name``
@@ -241,10 +243,7 @@ Role                           | Description
 [ndfc_network_deleted_all] | Delete all networks within a fabric, given ``fabric_name``
 [ndfc_network_info_get] | Retrieve ``network_info`` dictionary, given ``fabric_name``, ``network_name``
 [ndfc_network_replaced] | Replace network on the NDFC controller with its current local definition, given ``network_name``
-[ndfc_network_replaced_all] | Replace all networks within a fabric, given ``fabric_name``
-*[ndfc_policy_query_generated_config] | Query and display all populated generated_configs on device ``device_name``, given ``fabric_name``, ``device_name``
-*[ndfc_policy_query_generated_config_all] | Query and display all populated generated_configs on all devices, given ``fabric_name``
-*[ndfc_policy_query_interface_all] | Query and display interface config on all devices in a fabric, given ``fabric_name``, ``interface_name``
+[ndfc_network_replaced_all] | Replace all networks within a fabric with their current local definitions, given ``fabric_name``
 [ndfc_policy_vrf_rt_import_evpn] | Import a vrf's route-targets into another vrf on a single device, given ``fabric_name``, ``device_name``
 [ndfc_policy_vrf_rt_import_evpn_loop] | Import a vrf's route-targets into another vrf on a list of devices in a fabric, given ``fabric_name``, and a list of ``device_name``
 [ndfc_rest_config_deploy] | NDFC REST API POST calls to config-save and config-deploy for a device, given ``fabric_name``, ``device_name``
@@ -275,16 +274,17 @@ Role                           | Description
 [ndfc_vrf_query] | Query VRF and return json object ``info``, given ``fabric_name``, ``vrf_name``
 [ndfc_vrf_replaced] | Update (replaced) a vrf, given ``fabric_name``, ``vrf_name``
 
-\* The Roles marked with ``*`` are examples showing how one can use cisco.dcnm.dcnm_query to glean various information from devices.  These are not used within any of the other Roles.
 
 [ndfc_common]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common
 [ndfc_device_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_config_get
 [ndfc_device_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_deleted
 [ndfc_device_deleted_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_deleted_all
+[ndfc_device_generated_configs_all_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_generated_configs_all_get
 [ndfc_device_generated_configs_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_generated_configs_get
 [ndfc_device_info_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_info_get
 [ndfc_device_ipv4_address_local_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_ipv4_address_local_get
 [ndfc_device_ipv4_address_remote_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_ipv4_address_remote_get
+[ndfc_device_interface_config_all_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_interface_config_all_get
 [ndfc_device_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_merged
 [ndfc_device_merged_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_merged_all
 [ndfc_device_model_number_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_model_number_get
@@ -296,9 +296,6 @@ Role                           | Description
 [ndfc_network_info_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_info_get
 [ndfc_network_replaced]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_replaced
 [ndfc_network_replaced_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_replaced_all
-[ndfc_policy_query_generated_config]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_query_generated_config
-[ndfc_policy_query_generated_config_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_query_generated_config_all
-[ndfc_policy_query_interface_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_query_interface_all
 [ndfc_policy_vrf_rt_import_evpn]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_vrf_rt_import_evpn
 [ndfc_policy_vrf_rt_import_evpn_loop]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_vrf_rt_import_evpn_loop
 [ndfc_rest_config_deploy]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_config_deploy

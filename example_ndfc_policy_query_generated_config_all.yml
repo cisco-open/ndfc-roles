@@ -1,8 +1,0 @@
-# example_ndfc_policy_query_generated_config_all.yml
----
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_policy_query_generated_config_all
-  vars:
-    fabric_name: f1

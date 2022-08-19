@@ -1,13 +1,12 @@
-# ndfc_policy_query_interface_all
+# ndfc_device_generated_configs_all_get
 
-Query the config for a specific interface across all devices in fabric ``fabric_name``
+Query populated generated_config from all devices in fabric ``fabric_name``
 
 ### Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 fabric_name     | str() | The fabric in which the devices reside
-interface_name  | str() | An NX-OS interface name e.g. Ethernet1/12, Port-channel11, Loopback1, etc
 
 Fabric parameters, including ``fabric_name`, are defined in the following file:
 
@@ -25,10 +24,9 @@ See the following for details:
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_policy_query_interface_all
+    - ndfc_device_generated_configs_all_get
   vars:
     fabric_name: f1
-    interface_name: Ethernet1/11
 ```
 
 ### Licensing

@@ -1,4 +1,4 @@
-# ndfc_policy_query_generated_config_all/worker.yml
+# ndfc_device_generated_configs_all_get/worker.yml
 - name: worker query WANT FABRIC {{ fabric_name }} CURRENT FABRIC {{ device.value.switch_fabric }} DEVICE {{ device.value.name }} IP {{ device.value.ip }} generated_config 
   cisco.dcnm.dcnm_policy:
     fabric: "{{ device.value.switch_fabric }}"
