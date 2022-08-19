@@ -1,5 +1,7 @@
 # ndfc_rest_config_deploy/tasks/main.yml
 ---
+- ansible.builtin.include_role:
+    name: ndfc_device_config_get
 
 - ansible.builtin.include_role:
     name: ndfc_device_info_get
@@ -13,10 +15,10 @@
     ansible_connection: httpapi
     vars_dict:
 
-- name: main REST POST config-deploy FABRIC {{ fabric_name }} device_name {{ device_name }} switchDbId {{ device_info.switchDbID }}
+- name: main REST POST config-deploy FABRIC {{ device_config.switch_fabric }} device_name {{ device_name }} switchDbId {{ device_info.switchDbID }}
   cisco.dcnm.dcnm_rest:
     method: POST
-    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ fabric_name }}/config-deploy/{{ device_info.switchDbID }}"
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics/{{ device_config.switch_fabric }}/config-deploy/{{ device_info.switchDbID }}"
     json_data: "{{ vars_dict | to_json }}"
   vars:
     ansible_connection: httpapi

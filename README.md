@@ -246,7 +246,7 @@ Role                           | Description
 [ndfc_network_replaced_all] | Replace all networks within a fabric with their current local definitions, given ``fabric_name``
 [ndfc_policy_vrf_rt_import_evpn] | Import a vrf's route-targets into another vrf on a single device, given ``fabric_name``, ``device_name``
 [ndfc_policy_vrf_rt_import_evpn_loop] | Import a vrf's route-targets into another vrf on a list of devices in a fabric, given ``fabric_name``, and a list of ``device_name``
-[ndfc_rest_config_deploy] | NDFC REST API POST calls to config-save and config-deploy for a device, given ``fabric_name``, ``device_name``
+[ndfc_rest_config_deploy] | NDFC REST API POST calls to config-save and config-deploy for a device, given ``device_name``
 [ndfc_rest_config_deploy_all] | NDFC REST API POST calls to config-save and config-deploy for a fabric, given ``fabric_name``
 [ndfc_rest_device_list_by_fabric] | Retrieve list of devices in fabric, given ``fabric_name``
 [ndfc_rest_device_set_role] | Set a device's role, given ``fabric_name``, ``device_name``, and ``role``
