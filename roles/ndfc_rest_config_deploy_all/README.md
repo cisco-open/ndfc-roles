@@ -4,7 +4,11 @@ Issue NDFC POST REST API calls to invoke config-save and config-deploy in fabric
 
 ### Role Variables
 
-Default values for the following variables are set in ``./roles/ndfc_config_deploy_all_rest/defaults/main.yml``:
+Variable           | Type   | Description
+-------------------|--------|------------
+fabric_name        | str()  | The fabric to config-save and config-deploy
+
+Default values for the following variables are set in ``./roles/ndfc_rest_config_deploy_all/defaults/main.yml``:
 
 Variable           | Type   | Description
 -------------------|--------|------------
