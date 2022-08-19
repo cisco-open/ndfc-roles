@@ -14,3 +14,5 @@
       vrf_extension_template: Default_VRF_Extension_Universal
       service_vrf_template: null
       attach: "{{ vrf_config.attach }}"
+  vars:
+    ansible_connection: httpapi
