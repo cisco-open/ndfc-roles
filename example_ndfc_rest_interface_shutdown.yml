@@ -6,5 +6,5 @@
     - ndfc_rest_interface_shutdown
   vars:
     - fabric_name: f1
-      device_name: leaf_1
-      interface_name: Ethernet1/49
+      device_name: spine_1
+      interface_name: Ethernet1/32
