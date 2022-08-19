@@ -1,7 +1,5 @@
 # ndfc_rest_fabric_access_mode_set
 
-NOTE: This is not working currently.  We're looking into it...
-
 Given ``fabric_name`` set the fabric access_mode to true or false via var ``read_only``
 
 ### Role Variables
