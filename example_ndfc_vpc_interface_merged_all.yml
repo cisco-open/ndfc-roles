@@ -5,4 +5,4 @@
   roles:
     - ndfc_vpc_interface_merged_all
   vars:
-    vpc_name: vpc1
+    vpc_name: vpc_1
