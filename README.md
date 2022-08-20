@@ -254,13 +254,13 @@ Role                           | Description
 [ndfc_rest_fabric_access_mode_set] | Set a fabric's access mode, given ``fabric_name``, and ``read_only``
 [ndfc_rest_fabric_active_fabrics_get] | Queries NDFC controller for list of active fabrics
 [ndfc_rest_fabric_asn_get] | Retrieve a fabric's BGP ASN, given ``fabric_name``
-[ndfc_rest_fabric_switch_create] | Create a switch fabric, given ``fabric_name``
 [ndfc_rest_fabric_delete] | Delete a fabric, given ``fabric_name``
 [ndfc_rest_fabric_external_create] | Create an external fabric, given ``fabric_name``
 [ndfc_rest_fabric_info_get] | Retrieve a fabric's information from the NDFC controller, given ``fabric_name``
 [ndfc_rest_fabric_msd_child_add] | Add a child fabric to an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_child_remove] | Remove a child fabric from an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_create] | Create a multi-side domain fabric, given ``msd_fabric``
+[ndfc_rest_fabric_switch_create] | Create a switch fabric, given ``fabric_name``
 [ndfc_rest_interface_no_shutdown] | Administratively no shutdown interface, given ``device_name``, ``interface_name``
 [ndfc_rest_interface_shutdown] | Administratively shutdown interface, given ``device_name``, ``interface_name``
 [ndfc_rest_rediscover] | Rediscover a device, given ``device_name``
@@ -272,7 +272,8 @@ Role                           | Description
 [ndfc_service_node_merged] | Create a service node, given ``service_node_name``
 [ndfc_vpc_interface_merged_all] | Create (merge) all vpc interfaces for a vpc pair, given ``vpc_name``
 [ndfc_vrf_all] | merge/delete all vrfs in a fabric, given ``fabric_name``
-[ndfc_vrf_query] | Query VRF and return json object ``vrf_info``, given ``vrf_name``
+[ndfc_vrf_config_get] | Retrieve local configuration for vrf in json object ``vrf_config``, given ``vrf_name``
+[ndfc_vrf_query] | Retrieve NDFC controller configuration for VRF in json object ``vrf_info``, given ``vrf_name``
 [ndfc_vrf_replaced] | Update (replaced) a vrf, given ``vrf_name``
 
 
@@ -283,9 +284,9 @@ Role                           | Description
 [ndfc_device_generated_configs_all_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_generated_configs_all_get
 [ndfc_device_generated_configs_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_generated_configs_get
 [ndfc_device_info_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_info_get
+[ndfc_device_interface_config_all_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_interface_config_all_get
 [ndfc_device_ipv4_address_local_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_ipv4_address_local_get
 [ndfc_device_ipv4_address_remote_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_ipv4_address_remote_get
-[ndfc_device_interface_config_all_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_interface_config_all_get
 [ndfc_device_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_merged
 [ndfc_device_merged_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_merged_all
 [ndfc_device_model_number_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_model_number_get
@@ -301,19 +302,19 @@ Role                           | Description
 [ndfc_policy_vrf_rt_import_evpn_loop]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_vrf_rt_import_evpn_loop
 [ndfc_rest_config_deploy]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_config_deploy
 [ndfc_rest_config_deploy_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_config_deploy_all
-[ndfc_rest_device_set_role]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_device_set_role
 [ndfc_rest_device_list_by_fabric]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_device_list_by_fabric
+[ndfc_rest_device_set_role]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_device_set_role
 [ndfc_rest_fabric_access_mode_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_access_mode_get
 [ndfc_rest_fabric_access_mode_set]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_access_mode_set
 [ndfc_rest_fabric_active_fabrics_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_active_fabrics_get
 [ndfc_rest_fabric_asn_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_asn_get
-[ndfc_rest_fabric_switch_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_switch_create
 [ndfc_rest_fabric_delete]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_delete
 [ndfc_rest_fabric_external_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_external_create
 [ndfc_rest_fabric_info_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_info_get
 [ndfc_rest_fabric_msd_child_add]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_add
 [ndfc_rest_fabric_msd_child_remove]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_remove
 [ndfc_rest_fabric_msd_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_create
+[ndfc_rest_fabric_switch_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_switch_create
 [ndfc_rest_interface_no_shutdown]: https:////github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_interface_no_shutdown
 [ndfc_rest_interface_shutdown]: https:////github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_interface_shutdown
 [ndfc_rest_rediscover]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_rediscover
@@ -325,6 +326,7 @@ Role                           | Description
 [ndfc_service_node_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_node_merged
 [ndfc_vpc_interface_merged_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vpc_interface_merged_all
 [ndfc_vrf_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_all
+[ndfc_vrf_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_config_get
 [ndfc_vrf_query]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_query
 [ndfc_vrf_replaced]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_replaced
 
