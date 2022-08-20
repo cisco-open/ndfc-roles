@@ -15,7 +15,6 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: leaf_1
 
 # leaf_2
@@ -24,7 +23,6 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: leaf_2
 
 # leaf_3
@@ -33,7 +31,6 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: leaf_3
 
 # leaf_4
@@ -42,7 +39,6 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: leaf_4
 
 # spine_1
@@ -51,7 +47,6 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: spine_1
 
 # spine_2
@@ -60,42 +55,37 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: spine_2
 
-# vpc1
+# vpc_1
 - hosts: ndfc
   gather_facts: false
   roles:
   - ndfc_rest_vpc_create
   vars:
-    fabric_name: f1
-    vpc_name: vpc1
+    vpc_name: vpc_1
 
 - hosts: ndfc
   gather_facts: false
   roles:
   - ndfc_vpc_interface_merged_all
   vars:
-    fabric_name: f1
-    vpc_name: vpc1
+    vpc_name: vpc_1
 
-# vpc2
+# vpc_2
 - hosts: ndfc
   gather_facts: false
   roles:
   - ndfc_rest_vpc_create
   vars:
-    fabric_name: f1
-    vpc_name: vpc2
+    vpc_name: vpc_2
 
 - hosts: ndfc
   gather_facts: false
   roles:
   - ndfc_vpc_interface_merged_all
   vars:
-    fabric_name: f1
-    vpc_name: vpc2
+    vpc_name: vpc_2
 
 # VRFs
 - hosts: ndfc
@@ -123,11 +113,10 @@
     fabric_name: f1
 
 - hosts: ndfc
-  name: fabric {{ fabric_name }} vrf {{ vrf_name }} import vrf {{ import_vrf_name }} route-targets
+  name: fabric f1 vrf {{ vrf_name }} import vrf {{ import_vrf_name }} route-targets
   gather_facts: false
   vars:
     state: merged
-    fabric_name: f1
     vrf_name: v1
     import_vrf_name: v2
     devices:
@@ -147,11 +136,10 @@
     fabric_name: f1
 
 - hosts: ndfc
-  name: fabric {{ fabric_name }} vrf {{ vrf_name }} import vrf {{ import_vrf_name }} route-targets
+  name: fabric f1 vrf {{ vrf_name }} import vrf {{ import_vrf_name }} route-targets
   gather_facts: false
   vars:
     state: merged
-    fabric_name: f1
     vrf_name: v2
     import_vrf_name: v1
     devices:

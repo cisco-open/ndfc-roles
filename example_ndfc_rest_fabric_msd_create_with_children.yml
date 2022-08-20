@@ -14,7 +14,6 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: leaf_1
 
 # leaf_2
@@ -23,7 +22,6 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: leaf_2
 
 # leaf_3
@@ -32,7 +30,6 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: leaf_3
 
 # leaf_4
@@ -41,7 +38,6 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: leaf_4
 
 # spine_1
@@ -50,7 +46,6 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: spine_1
 
 # spine_2
@@ -59,7 +54,6 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: spine_2
 
 # border_gateway_1
@@ -68,7 +62,6 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: border_gateway_1
 
 # border_gateway_2
@@ -77,17 +70,15 @@
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f1
     device_name: border_gateway_2
 
-# vpc1
+# vpc_1
 - hosts: ndfc
   gather_facts: false
   roles:
   - ndfc_rest_vpc_create
   vars:
-    fabric_name: f1
-    vpc_name: vpc1
+    vpc_name: vpc_1
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -95,14 +86,13 @@
   vars:
     fabric_name: f1
 
-# vpc1 interfaces
+# vpc_1 interfaces
 - hosts: ndfc
   gather_facts: false
   roles:
   - ndfc_vpc_interface_merged_all
   vars:
-    fabric_name: f1
-    vpc_name: vpc1
+    vpc_name: vpc_1
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -110,14 +100,13 @@
   vars:
     fabric_name: f1
 
-# vpc2
+# vpc_2
 - hosts: ndfc
   gather_facts: false
   roles:
   - ndfc_rest_vpc_create
   vars:
-    fabric_name: f1
-    vpc_name: vpc2
+    vpc_name: vpc_2
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -125,14 +114,13 @@
   vars:
     fabric_name: f1
 
-# vpc2 interfaces
+# vpc_2 interfaces
 - hosts: ndfc
   gather_facts: false
   roles:
   - ndfc_vpc_interface_merged_all
   vars:
-    fabric_name: f1
-    vpc_name: vpc2
+    vpc_name: vpc_2
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -148,86 +136,77 @@
   vars:
     fabric_name: f2
 
-# leaf_1
+# leaf_5
 - hosts: ndfc
   gather_facts: false
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f2
-    device_name: leaf_1
+    device_name: leaf_5
 
-# leaf_2
+# leaf_6
 - hosts: ndfc
   gather_facts: false
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f2
-    device_name: leaf_2
+    device_name: leaf_6
 
-# leaf_3
+# leaf_7
 - hosts: ndfc
   gather_facts: false
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f2
-    device_name: leaf_3
+    device_name: leaf_7
 
-# leaf_4
+# leaf_8
 - hosts: ndfc
   gather_facts: false
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f2
-    device_name: leaf_4
+    device_name: leaf_8
 
-# spine_1
+# spine_3
 - hosts: ndfc
   gather_facts: false
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f2
-    device_name: spine_1
+    device_name: spine_3
 
-# spine_2
+# spine_4
 - hosts: ndfc
   gather_facts: false
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f2
-    device_name: spine_2
+    device_name: spine_4
 
-# border_gateway_1
+# border_gateway_3
 - hosts: ndfc
   gather_facts: false
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f2
-    device_name: border_gateway_1
+    device_name: border_gateway_3
 
-# border_gateway_2
+# border_gateway_4
 - hosts: ndfc
   gather_facts: false
   roles:
     - ndfc_device_merged
   vars:
-    fabric_name: f2
-    device_name: border_gateway_2
+    device_name: border_gateway_4
 
-# vpc1
+# vpc_3
 - hosts: ndfc
   gather_facts: false
   roles:
   - ndfc_rest_vpc_create
   vars:
-    fabric_name: f2
-    vpc_name: vpc1
+    vpc_name: vpc_3
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -235,14 +214,13 @@
   vars:
     fabric_name: f2
 
-# vpc1 interfaces
+# vpc_3 interfaces
 - hosts: ndfc
   gather_facts: false
   roles:
   - ndfc_vpc_interface_merged_all
   vars:
-    fabric_name: f2
-    vpc_name: vpc1
+    vpc_name: vpc_3
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -250,14 +228,13 @@
   vars:
     fabric_name: f2
 
-# vpc2
+# vpc_4
 - hosts: ndfc
   gather_facts: false
   roles:
   - ndfc_rest_vpc_create
   vars:
-    fabric_name: f2
-    vpc_name: vpc2
+    vpc_name: vpc_4
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -265,14 +242,13 @@
   vars:
     fabric_name: f2
 
-# vpc2 interfaces
+# vpc_4 interfaces
 - hosts: ndfc
   gather_facts: false
   roles:
   - ndfc_vpc_interface_merged_all
   vars:
-    fabric_name: f2
-    vpc_name: vpc2
+    vpc_name: vpc_4
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -360,7 +336,6 @@
   gather_facts: false
   vars:
     state: merged
-    fabric_name: f1
     vrf_name: v1
     import_vrf_name: v2
     devices:
@@ -382,7 +357,6 @@
   gather_facts: false
   vars:
     state: merged
-    fabric_name: f1
     vrf_name: v2
     import_vrf_name: v1
     devices:
@@ -404,14 +378,13 @@
   gather_facts: false
   vars:
     state: merged
-    fabric_name: f2
     vrf_name: v1
     import_vrf_name: v2
     devices:
-      - leaf_1
-      - leaf_2
-      - leaf_3
-      - leaf_4
+      - leaf_5
+      - leaf_6
+      - leaf_7
+      - leaf_8
   roles:
     - ndfc_policy_vrf_rt_import_evpn_loop
 - hosts: ndfc
@@ -426,14 +399,13 @@
   gather_facts: false
   vars:
     state: merged
-    fabric_name: f2
     vrf_name: v2
     import_vrf_name: v1
     devices:
-      - leaf_1
-      - leaf_2
-      - leaf_3
-      - leaf_4
+      - leaf_5
+      - leaf_6
+      - leaf_7
+      - leaf_8
   roles:
     - ndfc_policy_vrf_rt_import_evpn_loop
 - hosts: ndfc
