@@ -9,5 +9,6 @@
     device_name: leaf_1
   tasks:
   - block:
-    - debug:
-        msg: "device_config: {{ device_config }}"
+    - name: debug device_config
+      debug:
+        var: device_config
