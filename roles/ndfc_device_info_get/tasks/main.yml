@@ -9,6 +9,8 @@
     config:
     - seed_ip: "{{ device_config.ip }}"
   register: wr1
+  vars:
+    ansible_connection: httpapi
 
 - name: worker set_fact device_info
   set_fact:
