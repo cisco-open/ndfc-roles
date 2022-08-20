@@ -1,0 +1,14 @@
+# example_ndfc_device_config_get.yml
+# Query local vars for device configuration
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_vpc_config_get
+  vars:
+    vpc_name: vpc_1
+  tasks:
+  - block:
+    - name: debug vpc_config
+      debug:
+        var: vpc_config
