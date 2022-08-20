@@ -5,59 +5,48 @@
 # - else
 #     skip
 
-# set_fact for p1_serial, p1_vpc, p1_db_id
-- name: worker query {{ item.fabric }} {{ item.vpc_name }} vpc_peer_1 {{ ip }}
-  cisco.dcnm.dcnm_inventory:
-    fabric: "{{ item.fabric }}"
-    state: query
-    config:
-    - seed_ip: "{{ ip }}"
-  register: wr1
+- ansible.builtin.include_role:
+    name: ndfc_vpc_config_get
   vars:
-    ansible_connection: httpapi
-    wq1: "[?fabric == '{{ item.fabric }}'] | [?vpc_name == '{{ item.vpc_name }}'].peer_1_ip | [0]"
-    ip: "{{ vpc_peers.values() | list | json_query(wq1)}}"
+    vpc_name: "{{ item.vpc_name }}"
 
-- name: worker set_fact {{ item.fabric }} {{ item.vpc_name }} {{ item.vpc_port_id }} - p1_serial, p1_vpc, p1_db_id, p1_ip
+- ansible.builtin.include_role:
+    name: ndfc_device_config_get
+  vars:
+    device_name: "{{ vpc_config.peer_1 }}"
+
+- ansible.builtin.include_role:
+    name: ndfc_device_info_get
+  vars:
+    device_name: "{{ vpc_config.peer_1 }}"
+
+- name: worker set_fact vpc_peer_1 {{ device_config.switch_fabric }} {{ item.vpc_name }} {{ item.vpc_port_id }} - p1_serial, p1_vpc, p1_db_id, p1_ip
   set_fact:
-    p1_serial: "{{ wr1.response | json_query(wq2) }}"
-    p1_vpc: "{{ wr1.response | json_query(wq3) }}"
-    p1_db_id: "{{ wr1.response | json_query(wq4) }}"
-    p1_ip: "{{ wr1.response | json_query(wq5) }}"
-  vars:
-    wq2: "[0].serialNumber"
-    wq3: "[0].isVpcConfigured"
-    wq4: "[0].switchDbID"
-    wq5: "[0].ipAddress"
+    p1_serial: "{{ device_info.serialNumber }}"
+    p1_vpc: "{{ device_info.isVpcConfigured }}"
+    p1_db_id: "{{ device_info.switchDbID }}"
+    p1_ip: "{{ device_info.ipAddress }}"
 
-# set_fact for p2_serial, p2_vpc, p2_db_id
-- name: worker query {{ item.fabric }} {{ item.vpc_name }} vpc_peer_2 {{ ip }}
-  cisco.dcnm.dcnm_inventory:
-    fabric: "{{ item.fabric }}"
-    state: query
-    config:
-    - seed_ip: "{{ ip }}"
-  register: wr2
+- ansible.builtin.include_role:
+    name: ndfc_device_config_get
   vars:
-    ansible_connection: httpapi
-    wq6: "[?fabric == '{{ item.fabric }}'] | [?vpc_name == '{{ item.vpc_name }}'].peer_2_ip | [0]"
-    ip: "{{ vpc_peers.values() | list  | json_query(wq6)}}"
+    device_name: "{{ vpc_config.peer_2 }}"
 
-- name: worker set_fact {{ item.fabric }} {{ item.vpc_name }} {{ item.vpc_port_id }} - p2_serial, p2_vpc, p2_db_id, p2_ip
+- ansible.builtin.include_role:
+    name: ndfc_device_info_get
+  vars:
+    device_name: "{{ vpc_config.peer_2 }}"
+
+- name: worker set_fact vpc_peer_2 {{ device_config.switch_fabric }} {{ item.vpc_name }} {{ item.vpc_port_id }} - p2_serial, p2_vpc, p2_db_id, p2_ip
   set_fact:
-    p2_serial: "{{ wr2.response | json_query(wq7) }}"
-    p2_vpc: "{{ wr2.response | json_query(wq8) }}"
-    p2_db_id: "{{ wr2.response | json_query(wq9) }}"
-    p2_ip: "{{ wr2.response | json_query(wq10) }}"
-  vars:
-    wq7: "[0].serialNumber"
-    wq8: "[0].isVpcConfigured"
-    wq9: "[0].switchDbID"
-    wq10: "[0].ipAddress"
+    p2_serial: "{{ device_info.serialNumber }}"
+    p2_vpc: "{{ device_info.isVpcConfigured }}"
+    p2_db_id: "{{ device_info.switchDbID }}"
+    p2_ip: "{{ device_info.ipAddress }}"
 
-- name: worker merged fabric {{ item.fabric }} vpc_name {{ item.vpc_name }} vpc_port_id {{ item.vpc_port_id }} interface_mode {{ item.interface_mode }} ip {{ p1_ip }}/{{p2_ip}}
+- name: worker merged fabric {{ device_config.switch_fabric }} vpc_name {{ item.vpc_name }} vpc_port_id {{ item.vpc_port_id }} interface_mode {{ item.interface_mode }} ip {{ p1_ip }}/{{p2_ip}}
   cisco.dcnm.dcnm_interface:
-    fabric: "{{ item.fabric }}"
+    fabric: "{{ device_config.switch_fabric }}"
     state: merged
     config:
       - name: "{{ item.vpc_port_id }}"
