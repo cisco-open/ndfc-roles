@@ -6,7 +6,6 @@ Create vpc peering ``vpc_name`` in fabric ``fabric_name``
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric in which ``vpc_name`` resides
 vpc_name        | str() | The name of the vpc peering to create
 
 ``fabric_name`` and ``vpc_name`` are defined in the following file:
