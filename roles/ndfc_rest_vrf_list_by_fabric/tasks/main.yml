@@ -9,12 +9,12 @@
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/top-down/fabrics/{{ fabric_name }}/vrfs"
   register: mr1
   ignore_errors: true
-- name: set_fact info on success
+- name: set_fact vrf_list on success
   set_fact:
      vrf_list: "{{ mr1.response.DATA }}"
   when:
     mr1 is succeeded
-- name: set_fact info on failed
+- name: set_fact vrf_list on failed
   set_fact:
      vrf_list: "{{ [] | to_json }}"
   when:
