@@ -12,7 +12,7 @@ fabric_name     | str()  | The fabric in which ``device_name`` resides (see devi
 vrf_name        | str()  | The vrf into which ``import_vrf_name``'s route-targets will be imports
 import_vrf_name | str()  | The vrf whose route-targets will be imported into ``vrf_name``
 state           | str() | The Ansible state to apply for the import. e.g. ``deleted`` to delete the import, ``merged`` to merge the import.  NOTE: ``replaced`` is not a valid state for this module.
-devices         | list() | An Ansible list of ``device_name`` to which ``vrf_name`` is attached
+device_list     | list() | An Ansible list of ``device_name`` to which ``vrf_name`` is attached
 
 Fabric, device, and vrf names are are defined in the following file:
 
@@ -34,10 +34,9 @@ The example below performs a bi-directional import of route-targets between vrfs
   gather_facts: false
   vars:
     state: merged
-    fabric_name: f1
     vrf_name: v1
     import_vrf_name: v2
-    devices:
+    device_list:
       - leaf_1
       - leaf_2
       - leaf_3
@@ -60,10 +59,9 @@ The example below performs a bi-directional import of route-targets between vrfs
   gather_facts: false
   vars:
     state: merged
-    fabric_name: f1
     vrf_name: v2
     import_vrf_name: v1
-    devices:
+    device_list:
       - leaf_1
       - leaf_2
       - leaf_3
