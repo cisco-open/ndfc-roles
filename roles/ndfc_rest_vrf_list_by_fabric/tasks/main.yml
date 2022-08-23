@@ -1,6 +1,6 @@
 # ndfc_rest_vrf_list_by_fabric/tasks/main.yml
 #
-# Return JSON object 'info' which will be a list of vrf dictionaries
+# Return JSON object 'vrf_list' which will be a list of vrf dictionaries
 # if the GET request is successful, or an empty list if the GET request fails
 ---
 - name: main REST GET vrfs FABRIC {{ fabric_name }}
@@ -11,11 +11,11 @@
   ignore_errors: true
 - name: set_fact info on success
   set_fact:
-     info: "{{ mr1.response.DATA }}"
+     vrf_list: "{{ mr1.response.DATA }}"
   when:
     mr1 is succeeded
 - name: set_fact info on failed
   set_fact:
-     info: "{{ [] | to_json }}"
+     vrf_list: "{{ [] | to_json }}"
   when:
     mr1 is failed
