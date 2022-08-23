@@ -9,59 +9,41 @@
 - ansible.builtin.include_role:
     name: ndfc_vpc_config_get
 
+# peer_1
+
 - ansible.builtin.include_role:
     name: ndfc_device_config_get
   vars:
     device_name: "{{ vpc_config.peer_1 }}"
 
-# TODO: Use ndfc_device_info_get to retrieve serialNumber, isVpcConfigured, switchDbID (see ndfc_vpc_interface_config_merged)
-# set_fact for p1_serial, p1_vpc, p1_db_id
-- name: main query FABRIC {{ device_config.switch_fabric }} VPC {{ vpc_name }} vpc_peer_1 {{ device_config.ip }}
-  cisco.dcnm.dcnm_inventory:
-    fabric: "{{ device_config.switch_fabric }}"
-    state: query
-    config:
-    - seed_ip: "{{ device_config.ip }}"
-  register: mr1
+- ansible.builtin.include_role:
+    name: ndfc_device_info_get
   vars:
-    ansible_connection: httpapi
+    device_name: "{{ vpc_config.peer_1 }}"
 
-- name: main set_fact p1_serial, p1_vpc, p1_db_id
+- name: worker set_fact vpc_peer_1 {{ device_config.switch_fabric }} {{ vpc_name }} - p1_serial, p1_vpc, p1_db_id
   set_fact:
-    p1_serial: "{{ mr1.response | json_query(mq2) }}"
-    p1_vpc: "{{ mr1.response | json_query(mq3) }}"
-    p1_db_id: "{{ mr1.response | json_query(mq4) }}"
-  vars:
-    mq2: "[0].serialNumber"
-    mq3: "[0].isVpcConfigured"
-    mq4: "[0].switchDbID"
+    p1_serial: "{{ device_info.serialNumber }}"
+    p1_vpc: "{{ device_info.isVpcConfigured }}"
+    p1_db_id: "{{ device_info.switchDbID }}"
+
+# peer_2
 
 - ansible.builtin.include_role:
     name: ndfc_device_config_get
   vars:
     device_name: "{{ vpc_config.peer_2 }}"
 
-# TODO: Use ndfc_device_info_get to retrieve serialNumber, isVpcConfigured, switchDbID (see ndfc_vpc_interface_config_merged)
-# set_fact for p2_serial, p2_vpc, p2_db_id
-- name: main query FABRIC {{ device_config.switch_fabric }} VPC {{ vpc_name }} vpc_peer_2
-  cisco.dcnm.dcnm_inventory:
-    fabric: "{{ device_config.switch_fabric }}"
-    state: query
-    config:
-    - seed_ip: "{{ device_config.ip }}"
-  register: mr2
+- ansible.builtin.include_role:
+    name: ndfc_device_info_get
   vars:
-    ansible_connection: httpapi
+    device_name: "{{ vpc_config.peer_2 }}"
 
-- name: main set_fact p2_serial, p2_vpc, p2_db_id
+- name: worker set_fact vpc_peer_1 {{ device_config.switch_fabric }} {{ vpc_name }} - p2_serial, p2_vpc, p2_db_id
   set_fact:
-    p2_serial: "{{ mr2.response | json_query(mq6) }}"
-    p2_vpc: "{{ mr2.response | json_query(mq7) }}"
-    p2_db_id: "{{ mr2.response | json_query(mq8) }}"
-  vars:
-    mq6: "[0].serialNumber"
-    mq7: "[0].isVpcConfigured"
-    mq8: "[0].switchDbID"
+    p2_serial: "{{ device_info.serialNumber }}"
+    p2_vpc: "{{ device_info.isVpcConfigured }}"
+    p2_db_id: "{{ device_info.switchDbID }}"
 
 # Conditionally create vpc peering
 - name: main REST create VPC Peers fabric_name {{ device_config.switch_fabric }} vpc_name {{ vpc_name }} configured {{ p1_vpc }}/{{ p2_vpc }} serial_number {{ p1_serial }}/{{ p2_serial }}"
