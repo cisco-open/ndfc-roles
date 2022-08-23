@@ -4,44 +4,42 @@
 # Ansible dcnm_rest module per below.  Hence, this is a work in progress
 # and doesn't work.
 
+- ansible.builtin.include_role:
+    name: ndfc_vpc_config_get
+
 # Retrieve serial number and vpc config state for vpc_peer_1
-- name: main query vpc_peer_1 {{ fabric_name }} {{ vpc_name }}
-  cisco.dcnm.dcnm_inventory:
-    fabric: "{{ fabric_name }}"
-    state: query
-    config:
-    - seed_ip: "{{ ip }}"
-  register: mr1
+
+- ansible.builtin.include_role:
+    name: ndfc_device_config_get
   vars:
-    mq1: "[?fabric == '{{ fabric_name }}'] | [?name == '{{ vpc_name }}'].peer_1_ip | [0]"
-    ip: "{{ vpc_peers | json_query(mq1)}}"
-- name: main set_fact vpc_peer_1 serial number
+    device_name: "{{ vpc_config.peer_1 }}"
+
+- ansible.builtin.include_role:
+    name: ndfc_device_info_get
+  vars:
+    device_name: "{{ vpc_config.peer_1 }}"
+
+- name: worker set_fact vpc_peer_1 fabric {{ device_config.switch_fabric }} vpc {{ vpc_name }} device {{ vpc_config.peer_1 }} - p1_serial, p1_vpc
   set_fact:
-    p1_serial: "{{ mr1.response | json_query(mq2) }}"
-    p1_vpc: "{{ mr1.response | json_query(mq3) }}"
-  vars:
-    mq2: "[0].serialNumber"
-    mq3: "[0].isVpcConfigured"
+    p1_serial: "{{ device_info.serialNumber }}"
+    p1_vpc: "{{ device_info.isVpcConfigured }}"
 
 # Retrieve serial number and vpc config state for vpc_peer_2
-- name: main query vpc_peer_2 {{ fabric_name }} {{ vpc_name }}
-  cisco.dcnm.dcnm_inventory:
-    fabric: "{{ fabric_name }}"
-    state: query
-    config:
-    - seed_ip: "{{ ip }}"
-  register: mr2
-  vars:
-    mq4: "[?fabric == '{{ fabric_name }}'] | [?name == '{{ vpc_name }}'].peer_2_ip | [0]"
-    ip: "{{ vpc_peers | json_query(mq4)}}"
 
-- name: main set_fact vpc_peer_2 serial number
-  set_fact:
-    p2_serial: "{{ mr2.response | json_query(mq5) }}"
-    p2_vpc: "{{ mr2.response | json_query(mq6) }}"
+- ansible.builtin.include_role:
+    name: ndfc_device_config_get
   vars:
-    mq5: "[0].serialNumber"
-    mq6: "[0].isVpcConfigured"
+    device_name: "{{ vpc_config.peer_2 }}"
+
+- ansible.builtin.include_role:
+    name: ndfc_device_info_get
+  vars:
+    device_name: "{{ vpc_config.peer_2 }}"
+
+- name: worker set_fact vpc_peer_2 fabric {{ device_config.switch_fabric }} vpc {{ vpc_name }} device {{ vpc_config.peer_2 }} - p2_serial, p2_vpc
+  set_fact:
+    p2_serial: "{{ device_info.serialNumber }}"
+    p2_vpc: "{{ device_info.isVpcConfigured }}"
 
 # Conditionally delete vpc peering
 - name: main REST DELETE VPC Peers fabric_name {{ fabric_name }} vpc_name {{ vpc_name }} configured {{ p1_vpc }}/{{ p2_vpc }} serial_numbers {{ p1_serial }}/{{ p2_serial }}"
