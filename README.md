@@ -229,7 +229,7 @@ Role                           | Description
 [ndfc_device_deleted_all] | Delete all devices in a fabric, given ``fabric_name``
 [ndfc_device_generated_configs_all_get] | Query and display all populated generated_configs on all devices, given ``fabric_name``
 [ndfc_device_generated_configs_get] | Retrieve device generated configs, given ``device_name``
-[ndfc_device_info_get] | Query device on the NDFC controller, given ``device_name``
+[ndfc_device_info_get] | Return info on device from the NDFC controller in var ``device_info``, given ``device_name``
 [ndfc_device_interface_config_all_get] | Retrieve and display interface configuration on all devices in a fabric, given ``fabric_name``, ``interface_name``
 [ndfc_device_ipv4_address_local_get] | Retrieve device ipv4 address from local vars, given ``device_name``
 [ndfc_device_ipv4_address_remote_get] | Retrieve device ipv4 address from NDFC controller, given ``device_name``
@@ -241,7 +241,7 @@ Role                           | Description
 [ndfc_network_config_get] | Retrieve local configuration for network, given ``network_name``
 [ndfc_network_deleted] | Delete a network, given ``fabric_name``, ``network_name``
 [ndfc_network_deleted_all] | Delete all networks within a fabric, given ``fabric_name``
-[ndfc_network_info_get] | Retrieve ``network_info`` dictionary, given ``fabric_name``, ``network_name``
+[ndfc_network_info_get] | Retrieve ``network_info`` dictionary, given ``network_name``
 [ndfc_network_replaced] | Replace network on the NDFC controller with its current local definition, given ``network_name``
 [ndfc_network_replaced_all] | Replace all networks within a fabric with their current local definitions, given ``fabric_name``
 [ndfc_policy_vrf_rt_import_evpn] | Import a vrf's route-targets into another vrf on a single device, given ``device_name``
@@ -267,7 +267,7 @@ Role                           | Description
 [ndfc_rest_service_node_add] | Add a service node, given ``service_node_name``
 [ndfc_rest_vpc_create] | Create a VPC pair, given ``fabric_name``, ``vpc_name``
 [ndfc_rest_vpc_delete] | Delete a VPC pair, given ``fabric_name``, ``vpc_name``
-[ndfc_rest_vrf_list_by_fabric] | List VRFs in a given fabric, given ``fabric_name``
+[ndfc_rest_vrf_list_by_fabric] | Return list of VRFs in a given fabric in var ``vrf_list``, given ``fabric_name``
 [ndfc_service_node_deleted] | Delete a service node, given ``service_node_name``
 [ndfc_service_node_merged] | Create a service node, given ``service_node_name``
 [ndfc_vpc_interface_merged_all] | Create (merge) all vpc interfaces for a vpc pair, given ``vpc_name``
