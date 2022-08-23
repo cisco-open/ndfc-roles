@@ -119,7 +119,7 @@
     state: merged
     vrf_name: v1
     import_vrf_name: v2
-    devices:
+    device_list:
       - leaf_1
       - leaf_2
       - leaf_3
@@ -142,7 +142,7 @@
     state: merged
     vrf_name: v2
     import_vrf_name: v1
-    devices:
+    device_list:
       - leaf_1
       - leaf_2
       - leaf_3
