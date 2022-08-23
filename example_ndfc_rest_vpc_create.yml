@@ -7,4 +7,4 @@
     - ndfc_rest_config_deploy_all
   vars:
     fabric_name: f2
-    vpc_name: vpc2
+    vpc_name: vpc_3
