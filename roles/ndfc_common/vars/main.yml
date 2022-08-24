@@ -479,29 +479,21 @@ vpc_peers:
     fabric: "{{ switch_fabrics.f1.name }}"
     peer_1: leaf_1
     peer_2: leaf_2
-    peer_1_ip: "{{ devices.leaf_1.ip }}"
-    peer_2_ip: "{{ devices.leaf_2.ip }}"
   vpc_2:
     vpc_name: vpc_2
     fabric: "{{ switch_fabrics.f1.name }}"
     peer_1: leaf_3
     peer_2: leaf_4
-    peer_1_ip: "{{ devices.leaf_3.ip }}"
-    peer_2_ip: "{{ devices.leaf_4.ip }}"
   vpc_3:
     vpc_name: vpc_3
     fabric: "{{ switch_fabrics.f2.name }}"
     peer_1: leaf_5
     peer_2: leaf_6
-    peer_1_ip: "{{ devices.leaf_5.ip }}"
-    peer_2_ip: "{{ devices.leaf_6.ip }}"
   vpc_4:
     vpc_name: vpc_4
     fabric: "{{ switch_fabrics.f2.name }}"
     peer_1: leaf_7
     peer_2: leaf_8
-    peer_1_ip: "{{ devices.leaf_7.ip }}"
-    peer_2_ip: "{{ devices.leaf_8.ip }}"
 
 # VPC Interfaces
 vpc_interfaces:
