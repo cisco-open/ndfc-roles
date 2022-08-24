@@ -4,18 +4,10 @@
   vars:
     network_name: "{{ network.value.name }}"
 
-- name: debug network_config
-  debug:
-    var: network_config
-
 - ansible.builtin.include_role:
     name: ndfc_fabric_config_get
   vars:
     fabric_name: "{{ network.value.fabric }}"
-
-- name: debug fabric_config
-  debug:
-    var: fabric_config
 
 - name: worker deleted FABRIC {{ network.value.fabric }} NETWORK {{ network.value.net_name }} VRF {{ network.value.vrf_name }} VLAN {{ network.value.vlan_id }} SUBNET {{ network.value.gw_ip_subnet }}
   cisco.dcnm.dcnm_network:
