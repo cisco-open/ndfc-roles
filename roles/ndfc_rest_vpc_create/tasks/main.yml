@@ -58,3 +58,15 @@
       peerTwoId: "{{ p2_serial }}"
       useVirtualPeerlink: "true"
   when: p1_serial != '' and p2_serial != '' and p1_vpc == False and p2_vpc == False
+
+- ansible.builtin.include_role:
+    name: ndfc_rest_config_deploy
+  vars:
+    device_name: "{{ vpc_config.peer_1 }}"
+  when: p1_serial != '' and p2_serial != '' and p1_vpc == False and p2_vpc == False
+
+- ansible.builtin.include_role:
+    name: ndfc_rest_config_deploy
+  vars:
+    device_name: "{{ vpc_config.peer_2 }}"
+  when: p1_serial != '' and p2_serial != '' and p1_vpc == False and p2_vpc == False
