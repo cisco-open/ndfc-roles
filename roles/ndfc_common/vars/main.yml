@@ -668,7 +668,6 @@ service_route_peerings:
   srp_1:
     state: merged
     fabric: "{{ switch_fabrics.f1.name }}"
-    foo: "{{ switch_fabrics.f2.name}}"
     service_fabric: "{{ external_fabrics.sn_fabric_2.name }}"
     attach: true
     deploy: true
