@@ -1,0 +1,13 @@
+# example_ndfc_service_route_peering_config_get.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_service_route_peering_config_get
+  vars:
+    service_route_peering_name: srp_1
+  tasks:
+  - block:
+    - name: debug service_route_peering_config
+      debug:
+        var: service_route_peering_config

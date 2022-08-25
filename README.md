@@ -248,6 +248,7 @@ Role                           | Description
 [ndfc_service_node_config_get] | Retrieve local configuration for service node, given ``service_node_name``
 [ndfc_service_node_deleted] | Delete a service node, given ``service_node_name``
 [ndfc_service_node_merged] | Create a service node, given ``service_node_name``
+[ndfc_service_route_peering_config_get] | Retrieve local configuration for service route peering, given ``service_route_peering_name``
 [ndfc_vpc_interface_merged_all] | Create (merge) all vpc interfaces for a vpc pair, given ``vpc_name``
 [ndfc_vrf_all] | merge/delete all vrfs in a fabric, given ``fabric_name``
 [ndfc_vrf_config_get] | Retrieve local configuration for vrf in json object ``vrf_config``, given ``vrf_name``
@@ -303,6 +304,7 @@ Role                           | Description
 [ndfc_service_node_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_node_config_get
 [ndfc_service_node_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_node_deleted
 [ndfc_service_node_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_node_merged
+[ndfc_service_route_peering_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_route_peering_config_get
 [ndfc_vpc_interface_merged_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vpc_interface_merged_all
 [ndfc_vrf_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_all
 [ndfc_vrf_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_config_get
