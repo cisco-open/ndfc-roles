@@ -26,7 +26,12 @@ See the following for details:
   roles:
     - ndfc_device_config_get
   vars:
-    device_name: spine_1
+    device_name: leaf_1
+  tasks:
+  - block:
+    - name: debug device_config
+      debug:
+        var: device_config
 ```
 
 ### Licensing
