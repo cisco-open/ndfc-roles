@@ -10,4 +10,4 @@
   tasks:
   - block:
     - debug:
-        msg: "fabric_config: {{ fabric_config }}"
+        var: fabric_config

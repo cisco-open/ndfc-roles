@@ -10,4 +10,4 @@
   tasks:
   - block:
     - debug:
-        msg: "network_config: {{ network_config }}"
+        var: network_config

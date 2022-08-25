@@ -10,4 +10,4 @@
   tasks:
   - block:
     - debug:
-        msg: "vrf_config: {{ vrf_config }}"
+        var: vrf_config
