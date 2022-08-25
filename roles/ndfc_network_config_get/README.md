@@ -26,6 +26,11 @@ See the following for details:
     - ndfc_network_config_get
   vars:
     network_name: f1_n1111
+  tasks:
+  - block:
+    - name: debug network_config
+      debug:
+        var: network_config
 ```
 
 ### Licensing
