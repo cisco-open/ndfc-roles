@@ -20,7 +20,7 @@ You should use either (1 and 2) OR 3 (which creates 1 and 2, but with MSD connec
 
 These playbooks leverage many of the included roles.
 
-The remaining Roles are provided as examples which either provide extra functionality (e.g. create external fabrics, and service nodes) or facilitate various day2 ops, such as deleting a fabric, etc.
+The remaining Roles are offered as examples which either provide extra functionality (e.g. create external fabrics, and service nodes) or facilitate various day2 ops, such as deleting a fabric, etc.
 
 ## To clone this repo
 
