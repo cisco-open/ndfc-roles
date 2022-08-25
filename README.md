@@ -6,15 +6,9 @@
 
 This repo contains Ansible Roles and example playbooks that, together, implement a basic Spine/Leaf VXLAN/EVPN fabric using Cisco's DCNM/NDFC Controller.
 
-Two identical child fabrics and a multisite domain (MSD) fabric are defined in the role ``ndfc_common``.  The two child fabrics use  non-overlapping underlay addressing to facilitate interconnection via a multi-site domain (MSD) fabric, which is also defined in ``ndfc_common``; specifically, in ``ndfc_common/vars/main.yml``
+Two identical child fabrics and a multisite domain (MSD) fabric are defined in the role ``ndfc_common``.  The two child fabrics use non-overlapping underlay addressing to facilitate interconnection via a multi-site domain (MSD) fabric, which is also defined in ``ndfc_common``; specifically, in ``ndfc_common/vars/main.yml``
 
-The main playbooks, which create the two fabrics and the MSD fabric are located in the top-level directory:
-
-```bash
-example_ndfc_rest_fabric_switch_create_f1.yml
-example_ndfc_rest_fabric_switch_create_f2.yml
-example_ndfc_rest_fabric_msd_create_with_children.yml
-```
+The main playbooks, which create the two fabrics and the MSD fabric are located in the top-level directory.
 
 Ref | Playbook | Description
 --- | -------- | -----------
@@ -22,28 +16,11 @@ Ref | Playbook | Description
 2 | ``example_ndfc_rest_fabric_switch_create_f2.yml`` | creates VXLAN/EVPN fabric f2 without connectivity to an MSD fabric
 3 | ``example_ndfc_rest_fabric_msd_create_with_children.yml`` | creates VXLAN/EVPN fabrics f1 and f2, connecting them through an MSD fabric
 
-Hence, you should use either (1 and 2) OR 3 (which creates 1 and 2, but with MSD connectivity).  That is, (1 and 2) are mutually exclusive to 3.
+You should use either (1 and 2) OR 3 (which creates 1 and 2, but with MSD connectivity).  That is, (1 and 2) are mutually exclusive to 3.
 
-These playbooks leverage the following included Roles:
+These playbooks leverage many of the included roles.
 
-```bash
-ndfc_rest_config_deploy_all
-ndfc_device_merged
-ndfc_rest_fabric_switch_create
-ndfc_network_replaced_all
-ndfc_policy_vrf_rt_import_evpn_loop
-ndfc_rest_vpc_create
-ndfc_vpc_interface_merged_all
-```
-
-And, in the case of MSD, the following additional Roles are used:
-
-```bash
-ndfc_rest_fabric_msd_create
-msdc_rest_fabric_msd_child_add
-```
-
-The remaining Roles are provided as examples which facilitate various day2 ops.
+The remaining Roles are provided as examples which either provide extra functionality (e.g. create external fabrics, and service nodes) or facilitate various day2 ops, such as deleting a fabric, etc.
 
 ## To clone this repo
 
