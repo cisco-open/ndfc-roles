@@ -1,0 +1,7 @@
+# ndfc_service_node_config_get/tasks/main.yml
+---
+- name: set_fact service_node_config {{ service_node_name }}
+  ansible.builtin.set_fact:
+     service_node_config: "{{ service_nodes | json_query(service_node_config_q1) }}"
+  vars:
+    service_node_config_q1: "{{ service_node_name }}"

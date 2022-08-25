@@ -245,6 +245,7 @@ Role                           | Description
 [ndfc_rest_vpc_create] | Create a VPC pair, given ``fabric_name``, ``vpc_name``
 [ndfc_rest_vpc_delete] | Delete a VPC pair, given ``fabric_name``, ``vpc_name``
 [ndfc_rest_vrf_list_by_fabric] | Return list of VRFs in a given fabric in var ``vrf_list``, given ``fabric_name``
+[ndfc_service_node_config_get] | Retrieve local configuration for service node, given ``service_node_name``
 [ndfc_service_node_deleted] | Delete a service node, given ``service_node_name``
 [ndfc_service_node_merged] | Create a service node, given ``service_node_name``
 [ndfc_vpc_interface_merged_all] | Create (merge) all vpc interfaces for a vpc pair, given ``vpc_name``
@@ -299,6 +300,7 @@ Role                           | Description
 [ndfc_rest_vpc_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_vpc_create
 [ndfc_rest_vpc_delete]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_vpc_delete
 [ndfc_rest_vrf_list_by_fabric]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_vrf_list_by_fabric
+[ndfc_service_node_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_node_config_get
 [ndfc_service_node_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_node_deleted
 [ndfc_service_node_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_node_merged
 [ndfc_vpc_interface_merged_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vpc_interface_merged_all

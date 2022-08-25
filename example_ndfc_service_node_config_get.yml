@@ -1,0 +1,14 @@
+# example_ndfc_service_node_config_get.yml
+---
+
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_service_node_config_get
+  vars:
+    service_node_name: sn_1
+  tasks:
+  - block:
+    - name: debug service_node_config
+      debug:
+        var: service_node_config
