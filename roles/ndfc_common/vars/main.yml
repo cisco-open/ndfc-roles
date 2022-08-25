@@ -117,6 +117,7 @@ external_fabrics:
     SUBINTERFACE_RANGE: 2-511
 
 devices:
+  # switch_fabric f1 ----------------------------------------------
   leaf_1:
     name: leaf_1
     switch_fabric: "{{ switch_fabrics.f1.name }}"
@@ -141,7 +142,31 @@ devices:
     msd_fabric: "{{ msd_fabrics.MSD.name }}"
     ip: 172.22.150.105
     role: leaf
-  # switch_fabric f2
+  spine_1:
+    name: spine_1
+    switch_fabric: "{{ switch_fabrics.f1.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.112
+    role: spine
+  spine_2:
+    name: spine_2
+    switch_fabric: "{{ switch_fabrics.f1.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.113
+    role: spine
+  border_gateway_1:
+    name: border_gateway_1
+    switch_fabric: "{{ switch_fabrics.f1.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.110
+    role: border_gateway
+  border_gateway_2:
+    name: border_gateway_2
+    switch_fabric: "{{ switch_fabrics.f1.name }}"
+    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    ip: 172.22.150.111
+    role: border_gateway
+  # switch_fabric f2 ----------------------------------------------
   leaf_5:
     name: leaf_5
     switch_fabric: "{{ switch_fabrics.f2.name }}"
@@ -166,19 +191,6 @@ devices:
     msd_fabric: "{{ msd_fabrics.MSD.name }}"
     ip: 172.22.150.109
     role: leaf
-
-  spine_1:
-    name: spine_1
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
-    ip: 172.22.150.112
-    role: spine
-  spine_2:
-    name: spine_2
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
-    ip: 172.22.150.113
-    role: spine
   spine_3:
     name: spine_3
     switch_fabric: "{{ switch_fabrics.f2.name }}"
@@ -191,19 +203,6 @@ devices:
     msd_fabric: "{{ msd_fabrics.MSD.name }}"
     ip: 172.22.150.115
     role: spine
-
-  border_gateway_1:
-    name: border_gateway_1
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
-    ip: 172.22.150.110
-    role: border_gateway
-  border_gateway_2:
-    name: border_gateway_2
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
-    ip: 172.22.150.111
-    role: border_gateway
   border_gateway_3:
     name: border_gateway_3
     switch_fabric: "{{ switch_fabrics.f2.name }}"
@@ -422,7 +421,7 @@ vrfs:
 
 ### If using an MSD fabric to interconnect sites, we need to apply networks and
 ### VRFs to the MSD fabric, rather than the individual site fabrics.  The
-### VRFs below are duplicates of the above site fabric VRFs but additionally define
+### VRFs below are duplicates of the above site/switch fabric VRFs but additionally define
 ### attachments for the border_gateway roles, and will be used if the fabric name
 ### is an MSD fabric.
 
