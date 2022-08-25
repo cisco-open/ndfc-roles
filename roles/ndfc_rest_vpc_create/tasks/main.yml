@@ -2,7 +2,7 @@
 
 # - Retrieve serialNumber and isVpcConfigured for both target vpc peers
 # - if, for both peers, serialNumber != '' and isVpcConfigured == 'false'
-#     create the peers
+#   and both peers are in the same fabric, create the peers
 # - else
 #     skip
 
@@ -26,6 +26,7 @@
     p1_serial: "{{ device_info.serialNumber }}"
     p1_vpc: "{{ device_info.isVpcConfigured }}"
     p1_db_id: "{{ device_info.switchDbID }}"
+    p1_fabric: "{{ device_config.switch_fabric}}"
 
 # peer_2
 
@@ -44,9 +45,10 @@
     p2_serial: "{{ device_info.serialNumber }}"
     p2_vpc: "{{ device_info.isVpcConfigured }}"
     p2_db_id: "{{ device_info.switchDbID }}"
+    p2_fabric: "{{ device_config.switch_fabric}}"
 
 # Conditionally create vpc peering
-- name: main REST create VPC Peers fabric_name {{ device_config.switch_fabric }} vpc_name {{ vpc_name }} configured {{ p1_vpc }}/{{ p2_vpc }} serial_number {{ p1_serial }}/{{ p2_serial }}"
+- name: main REST create VPC Peers fabric {{ p1_fabric }}/{{ p2_fabric }} vpc_name {{ vpc_name }} configured {{ p1_vpc }}/{{ p2_vpc }} serial_number {{ p1_serial }}/{{ p2_serial }}"
   cisco.dcnm.dcnm_rest:
     method: POST
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/vpcpair"
@@ -57,16 +59,31 @@
       peerOneId: "{{ p1_serial }}"
       peerTwoId: "{{ p2_serial }}"
       useVirtualPeerlink: "true"
-  when: p1_serial != '' and p2_serial != '' and p1_vpc == False and p2_vpc == False
+  when: 
+    - p1_serial != ''
+    - p2_serial != ''
+    - p1_vpc == False
+    - p2_vpc == False
+    - p1_fabric == p2_fabric
 
 - ansible.builtin.include_role:
     name: ndfc_rest_config_deploy
   vars:
     device_name: "{{ vpc_config.peer_1 }}"
-  when: p1_serial != '' and p2_serial != '' and p1_vpc == False and p2_vpc == False
+  when: 
+    - p1_serial != ''
+    - p2_serial != ''
+    - p1_vpc == False
+    - p2_vpc == False
+    - p1_fabric == p2_fabric
 
 - ansible.builtin.include_role:
     name: ndfc_rest_config_deploy
   vars:
     device_name: "{{ vpc_config.peer_2 }}"
-  when: p1_serial != '' and p2_serial != '' and p1_vpc == False and p2_vpc == False
+  when: 
+    - p1_serial != ''
+    - p2_serial != ''
+    - p1_vpc == False
+    - p2_vpc == False
+    - p1_fabric == p2_fabric
