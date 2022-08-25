@@ -476,22 +476,18 @@ vrfs:
 vpc_peers:
   vpc_1:
     vpc_name: vpc_1
-    fabric: "{{ switch_fabrics.f1.name }}"
     peer_1: leaf_1
     peer_2: leaf_2
   vpc_2:
     vpc_name: vpc_2
-    fabric: "{{ switch_fabrics.f1.name }}"
     peer_1: leaf_3
     peer_2: leaf_4
   vpc_3:
     vpc_name: vpc_3
-    fabric: "{{ switch_fabrics.f2.name }}"
     peer_1: leaf_5
     peer_2: leaf_6
   vpc_4:
     vpc_name: vpc_4
-    fabric: "{{ switch_fabrics.f2.name }}"
     peer_1: leaf_7
     peer_2: leaf_8
 
@@ -499,7 +495,6 @@ vpc_peers:
 vpc_interfaces:
   vpci_1111:
     vpc_name: vpc_1
-    fabric: "{{ switch_fabrics.f1.name }}"
     vpc_port_id: vpi11
     interface_mode: trunk
     mtu: jumbo
@@ -513,7 +508,6 @@ vpc_interfaces:
 
   vpci_1112:
     vpc_name: vpc_1
-    fabric: "{{ switch_fabrics.f1.name }}"
     vpc_port_id: vpi12
     interface_mode: trunk
     mtu: jumbo
@@ -527,7 +521,6 @@ vpc_interfaces:
 
   vpci_1211:
     vpc_name: vpc_2
-    fabric: "{{ switch_fabrics.f1.name }}"
     vpc_port_id: vpi11
     interface_mode: trunk
     mtu: jumbo
@@ -541,7 +534,6 @@ vpc_interfaces:
 
   vpci_1212:
     vpc_name: vpc_2
-    fabric: "{{ switch_fabrics.f1.name }}"
     vpc_port_id: vpi12
     interface_mode: trunk
     mtu: jumbo
@@ -556,7 +548,6 @@ vpc_interfaces:
 # f2
   vpci_2111:
     vpc_name: vpc_3
-    fabric: "{{ switch_fabrics.f2.name }}"
     vpc_port_id: vpi11
     interface_mode: trunk
     mtu: jumbo
@@ -570,7 +561,6 @@ vpc_interfaces:
 
   vpci_2112:
     vpc_name: vpc_3
-    fabric: "{{ switch_fabrics.f2.name }}"
     vpc_port_id: vpi12
     interface_mode: trunk
     mtu: jumbo
@@ -584,7 +574,6 @@ vpc_interfaces:
 
   vpci_2211:
     vpc_name: vpc_4
-    fabric: "{{ switch_fabrics.f2.name }}"
     vpc_port_id: vpi11
     interface_mode: trunk
     mtu: jumbo
@@ -598,7 +587,6 @@ vpc_interfaces:
 
   vpci_2212:
     vpc_name: vpc_4
-    fabric: "{{ switch_fabrics.f2.name }}"
     vpc_port_id: vpi12
     interface_mode: trunk
     mtu: jumbo
