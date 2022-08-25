@@ -1,0 +1,21 @@
+# ndfc_rest_device_intent_config_get/tasks/main.yml
+---
+- ansible.builtin.include_role:
+    name: ndfc_device_config_get
+
+- ansible.builtin.include_role:
+    name: ndfc_device_info_get
+
+- name: main REST GET intent_config DEVICE {{ device_config.name }} SERIAL {{ device_info.serialNumber }}
+  cisco.dcnm.dcnm_rest:
+    method: GET
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/policies/switches/{{ device_info.serialNumber }}/intent-config"
+    json_data: "{{ vars_dict | to_json }}"
+  vars:
+    ansible_connection: httpapi
+    vars_dict:
+  register: mr1
+
+- name: set_fact device_intent_config
+  set_fact:
+    device_intent_config: "{{ mr1.response.DATA.config }}"

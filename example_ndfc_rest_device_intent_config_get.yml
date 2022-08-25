@@ -1,0 +1,13 @@
+# example_ndfc_rest_device_intent_config_get.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_device_intent_config_get
+  vars:
+    device_name: leaf_1
+  tasks:
+  - block:
+    - name: debug device_intent_config
+      debug:
+        var: device_intent_config
