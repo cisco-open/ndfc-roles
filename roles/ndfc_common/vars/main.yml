@@ -231,6 +231,7 @@ networks:
     vrf_name: v1
     vlan_id: 1111
     gw_ip_subnet: "10.21.1.1/24"
+    tag: 12345 # used in service_route_peerings
     attach:
       - ip_address: "{{ devices.leaf_1.ip }}"
         ports: "{{ port_groups.pg11 }}"
@@ -248,6 +249,7 @@ networks:
     vrf_name: v2
     vlan_id: 1112
     gw_ip_subnet: "10.22.1.1/24"
+    tag: 12345
     attach:
       - ip_address: "{{ devices.leaf_1.ip }}"
         ports: "{{ port_groups.pg12 }}"
@@ -265,6 +267,7 @@ networks:
     vrf_name: v1
     vlan_id: 1111
     gw_ip_subnet: "10.21.1.1/24"
+    tag: 12345
     attach:
     - ip_address: "{{ devices.leaf_5.ip }}"
       ports: "{{ port_groups.pg11 }}"
@@ -282,6 +285,7 @@ networks:
     vrf_name: v2
     vlan_id: 1112
     gw_ip_subnet: "10.22.1.1/24"
+    tag: 12345
     attach:
     - ip_address: "{{ devices.leaf_5.ip }}"
       ports: "{{ port_groups.pg12 }}"
@@ -299,6 +303,7 @@ networks:
     vrf_name: v1
     vlan_id: 1111
     gw_ip_subnet: "10.21.1.1/24"
+    tag: 12345
     attach:
     - ip_address: "{{ devices.leaf_1.ip }}"
       ports: "{{ port_groups.pg11 }}"
@@ -332,6 +337,7 @@ networks:
     vrf_name: v2
     vlan_id: 1112
     gw_ip_subnet: "10.22.1.1/24"
+    tag: 12345
     attach:
     - ip_address: "{{ devices.leaf_1.ip }}"
       ports: "{{ port_groups.pg11 }}"
@@ -665,34 +671,35 @@ service_nodes:
 
 service_route_peerings:
   srp_1:
+    name: srp_1
     state: merged
     fabric: "{{ switch_fabrics.f1.name }}"
-    service_fabric: "{{ external_fabrics.sn_fabric_2.name }}"
+    service_fabric: "{{ external_fabrics.sn_fabric_1.name }}"
     attach: true
     deploy: true
     config:
-      - name: IT-FW-RP1                                  # mandatory
+      - name: it_fw_srp_1                                # mandatory
         node_name: sn_2                                  # mandatory
         deploy_mode: intra_tenant_fw                     # mandatory, choices=[intra_tenant_fw, inter_tenant_fw]
         inside_network:                                  #
-          vrf: v1                                 # mandatory
-          name: rp1-sn1-inside-net                       # mandatory
-          vlan_id: 1111                                   # optional
+          name: "{{ networks.f1_n1111.net_name }}"       # mandatory
+          vrf: "{{ networks.f1_n1111.vrf_name }}"        # mandatory
+          vlan_id: "{{ networks.f1_n1111.vlan_id }}"
           profile:
-            ipv4_gw: 10.21.1.1/24                       # mandatory
-            #ipv6_gw: 2001:db01::1/64                     # optional, default is ''
-            #vlan_name: rp1-sn1-inside                    # optional, default is ''
+            ipv4_gw: "{{ networks.f1_n1111.gw_ip_subnet }}" # mandatory
+            #ipv6_gw: 2001:db01::1/64                       # optional, default is ''
+            vlan_name: "inside.{{ networks.f1_n1111.vrf_name }}.{{ networks.f1_n1111.vlan_id }}" # optional, default is ''
             int_descr: "RP1 SN1 inside interface"        # optional, default is ''
-            tag: 12345                                   # optional, default is 12345
+            tag:  "{{ networks.f1_n1111.tag }}"          # optional, default is 12345
         next_hop: 10.21.1.100                            # mandatory
         outside_network:                                 #
-          vrf: v1                                        # mandatory
-          name: rp1-sn1-outside-net                      # mandatory
-          vlan_id: 1112                                   # optional
+          name: "{{ networks.f1_n1112.net_name }}"       # mandatory
+          vrf: "{{ networks.f1_n1112.vrf_name }}"        # mandatory
+          vlan_id: "{{ networks.f1_n1112.vlan_id }}"     # optional
           profile:
-            ipv4_gw: 10.22.1.1/24                      # mandatory
-            #ipv6_gw: 2001:db02::1/64                     # optional, default is ''
-            #vlan_name: rp1-sn1-outside                   # optional, default is ''
-            int_descr: "RP1 SN1 outside interface"       # optionL, default is ''
-            tag: 12345                                   # optional, default is 12345
+            ipv4_gw: "{{ networks.f1_n1112.gw_ip_subnet }}" # mandatory
+            #ipv6_gw: 2001:db02::1/64                    # optional, default is ''
+            vlan_name: "outside.{{ networks.f1_n1112.vrf_name }}.{{ networks.f1_n1112.vlan_id }}" # optional, default is ''
+            int_descr: "RP1 SN1 outside interface"       # optional, default is ''
+            tag:  "{{ networks.f1_n1112.tag }}"          # optional, default is 12345
         reverse_next_hop: 10.22.1.100                    # optional, default is ''
