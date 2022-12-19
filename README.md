@@ -34,10 +34,29 @@ git clone https://github.com/allenrobel/ndfc-roles.git
 
 ndfc-roles has been tested with the following ND+NDFC versions
 
-Tested | ND       | NDFC
------- | -------- | -----------
-Yes    | 2.2(1h)  | 12.1.1e
-Yes    | 2.1(2d)  | 12.0.2f
+Tested | ND       | NDFC        | cisco.dcnm | Result
+------ | -------- | ----------- | ---------- | ------
+Yes    | 2.2(2d)  | 12.1.1e     | 2.4.0      | FAIL[1]
+Yes    | 2.2(1h)  | 12.1.1e     | 2.1.0      | PASS
+Yes    | 2.1(2d)  | 12.0.2f     | 2.1.0      | PASS
+Yes    | 2.1(2d)  | 12.0.2f     | 2.1.0      | PASS
+
+[1] The following fails
+
+```ansible
+- hosts: ndfc
+gather_facts: false
+roles:
+- ndfc_network_replaced_all
+vars:
+    fabric_name: MSD
+```
+
+The error returned is:
+
+```bash
+ "Invalid: Fabric mode is not multicast and Multicast Address: 239.1.1.0 is present",
+```
 
 ### cisco.dcnm Ansible Collection Version 2.1.0
 
