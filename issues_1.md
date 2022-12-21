@@ -1,4 +1,4 @@
-The following example playbook fails (as do similar tasks in other playbooks).
+The following example playbook fails when using cisco.dcnm version 2.4.0 (as do similar tasks in other playbooks).
 
 ```yaml
 - hosts: ndfc
@@ -19,7 +19,10 @@ The error returned is, variously:
  "Invalid: Ingress Replication is true and Multicast Address is 239.1.1.0"
 ```
 
-A workaround is to set ``multicast_group_address: ""`` in roles/ndfc_network_replaced_all/tasks/worker.yml, like so:
+You can use either of the following two workarounds:
+
+1. Downgrade to cisco.dcnm 2.3.0
+2. If running cisco.dcnm 2.4.0, set ``multicast_group_address: ""`` in roles/ndfc_network_replaced_all/tasks/worker.yml, like so:
 
 ```yaml
 # ndfc_network_replaced_all/tasks/worker.yml
