@@ -19,7 +19,7 @@ The error returned is, variously:
  "Invalid: Ingress Replication is true and Multicast Address is 239.1.1.0"
 ```
 
-You can use either of the following two workarounds:
+There are two known workarounds:
 
 1. Downgrade to cisco.dcnm 2.3.0
 2. If running cisco.dcnm 2.4.0, set ``multicast_group_address: ""`` in roles/ndfc_network_replaced_all/tasks/worker.yml, like so:
