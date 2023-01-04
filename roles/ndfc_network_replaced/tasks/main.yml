@@ -1,4 +1,8 @@
 # ndfc_network_replaced/tasks/main.yml
+# 2023-01-04: Added a temporary workaround to issue where one of the following errors are thrown
+# due to changes in DCNM Ansible Collection version 2.4.0:
+# Invalid: Fabric mode is not multicast and Multicast Address: 239.1.1.0 is present
+# Invalid: Ingress Replication is true and Multicast Address is 239.1.1.0
 - ansible.builtin.include_role:
     name: ndfc_network_config_get
 
@@ -8,6 +12,7 @@
     state: replaced
     config:
     - net_name: "{{ network_config.net_name }}"
+      multicast_group_address: ""
       vrf_name: "{{ network_config.vrf_name }}"
       vlan_id: "{{ network_config.vlan_id }}"
       gw_ip_subnet: "{{ network_config.gw_ip_subnet }}"
