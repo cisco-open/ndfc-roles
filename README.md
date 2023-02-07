@@ -36,12 +36,14 @@ ndfc-roles has been tested with the following ND+NDFC versions
 
 Tested | ND       | NDFC        | cisco.dcnm | Result
 ------ | -------- | ----------- | ---------- | ------
+Yes    |  2.3(1c) | 12.1.2e     | 2.4.0      | [FAIL][2]
 Yes    | 2.2(2d)  | 12.1.1e     | 2.4.0      | [FAIL][1]
 Yes    | 2.2(1h)  | 12.1.1e     | 2.1.0      | PASS
 Yes    | 2.1(2d)  | 12.0.2f     | 2.1.0      | PASS
 Yes    | 2.1(2d)  | 12.0.2f     | 2.1.0      | PASS
 
 [1]: ./issues_1.md
+[2]: ./issues_2.md
 
 ### cisco.dcnm Ansible Collection Version 2.1.0
 

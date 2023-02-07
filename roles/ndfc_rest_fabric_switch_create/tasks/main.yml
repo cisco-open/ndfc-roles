@@ -16,6 +16,7 @@
      SUBNET_RANGE: "{{ all_fabrics.values() | list | json_query(mq5) }}"
      FABRIC_MTU: "{{ all_fabrics.values() | list | json_query(mq6) }}"
      REPLICATION_MODE: "{{ all_fabrics.values() | list | json_query(mq7) }}"
+     ENABLE_PVLAN: "{{ all_fabrics.values() | list | json_query(mq8) }}"
   vars:
     mq1: "[?name == '{{ fabric_name }}'].BGP_AS | [0]"
     mq2: "[?name == '{{ fabric_name }}'].ANYCAST_RP_IP_RANGE | [0]"
@@ -24,6 +25,7 @@
     mq5: "[?name == '{{ fabric_name }}'].SUBNET_RANGE | [0]"
     mq6: "[?name == '{{ fabric_name }}'].FABRIC_MTU | [0]"
     mq7: "[?name == '{{ fabric_name }}'].REPLICATION_MODE | [0]"
+    mq8: "[?name == '{{ fabric_name }}'].ENABLE_PVLAN | [0]"
 
 - name: main REST POST Easy_Fabric FABRIC {{ fabric_name }} BGP_AS {{ BGP_AS }} ACTIVE_FABRICS {{ active_fabrics }}
   cisco.dcnm.dcnm_rest:
@@ -41,3 +43,4 @@
       SUBNET_RANGE: "{{ SUBNET_RANGE }}"
       FABRIC_MTU: "{{ FABRIC_MTU }}"
       REPLICATION_MODE: "{{ REPLICATION_MODE }}"
+      ENABLE_PVLAN: "{{ ENABLE_PVLAN }}"
