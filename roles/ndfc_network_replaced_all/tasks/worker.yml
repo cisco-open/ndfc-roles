@@ -1,10 +1,19 @@
 # ndfc_network_replaced_all/tasks/worker.yml
+# 2023-04-11: Added a temporary workaround for an issue where one of the following
+# errors are thrown due to changes in DCNM Ansible Collection version 2.4.0:
+# Invalid: Fabric mode is not multicast and Multicast Address: 239.1.1.0 is present
+# Invalid: Ingress Replication is true and Multicast Address is 239.1.1.0
+# See the following issue:
+# https://github.com/CiscoDevNet/ansible-dcnm/issues/185
+# The workaround is to add multicast_group_address: "" to config:
+# 2023-04-11: Update: This still seems broken in cisco.dcnm version 3.1.1 so keeping the workaround.
 - name: worker replaced FABRIC {{ network.value.fabric }} NETWORK {{ network.value.net_name }} VRF {{ network.value.vrf_name }} VLAN {{ network.value.vlan_id }} SUBNET {{ network.value.gw_ip_subnet }}"
   cisco.dcnm.dcnm_network:
     fabric: "{{ fabric_name }}"
     state: replaced
     config:
     - net_name: "{{ network.value.net_name }}"
+      multicast_group_address: ""
       vrf_name: "{{ network.value.vrf_name }}"
       vlan_id: "{{ network.value.vlan_id }}"
       gw_ip_subnet: "{{ network.value.gw_ip_subnet }}"
