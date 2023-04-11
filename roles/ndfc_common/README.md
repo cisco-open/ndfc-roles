@@ -8,7 +8,27 @@ json_query (``pip install jmespath``)
 
 ### Role Variables
 
-#### fabrics
+#### lan_classic_fabrics
+
+A list of dictionaries with the following structure:
+
+Variable               | Example        | Type       | Description
+-----------------------|----------------|-----------|-------------------
+name                   | my_lan_fabric  | str()     | Fabric name
+LOOPBACK0_IP_RANGE     | 10.201.0.0/22  | str()     | prefix/mask defining DCI loopback address range
+IS_READ_ONLY           | false          | bool()    | If ``true`` the fabric will be created in monitor mode and no edits can be made to it.  If ``false``, the fabric will be created in read/write mode.
+
+##### Example
+
+```yaml
+lan_classic_fabrics:
+  my_lan_classic_fabric:
+    name: my_lan_classic_fabric
+    LOOPBACK0_IP_RANGE: 10.37.0.0/22
+    IS_READ_ONLY: false
+```
+
+#### switch_fabrics
 
 A list of dictionaries with the following structure:
 
@@ -79,6 +99,8 @@ msd_fabrics:
   DCI_SUBNET_RANGE: 10.100.1.0/24
   DCI_SUBNET_TARGET_MASK: 30
 ```
+
+
 #### external_fabrics
 
 A list of dictionaries with the following structure:
