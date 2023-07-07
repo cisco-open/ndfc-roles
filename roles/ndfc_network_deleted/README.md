@@ -1,20 +1,21 @@
 # ndfc_network_deleted
 
-Delete network ``network_name`` where ``network_name`` matches the ``name`` key in the ``networks`` dictionary in ``roles/ndfc_common/vars/main.yml``
+Delete network ``network_name`` where ``network_name`` matches the ``name`` key in the local ``networks`` dictionary in [./inventory/group_vars/ndfc/03_networks.yml](/inventory/group_vars/ndfc/03_networks.yml)
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-network_name    | str() | The network to be deleted
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+network_name    | string | The network to be deleted
 
-Network names are defined in the following file:
+Network parameters are defined in the following files:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/03_networks.yml](/inventory/group_vars/ndfc/03_networks.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
+
 
 
 ### Example Playbooks
