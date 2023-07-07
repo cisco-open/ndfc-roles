@@ -1,0 +1,146 @@
+port_groups:
+  pg11:
+  - Port-channel11
+  pg12:
+  - Port-channel12
+
+networks:
+  f1_n1111:
+    name: f1_n1111 # name must be unique across all fabrics
+    fabric: "{{ switch_fabrics.f1.name }}"
+    net_name: n1111 # can be the same across fabrics
+    vrf_name: v1
+    vlan_id: 1111
+    gw_ip_subnet: "10.21.1.1/24"
+    tag: 12345 # used in service_route_peerings
+    attach:
+      - ip_address: "{{ devices.leaf_1.ip }}"
+        ports: "{{ port_groups.pg11 }}"
+      - ip_address: "{{ devices.leaf_2.ip }}"
+        ports: "{{ port_groups.pg11 }}"
+      - ip_address: "{{ devices.leaf_3.ip }}"
+        ports: "{{ port_groups.pg11 }}"
+      - ip_address: "{{ devices.leaf_4.ip }}"
+        ports: "{{ port_groups.pg11 }}"
+
+  f1_n1112:
+    name: f1_n1112
+    fabric: "{{ switch_fabrics.f1.name }}"
+    net_name: n1112
+    vrf_name: v2
+    vlan_id: 1112
+    gw_ip_subnet: "10.22.1.1/24"
+    tag: 12345
+    attach:
+      - ip_address: "{{ devices.leaf_1.ip }}"
+        ports: "{{ port_groups.pg12 }}"
+      - ip_address: "{{ devices.leaf_2.ip }}"
+        ports: "{{ port_groups.pg12 }}"
+      - ip_address: "{{ devices.leaf_3.ip }}"
+        ports: "{{ port_groups.pg12 }}"
+      - ip_address: "{{ devices.leaf_4.ip }}"
+        ports: "{{ port_groups.pg12 }}"
+
+  f2_n1111:
+    name: f2_n1111
+    fabric: "{{ switch_fabrics.f2.name }}"
+    net_name: n1111
+    vrf_name: v1
+    vlan_id: 1111
+    gw_ip_subnet: "10.21.1.1/24"
+    tag: 12345
+    attach:
+    - ip_address: "{{ devices.leaf_5.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_6.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_7.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_8.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+
+  f2_n1112:
+    name: f2_n1112
+    fabric: "{{ switch_fabrics.f2.name }}"
+    net_name: n1112
+    vrf_name: v2
+    vlan_id: 1112
+    gw_ip_subnet: "10.22.1.1/24"
+    tag: 12345
+    attach:
+    - ip_address: "{{ devices.leaf_5.ip }}"
+      ports: "{{ port_groups.pg12 }}"
+    - ip_address: "{{ devices.leaf_6.ip }}"
+      ports: "{{ port_groups.pg12 }}"
+    - ip_address: "{{ devices.leaf_7.ip }}"
+      ports: "{{ port_groups.pg12 }}"
+    - ip_address: "{{ devices.leaf_8.ip }}"
+      ports: "{{ port_groups.pg12 }}"
+
+  msd_n1111:
+    name: msd_n1111
+    fabric: "{{ msd_fabrics.MSD.name }}"
+    net_name: n1111
+    vrf_name: v1
+    vlan_id: 1111
+    gw_ip_subnet: "10.21.1.1/24"
+    tag: 12345
+    attach:
+    - ip_address: "{{ devices.leaf_1.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_2.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_3.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_4.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_5.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_6.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_7.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_8.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.border_gateway_1.ip }}"
+      ports: ""
+    - ip_address: "{{ devices.border_gateway_2.ip }}"
+      ports: ""
+    - ip_address: "{{ devices.border_gateway_3.ip }}"
+      ports: ""
+    - ip_address: "{{ devices.border_gateway_4.ip }}"
+      ports: ""
+
+  msd_n1112:
+    name: msd_n1112
+    fabric: "{{ msd_fabrics.MSD.name }}"
+    net_name: n1112
+    vrf_name: v2
+    vlan_id: 1112
+    gw_ip_subnet: "10.22.1.1/24"
+    tag: 12345
+    attach:
+    - ip_address: "{{ devices.leaf_1.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_2.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_3.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_4.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_5.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_6.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_7.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.leaf_8.ip }}"
+      ports: "{{ port_groups.pg11 }}"
+    - ip_address: "{{ devices.border_gateway_1.ip }}"
+      ports: ""
+    - ip_address: "{{ devices.border_gateway_2.ip }}"
+      ports: ""
+    - ip_address: "{{ devices.border_gateway_3.ip }}"
+      ports: ""
+    - ip_address: "{{ devices.border_gateway_4.ip }}"
+      ports: ""

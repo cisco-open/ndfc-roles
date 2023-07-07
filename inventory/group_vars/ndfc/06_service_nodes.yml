@@ -1,0 +1,100 @@
+service_nodes:
+  sn_1:
+    service_node_name: "sn_1"
+    external_fabric_name: "{{ external_fabrics.sn_fabric_1.name }}"
+    # NOTE, service_node_type values are different between Ansible module
+    # dcnm_service_node and the REST API.  Since ndfc-roles offers roles
+    # based on both, you need to ensure that you're using the correct
+    # service_node_type values, per below (these are case-sensitive):
+    # REST: "Firewall" "ADC" "VNF" 
+    # dcnm_service_node: firewall, load_balancer, virtual_network_function
+    service_node_type: "firewall" # dcnm_service_node
+    # service_node_type: "Firewall" # REST
+    service_node_form_factor: "Virtual"
+    service_node_peer_name: "foo"
+    service_node_interface_name: "Ethernet1/1"
+    attached_fabric_name: "{{ switch_fabrics.f1.name }}"
+    attached_switch_name: "leaf_1"
+    attached_switch_interface_name: "Ethernet1/1"
+    vpc_switches_attached: false
+    link_template_name: "service_link_trunk"
+    interface_speed: "Auto"
+    interface_mtu: "jumbo"
+    interface_allowed_vlans: "all"
+    interface_bpduguard_enabled: true
+    interface_porttype_fast_enabled: true
+    interface_admin_state: true
+
+  sn_2:
+    service_node_name: "sn_2"
+    external_fabric_name: "{{ external_fabrics.sn_fabric_2.name }}"
+    # see note for service_node_type above
+    service_node_type: "firewall"
+    service_node_form_factor: "Virtual"
+    service_node_peer_name: "bar"
+    service_node_interface_name: "Ethernet1/1"
+    attached_fabric_name: "{{ switch_fabrics.f1.name }}"
+    attached_switch_name: "leaf_2"
+    attached_switch_interface_name: "Ethernet1/1"
+    vpc_switches_attached: false
+    link_template_name: "service_link_trunk"
+    interface_speed: "Auto"
+    interface_mtu: "jumbo"
+    interface_allowed_vlans: "all"
+    interface_bpduguard_enabled: true
+    interface_porttype_fast_enabled: true
+    interface_admin_state: true
+
+  sn_3:
+    service_node_name: "sn_3"
+    external_fabric_name: "{{ external_fabrics.sn_fabric_3.name }}"
+    service_node_type: "Firewall"
+    service_node_form_factor: "Virtual"
+    service_node_peer_name: "foobar"
+    service_node_interface_name: "Ethernet1/1"
+    attached_fabric_name: "{{ switch_fabrics.f2.name }}"
+    attached_switch_name: "leaf_1"
+    attached_switch_interface_name: "Ethernet1/1"
+    vpc_switches_attached: false
+    link_template_name: "service_link_trunk"
+    interface_speed: "Auto"
+    interface_mtu: "jumbo"
+    interface_allowed_vlans: "all"
+    interface_bpduguard_enabled: true
+    interface_porttype_fast_enabled: true
+    interface_admin_state: true
+
+service_route_peerings:
+  srp_1:
+    name: srp_1
+    state: merged
+    fabric: "{{ switch_fabrics.f1.name }}"
+    service_fabric: "{{ external_fabrics.sn_fabric_1.name }}"
+    attach: true
+    deploy: true
+    config:
+      - name: it_fw_srp_1                                # mandatory
+        node_name: sn_2                                  # mandatory
+        deploy_mode: intra_tenant_fw                     # mandatory, choices=[intra_tenant_fw, inter_tenant_fw]
+        inside_network:                                  #
+          name: "{{ networks.f1_n1111.net_name }}"       # mandatory
+          vrf: "{{ networks.f1_n1111.vrf_name }}"        # mandatory
+          vlan_id: "{{ networks.f1_n1111.vlan_id }}"
+          profile:
+            ipv4_gw: "{{ networks.f1_n1111.gw_ip_subnet }}" # mandatory
+            #ipv6_gw: 2001:db01::1/64                       # optional, default is ''
+            vlan_name: "inside.{{ networks.f1_n1111.vrf_name }}.{{ networks.f1_n1111.vlan_id }}" # optional, default is ''
+            int_descr: "RP1 SN1 inside interface"        # optional, default is ''
+            tag:  "{{ networks.f1_n1111.tag }}"          # optional, default is 12345
+        next_hop: 10.21.1.100                            # mandatory
+        outside_network:                                 #
+          name: "{{ networks.f1_n1112.net_name }}"       # mandatory
+          vrf: "{{ networks.f1_n1112.vrf_name }}"        # mandatory
+          vlan_id: "{{ networks.f1_n1112.vlan_id }}"     # optional
+          profile:
+            ipv4_gw: "{{ networks.f1_n1112.gw_ip_subnet }}" # mandatory
+            #ipv6_gw: 2001:db02::1/64                    # optional, default is ''
+            vlan_name: "outside.{{ networks.f1_n1112.vrf_name }}.{{ networks.f1_n1112.vlan_id }}" # optional, default is ''
+            int_descr: "RP1 SN1 outside interface"       # optional, default is ''
+            tag:  "{{ networks.f1_n1112.tag }}"          # optional, default is 12345
+        reverse_next_hop: 10.22.1.100                    # optional, default is ''

@@ -1,0 +1,125 @@
+# VPC Peers
+vpc_peers:
+  vpc_1:
+    vpc_name: vpc_1
+    peer_1: leaf_1
+    peer_2: leaf_2
+  vpc_2:
+    vpc_name: vpc_2
+    peer_1: leaf_3
+    peer_2: leaf_4
+  vpc_3:
+    vpc_name: vpc_3
+    peer_1: leaf_5
+    peer_2: leaf_6
+  vpc_4:
+    vpc_name: vpc_4
+    peer_1: leaf_7
+    peer_2: leaf_8
+
+# VPC Interfaces
+vpc_interfaces:
+  vpci_1111:
+    vpc_name: vpc_1
+    vpc_port_id: vpi11
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true 
+    port_channel_mode: active 
+    peer1_allowed_vlans: 1111
+    peer2_allowed_vlans: 1111
+    member_list:
+    - Ethernet1/11
+
+  vpci_1112:
+    vpc_name: vpc_1
+    vpc_port_id: vpi12
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1112
+    peer2_allowed_vlans: 1112
+    member_list:
+    - Ethernet1/12
+
+  vpci_1211:
+    vpc_name: vpc_2
+    vpc_port_id: vpi11
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1111
+    peer2_allowed_vlans: 1111
+    member_list:
+    - Ethernet1/11
+
+  vpci_1212:
+    vpc_name: vpc_2
+    vpc_port_id: vpi12
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1112
+    peer2_allowed_vlans: 1112
+    member_list:
+    - Ethernet1/12
+
+# f2
+  vpci_2111:
+    vpc_name: vpc_3
+    vpc_port_id: vpi11
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1111
+    peer2_allowed_vlans: 1111
+    member_list:
+    - Ethernet1/11
+
+  vpci_2112:
+    vpc_name: vpc_3
+    vpc_port_id: vpi12
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1112
+    peer2_allowed_vlans: 1112
+    member_list:
+    - Ethernet1/12
+
+  vpci_2211:
+    vpc_name: vpc_4
+    vpc_port_id: vpi11
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1111
+    peer2_allowed_vlans: 1111
+    member_list:
+    - Ethernet1/11
+
+  vpci_2212:
+    vpc_name: vpc_4
+    vpc_port_id: vpi12
+    interface_mode: trunk
+    mtu: jumbo
+    port_type_fast: true
+    bpdu_guard: true
+    port_channel_mode: active
+    peer1_allowed_vlans: 1112
+    peer2_allowed_vlans: 1112
+    member_list:
+    - Ethernet1/12

@@ -1,0 +1,128 @@
+# LAN Classic Fabric parameters
+# These are created using the LAN_CLASSIC template
+lan_classic_fabrics:
+  LC_1:
+    name: LC_1
+    LOOPBACK0_IP_RANGE: 10.37.0.0/22
+    IS_READ_ONLY: false
+
+# Multi-Site Domain (MSD) Fabric parameters
+# These are created with the MSD_Fabric template
+msd_fabrics:
+  MSD:
+    name: MSD
+    type: msd
+    L2_SEGMENT_ID_RANGE: 30000-49000
+    L3_PARTITION_ID_RANGE: 50000-59000
+    ANYCAST_GW_MAC: 2020.0000.00aa
+    MS_LOOPBACK_ID: 100
+    BORDER_GWY_CONNECTIONS: Direct_To_BGWS
+    MS_UNDERLAY_AUTOCONFIG: true
+    DELAY_RESTORE: 300
+    LOOPBACK100_IP_RANGE: 10.100.0.0/24
+    DCI_SUBNET_RANGE: 10.100.1.0/24
+    DCI_SUBNET_TARGET_MASK: 30
+    ENABLE_PVLAN: "false"
+  msd_test_1:
+    name: msd_test_1
+    type: msd
+    L2_SEGMENT_ID_RANGE: 30000-49000
+    L3_PARTITION_ID_RANGE: 50000-59000
+    ANYCAST_GW_MAC: 2020.0000.00aa
+    MS_LOOPBACK_ID: 100
+    BORDER_GWY_CONNECTIONS: Direct_To_BGWS
+    MS_UNDERLAY_AUTOCONFIG: true
+    DELAY_RESTORE: 300
+    LOOPBACK100_IP_RANGE: 10.100.0.0/24
+    DCI_SUBNET_RANGE: 10.100.1.0/24
+    DCI_SUBNET_TARGET_MASK: 30
+    ENABLE_PVLAN: "false"
+
+# Easy_Fabric VXLAN fabric parameters
+# These are created using the Easy_Fabric template
+# Multicast replication mode requires the following: 
+#
+#   ANYCAST_RP_IP_RANGE: 10.254.1.0/24
+#   REPLICATION_MODE: Multicast
+#
+# Ingress replication mode, requires the following (note that
+# ANYCAST_RP_IP_RANGE needs to be commented, or removed, if 
+# REPLICATION_MODE is set to Ingress):
+#
+#   # ANYCAST_RP_IP_RANGE: COMMENTED OR REMOVED
+#   REPLICATION_MODE: Ingress
+
+switch_fabrics:
+  f1:
+    name: f1
+    type: switch
+    BGP_AS: 65001
+    #ANYCAST_RP_IP_RANGE: 10.254.1.0/24
+    LOOPBACK0_IP_RANGE: 10.2.0.0/22
+    LOOPBACK1_IP_RANGE: 10.3.0.0/22
+    SUBNET_RANGE: 10.4.0.0/16
+    FABRIC_MTU: 9216
+    REPLICATION_MODE: Ingress
+    ENABLE_PVLAN: "false"
+  f2:
+    name: f2
+    type: switch
+    BGP_AS: 65002
+    #ANYCAST_RP_IP_RANGE: 10.254.1.0/24
+    LOOPBACK0_IP_RANGE: 10.6.0.0/22
+    LOOPBACK1_IP_RANGE: 10.7.0.0/22
+    SUBNET_RANGE: 10.8.0.0/16
+    FABRIC_MTU: 9216
+    REPLICATION_MODE: Ingress
+    ENABLE_PVLAN: "false"
+
+  f3:
+    name: f3
+    type: switch
+    BGP_AS: 65003
+    #ANYCAST_RP_IP_RANGE: 10.254.1.0/24
+    LOOPBACK0_IP_RANGE: 10.36.0.0/22
+    LOOPBACK1_IP_RANGE: 10.37.0.0/22
+    SUBNET_RANGE: 10.38.0.0/16
+    FABRIC_MTU: 9216
+    REPLICATION_MODE: Ingress
+    ENABLE_PVLAN: "false"
+
+# External fabric parameters
+external_fabrics:
+  sn_fabric_1:
+    name: sn_fabric_1
+    type: external
+    BGP_AS: 65201
+    DCI_SUBNET_RANGE: 10.101.1.0/24
+    DCI_SUBNET_TARGET_MASK: 30
+    LOOPBACK0_IP_RANGE: 10.201.0.0/22
+    POWER_REDUNDANCY_MODE: ps-redundant
+    SUBINTERFACE_RANGE: 2-511
+  sn_fabric_2:
+    name: sn_fabric_2
+    type: external
+    BGP_AS: 65202
+    DCI_SUBNET_RANGE: 10.102.1.0/24
+    DCI_SUBNET_TARGET_MASK: 30
+    LOOPBACK0_IP_RANGE: 10.202.0.0/22
+    POWER_REDUNDANCY_MODE: ps-redundant
+    SUBINTERFACE_RANGE: 2-511
+  sn_fabric_3:
+    name: sn_fabric_3
+    type: external
+    BGP_AS: 65203
+    DCI_SUBNET_RANGE: 10.103.1.0/24
+    DCI_SUBNET_TARGET_MASK: 30
+    LOOPBACK0_IP_RANGE: 10.203.0.0/22
+    POWER_REDUNDANCY_MODE: ps-redundant
+    SUBINTERFACE_RANGE: 2-511
+  ext_fabric_test:
+    name: ext_fabric_test
+    type: external
+    BGP_AS: 65204
+    DCI_SUBNET_RANGE: 10.104.1.0/24
+    DCI_SUBNET_TARGET_MASK: 30
+    LOOPBACK0_IP_RANGE: 10.204.0.0/22
+    POWER_REDUNDANCY_MODE: ps-redundant
+    SUBINTERFACE_RANGE: 2-511

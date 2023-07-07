@@ -121,11 +121,13 @@ It is recommended (but not mandatory) that you encrypt these passwords.  Below i
 
 Add ``ansible_password`` and ``device_password`` in encrypted format (or non-encrypted, if you don't care about security).  These are the passwords you use to login to your DCNM/NDFC Controller, and NX-OS switches, respectively.
 
-To add encrypted passwords for the NDFC controller and NX-OS devices, issue the following from this repo's top-level directory.
+To add encrypted passwords for the NDFC controller and NX-OS devices, issue the following from this repo's top-level directory.  The lines containing ``echo`` are to ensure carraige returns are added after each line that ``ansible-vault`` adds.
 
 ```bash
 ansible-vault encrypt_string 'mySuperSecretNdfcPassword' --name 'ansible_password' >> ./inventory/group_vars/ndfc
+echo "\n" >> ./inventory/group_vars/ndfc
 ansible-vault encrypt_string 'mySuperSecretNxosPassword' --name 'device_password' >> ./inventory/group_vars/ndfc
+echo "\n" >> ./inventory/group_vars/ndfc
 ```
 
 ansible-vault will prompt you for a vault password, which you'll use to decrypt these passwords (using ``ansible-playbook --ask-vault-pass``) when running the example playbooks.
@@ -136,6 +138,7 @@ Example:
 % ansible-vault encrypt_string 'mySuperSecretNdfcPassword' --name 'ansible_password' >> ./inventory/group_vars/ndfc
 New Vault password: 
 Confirm New Vault password: 
+% echo "\n" >> ./inventory/group_vars/ndfc
 % cat ./inventory/group_vars/ndfc
 ansible_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
@@ -144,6 +147,7 @@ ansible_password: !vault |
           33353935396462663531323437336366653937326234313866623535313431366534363938633834
           6563336634653963320a376364323430316134623430636265383561663631343763646465626365
           36666366333438373537343033393939653830663061623362613439376161626439
+
 % 
 ```
 
