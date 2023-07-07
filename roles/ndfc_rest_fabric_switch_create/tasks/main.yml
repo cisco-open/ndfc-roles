@@ -2,7 +2,7 @@
 ---
 - name: set_fact all_fabrics
   ansible.builtin.set_fact:
-     all_fabrics: "{{ msd_fabrics | combine(switch_fabrics, external_fabrics) }}"
+     all_fabrics: "{{ switch_fabrics }}"
 
 - ansible.builtin.include_role:
     name: ndfc_rest_fabric_active_fabrics_get
