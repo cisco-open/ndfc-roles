@@ -1,8 +1,0 @@
-# example_ndfc_rest_rediscover.yml
----
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_rest_rediscover
-  vars:
-    device_name: spine_1
