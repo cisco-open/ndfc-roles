@@ -1,5 +1,6 @@
 # example_ndfc_network_config_get.yml
-# Retrieve configuration of network from vars defined in ndfc_common
+# Print configuration of network from vars defined in
+# inventory/group_vars/ndfc/03_networks.yml
 ---
 - hosts: ndfc
   gather_facts: false

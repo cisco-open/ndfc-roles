@@ -1,6 +1,7 @@
 # example_ndfc_device_ipv4_address_local_get.yml
-# Query device entry in ndfc_common with fabric_name and device_name
-# and print the switch's ipv4 address based on the vars config in ndfc_common
+# Query device entry in inventory/group_vars/ndfc/01_devices.yml 
+# containing fabric_name and device_name, and print the device's
+# ipv4 address.
 ---
 - hosts: ndfc
   gather_facts: false
