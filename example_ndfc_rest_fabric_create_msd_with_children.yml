@@ -1,0 +1,233 @@
+# example_ndfc_rest_fabric_create_msd_with_children.yml
+---
+# Fabric f1 - Create fabric
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_create_easy_fabric
+  vars:
+    fabric_name: f1
+# Fabric f1 - Get list of devices from ndfc_common role vars
+-   hosts: ndfc
+    gather_facts: false
+    roles:
+    - ndfc_device_list_get
+    vars:
+        fabric_name: f1
+# Fabric f1 - Add devices
+-   hosts: ndfc
+    gather_facts: false
+    roles:
+    - ndfc_device_list_merged
+    vars:
+        devices: "{{ device_list }}"
+        fabric_name: f1
+
+# Fabric f2 - Create fabric
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_create_easy_fabric
+  vars:
+    fabric_name: f2
+# Fabric f2 - Get list of devices from ndfc_common role vars
+-   hosts: ndfc
+    gather_facts: false
+    roles:
+    - ndfc_device_list_get
+    vars:
+        fabric_name: f2
+# Fabric f2 - Add devices
+-   hosts: ndfc
+    gather_facts: false
+    roles:
+    - ndfc_device_list_merged
+    vars:
+        devices: "{{ device_list }}"
+        fabric_name: f2
+
+# vpc_1
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_rest_vpc_create
+  vars:
+    vpc_name: vpc_1
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: f1
+
+# vpc_1 interfaces
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_vpc_interface_merged_all
+  vars:
+    vpc_name: vpc_1
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: f1
+
+# vpc_2
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_rest_vpc_create
+  vars:
+    vpc_name: vpc_2
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: f1
+
+# vpc_2 interfaces
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_vpc_interface_merged_all
+  vars:
+    vpc_name: vpc_2
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: f1
+
+# vpc_3
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_rest_vpc_create
+  vars:
+    vpc_name: vpc_3
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: f2
+
+# vpc_3 interfaces
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_vpc_interface_merged_all
+  vars:
+    vpc_name: vpc_3
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: f2
+
+# vpc_4
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_rest_vpc_create
+  vars:
+    vpc_name: vpc_4
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: f2
+
+# vpc_4 interfaces
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_vpc_interface_merged_all
+  vars:
+    vpc_name: vpc_4
+
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: f2
+
+# Create the MSD Fabric
+# NOTE: we do not add an ndfc_rest_config_deploy_all after
+# this because the newly-created MSD fabric will be in "freeze"
+# mode until a child fabric is added.
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_create_msd
+  vars:
+    msd_fabric: MSD
+
+# Add child_fabric f1 to MSD fabric
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_msd_child_add
+  vars:
+    msd_fabric: MSD
+    child_fabric: f1
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: MSD
+
+# Add child_fabric f2 to MSD fabric
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_msd_child_add
+  vars:
+    msd_fabric: MSD
+    child_fabric: f2
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: MSD
+
+
+# Add VRFs to the MSD fabric.  These will be inherited
+# by the child fabrics.
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_vrf_all
+  vars:
+    fabric_name: MSD
+    state: merged
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: MSD
+
+# Add networks to the MSD fabric.  These will be inherited
+# by the child fabrics.
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_network_replaced_all
+  vars:
+    fabric_name: MSD
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: MSD

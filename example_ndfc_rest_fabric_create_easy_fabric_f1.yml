@@ -1,0 +1,74 @@
+# example_ndfc_rest_fabric_create_easy_fabric_f1.yml
+# This creates a standalone fabric (i.e. not MSD child).
+---
+# Fabric and devices
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_create_easy_fabric
+  vars:
+    fabric_name: f1
+
+# Fabric f1 - Add devices
+-   hosts: ndfc
+    gather_facts: false
+    roles:
+    - ndfc_device_list_merged
+    vars:
+        devices: "{{ device_list }}"
+        fabric_name: f1
+
+# vpc_1
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_rest_vpc_create
+  vars:
+    vpc_name: vpc_1
+
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_vpc_interface_merged_all
+  vars:
+    vpc_name: vpc_1
+
+# vpc_2
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_rest_vpc_create
+  vars:
+    vpc_name: vpc_2
+
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_vpc_interface_merged_all
+  vars:
+    vpc_name: vpc_2
+
+# VRFs
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_vrf_all
+  vars:
+    fabric_name: f1
+    state: replaced
+
+# Networks
+- hosts: ndfc
+  gather_facts: false
+  roles:
+  - ndfc_network_replaced_all
+  vars:
+    fabric_name: f1
+
+# Deploy
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_config_deploy_all
+  vars:
+    fabric_name: f1

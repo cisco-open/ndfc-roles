@@ -1,0 +1,8 @@
+# example_ndfc_rest_fabric_create_lan_classic
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_rest_fabric_create_lan_classic
+  vars:
+    fabric_name: LC_1
