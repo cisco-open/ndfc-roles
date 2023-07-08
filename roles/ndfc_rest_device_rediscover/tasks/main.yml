@@ -1,0 +1,28 @@
+# ndfc_rest_device_rediscover/tasks/main.yml
+---
+- ansible.builtin.include_role:
+    name: ndfc_device_config_get
+
+- name: query FABRIC {{ device_config.switch_fabric }} ROLE {{ device_config.role }} NAME {{ device_name }} IP {{ device_config.ip }}
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ device_config.switch_fabric }}"
+    state: query
+    config:
+    - seed_ip: "{{ device_config.ip }}"
+  register: result
+
+- name: set_fact device_id FABRIC {{ device_config.switch_fabric }} ROLE {{ device_config.role }} NAME {{ device_name }} IP {{ device_config.ip }}
+  set_fact:
+     device_id: "{{ result.response | json_query(q2) | to_json }}"
+  vars:
+    q2: "[0].switchDbID"
+
+- name: worker REST POST rediscoverSwitch FABRIC {{ device_config.switch_fabric }} ROLE {{ device_config.role }} NAME {{ device_name }} IP {{ device_config.ip }} DEVICE_ID {{ device_id }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-discovery/rediscoverSwitch"
+    json_data: "{{ vars_list | to_json }}"
+  when: "device_id != None"
+  vars:
+    vars_list:
+      - "{{ device_id }}"
