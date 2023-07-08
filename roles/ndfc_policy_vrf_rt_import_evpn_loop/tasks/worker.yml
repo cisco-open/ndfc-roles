@@ -6,7 +6,7 @@
     device_name: "{{ item }}"
 - name: set_fact all_fabrics
   ansible.builtin.set_fact:
-     all_fabrics: "{{ msd_fabrics | combine(switch_fabrics, external_fabrics) }}"
+    all_fabrics: "{{ msd | combine(easy_fabric, external, lan_classic) }}"
 
 - name: worker {{ state }} FABRIC {{ device_config.switch_fabric }} DEVICE {{ item }} VRF.VLAN.ASN.INDEX {{ vrf_name }}.{{ vrf_vlan_id }}.{{ import_vrf_asn }}.{{ vrf_index }} import VRF.ASN:INDEX {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}
   retries: 3
