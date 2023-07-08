@@ -15,3 +15,9 @@
 - name: set_fact fabric_info
   ansible.builtin.set_fact:
     fabric_info: "{{ mr1 }}"
+  when: "fabric_name in active_fabrics"
+
+- name: set_fact fabric_info null
+  ansible.builtin.set_fact:
+    fabric_info: ""
+  when: "fabric_name not in active_fabrics"
