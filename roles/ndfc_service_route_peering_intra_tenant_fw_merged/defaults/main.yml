@@ -1,0 +1,9 @@
+# ndfc_rest_service_node_add/defaults/main.yml
+link_template_name: "service_link_trunk"
+vpc_switches_attached: false
+interface_speed: "Auto"
+interface_mtu: "jumbo"
+interface_allowed_vlans: "all"
+interface_bpduguard_enabled: true
+interface_porttype_fast_enabled: true
+interface_admin_state: true

@@ -1,0 +1,54 @@
+# ndfc_service_route_peering_intra_tenant_fw_merged/tasks/main.yml
+---
+- ansible.builtin.include_role:
+    name: ndfc_rest_fabric_active_fabrics_get
+
+- ansible.builtin.include_role:
+    name: ndfc_service_route_peering_config_get
+
+- name: debug service_route_peering_config
+  debug:
+    var: service_route_peering_config
+
+# - name: main service_node_create attached_fabric_name {{ service_route_peering_name }}
+#   cisco.dcnm.dcnm_service_route_peering: "{{ service_route_peering_config }}"
+#   vars:
+#     ansible_connection: httpapi
+- debug:
+    var: service_route_peering_config.config[0].inside_network.vlan_id
+
+- name: "{{ service_route_peering_config.name }}"
+  vars:
+    ansible_connection: httpapi
+  cisco.dcnm.dcnm_service_route_peering:
+    state: "{{ service_route_peering_config.state }}"
+    fabric: "{{ service_route_peering_config.fabric }}"
+    service_fabric:  "{{ service_route_peering_config.service_fabric }}"
+    attach:  "{{ service_route_peering_config.attach }}"
+    deploy:  "{{ service_route_peering_config.deploy }}"
+    config:
+      - name:  "{{ service_route_peering_config.config[0].name }}" # mandatory
+        node_name: "{{ service_route_peering_config.config[0].node_name }}" # mandatory
+        deploy_mode: "{{ service_route_peering_config.config[0].deploy_mode }}"  # mandatory, choices=[intra_tenant_fw, inter_tenant_fw]
+        inside_network:
+          vrf: "{{ service_route_peering_config.config[0].inside_network.vrf }}" # mandatory
+          name: "{{ service_route_peering_config.config[0].inside_network.name }}" # mandatory
+          vlan_id: "{{ service_route_peering_config.config[0].inside_network.vlan_id }}"  # optional
+          profile:
+            ipv4_gw: "{{ service_route_peering_config.config[0].inside_network.profile.ipv4_gw }}"  # mandatory
+            #ipv6_gw: "{{ service_route_peering_config.config[0].inside_network.profile.ipv6_gw }}"   # optional, default is ''
+            vlan_name: "{{ service_route_peering_config.config[0].inside_network.profile.vlan_name }}" # optional, default is ''
+            int_descr: "{{ service_route_peering_config.config[0].inside_network.profile.int_descr }}"   # optional, default is ''
+            tag: "{{ service_route_peering_config.config[0].inside_network.profile.tag }}" # optional, default is 12345
+        next_hop: "{{ service_route_peering_config.config[0].next_hop }}" # mandatory
+        outside_network:
+          vrf: "{{ service_route_peering_config.config[0].outside_network.vrf }}" # mandatory
+          name: "{{ service_route_peering_config.config[0].outside_network.name }}" # mandatory
+          vlan_id: "{{ service_route_peering_config.config[0].outside_network.vlan_id }}"  # optional
+          profile:
+            ipv4_gw: "{{ service_route_peering_config.config[0].outside_network.profile.ipv4_gw }}"  # mandatory
+            #ipv6_gw: "{{ service_route_peering_config.config[0].outside_network.profile.ipv6_gw }}"   # optional, default is ''
+            vlan_name: "{{ service_route_peering_config.config[0].outside_network.profile.vlan_name }}" # optional, default is ''
+            int_descr: "{{ service_route_peering_config.config[0].outside_network.profile.int_descr }}"   # optional, default is ''
+            tag: "{{ service_route_peering_config.config[0].outside_network.profile.tag }}" # optional, default is 12345
+        reverse_next_hop: "{{ service_route_peering_config.config[0].reverse_next_hop }}" # optional, default is ''
