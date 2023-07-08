@@ -1,0 +1,33 @@
+# ndfc_rest_fabric_create_easy_fabric/tasks/main.yml
+---
+- ansible.builtin.include_role:
+    name: ndfc_rest_fabric_active_fabrics_get
+
+-   name: main set_fact nv_pairs {{ fabric_name }}
+    set_fact:
+        nv_pairs: "{{ easy_fabric.values() | list | json_query(mq1) }}"
+    vars:
+        mq1: "[?FABRIC_NAME == '{{ fabric_name }}'] | [0]"
+
+- name: main REST POST easy_fabric {{ fabric_name }} active_fabrics {{ active_fabrics }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
+    json_data: "{{ vars_dict | to_json }}"
+  when: "fabric_name not in active_fabrics"
+  vars:
+    ansible_connection: httpapi
+    vars_dict:
+        fabricName: "{{ fabric_name }}"
+        fabricType: Switch_Fabric
+        fabricTypeFriendly": "Switch Fabric"
+        fabricTechnology: VXLANFabric
+        fabricTechnologyFriendly: "VXLAN Fabric"
+        provisionMode: DCNMTopDown
+        deviceType: n9k
+        templateName: Easy_Fabric
+        vrfTemplate: Default_VRF_Universal
+        networkTemplate: Default_Network_Universal
+        vrfExtensionTemplate: Default_VRF_Extension_Universal
+        networkExtensionTemplate: Default_Network_Extension_Universal
+        nvPairs: "{{ nv_pairs }}"

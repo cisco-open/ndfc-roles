@@ -1,0 +1,23 @@
+# ndfc_rest_fabric_create_external/tasks/main.yml
+---
+- ansible.builtin.include_role:
+    name: ndfc_rest_fabric_active_fabrics_get
+
+-   name: main set_fact nv_pairs {{ fabric_name }}
+    set_fact:
+        nv_pairs: "{{ external.values() | list | json_query(mq1) }}"
+    vars:
+        mq1: "[?FABRIC_NAME == '{{ fabric_name }}'] | [0]"
+
+- name: main REST POST external_fabric {{ fabric_name }} active_fabrics {{ active_fabrics }}
+  cisco.dcnm.dcnm_rest:
+    method: POST
+    path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/control/fabrics"
+    json_data: "{{ vars_dict | to_json }}"
+  when: "fabric_name not in active_fabrics"
+  vars:
+    ansible_connection: httpapi
+    vars_dict:
+      fabricName: "{{ fabric_name }}"
+      templateName: External_Fabric
+      nvPairs: "{{ nv_pairs }}"
