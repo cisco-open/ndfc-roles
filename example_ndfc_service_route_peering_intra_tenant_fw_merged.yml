@@ -1,0 +1,8 @@
+# example_ndfc_service_node_merged.yml
+---
+- hosts: ndfc
+  gather_facts: false
+  roles:
+    - ndfc_service_route_peering_intra_tenant_fw_merged
+  vars:
+    service_route_peering_name: srp_1
