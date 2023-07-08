@@ -1,24 +1,24 @@
-# ndfc_rest_fabric_msd_create
+# ndfc_rest_fabric_info_get
 
-Create Multi-Site Domain (MSD) fabric ``msd_fabric``
+Returns information for ``fabric_name`` in variable ``fabric_info``
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-msd_fabric      | str() | The MSD fabric to be created
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+fabric_name     | string | The fabric to be queried
 
-MSD fabric parameters are defined in the following file under ``msd_fabrics``
+Fabric parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Default Variables
 
-Defaults for the following are in ``./roles/ndfc_rest_fabric_external_create/defaults/main.yml``:
+Defaults for the following are in [./roles/ndfc_rest_fabric_info_get/defaults/main.yml](/roles/ndfc_rest_fabric_info_get/defaults/main.yml)
 
 Variable              | Type   | Description
 ----------------------|--------|----------------------------------------
@@ -32,9 +32,14 @@ IS_READ_ONLY          | bool() | Default: false
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_rest_fabric_msd_create
+    - ndfc_rest_fabric_info_get
   vars:
-    msd_fabric: MSD
+    fabric_name: MSD
+  tasks:
+  - block:
+    - name: debug fabric_info
+      debug:
+        var: fabric_info
 ```
 
 ### Licensing

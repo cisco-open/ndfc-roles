@@ -1,25 +1,25 @@
 # ndfc_fabric_config_get
 
-Retrieve config for ``fabric_name`` from the following sections of ``./roles/ndfc_common/vars/main.yml``
+Retrieve config for ``fabric_name`` from the following sections of ``./inventory/group_vars/ndfc/01_fabrics.yml``
 
+- lan_classic_fabrics
 - msd_fabrics
 - switch_fabrics
 - external_fabrics
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric configuration to retrieve
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+fabric_name     | string | The fabric configuration to retrieve
 
-Fabric names are defined in the following file:
+Fabric parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/01_networks.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
-
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Example Playbook
 

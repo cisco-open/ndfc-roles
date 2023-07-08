@@ -4,25 +4,25 @@ Query the NDFC controller and retrieve ``network_info`` dictionary given ``netwo
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-network_name    | str() | The network for which to retrieve ``network_info`` dictionary
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+network_name    | string | The network for which to retrieve ``network_info`` dictionary
 
-Network names are defined in the following file:
+Network parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/03_networks.yml](/inventory/group_vars/ndfc/03_networks.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 NOTE: ``network_name`` must match value in network entry's ``name:`` key (i.e. don't try to match on the value of the ``net_name:`` key).
 
 ## Returned Variables
 
-Variable        | Type   | Description
-----------------|--------|----------------------------------------
-network_info    | dict() | information pertaining to network ``network_name``
+Variable        | Type | Description
+----------------|------|----------------------------------------
+network_info    | dict | information pertaining to network ``network_name``
 
 ### Example Playbooks
 

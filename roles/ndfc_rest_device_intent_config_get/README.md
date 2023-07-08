@@ -4,16 +4,24 @@ Retrieve intended config for ``device_name``
 
 ### Role Variables
 
-Variable           | Type   | Description
--------------------|--------|------------
-device_name        | str()  | Device ``name`` in devices dictionary in ndfc_common/vars/main.yml
+Variable           | Type    | Description
+-------------------|---------|------------
+device_name        | string  | Device ``name`` in devices dictionary
 
-Default values for the following variables are set in ``./roles/ndfc_rest_config_deploy/defaults/main.yml``:
+Device parameters are defined in the following file:
 
-Variable           | Type   | Description
--------------------|--------|------------
-forceShowRun       | bool() | default, false
-inclAllMSDSwitches | bool() | default, false
+- [./inventory/group_vars/ndfc/02_devices.yml](/inventory/group_vars/ndfc/02_devices.yml)
+
+See the following for details:
+
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
+
+Default values for the following variables are set in [./roles/ndfc_rest_config_deploy/defaults/main.yml](/roles/ndfc_rest_config_deploy/defaults/main.yml):
+
+Variable           | Type    | Description
+-------------------|---------|------------
+forceShowRun       | boolean | default, false
+inclAllMSDSwitches | boolean | default, false
 
 ### Example Playbook
 

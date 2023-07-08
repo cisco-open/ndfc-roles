@@ -1,7 +1,7 @@
 service_nodes:
   sn_1:
     service_node_name: "sn_1"
-    external_fabric_name: "{{ external_fabrics.sn_fabric_1.name }}"
+    external_fabric_name: "{{ external.sn_fabric_1.name }}"
     # NOTE, service_node_type values are different between Ansible module
     # dcnm_service_node and the REST API.  Since ndfc-roles offers roles
     # based on both, you need to ensure that you're using the correct
@@ -13,7 +13,7 @@ service_nodes:
     service_node_form_factor: "Virtual"
     service_node_peer_name: "foo"
     service_node_interface_name: "Ethernet1/1"
-    attached_fabric_name: "{{ switch_fabrics.f1.name }}"
+    attached_fabric_name: "{{ easy_fabric.f1.name }}"
     attached_switch_name: "leaf_1"
     attached_switch_interface_name: "Ethernet1/1"
     vpc_switches_attached: false
@@ -27,13 +27,13 @@ service_nodes:
 
   sn_2:
     service_node_name: "sn_2"
-    external_fabric_name: "{{ external_fabrics.sn_fabric_2.name }}"
+    external_fabric_name: "{{ external.sn_fabric_2.name }}"
     # see note for service_node_type above
     service_node_type: "firewall"
     service_node_form_factor: "Virtual"
     service_node_peer_name: "bar"
     service_node_interface_name: "Ethernet1/1"
-    attached_fabric_name: "{{ switch_fabrics.f1.name }}"
+    attached_fabric_name: "{{ easy_fabric.f1.name }}"
     attached_switch_name: "leaf_2"
     attached_switch_interface_name: "Ethernet1/1"
     vpc_switches_attached: false
@@ -47,12 +47,12 @@ service_nodes:
 
   sn_3:
     service_node_name: "sn_3"
-    external_fabric_name: "{{ external_fabrics.sn_fabric_3.name }}"
+    external_fabric_name: "{{ external.sn_fabric_3.name }}"
     service_node_type: "Firewall"
     service_node_form_factor: "Virtual"
     service_node_peer_name: "foobar"
     service_node_interface_name: "Ethernet1/1"
-    attached_fabric_name: "{{ switch_fabrics.f2.name }}"
+    attached_fabric_name: "{{ easy_fabric.f2.name }}"
     attached_switch_name: "leaf_1"
     attached_switch_interface_name: "Ethernet1/1"
     vpc_switches_attached: false
@@ -68,8 +68,8 @@ service_route_peerings:
   srp_1:
     name: srp_1
     state: merged
-    fabric: "{{ switch_fabrics.f1.name }}"
-    service_fabric: "{{ external_fabrics.sn_fabric_1.name }}"
+    fabric: "{{ easy_fabric.f1.name }}"
+    service_fabric: "{{ external.sn_fabric_1.name }}"
     attach: true
     deploy: true
     config:

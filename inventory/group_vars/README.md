@@ -10,32 +10,91 @@ json_query (``pip install jmespath``)
 
 #### lan_classic_fabrics
 
-A list of dictionaries with the following structure:
+A dictionary of dictionaries.  Some of the more frequently-used variables are:
+
+TODO: complete this table...
 
 Variable               | Example        | Type       | Description
 -----------------------|----------------|------------|-------------------
-name                   | my_lan_fabric  | string     | Fabric name
+FABRIC_NAME            | LC_1           | string     | Fabric name
 LOOPBACK0_IP_RANGE     | 10.201.0.0/22  | string     | prefix/mask defining DCI loopback address range
 IS_READ_ONLY           | false          | boolean    | If ``true`` the fabric will be created in monitor mode and no edits can be made to it.  If ``false``, the fabric will be created in read/write mode.
 
 ##### Example
 
 ```yaml
-lan_classic_fabrics:
-  my_lan_classic_fabric:
-    name: my_lan_classic_fabric
-    LOOPBACK0_IP_RANGE: 10.37.0.0/22
-    IS_READ_ONLY: false
+lan_classic:
+    LC_1:
+        FABRIC_NAME: LC_1
+        PM_ENABLE: false
+        FABRIC_TYPE: External
+        FABRIC_TECHNOLOGY: LANClassic
+        FF: LANClassic
+        PM_ENABLE_PREV: false
+        INBAND_MGMT_PREV: false
+        FEATURE_PTP_INTERNAL: false
+        DEPLOYMENT_FREEZE: false
+        LOOPBACK0_IP_RANGE: 10.1.0.0/22
+        INBAND_ENABLE_PREV: false
+        MGMT_V6PREFIX: 64
+        DCI_SUBNET_RANGE: 10.10.1.0/24
+        DCI_SUBNET_TARGET_MASK: 30
+        ENABLE_NETFLOW_PREV: ""
+        DHCP_START_INTERNAL: ""
+        DHCP_END_INTERNAL: ""
+        MGMT_GW_INTERNAL: ""
+        MGMT_PREFIX_INTERNAL: ""
+        BOOTSTRAP_MULTISUBNET_INTERNAL: ""
+        MGMT_V6PREFIX_INTERNAL: ""
+        DHCP_IPV6_ENABLE_INTERNAL: ""
+        POWER_REDUNDANCY_MODE: ps-redundant
+        MPLS_HANDOFF: false
+        MPLS_LB_ID: ""
+        AAA_REMOTE_IP_ENABLED: false
+        SNMP_SERVER_HOST_TRAP: true
+        CDP_ENABLE: false
+        ENABLE_NXAPI: false
+        ENABLE_NXAPI_HTTP: false
+        INBAND_MGMT: false
+        FEATURE_PTP: false
+        PTP_LB_ID: ""
+        PTP_DOMAIN_ID: ""
+        FABRIC_FREEFORM: ""
+        AAA_SERVER_CONF: ""
+        SUBINTERFACE_RANGE: 2-511
+        MPLS_LOOPBACK_IP_RANGE: ""
+        enableRealTimeBackup: false
+        enableScheduledBackup: false
+        scheduledTime: ""
+        INBAND_ENABLE: false
+        DHCP_ENABLE: false
+        DHCP_IPV6_ENABLE: ""
+        DHCP_START: ""
+        DHCP_END: ""
+        MGMT_GW: ""
+        MGMT_PREFIX: ""
+        ENABLE_AAA: false
+        BOOTSTRAP_CONF: ""
+        BOOTSTRAP_MULTISUBNET: ""
+        ENABLE_NETFLOW: false
+        NETFLOW_EXPORTER_LIST: ""
+        NETFLOW_RECORD_LIST: ""
+        NETFLOW_MONITOR_LIST: ""
+        IS_READ_ONLY: false
+        BOOTSTRAP_ENABLE: false
 ```
 
-#### switch_fabrics
+#### easy_fabric
 
-A dictionary of dictionaries with the following structure:
+aka. VXLAN/EVPN Fabrics
+
+A dictionary of dictionaries.  Some of the more frequently-used variables are:
+
+TODO: complete this table
 
 Variable              | Example       | Type        | Description
 ----------------------|---------------|-------------|-------------------
-name                  | fabric_1      | string      | Fabric name
-type                  | switch        | string      | the type of fabric
+FABRIC_NAME           | fabric_1      | string      | Fabric name
 BGP_AS                | 65001         | string      | Fabric BGP autonomous system number
 ANYCAST_RP_IP_RANGE   | 10.254.1.0/24 | net/prefix  | Fabric PIM RP. Set only if REPLICATION_MODE == Multicast
 LOOPBACK0_IP_RANGE    | 10.2.0.0/22   | net/prefix  | Loopback for routing protocols (OSPF/BGP)
@@ -44,81 +103,347 @@ SUBNET_RANGE          | 10.4.0.0/16   | net/prefix  | Inter-device links e.g. sp
 FABRIC_MTU            | 1500          | integer     | Packet Maximum Transfer Unit within the fabric
 REPLICATION_MODE      | Multicast     | string      | Replication mode of the fabric. Multicast or Ingress.
 ENABLE_PVLAN          | false         | boolean     | Mandatory. enable/disable PVLAN
-ENABLE_PVLAN_PREV     | false         | boolean     | Mandatory. enable/disable PVLAN
+
+NOTE: variables below (mis)spelled DEAFULT_* e.g. DEAFULT_QUEUING_POLICY_CLOUDSCALE,
+are correct (i.e. NDFC expects these to be spelled incorrectly).  A bug to fix these
+was filed, but was Closed with no action taken.
 
 ##### Example
 
 ```yaml
-switch_fabrics:
-  f1:
-    name: f1
-    type: switch
-    BGP_AS: 65001
-    #ANYCAST_RP_IP_RANGE: 10.254.1.0/24
-    LOOPBACK0_IP_RANGE: 10.2.0.0/22
-    LOOPBACK1_IP_RANGE: 10.3.0.0/22
-    SUBNET_RANGE: 10.4.0.0/16
-    FABRIC_MTU: 9216
-    REPLICATION_MODE: Ingress
-    ENABLE_PVLAN: false
-    ENABLE_PVLAN_PREV: false
-  f2:
-    name: f2
-    type: switch
-    BGP_AS: 65002
-    #ANYCAST_RP_IP_RANGE: 10.254.1.0/24
-    LOOPBACK0_IP_RANGE: 10.6.0.0/22
-    LOOPBACK1_IP_RANGE: 10.7.0.0/22
-    SUBNET_RANGE: 10.8.0.0/16
-    FABRIC_MTU: 9216
-    REPLICATION_MODE: Ingress
-    ENABLE_PVLAN: false
-    ENABLE_PVLAN_PREV: false
+easy_fabric:
+    f1:
+        FABRIC_NAME: f1
+        BGP_AS: 65001
+        SITE_ID: 65001
+        OSPF_AREA_ID: 0.0.0.0
+        L2_SEGMENT_ID_RANGE: 30000-49000
+        L3_PARTITION_ID_RANGE: 50000-59000
+        NETWORK_VLAN_RANGE: 2300-2999
+        VRF_VLAN_RANGE: 2000-2299
+        SUBINTERFACE_RANGE: 2-511
+        LOOPBACK0_IP_RANGE: 10.10.0.0/22
+        LOOPBACK1_IP_RANGE: 10.11.0.0/22
+        SUBNET_RANGE: 10.12.0.0/16
+        LOOPBACK0_IPV6_RANGE: ""
+        LOOPBACK1_IPV6_RANGE: ""
+        V6_SUBNET_RANGE: ""
+        SUBNET_TARGET_MASK: 30
+        DCI_SUBNET_RANGE: 10.13.0.0/16
+        DCI_SUBNET_TARGET_MASK: 30
+        SERVICE_NETWORK_VLAN_RANGE: 3000-3199
+        ROUTE_MAP_SEQUENCE_NUMBER_RANGE: 1-65534
+        FABRIC_MTU: 9216
+        L2_HOST_INTF_MTU: 9216
+        REPLICATION_MODE: Ingress
+        ANYCAST_GW_MAC: 2020.0000.00aa
+        CDP_ENABLE: false
+        ENABLE_EVPN: true
+        ENABLE_NGOAM: true
+        ENABLE_TENANT_DHCP: true
+        ENABLE_MACSEC: false
+        ENABLE_NXAPI: true
+        ENABLE_PBR: false
+        PM_ENABLE: false
+        ENABLE_PVLAN: false
+        ENABLE_NETFLOW: false
+        ENABLE_VPC_PEER_LINK_NATIVE_VLAN: false
+        ENABLE_NXAPI_HTTP: true
+        ENABLE_TRM: false
+        BOOTSTRAP_ENABLE: false
+        BFD_ENABLE: false
+        BFD_IBGP_ENABLE: false
+        BFD_OSPF_ENABLE: false
+        BFD_ISIS_ENABLE: false
+        BFD_PIM_ENABLE: false
+        BFD_AUTH_ENABLE: false
+        DHCP_ENABLE: false
+        DHCP_IPV6_ENABLE: ""
+        DHCP_START: ""
+        DHCP_END: ""
+        UNDERLAY_IS_V6: false
+        USE_LINK_LOCAL: false
+        V6_SUBNET_TARGET_MASK: ""
+        LINK_STATE_ROUTING: ospf
+        VPC_DELAY_RESTORE_TIME: 60
+        RR_COUNT: 2
+        BGP_AS_PREV: ""
+        PM_ENABLE_PREV: false
+        ENABLE_FABRIC_VPC_DOMAIN_ID_PREV: ""
+        FABRIC_VPC_DOMAIN_ID_PREV: ""
+        LINK_STATE_ROUTING_TAG_PREV: ""
+        OVERLAY_MODE_PREV: ""
+        ENABLE_PVLAN_PREV: ""
+        FABRIC_MTU_PREV: 9216
+        L2_HOST_INTF_MTU_PREV: 9216
+        DEPLOYMENT_FREEZE: false
+        INBAND_MGMT_PREV: false
+        BOOTSTRAP_ENABLE_PREV: false
+        MGMT_V6PREFIX: 64
+        ENABLE_NETFLOW_PREV: ""
+        FABRIC_TYPE: Switch_Fabric
+        ENABLE_AGENT: false
+        AGENT_INTF: eth0
+        SSPINE_ADD_DEL_DEBUG_FLAG: Disable
+        BRFIELD_DEBUG_FLAG: Disable
+        ACTIVE_MIGRATION: false
+        FF: Easy_Fabric
+        MSO_SITE_ID: ""
+        MSO_CONTROLER_ID: ""
+        MSO_SITE_GROUP_NAME: ""
+        PREMSO_PARENT_FABRIC: ""
+        MSO_CONNECTIVITY_DEPLOYED: ""
+        ANYCAST_RP_IP_RANGE_INTERNAL: ""
+        DHCP_START_INTERNAL: ""
+        DHCP_END_INTERNAL: ""
+        DHCP_IPV6_ENABLE_INTERNAL: ""
+        MGMT_GW_INTERNAL: ""
+        MGMT_PREFIX_INTERNAL: ""
+        BOOTSTRAP_MULTISUBNET_INTERNAL: ""
+        MGMT_V6PREFIX_INTERNAL: ""
+        UNNUM_DHCP_START_INTERNAL: ""
+        UNNUM_DHCP_END_INTERNAL: ""
+        FEATURE_PTP_INTERNAL: false
+        SSPINE_COUNT: 0
+        SPINE_COUNT: 0
+        abstract_feature_leaf: base_feature_leaf_upg
+        abstract_feature_spine: base_feature_spine_upg
+        abstract_dhcp: base_dhcp
+        abstract_multicast: base_multicast_11_1
+        abstract_anycast_rp: anycast_rp
+        abstract_loopback_interface: int_fabric_loopback_11_1
+        abstract_isis: base_isis_level2
+        abstract_ospf: base_ospf
+        abstract_vpc_domain: base_vpc_domain_11_1
+        abstract_vlan_interface: int_fabric_vlan_11_1
+        abstract_isis_interface: isis_interface
+        abstract_ospf_interface: ospf_interface_11_1
+        abstract_pim_interface: pim_interface
+        abstract_route_map: route_map
+        abstract_bgp: base_bgp
+        abstract_bgp_rr: evpn_bgp_rr
+        abstract_bgp_neighbor: evpn_bgp_rr_neighbor
+        abstract_extra_config_leaf: extra_config_leaf
+        abstract_extra_config_spine: extra_config_spine
+        abstract_extra_config_tor: extra_config_tor
+        abstract_extra_config_bootstrap: extra_config_bootstrap_11_1
+        temp_anycast_gateway: anycast_gateway
+        temp_vpc_domain_mgmt: vpc_domain_mgmt
+        temp_vpc_peer_link: int_vpc_peer_link_po
+        abstract_routed_host: int_routed_host
+        abstract_trunk_host: int_trunk_host
+        L3VNI_MCAST_GROUP: ""
+        PHANTOM_RP_LB_ID1: ""
+        PHANTOM_RP_LB_ID2: ""
+        PHANTOM_RP_LB_ID3: ""
+        PHANTOM_RP_LB_ID4: ""
+        VPC_PEER_LINK_VLAN: 3600
+        VPC_PEER_KEEP_ALIVE_OPTION: management
+        VPC_AUTO_RECOVERY_TIME: 360
+        VPC_DELAY_RESTORE: 150
+        VPC_PEER_LINK_PO: 500
+        VPC_ENABLE_IPv6_ND_SYNC: true
+        ADVERTISE_PIP_BGP: false
+        ENABLE_FABRIC_VPC_DOMAIN_ID: false
+        FABRIC_VPC_DOMAIN_ID: ""
+        FABRIC_VPC_QOS_POLICY_NAME: ""
+        BGP_LB_ID: 0
+        NVE_LB_ID: 1
+        ANYCAST_LB_ID: ""
+        LINK_STATE_ROUTING_TAG: UNDERLAY
+        OSPF_AUTH_KEY_ID: ""
+        OSPF_AUTH_KEY: ""
+        ISIS_LEVEL: ""
+        ISIS_P2P_ENABLE: false
+        ISIS_AUTH_ENABLE: false
+        ISIS_AUTH_KEYCHAIN_NAME: ""
+        ISIS_AUTH_KEYCHAIN_KEY_ID: ""
+        ISIS_AUTH_KEY: ""
+        ISIS_OVERLOAD_ENABLE: false
+        ISIS_OVERLOAD_ELAPSE_TIME: ""
+        BGP_AUTH_KEY_TYPE: ""
+        BGP_AUTH_KEY: ""
+        PIM_HELLO_AUTH_KEY: ""
+        BFD_AUTH_KEY_ID: ""
+        BFD_AUTH_KEY: ""
+        IBGP_PEER_TEMPLATE: ""
+        IBGP_PEER_TEMPLATE_LEAF: ""
+        default_vrf: Default_VRF_Universal
+        default_network: Default_Network_Universal
+        vrf_extension_template: Default_VRF_Extension_Universal
+        network_extension_template: Default_Network_Extension_Universal
+        OVERLAY_MODE: config-profile
+        default_pvlan_sec_network: ""
+        HOST_INTF_ADMIN_STATE: true
+        POWER_REDUNDANCY_MODE: ps-redundant
+        COPP_POLICY: strict
+        HD_TIME: 180
+        BROWNFIELD_NETWORK_NAME_FORMAT: Auto_Net_VNI$$VNI$$_VLAN$$VLAN_ID$$
+        BROWNFIELD_SKIP_OVERLAY_NETWORK_ATTACHMENTS: false
+        STRICT_CC_MODE: false
+        AAA_REMOTE_IP_ENABLED: false
+        SNMP_SERVER_HOST_TRAP: true
+        ANYCAST_BGW_ADVERTISE_PIP: false
+        PTP_LB_ID: ""
+        PTP_DOMAIN_ID: ""
+        MPLS_LB_ID: ""
+        TCAM_ALLOCATION: true
+        DEAFULT_QUEUING_POLICY_CLOUDSCALE: ""
+        DEAFULT_QUEUING_POLICY_R_SERIES: ""
+        DEAFULT_QUEUING_POLICY_OTHER: ""
+        MACSEC_KEY_STRING: ""
+        MACSEC_ALGORITHM: ""
+        MACSEC_FALLBACK_KEY_STRING: ""
+        MACSEC_FALLBACK_ALGORITHM: ""
+        MACSEC_CIPHER_SUITE: ""
+        MACSEC_REPORT_TIMER: ""
+        STP_ROOT_OPTION: unmanaged
+        STP_VLAN_RANGE: ""
+        MST_INSTANCE_RANGE: ""
+        STP_BRIDGE_PRIORITY: ""
+        EXTRA_CONF_LEAF: ""
+        EXTRA_CONF_SPINE: ""
+        EXTRA_CONF_TOR: ""
+        EXTRA_CONF_INTRA_LINKS: ""
+        STATIC_UNDERLAY_IP_ALLOC: false
+        MPLS_LOOPBACK_IP_RANGE: ""
+        ROUTER_ID_RANGE: ""
+        VRF_LITE_AUTOCONFIG: Manual
+        AUTO_SYMMETRIC_VRF_LITE: false
+        AUTO_VRFLITE_IFC_DEFAULT_VRF: false
+        AUTO_SYMMETRIC_DEFAULT_VRF: false
+        DEFAULT_VRF_REDIS_BGP_RMAP: ""
+        DNS_SERVER_IP_LIST: ""
+        DNS_SERVER_VRF: ""
+        NTP_SERVER_IP_LIST: ""
+        NTP_SERVER_VRF: ""
+        SYSLOG_SERVER_IP_LIST: ""
+        SYSLOG_SEV: ""
+        SYSLOG_SERVER_VRF: ""
+        AAA_SERVER_CONF: ""
+        MGMT_GW: ""
+        MGMT_PREFIX: ""
+        BOOTSTRAP_MULTISUBNET: ""
+        SEED_SWITCH_CORE_INTERFACES: ""
+        SPINE_SWITCH_CORE_INTERFACES: ""
+        INBAND_DHCP_SERVERS: ""
+        UNNUM_BOOTSTRAP_LB_ID: ""
+        UNNUM_DHCP_START: ""
+        UNNUM_DHCP_END: ""
+        ENABLE_AAA: false
+        BOOTSTRAP_CONF: ""
+        enableRealTimeBackup: ""
+        enableScheduledBackup: ""
+        scheduledTime: ""
+        NETFLOW_EXPORTER_LIST: ""
+        NETFLOW_RECORD_LIST: ""
+        NETFLOW_MONITOR_LIST: ""
+        FABRIC_INTERFACE_TYPE: p2p
+        VPC_DOMAIN_ID_RANGE: 1-1000
+        FABRIC_VPC_QOS: false
+        OSPF_AUTH_ENABLE: false
+        BGP_AUTH_ENABLE: false
+        GRFIELD_DEBUG_FLAG: Disable
+        FEATURE_PTP: false
+        MPLS_HANDOFF: false
+        ENABLE_DEFAULT_QUEUING_POLICY: false
+        INBAND_MGMT: false
+        MULTICAST_GROUP_SUBNET: ""
+        RP_COUNT: ""
+        RP_MODE: ""
+        RP_LB_ID: ""
+        PIM_HELLO_AUTH_ENABLE: false
+        ANYCAST_RP_IP_RANGE: ""
 ```
 
-#### msd_fabrics
+#### msd - Multisite Domain Fabrics
 
-A list of dictionaries with the following structure:
+A dictionary of dictionaries.  Some of the more frequently-used variables are:
 
-Variable              | Example        | Type       | Description
-----------------------|----------------|-----------|-------------------
-name                  | fabric_1       | string     | Fabric name
-ANYCAST_GW_MAC        | 2020.0000.00aa | string     | Shared mac-address for all leafs
-BORDER_GWY_CONNECTIONS | Direct_To_BGWS | string    | The type of BGP peering within the MSD fabric.  Valid options: ``Manual``, ``Direct_To_BGWS``, ``Centralized_To_Route_Server``
-DCI_SUBNET_RANGE      | 10.100.1.0/24 | net/prefix | Range of IPv4 addresses to use for inter-device links within the MSD fabric
-DCI_SUBNET_TARGET_MASK | 30            | integer     | Subnet mask to use for inter-device links within the MSD fabric. min: 8, max: 31
-DELAY_RESTORE         | 300            | integer     | Multi-Site underlay and overlay control plane convergence time in seconds.  min: 30, max: 1000
-L2_SEGMENT_ID_RANGE   | 30000-49000    | string      | Range for L2 VNIs. min: 1, max: 16777214
-L3_PARTITION_ID_RANGE | 50000-59000    | string      | Range for L3 VNIs. min: 1, max: 16777214
-LOOPBACK100_IP_RANGE  | 10.100.0.0/24  | net/prefix | range for BGW loopback interfaces associated with multisite
-MS_LOOPBACK_ID        | 100            | integer      | loopback ID for the multisite loopback interface. min: 0, max: 1023
-MS_UNDERLAY_AUTOCONFIG | true          | boolean     | Enable ``true`` or disable ``false`` the multi-site underlay autoconfiguration
+TODO: complete this table
+
+Variable               | Example        | Type       | Description
+-----------------------|----------------|-----------|-------------------
+FABRIC_NAME            | fabric_1       | string     | Fabric name
+ANYCAST_GW_MAC         | 2020.0000.00aa | string     | Shared mac-address for all leafs
+BORDER_GWY_CONNECTIONS | Direct_To_BGWS | string     | The type of BGP peering within the MSD fabric.  Valid options: ``Manual``, ``Direct_To_BGWS``, ``Centralized_To_Route_Server``
+DCI_SUBNET_RANGE       | 10.100.1.0/24  | net/prefix  | Range of IPv4 addresses to use for inter-device links within the MSD fabric
+DCI_SUBNET_TARGET_MASK | 30             | integer     | Subnet mask to use for inter-device links within the MSD fabric. min: 8, max: 31
+DELAY_RESTORE          | 300            | integer     | Multi-Site underlay and overlay control plane convergence time in seconds.  min: 30, max: 1000
+L2_SEGMENT_ID_RANGE    | 30000-49000    | string      | Range for L2 VNIs. min: 1, max: 16777214
+L3_PARTITION_ID_RANGE  | 50000-59000    | string      | Range for L3 VNIs. min: 1, max: 16777214
+LOOPBACK100_IP_RANGE   | 10.100.0.0/24  | net/prefix  | range for BGW loopback interfaces associated with multisite
+MS_LOOPBACK_ID         | 100            | integer     | loopback ID for the multisite loopback interface. min: 0, max: 1023
+MS_UNDERLAY_AUTOCONFIG | true           | boolean     | Enable ``true`` or disable ``false`` the multi-site underlay autoconfiguration
 
 ##### Example
 
 ```yaml
-msd_fabrics:
-- name: MSD
-  ANYCAST_GW_MAC: 2020.0000.00aa
-  BORDER_GWY_CONNECTIONS: Direct_To_BGWS
-  DELAY_RESTORE: 300
-  L2_SEGMENT_ID_RANGE: 30000-49000
-  L3_PARTITION_ID_RANGE: 50000-59000
-  MS_LOOPBACK_ID: 100
-  MS_UNDERLAY_AUTOCONFIG: true
-  LOOPBACK100_IP_RANGE: 10.100.0.0/24
-  DCI_SUBNET_RANGE: 10.100.1.0/24
-  DCI_SUBNET_TARGET_MASK: 30
+msd:
+    MSD:
+        FABRIC_NAME: MSD
+        BORDER_GWY_CONNECTIONS: Direct_To_BGWS
+        LOOPBACK0_IP_RANGE: 10.2.0.0/22
+        LOOPBACK1_IP_RANGE: 10.3.0.0/22
+        SUBNET_RANGE: 10.4.0.0/16
+        LOOPBACK100_IP_RANGE: 10.10.0.0/24
+        MS_LOOPBACK_ID: 100
+        DCI_SUBNET_RANGE: 10.10.1.0/24
+        DCI_SUBNET_TARGET_MASK: 30
+        SITE_ID: 65001
+        BGW_ROUTING_TAG: 54321
+        BGW_ROUTING_TAG_PREV: 54321
+        ANYCAST_GW_MAC: 2020.0000.00aa
+        L2_SEGMENT_ID_RANGE: 30000-49000
+        L3_PARTITION_ID_RANGE: 50000-59000
+        DELAY_RESTORE: 300
+        ENABLE_BGP_BFD: false
+        ENABLE_BGP_SEND_COMM: false
+        ENABLE_BGP_LOG_NEIGHBOR_CHANGE: false
+        MS_UNDERLAY_AUTOCONFIG: false
+        TOR_AUTO_DEPLOY: false
+        ENABLE_PVLAN: false
+        default_vrf: Default_VRF_Universal
+        default_network: Default_Network_Universal
+        vrf_extension_template: Default_VRF_Extension_Universal
+        network_extension_template: Default_Network_Extension_Universal
+        default_pvlan_sec_network: ""
+        ENABLE_PVLAN_PREV: ""
+        FABRIC_TYPE: MFD
+        FF: MSD
+        MSO_CONTROLER_ID: ""
+        MSO_SITE_GROUP_NAME: ""
+        PREMSO_PARENT_FABRIC: ""
+        DCNM_ID: ""
+        MS_IFC_BGP_PASSWORD_ENABLE_PREV: ""
+        MS_IFC_BGP_AUTH_KEY_TYPE_PREV: ""
+        MS_IFC_BGP_PASSWORD_PREV: ""
+        RP_SERVER_IP: ""
+        BGP_RP_ASN: ""
+        ENABLE_RS_REDIST_DIRECT: false
+        RS_ROUTING_TAG: ""
+        CLOUDSEC_AUTOCONFIG: false
+        CLOUDSEC_KEY_STRING: ""
+        CLOUDSEC_ALGORITHM: ""
+        CLOUDSEC_ENFORCEMENT: ""
+        CLOUDSEC_REPORT_TIMER: ""
+        MS_IFC_BGP_PASSWORD_ENABLE: false
+        MS_IFC_BGP_PASSWORD: ""
+        MS_IFC_BGP_AUTH_KEY_TYPE: ""
+        enableScheduledBackup: ""
+        scheduledTime: ""
 ```
 
 
-#### external_fabrics
+#### external - External Fabrics
 
-A list of dictionaries with the following structure:
+A dictionary of dictionaries.  Some of the more frequently-used variables are:
+
+TODO: complete this table
 
 Variable               | Example        | Type      | Description
 -----------------------|----------------|-----------|-------------------
-name                   | ext_fabric_1   | string    | Fabric name
+FABRIC_NAME            | ext_fabric_1   | string    | Fabric name
 BGP_AS                 | 65201          | string    | Fabric BGP ASN
 DCI_SUBNET_RANGE       | 10.101.1.0/24  | string    | prefix/mask defining DCI subnet address range
 DCI_SUBNET_TARGET_MASK | 30             | integer   | subnet mask for DCI subnets
@@ -129,14 +454,71 @@ SUBINTERFACE_RANGE     | 2-512          | string    | Per Border Dot1q Range For
 ##### Example
 
 ```yaml
-external_fabrics:
-- name: sn_fabric_1
-  BGP_AS: 65201
-  DCI_SUBNET_RANGE: 10.101.1.0/24
-  DCI_SUBNET_TARGET_MASK: 30
-  LOOPBACK0_IP_RANGE: 10.201.0.0/22
-  POWER_REDUNDANCY_MODE: ps-redundant
-  SUBINTERFACE_RANGE: 2-511
+external:
+    ext_fabric_1:
+        FABRIC_NAME: ext_fabric_1
+        BGP_AS: 65201
+        PM_ENABLE: false
+        EXT_FABRIC_TYPE: External Connectivity Network
+        PM_ENABLE_PREV: false
+        INBAND_MGMT_PREV: false
+        FEATURE_PTP_INTERNAL: false
+        DEPLOYMENT_FREEZE: false
+        LOOPBACK0_IP_RANGE: 10.201.0.0/22
+        FABRIC_TYPE: External
+        FF: External
+        MSO_SITE_ID: ""
+        MSO_CONTROLER_ID: ""
+        MSO_SITE_GROUP_NAME: ""
+        PREMSO_PARENT_FABRIC: ""
+        MSO_CONNECTIVITY_DEPLOYED: ""
+        INBAND_ENABLE_PREV: false
+        MGMT_V6PREFIX: 64
+        DCI_SUBNET_RANGE: 10.10.1.0/24
+        DCI_SUBNET_TARGET_MASK: 30
+        ENABLE_NETFLOW_PREV: ""
+        DHCP_START_INTERNAL: ""
+        DHCP_END_INTERNAL: ""
+        MGMT_GW_INTERNAL: ""
+        MGMT_PREFIX_INTERNAL: ""
+        BOOTSTRAP_MULTISUBNET_INTERNAL: ""
+        MGMT_V6PREFIX_INTERNAL: ""
+        DHCP_IPV6_ENABLE_INTERNAL: ""
+        POWER_REDUNDANCY_MODE: ps-redundant
+        MPLS_HANDOFF: false
+        MPLS_LB_ID: ""
+        AAA_REMOTE_IP_ENABLED: false
+        SNMP_SERVER_HOST_TRAP: true
+        CDP_ENABLE: false
+        ENABLE_NXAPI: false
+        ENABLE_NXAPI_HTTP: false
+        INBAND_MGMT: false
+        FEATURE_PTP: false
+        PTP_LB_ID: ""
+        PTP_DOMAIN_ID: ""
+        FABRIC_FREEFORM: ""
+        AAA_SERVER_CONF: ""
+        SUBINTERFACE_RANGE: 2-511
+        MPLS_LOOPBACK_IP_RANGE: ""
+        enableRealTimeBackup: ""
+        enableScheduledBackup: ""
+        scheduledTime: ""
+        INBAND_ENABLE: false
+        DHCP_ENABLE: false
+        DHCP_IPV6_ENABLE: ""
+        DHCP_START: ""
+        DHCP_END: ""
+        MGMT_GW: ""
+        MGMT_PREFIX: ""
+        ENABLE_AAA: false
+        BOOTSTRAP_CONF: ""
+        BOOTSTRAP_MULTISUBNET: ""
+        ENABLE_NETFLOW: false
+        NETFLOW_EXPORTER_LIST: ""
+        NETFLOW_RECORD_LIST: ""
+        NETFLOW_MONITOR_LIST: ""
+        IS_READ_ONLY: false
+        BOOTSTRAP_ENABLE: false
 ```
 
 ### 02_devices.yml
@@ -164,22 +546,22 @@ devices:
   # preserve_config must be set to True for LAN Classic fabrics
   leaf_1_LC_1:
     name: leaf_1_LC_1
-    switch_fabric: "{{ lan_classic_fabrics.LC_1.name }}"
+    switch_fabric: "{{ lan_classic.LC_1.name }}"
     ip: 172.22.150.99
     role: leaf
     preserve_config: true
   # switch_fabric f1
   leaf_1:
     name: leaf_1
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f1.name }}"
+    msd_fabric: "{{ msd.MSD.name }}"
     ip: 172.22.150.102
     role: leaf
     preserve_config: false
   leaf_2:
     name: leaf_2
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f1.name }}"
+    msd_fabric: "{{ msd.MSD.name }}"
     ip: 172.22.150.103
     role: leaf
     preserve_config: false
@@ -226,7 +608,7 @@ Below, network n1111 (10.21.1.0/24), with gateway 10.21.1.1, in fabric f1, is co
 networks:
   f1_n1111:
     name: f1_n1111 # name must be unique across all fabrics
-    fabric: "{{ switch_fabrics.f1.name }}"
+    fabric: "{{ easy_fabric.f1.name }}"
     net_name: n1111 # can be the same across fabrics
     vrf_name: v1
     vlan_id: 1111
@@ -244,7 +626,7 @@ networks:
 
   f1_n1112:
     name: f1_n1112
-    fabric: "{{ switch_fabrics.f1.name }}"
+    fabric: "{{ easy_fabric.f1.name }}"
     net_name: n1112
     vrf_name: v2
     vlan_id: 1112
@@ -285,15 +667,15 @@ attach.ip_address      | 192.168.1.1    | IP address    | mgmt0 address of the s
 vrfs:
   f1_v1:
     name: f1_v1
-    fabric: "{{ switch_fabrics.f1.name }}"
+    fabric: "{{ easy_fabric.f1.name }}"
     vrf_name: v1
     vrf_id: 63031
     vlan_id: 3031
     # You could explicitely list these as well...
     # import_vpn_rt: 65001:63031,65002:63032
     # import_evpn_rt: 65001:63031,65002:63032
-    import_vpn_rt: "{{ switch_fabrics.f1.BGP_AS }}:63031,{{ switch_fabrics.f2.BGP_AS }}:63032"
-    import_evpn_rt: "{{ switch_fabrics.f1.BGP_AS }}:63031,{{ switch_fabrics.f2.BGP_AS }}:63032"
+    import_vpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
+    import_evpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
     vrf_template: Default_VRF_Universal
     vrf_extension_template: Default_VRF_Extension_Universal
     service_vrf_template: null
@@ -305,12 +687,12 @@ vrfs:
 
   f1_v2:
     name: f1_v2
-    fabric: "{{ switch_fabrics.f1.name }}"
+    fabric: "{{ easy_fabric.f1.name }}"
     vrf_name: v2
     vrf_id: 63032
     vlan_id: 3032
-    import_vpn_rt: "{{ switch_fabrics.f1.BGP_AS }}:63031,{{ switch_fabrics.f2.BGP_AS }}:63032"
-    import_evpn_rt: "{{ switch_fabrics.f1.BGP_AS }}:63031,{{ switch_fabrics.f2.BGP_AS }}:63032"
+    import_vpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
+    import_evpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
     vrf_template: Default_VRF_Universal
     vrf_extension_template: Default_VRF_Extension_Universal
     service_vrf_template: null

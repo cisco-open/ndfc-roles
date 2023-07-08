@@ -8,15 +8,13 @@ Variable        | Type   | Description
 ----------------|--------|----------------------------------------
 network_name    | string | The network to be deleted
 
-Network parameters are defined in the following files:
+Network parameters are defined in the following file:
 
 - [./inventory/group_vars/ndfc/03_networks.yml](/inventory/group_vars/ndfc/03_networks.yml)
 
 See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
-
-
 
 ### Example Playbooks
 

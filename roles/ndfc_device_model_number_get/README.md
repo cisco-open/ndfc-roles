@@ -6,17 +6,18 @@ The device's model number is returned in variable ``device_model_number``.
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-device_name     | str() | The device to be queried
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+device_name     | string | The device to be queried
 
-Device and Fabric names are defined in the following file:
+Fabric and device parameters are defined in the following files:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
+- [./inventory/group_vars/ndfc/02_devices.yml](/inventory/group_vars/ndfc/02_devices.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Example Playbook
 

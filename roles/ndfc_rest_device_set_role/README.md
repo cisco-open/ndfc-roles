@@ -4,27 +4,27 @@ Set role for device ``device_name``.
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-device_name     | str() | The device to be merged
-role            | str() | The desired role for ``device_name`` e.g. leaf, spine, border_gateway, etc
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+device_name     | string | The device to be merged
+role            | string | The desired role for ``device_name`` e.g. leaf, spine, border_gateway, etc
 
-Device and Fabric names are defined in the following file:
+Device parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/02_devices.yml](/inventory/group_vars/ndfc/02_devices.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 Other variables used in this Role:
 
-Defaults for the following are in ``./roles/ndfc_rest_device_set_role/defaults/main.yml``:
+Defaults for the following are in [./roles/ndfc_rest_device_set_role/defaults/main.yml](/roles/ndfc_rest_device_set_role/defaults/main.yml)
 
-Variable        | Type   | Description
-----------------|--------|------------
-forceShowRun    | bool() | Default: ``false`` Included in the config-deploy REST call payload.
-inclAllMSDSwitches | bool() | Default: ``false`` Included in the config-deploy REST call payload.
+Variable           | Type    | Description
+-------------------|---------|------------
+forceShowRun       | boolean | Default: ``false`` Included in the config-deploy REST call payload.
+inclAllMSDSwitches | boolean | Default: ``false`` Included in the config-deploy REST call payload.
 
 ### Dependencies
 

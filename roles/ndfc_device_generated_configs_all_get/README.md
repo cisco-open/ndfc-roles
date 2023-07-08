@@ -4,17 +4,18 @@ Query populated generated_config from all devices in fabric ``fabric_name``
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric in which the devices reside
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+fabric_name     | string | The fabric in which the devices reside
 
-Fabric parameters, including ``fabric_name`, are defined in the following file:
+Fabric and device parameters are defined in the following files:
 
-``./roles/ndfc_common/vars/main.yml``
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
+- [./inventory/group_vars/ndfc/02_devices.yml](/inventory/group_vars/ndfc/02_devices.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 
 ### Example Playbook

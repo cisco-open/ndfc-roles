@@ -4,36 +4,37 @@ Merge device ``device_name`` into the topology.
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-device_name     | str() | The device to be merged
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+device_name     | string | The device to be merged
 
-Device and Fabric names are defined in the following file:
+Fabric and device parameters are defined in the following files:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
+- [./inventory/group_vars/ndfc/02_devices.yml](/inventory/group_vars/ndfc/02_devices.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 Other variables used in this Role:
 
-From ``./roles/ndfc_devices_merged/defaults/main.yml``:
+- [./roles/ndfc_devices_merged/defaults/main.yml](/roles/ndfc_devices_merged/defaults/main.yml)
 
-Variable        | Type   | Description
-----------------|--------|------------
-auth_proto      | str()  | The protocol to use to authenticate to each device.  We assume all devices use the same protocol.
-max_hops        | int()  | The number of CDP hops to traverse when discovering devices. We set this to 0 to discover one device at a time.
-preserve_config | bool() | If true, preserve the existing config on the device(s).  If false, do not preserve the configs.
-forceShowRun    | bool() | Default: ``false`` Included in the config-deploy REST call payload.
-inclAllMSDSwitches | bool() | Default: ``false`` Included in the config-deploy REST call payload.
+Variable           | Type       | Description
+-------------------|------------|------------
+auth_proto         | string     | The protocol to use to authenticate to each device.  We assume all devices use the same protocol.
+max_hops           | integer    | The number of CDP hops to traverse when discovering devices. We set this to 0 to discover one device at a time.
+preserve_config    | boolean    | If true, preserve the existing config on the device(s).  If false, do not preserve the configs.
+forceShowRun       | boolean    | Default: ``false`` Included in the config-deploy REST call payload.
+inclAllMSDSwitches | boolean    | Default: ``false`` Included in the config-deploy REST call payload.
 
-From ``./inventory/group_vars/ndfc``:
+- [./inventory/group_vars/ndfc/00_connection.yml](/inventory/group_vars/ndfc/00_connection.yml)
 
 Variable              | Type    | Description
 ----------------------|---------|------------
-device_password       | str()   | The password used to login to the device
-device_username       | str()   | The username used to login to the device
+device_password       | string  | The password used to login to the device
+device_username       | string  | The username used to login to the device
 
 ### Dependencies
 

@@ -3,121 +3,121 @@ devices:
   # preserve_config must be set to True for LAN Classic fabrics
   leaf_1_LC_1:
     name: leaf_1_LC_1
-    switch_fabric: "{{ lan_classic_fabrics.LC_1.name }}"
+    switch_fabric: "{{ lan_classic.LC_1.FABRIC_NAME }}"
     ip: 172.22.150.99
     role: leaf
     preserve_config: True
   # switch_fabric f1 ----------------------------------------------
   leaf_1:
     name: leaf_1
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f1.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.102
     role: leaf
     preserve_config: False
   leaf_2:
     name: leaf_2
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f1.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.103
     role: leaf
     preserve_config: False
   leaf_3:
     name: leaf_3
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f1.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.104
     role: leaf
     preserve_config: False
   leaf_4:
     name: leaf_4
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f1.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.105
     role: leaf
     preserve_config: False
   spine_1:
     name: spine_1
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f1.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.112
     role: spine
     preserve_config: False
   spine_2:
     name: spine_2
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f1.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.113
     role: spine
     preserve_config: False
   border_gateway_1:
     name: border_gateway_1
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f1.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.110
     role: border_gateway
     preserve_config: False
   border_gateway_2:
     name: border_gateway_2
-    switch_fabric: "{{ switch_fabrics.f1.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f1.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.111
     role: border_gateway
     preserve_config: False
   # switch_fabric f2 ----------------------------------------------
   leaf_5:
     name: leaf_5
-    switch_fabric: "{{ switch_fabrics.f2.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f2.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.106
     role: leaf
     preserve_config: False
   leaf_6:
     name: leaf_6
-    switch_fabric: "{{ switch_fabrics.f2.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f2.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.107
     role: leaf
     preserve_config: False
   leaf_7:
     name: leaf_7
-    switch_fabric: "{{ switch_fabrics.f2.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f2.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.108
     role: leaf
     preserve_config: False
   leaf_8:
     name: leaf_8
-    switch_fabric: "{{ switch_fabrics.f2.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f2.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.109
     role: leaf
     preserve_config: False
   spine_3:
     name: spine_3
-    switch_fabric: "{{ switch_fabrics.f2.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f2.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.114
     role: spine
     preserve_config: False
   spine_4:
     name: spine_4
-    switch_fabric: "{{ switch_fabrics.f2.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f2.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.115
     role: spine
     preserve_config: False
   border_gateway_3:
     name: border_gateway_3
-    switch_fabric: "{{ switch_fabrics.f2.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f2.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.100
     role: border_gateway
     preserve_config: False
   border_gateway_4:
     name: border_gateway_4
-    switch_fabric: "{{ switch_fabrics.f2.name }}"
-    msd_fabric: "{{ msd_fabrics.MSD.name }}"
+    switch_fabric: "{{ easy_fabric.f2.FABRIC_NAME }}"
+    msd_fabric: "{{ msd.MSD.FABRIC_NAME }}"
     ip: 172.22.150.101
     role: border_gateway
     preserve_config: False

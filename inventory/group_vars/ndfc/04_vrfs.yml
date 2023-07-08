@@ -1,10 +1,14 @@
 vrfs:
   f1_v1:
     name: f1_v1
-    fabric: "{{ switch_fabrics.f1.name }}"
+    fabric: "{{ easy_fabric.f1.name }}"
     vrf_name: v1
     vrf_id: 63031
     vlan_id: 3031
+    import_vpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
+    import_evpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
+    # import_vpn_rt: 65001:63031,65002:63032
+    # import_evpn_rt: 65001:63031,65002:63032
     vrf_template: Default_VRF_Universal
     vrf_extension_template: Default_VRF_Extension_Universal
     service_vrf_template: null
@@ -16,10 +20,12 @@ vrfs:
 
   f1_v2:
     name: f1_v2
-    fabric: "{{ switch_fabrics.f1.name }}"
+    fabric: "{{ easy_fabric.f1.name }}"
     vrf_name: v2
     vrf_id: 63032
     vlan_id: 3032
+    import_vpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
+    import_evpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
     vrf_template: Default_VRF_Universal
     vrf_extension_template: Default_VRF_Extension_Universal
     service_vrf_template: null
@@ -31,10 +37,12 @@ vrfs:
 
   f2_v1:
     name: f2_v1
-    fabric: "{{ switch_fabrics.f2.name }}"
+    fabric: "{{ easy_fabric.f2.name }}"
     vrf_name: v1
     vrf_id: 63031
     vlan_id: 3031
+    import_vpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
+    import_evpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
     vrf_template: Default_VRF_Universal
     vrf_extension_template: Default_VRF_Extension_Universal
     service_vrf_template: null
@@ -46,10 +54,12 @@ vrfs:
 
   f2_v2:
     name: f2_v2
-    fabric: "{{ switch_fabrics.f2.name }}"
+    fabric: "{{ easy_fabric.f2.name }}"
     vrf_name: v2
     vrf_id: 63032
     vlan_id: 3032
+    import_vpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
+    import_evpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
     vrf_template: Default_VRF_Universal
     vrf_extension_template: Default_VRF_Extension_Universal
     service_vrf_template: null
@@ -67,10 +77,12 @@ vrfs:
 
   msd_v1:
     name: msd_v1
-    fabric: "{{ msd_fabrics.MSD.name }}"
+    fabric: "{{ msd.MSD.name }}"
     vrf_name: v1
     vrf_id: 63031
     vlan_id: 3031
+    import_vpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
+    import_evpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
     vrf_template: Default_VRF_Universal
     vrf_extension_template: Default_VRF_Extension_Universal
     service_vrf_template: null
@@ -90,10 +102,12 @@ vrfs:
 
   msd_v2:
     name: msd_v2
-    fabric: "{{ msd_fabrics.MSD.name }}"
+    fabric: "{{ msd.MSD.name }}"
     vrf_name: v2
     vrf_id: 63032
     vlan_id: 3032
+    import_vpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
+    import_evpn_rt: "{{ easy_fabric.f1.BGP_AS }}:63031,{{ easy_fabric.f2.BGP_AS }}:63032"
     vrf_template: Default_VRF_Universal
     vrf_extension_template: Default_VRF_Extension_Universal
     service_vrf_template: null

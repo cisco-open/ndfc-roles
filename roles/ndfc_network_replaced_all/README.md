@@ -1,21 +1,21 @@
 # ndfc_network_replaced_all
 
-Replace all networks in fabric ``fabric_name`` with their current definitions in ``./roles/ndfc_common/vars/main.yml``
+Replace all networks in fabric ``fabric_name`` with their current definitions in Replace all networks in fabric ``fabric_name`` with their current definitions in ``./roles/ndfc_common/vars/main.yml``
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric in which the networks reside
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+fabric_name     | string | The fabric in which the networks reside
 
-Fabric parameters, including ``fabric_name`, are defined in the following file:
+Fabric and network parameters are defined in the following files:
 
-``./roles/ndfc_common/vars/main.yml``
+- [./inventory/group_vars/ndfc/01_networks.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
+- [./inventory/group_vars/ndfc/03_networks.yml](/inventory/group_vars/ndfc/03_networks.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
-
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Example Playbook
 

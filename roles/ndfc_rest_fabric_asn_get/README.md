@@ -2,19 +2,25 @@
 
 Given ``fabric_name`` return fabric BGP ASN in var ``fabric_asn``
 
+### Returned variables
+
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+fabric_asn      | string | The BGP AS of the queried fabric
+
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric to be queried
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+fabric_name     | string | The fabric to be queried
 
-Fabric parameters, including ``fabric_name`, are defined in the following file:
+Fabric parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Example Playbooks
 

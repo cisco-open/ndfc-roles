@@ -4,17 +4,17 @@ Retrieve local configuration for ``device_name``
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-device_name     | str() | The device for which local configuration information is retrieved
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+device_name     | string | The device for which local configuration information is retrieved
 
-Device names are defined in the following file:
+Device parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/02_devices.yml](/inventory/group_vars/ndfc/02_devices.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 
 ### Example Playbook

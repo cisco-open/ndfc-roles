@@ -7,10 +7,18 @@ if the GET request succeeded, or an empty list if the GET request failed.
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric to be queried
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+fabric_name     | string | The fabric to be queried
 
+Fabric and device parameters are defined in the following files:
+
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
+- [./inventory/group_vars/ndfc/02_devices.yml](/inventory/group_vars/ndfc/02_devices.yml)
+
+See the following for details:
+
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Example Playbook
 

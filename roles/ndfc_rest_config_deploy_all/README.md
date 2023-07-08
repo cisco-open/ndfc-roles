@@ -4,16 +4,24 @@ Issue NDFC POST REST API calls to invoke config-save and config-deploy in fabric
 
 ### Role Variables
 
-Variable           | Type   | Description
--------------------|--------|------------
-fabric_name        | str()  | The fabric to config-save and config-deploy
+Variable           | Type    | Description
+-------------------|---------|------------
+fabric_name        | string  | The fabric to config-save and config-deploy
 
-Default values for the following variables are set in ``./roles/ndfc_rest_config_deploy_all/defaults/main.yml``:
+Fabric parameters are defined in the following file:
 
-Variable           | Type   | Description
--------------------|--------|------------
-forceShowRun       | bool() | default, false
-inclAllMSDSwitches | bool() | default, false
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
+
+See the following for details:
+
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
+
+Default values for the following variables are set in [./roles/ndfc_rest_config_deploy_all/defaults/main.yml](/roles/ndfc_rest_config_deploy_all/defaults/main.yml):
+
+Variable           | Type    | Description
+-------------------|---------|------------
+forceShowRun       | boolean | default, false
+inclAllMSDSwitches | boolean | default, false
 
 ### Example Playbook
 

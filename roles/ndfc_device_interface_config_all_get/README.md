@@ -4,18 +4,19 @@ Query the config for a specific interface across all devices in fabric ``fabric_
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-fabric_name     | str() | The fabric in which the devices reside
-interface_name  | str() | An NX-OS interface name e.g. Ethernet1/12, Port-channel11, Loopback1, etc
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+fabric_name     | string | The fabric in which the devices reside
+interface_name  | string | An NX-OS interface name e.g. Ethernet1/12, Port-channel11, Loopback1, etc
 
-Fabric parameters, including ``fabric_name`, are defined in the following file:
+Fabric and interface parameters are defined in the following files:
 
-``./roles/ndfc_common/vars/main.yml``
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
+- [./inventory/group_vars/ndfc/03_networks.yml](/inventory/group_vars/ndfc/03_networks.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 
 ### Example Playbook

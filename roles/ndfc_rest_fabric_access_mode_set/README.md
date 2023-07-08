@@ -4,18 +4,18 @@ Given ``fabric_name`` set the fabric access_mode to true or false via var ``read
 
 ### Role Variables
 
-Variable        | Type   | Description
-----------------|--------|----------------------------------------
-fabric_name     | str()  | The fabric to be queried
-read_only       | bool() | The fabric access mode (true or false)
+Variable        | Type    | Description
+----------------|---------|----------------------------------------
+fabric_name     | string  | The fabric to be queried
+read_only       | boolean | The fabric access mode (true or false)
 
-Fabric parameters, including ``fabric_name`, are defined in the following file:
+Fabric parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Licensing
 

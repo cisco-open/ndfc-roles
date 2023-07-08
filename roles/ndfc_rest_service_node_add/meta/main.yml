@@ -7,5 +7,3 @@ galaxy_info:
   galaxy_tags:
     - ndfc
     - cisco
-dependencies:
-  - ndfc_common

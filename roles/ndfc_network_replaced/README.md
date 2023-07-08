@@ -1,20 +1,20 @@
 # ndfc_network_replaced
 
-Replace network ``network_name`` with its current definition in ``./roles/ndfc_common/vars/main.yml``
+Replace network ``network_name`` with its current local definition in [./inventory/group_vars/ndfc/03_networks.yml](/inventory/group_vars/ndfc/03_networks.yml)
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-network_name    | str() | The network to be replaced
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+network_name    | string | The network to be replaced
 
-Network parameters, including ``network_name`, are defined in the following file:
+Network parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``
+- [./inventory/group_vars/ndfc/03_networks.yml](/inventory/group_vars/ndfc/03_networks.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 
 ### Example Playbook
