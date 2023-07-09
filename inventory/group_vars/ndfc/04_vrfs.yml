@@ -1,7 +1,7 @@
 vrfs:
   f1_v1:
     name: f1_v1
-    fabric: "{{ easy_fabric.f1.name }}"
+    fabric: "{{ easy_fabric.f1.FABRIC_NAME }}"
     vrf_name: v1
     vrf_id: 63031
     vlan_id: 3031
@@ -20,7 +20,7 @@ vrfs:
 
   f1_v2:
     name: f1_v2
-    fabric: "{{ easy_fabric.f1.name }}"
+    fabric: "{{ easy_fabric.f1.FABRIC_NAME }}"
     vrf_name: v2
     vrf_id: 63032
     vlan_id: 3032
@@ -37,7 +37,7 @@ vrfs:
 
   f2_v1:
     name: f2_v1
-    fabric: "{{ easy_fabric.f2.name }}"
+    fabric: "{{ easy_fabric.f2.FABRIC_NAME }}"
     vrf_name: v1
     vrf_id: 63031
     vlan_id: 3031
@@ -54,7 +54,7 @@ vrfs:
 
   f2_v2:
     name: f2_v2
-    fabric: "{{ easy_fabric.f2.name }}"
+    fabric: "{{ easy_fabric.f2.FABRIC_NAME }}"
     vrf_name: v2
     vrf_id: 63032
     vlan_id: 3032
@@ -77,7 +77,7 @@ vrfs:
 
   msd_v1:
     name: msd_v1
-    fabric: "{{ msd.MSD.name }}"
+    fabric: "{{ msd.MSD.FABRIC_NAME }}"
     vrf_name: v1
     vrf_id: 63031
     vlan_id: 3031
@@ -102,7 +102,7 @@ vrfs:
 
   msd_v2:
     name: msd_v2
-    fabric: "{{ msd.MSD.name }}"
+    fabric: "{{ msd.MSD.FABRIC_NAME }}"
     vrf_name: v2
     vrf_id: 63032
     vlan_id: 3032
