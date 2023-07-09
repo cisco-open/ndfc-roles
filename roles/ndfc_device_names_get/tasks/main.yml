@@ -1,0 +1,11 @@
+# ndfc_device_names_get/tasks/main.yml
+# Return a list of device names in var device_names which match the input parameters
+---
+-   name: debug role
+    ansible.builtin.debug:
+        var: role
+-   name: set fact device_names
+    ansible.builtin.set_fact:
+        device_names: "{{ devices | dict2items | json_query(q2) }}"
+    vars:
+        q2: "[?value.switch_fabric=='{{ fabric_name }}' && value.role=='{{ role }}'].value.name"
