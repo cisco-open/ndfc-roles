@@ -1,0 +1,20 @@
+# ndfc_device_list_merged/tasks/main.yml
+
+# - ansible.builtin.include_role:
+#     name: ndfc_device_config_get
+
+# - name: debug fabric_name
+#   ansible.builtin.debug:
+#     msg: "fabric_name {{ fabric_name }}"
+
+# - name: debug device_list
+#   ansible.builtin.debug:
+#     msg: "device_list {{ device_list }}"
+
+- name: merged FABRIC {{ fabric_name }}
+  cisco.dcnm.dcnm_inventory:
+    fabric: "{{ fabric_name }}"
+    state: merged
+    config: "{{ device_list }}"
+  vars:
+    ansible_connection: httpapi

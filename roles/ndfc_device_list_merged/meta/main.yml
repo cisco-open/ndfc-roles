@@ -1,0 +1,9 @@
+galaxy_info:
+  author: Allen Robel
+  description: Principal Engineer
+  company: Cisco Systems, Inc.
+  license: license (GPL-2.0-or-later, MIT, etc)
+  min_ansible_version: 2.1
+  galaxy_tags:
+    - ndfc
+    - cisco
