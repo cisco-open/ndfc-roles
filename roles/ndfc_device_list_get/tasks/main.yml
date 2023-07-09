@@ -1,0 +1,7 @@
+# ndfc_device_config_get/tasks/main.yml
+---
+- name: set fact device_list
+  ansible.builtin.set_fact:
+    device_list: "{{ devices | dict2items | json_query(q2) }}"
+  vars:
+    q2: "[?value.switch_fabric=='{{ fabric_name }}'].{seed_ip: value.ip, role: value.role, password: `{{ device_password}}`, user_name: `{{ device_username }}` }"
