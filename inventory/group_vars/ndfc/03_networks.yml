@@ -7,7 +7,7 @@ port_groups:
 networks:
   f1_n1111:
     name: f1_n1111 # name must be unique across all fabrics
-    fabric: "{{ easy_fabric.f1.name }}"
+    fabric: "{{ easy_fabric.f1.FABRIC_NAME }}"
     net_name: n1111 # can be the same across fabrics
     vrf_name: v1
     vlan_id: 1111
@@ -25,7 +25,7 @@ networks:
 
   f1_n1112:
     name: f1_n1112
-    fabric: "{{ easy_fabric.f1.name }}"
+    fabric: "{{ easy_fabric.f1.FABRIC_NAME }}"
     net_name: n1112
     vrf_name: v2
     vlan_id: 1112
@@ -43,7 +43,7 @@ networks:
 
   f2_n1111:
     name: f2_n1111
-    fabric: "{{ easy_fabric.f2.name }}"
+    fabric: "{{ easy_fabric.f2.FABRIC_NAME }}"
     net_name: n1111
     vrf_name: v1
     vlan_id: 1111
@@ -61,7 +61,7 @@ networks:
 
   f2_n1112:
     name: f2_n1112
-    fabric: "{{ easy_fabric.f2.name }}"
+    fabric: "{{ easy_fabric.f2.FABRIC_NAME }}"
     net_name: n1112
     vrf_name: v2
     vlan_id: 1112
@@ -79,7 +79,7 @@ networks:
 
   msd_n1111:
     name: msd_n1111
-    fabric: "{{ msd.MSD.name }}"
+    fabric: "{{ msd.MSD.FABRIC_NAME }}"
     net_name: n1111
     vrf_name: v1
     vlan_id: 1111
@@ -113,7 +113,7 @@ networks:
 
   msd_n1112:
     name: msd_n1112
-    fabric: "{{ msd.MSD.name }}"
+    fabric: "{{ msd.MSD.FABRIC_NAME }}"
     net_name: n1112
     vrf_name: v2
     vlan_id: 1112
