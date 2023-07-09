@@ -19,7 +19,7 @@ See the following for details:
 
 Other variables used in this Role:
 
-- [./roles/ndfc_device_merged_all/defaults/main.yml](/roles/ndfc_devices_merged_all/defaults/main.yml)
+- [./roles/ndfc_device_merged_all/defaults/main.yml](/roles/ndfc_device_merged_all/defaults/main.yml)
 
 Variable        | Type    | Description
 ----------------|---------|------------
