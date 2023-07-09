@@ -23,6 +23,7 @@ A JSON list of objects containing device configurations, including seed_ip, role
         "username": "admin"
     }
 ]
+```
 
 ### Role Variables
 
