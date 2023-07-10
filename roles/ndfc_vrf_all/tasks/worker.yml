@@ -8,6 +8,8 @@
     - vrf_name: "{{ item.vrf_name }}"
       vrf_id: "{{ item.vrf_id }}"
       vlan_id: "{{ item.vlan_id }}"
+      import_vpn_rt: "{{ item.import_vpn_rt }}"
+      import_evpn_rt: "{{ item.import_evpn_rt }}"
       vrf_template: Default_VRF_Universal
       vrf_extension_template: Default_VRF_Extension_Universal
       service_vrf_template: null
