@@ -1,12 +1,12 @@
 # ndfc_rest_fabric_create_msd
 
-Create Multi-Site Domain (MSD) fabric ``msd_fabric``
+Create Multi-Site Domain (MSD) fabric ``fabric_name``
 
 ### Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
-msd_fabric      | string | The MSD fabric to be created
+fabric_name     | string | The MSD fabric to be created
 
 Fabric parameters, including ``fabric_name`, are defined in the following file:
 
@@ -25,7 +25,7 @@ See the following for details:
   roles:
     - ndfc_rest_fabric_create_msd
   vars:
-    msd_fabric: MSD
+    fabric_name: MSD
 ```
 
 ### Licensing
