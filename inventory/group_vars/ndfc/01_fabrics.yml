@@ -81,9 +81,9 @@ msd:
         L3_PARTITION_ID_RANGE: 50000-59000
         DELAY_RESTORE: 300
         ENABLE_BGP_BFD: false
-        ENABLE_BGP_SEND_COMM: false
+        ENABLE_BGP_SEND_COMM: true
         ENABLE_BGP_LOG_NEIGHBOR_CHANGE: false
-        MS_UNDERLAY_AUTOCONFIG: false
+        MS_UNDERLAY_AUTOCONFIG: true
         TOR_AUTO_DEPLOY: false
         ENABLE_PVLAN: false
         default_vrf: Default_VRF_Universal
