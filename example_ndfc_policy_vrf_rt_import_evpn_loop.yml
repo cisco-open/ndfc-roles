@@ -1,17 +1,27 @@
 # example_ndfc_policy_vrf_rt_import_evpn_loop.yml
-# Import vrf v2's route-targets into vrf v1 on device leaf_2 in fabric f1, using Ansible state 'merged'
+# Import vrf v2's route-targets into vrf v1 on all leafs in fabric f1, using Ansible state 'merged'
 ---
-- hosts: ndfc
-  name: import vrf {{ import_vrf_name }} evpn route-targets into vrf {{ vrf_name }} on device {{ device_name }} using Ansible state {{ state }}
-  gather_facts: false
-  roles:
+-   hosts: ndfc
+    name: Get device names
+    roles:
+    - ndfc_device_names_get
+    vars:
+        fabric_name: f1
+        role: leaf
+
+-   hosts: ndfc
+    name: debug device_names
+    gather_facts: false
+    tasks:
+    -   ansible.builtin.debug:
+            var: device_names
+-   hosts: ndfc
+    name: import vrf {{ import_vrf_name }} evpn route-targets into vrf {{ vrf_name }} on fabric f1 leafs
+    gather_facts: false
+    roles:
     - ndfc_policy_vrf_rt_import_evpn_loop
-  vars:
-    vrf_name: v1
-    import_vrf_name: v2
-    state: merged
-    device_list:
-      - leaf_1
-      - leaf_2
-      - leaf_3
-      - leaf_4
+    vars:
+        vrf_name: v1
+        import_vrf_name: v2
+        state: merged
+        device_list: "{{ device_names }}"
