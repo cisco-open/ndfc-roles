@@ -8,4 +8,4 @@
   tasks:
   - block:
     - debug:
-        msg: "network_info: {{ network_info | default('unable to find network. Check network_name.', true) }}"
+        var: network_info | default('unable to find network. Check network_name.', true)
