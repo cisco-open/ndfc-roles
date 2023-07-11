@@ -1,4 +1,4 @@
-# example_ndfc_device_serial_number_get.yml
+# example_ndfc_device_list_get.yml
 # Query NX-OS switch associated with fabric_name and device_name
 # and print the switch's serial number
 ---
@@ -11,5 +11,5 @@
   tasks:
   - block:
     - debug:
-        msg: "device_list: {{ device_list }}"
+        var: device_list
     when: "device_list != ''"
