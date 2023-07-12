@@ -1,9 +1,9 @@
-# ndfc_device_ipv4_address_remote_get/tasks/worker.yml
+# ndfc_device_ipv4_address_remote_get/tasks/main.yml
 
 - ansible.builtin.include_role:
     name: ndfc_device_config_get
 
-- name: worker device_ipv4_address_get FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }}
+- name: device_ipv4_address_get FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }}
   cisco.dcnm.dcnm_inventory:
     fabric: "{{ device_config.switch_fabric }}"
     state: query
@@ -12,7 +12,7 @@
   register: wr1
 
 # Device ipv4 address
-- name: worker set_fact device_ipv4_address
+- name: set_fact device_ipv4_address
   set_fact:
     device_ipv4_address: "{{ wr1.response | json_query(wq2) }}"
   vars:

@@ -1,9 +1,9 @@
-# ndfc_device_ipv4_address_local_get/tasks/worker.yml
+# ndfc_device_ipv4_address_local_get/tasks/main.yml
 
 - ansible.builtin.include_role:
     name: ndfc_device_config_get
 
 # Device ipv4 address
-- name: worker set_fact device_ipv4_address
+- name: set_fact device_ipv4_address
   set_fact:
     device_ipv4_address: "{{ device_config.ip }}"
