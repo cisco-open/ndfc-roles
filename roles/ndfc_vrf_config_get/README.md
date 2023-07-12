@@ -1,22 +1,26 @@
-# ndfc_device_deleted
+# ndfc_vrf_config_get
 
-Delete device ``device_name`` from fabric ``fabric_name`` using ``cisco.dcnm.dcnm_inventory``
+Retrieve the configuration for vrf  ``vrf_name``
+
+### Returns (via set_fact)
+
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+vrf_config      | object | A JSON object containing ``vrf_name``'s current configuration
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-device_name     | str() | The device to be deleted
-fabric_name     | str() | The fabric in which device_name resides
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+vrf_name        | string | The vrf's configuration to retrieve
 
-Device and fabric names are defined in the following file:
+VRF parameters are defined in the following files:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/04_vrfs.yml](/inventory/group_vars/ndfc/04_vrfs.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
-
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Example Playbook
 
@@ -25,12 +29,71 @@ See the following for details:
 - hosts: ndfc
   gather_facts: false
   roles:
-    - ndfc_device_deleted
+    - ndfc_vrf_config_get
   vars:
-    fabric_name: f1
-    device_name: spine_1
+    vrf_name: msd_v1
+  tasks:
+  - block:
+    - debug:
+        var: vrf_config
 ```
 
+### Example returned object
+
+```json
+{
+    "vrf_config": {
+        "attach": [
+            {
+                "ip_address": "172.22.150.102"
+            },
+            {
+                "ip_address": "172.22.150.103"
+            },
+            {
+                "ip_address": "172.22.150.104"
+            },
+            {
+                "ip_address": "172.22.150.105"
+            },
+            {
+                "ip_address": "172.22.150.106"
+            },
+            {
+                "ip_address": "172.22.150.107"
+            },
+            {
+                "ip_address": "172.22.150.108"
+            },
+            {
+                "ip_address": "172.22.150.109"
+            },
+            {
+                "ip_address": "172.22.150.110"
+            },
+            {
+                "ip_address": "172.22.150.111"
+            },
+            {
+                "ip_address": "172.22.150.100"
+            },
+            {
+                "ip_address": "172.22.150.101"
+            }
+        ],
+        "fabric": "MSD",
+        "import_evpn_rt": "65001:63031,65002:63032",
+        "import_vpn_rt": "65001:63031,65002:63032",
+        "name": "msd_v1",
+        "service_vrf_template": null,
+        "vlan_id": 3031,
+        "vrf_extension_template": "Default_VRF_Extension_Universal",
+        "vrf_id": 63031,
+        "vrf_name": "v1",
+        "vrf_template": "Default_VRF_Universal"
+    }
+}
+```
 ### Licensing
 
 GNU General Public License v3.0 or later.
