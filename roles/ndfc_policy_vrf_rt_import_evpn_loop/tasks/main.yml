@@ -1,5 +1,5 @@
 # ndfc_policy_vrf_rt_import_evpn_loop/tasks/main.yml
 ---
-- name: main {{ state }} VRF route-target import/export
-  include_tasks: worker.yml
-  loop: "{{ device_list }}"
+-   name: main {{ state }} VRF route-target import/export
+    include_tasks: worker.yml
+    loop: "{{ device_list }}"

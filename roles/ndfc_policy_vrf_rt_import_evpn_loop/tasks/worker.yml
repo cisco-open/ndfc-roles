@@ -1,46 +1,53 @@
 # ndfc_policy_vrf_rt_import_evpn_loop/tasks/worker.yml
 
-- ansible.builtin.include_role:
-    name: ndfc_device_config_get
-  vars:
-    device_name: "{{ item }}"
-- name: set_fact all_fabrics
-  ansible.builtin.set_fact:
-    all_fabrics: "{{ msd | combine(easy_fabric, external, lan_classic) }}"
+-   ansible.builtin.include_role:
+        name: ndfc_device_config_get
+    vars:
+        device_name: "{{ item }}"
+-   name: set_fact all_fabrics
+    ansible.builtin.set_fact:
+        all_fabrics: "{{ msd | combine(easy_fabric, external, lan_classic) }}"
 
-- name: worker {{ state }} FABRIC {{ device_config.switch_fabric }} DEVICE {{ item }} VRF.VLAN.ASN.INDEX {{ vrf_name }}.{{ vrf_vlan_id }}.{{ import_vrf_asn }}.{{ vrf_index }} import VRF.ASN:INDEX {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}
-  retries: 3
-  register: result
-  until: result is not failed
-  cisco.dcnm.dcnm_policy:
-    state: "{{ state }}"
-    deploy: true
-    fabric: "{{ device_config.switch_fabric }}"
-    config:
-      - name: Default_VRF_Universal
-        create_additional_policy: false
-        policy_vars:
-          vrfName: "{{ vrf_name }}"
-          vrfVlanId: "{{ vrf_vlan_id }}"
-          nveId: 1
-          asn: "{{ import_vrf_asn }}"
-          vrfSegmentId: "{{ vrf_index }}"
-          routeTargetImport: "{{ import_vrf_asn }}:{{ import_vrf_index }}"
-          routeTargetImportEvpn: "{{ import_vrf_asn }}:{{ import_vrf_index }}"
-      - switch:
-        - ip: "{{ device_config.ip }}"
-  vars:
-    ansible_connection: httpapi
-    wq1: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ import_vrf_name }}'].vrf_id | [0]"
-    wq2: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ vrf_name }}'].vlan_id | [0]"
-    wq3: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ vrf_name }}'].vrf_id | [0]"
-    wq4: "[?name == '{{ device_config.switch_fabric }}'].BGP_AS | [0]"
-    import_vrf_index: "{{ vrfs.values() | list | json_query(wq1) }}"
-    vrf_vlan_id: "{{ vrfs.values() | list | json_query(wq2) }}"
-    vrf_index: "{{ vrfs.values() | list | json_query(wq3) }}"
-    import_vrf_asn: "{{ all_fabrics.values() | list | json_query(wq4) }}"
-- ansible.builtin.include_role:
-    name: ndfc_rest_config_deploy
-  vars:
-    ansible_connection: httpapi
-    device_name: "{{ device_config.name }}"
+# We set retries to 3 here since this fails on the first try (as of NDFC version 12.1.1)
+# Might be fixed in later NDFC versions, but no harm keeping this around.
+-   name: worker {{ state }} FABRIC {{ device_config.switch_fabric }} DEVICE {{ item }} VRF.VLAN.ASN.INDEX {{ vrf_name }}.{{ vrf_vlan_id }}.{{ import_vrf_asn }}.{{ vrf_index }} import VRF.ASN:INDEX {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}
+    retries: 3
+    register: result
+    until: result is not failed
+    cisco.dcnm.dcnm_policy:
+        state: "{{ state }}"
+        deploy: true
+        fabric: "{{ device_config.switch_fabric }}"
+        config:
+        -   name: Default_VRF_Universal
+            create_additional_policy: false
+            policy_vars:
+                vrfName: "{{ vrf_name }}"
+                vrfVlanId: "{{ vrf_vlan_id }}"
+                nveId: 1
+                asn: "{{ import_vrf_asn }}"
+                vrfSegmentId: "{{ vrf_index }}"
+                routeTargetImport: "{{ import_vpn_rt }}"
+                routeTargetImportEvpn: "{{ import_evpn_rt }}"
+        -   switch:
+            -   ip: "{{ device_config.ip }}"
+    vars:
+        ansible_connection: httpapi
+        wq1: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ import_vrf_name }}'].vrf_id | [0]"
+        wq2: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ vrf_name }}'].vlan_id | [0]"
+        wq3: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ vrf_name }}'].vrf_id | [0]"
+        wq4: "[?FABRIC_NAME == '{{ device_config.switch_fabric }}'].BGP_AS | [0]"
+        wq5: "[?vrf_name == '{{ vrf_name }}'].import_vpn_rt | [0]"
+        wq6: "[?vrf_name == '{{ vrf_name }}'].import_evpn_rt | [0]"
+        import_vrf_index: "{{ vrfs.values() | list | json_query(wq1) }}"
+        vrf_vlan_id: "{{ vrfs.values() | list | json_query(wq2) }}"
+        vrf_index: "{{ vrfs.values() | list | json_query(wq3) }}"
+        import_vrf_asn: "{{ all_fabrics.values() | list | json_query(wq4) }}"
+        import_vpn_rt: "{{ all_fabrics.values() | list | json_query(wq5) }}"
+        import_evpn_rt: "{{ all_fabrics.values() | list | json_query(wq6) }}"
+
+-   ansible.builtin.include_role:
+        name: ndfc_rest_config_deploy
+    vars:
+        ansible_connection: httpapi
+        device_name: "{{ device_config.name }}"
