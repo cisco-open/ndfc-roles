@@ -1,4 +1,4 @@
-# ndfc_vrf_replaced/tasks/worker.yml
+# ndfc_vrf_replaced/tasks/main.yml
 - ansible.builtin.include_role:
     name: ndfc_vrf_config_get
 
@@ -10,6 +10,8 @@
     - vrf_name: "{{ vrf_config.vrf_name }}"
       vrf_id: "{{ vrf_config.vrf_id }}"
       vlan_id: "{{ vrf_config.vlan_id }}"
+      import_vpn_rt: "{{ item.import_vpn_rt }}"
+      import_evpn_rt: "{{ item.import_evpn_rt }}"
       vrf_template: Default_VRF_Universal
       vrf_extension_template: Default_VRF_Extension_Universal
       service_vrf_template: null
