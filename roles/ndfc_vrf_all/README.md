@@ -2,16 +2,6 @@
 
 Create, update, or delete all defined VRFs in fabric ``fabric_name``.
 
-### Role Dependencies
-
-ndfc_common
-
-## Other Dependencies
-
-Dependency  | Used By      | Install With
------------ | ------------ | ------------
-jmespath    | json_query() | pip install jmespath
-
 ### Role Variables
 
 Variable     | Description
@@ -21,42 +11,27 @@ state        | Ansible state.  One of merged, overridden, replaced, or deleted.
 
 ### Other variables
 
-This role reads the ``vrfs`` list of dictionaries from ``~/ndfc_common/vars/main.yml``
+This role reads the ``vrfs`` dictionary from:
 
-This list of dictionaries define VRFs and their attachment to devices.  Its property names are provided below.  See the following for details:
+- [./inventory/group_vars/ndfc/04_vrfs.yml](/inventory/group_vars/ndfc/04_vrfs.yml)
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+This dictionary defines VRFs and their attachment to devices.  Its property names are provided below.  See the following for details:
+
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 Variable               | Example        | Type         | Description
 -----------------------|----------------|--------------|-------------------
-fabric                 | f1             | str()        | Fabric in which vrf resides
-vrf_name               | vrf_1          | str()        | name of the vrf
-vrf_id                 | 9003031        | int()        | vrf Layer3 VNI / vn-segment
-vlan_id                | 3031           | int()        | vrf associated vlan 
-vrf_template           | TemplateVrf    | str()        | Overlay VRF Template For Leafs
-vrf_extension_template | TemplateExVrf  | str()        | Overlay VRF Template For Borders
-service_vrf_template   | ServiceVrf     | str()        | Service vrf template
+fabric                 | f1             | string       | Fabric in which vrf resides
+import_vpn_rt          | 65000:50001    | string       | vpn route-target to import
+import_evpn_rt         | 65000:50001    | string       | evpn route-target to import
+vrf_name               | vrf_1          | string       | name of the vrf
+vrf_id                 | 9003031        | integer      | vrf Layer3 VNI / vn-segment
+vlan_id                | 3031           | integer      | vrf associated vlan 
+vrf_template           | TemplateVrf    | string       | Overlay VRF Template For Leafs
+vrf_extension_template | TemplateExVrf  | string       | Overlay VRF Template For Borders
+service_vrf_template   | ServiceVrf     | string       | Service vrf template
 attach                 | See example    | list of dict | List of mgmt0 ip addresses of switches on which the VRF is configured
 attach.ip_address      | 192.168.1.1    | IP address   | mgmt0 address of the switch to which the vrf is attached
-
-Example entry in the ``vrfs`` list.
-
-```yaml
-vrfs:
-- fabric: "{{ fabrics[0].name }}"
-  vrf_name: v1
-  vrf_id: 9003031
-  vlan_id: 3031
-  vrf_template: Default_VRF_Universal
-  vrf_extension_template: Default_VRF_Extension_Universal
-  service_vrf_template: null
-  attach:
-    - ip_address: "{{ leafs[0].ip }}"
-    - ip_address: "{{ leafs[1].ip }}"
-    - ip_address: "{{ leafs[2].ip }}"
-    - ip_address: "{{ leafs[3].ip }}"
-```
-
 
 ### Example Playbooks
 
