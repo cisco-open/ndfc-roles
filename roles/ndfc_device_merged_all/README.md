@@ -10,8 +10,8 @@ fabric_name     | string | The fabric in which the devices reside
 
 Fabric and device parameters are defined in the following files:
 
-- ./inventory/group_vars/ndfc/01_fabrics.yml
-- ./inventory/group_vars/ndfc/02_devices.yml
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
+- [./inventory/group_vars/ndfc/02_devices.yml](/inventory/group_vars/ndfc/02_devices.yml)
 
 See the following for details:
 
