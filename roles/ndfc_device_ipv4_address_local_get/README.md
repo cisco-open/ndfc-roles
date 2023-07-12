@@ -1,10 +1,10 @@
 # ndfc_device_ipv4_address_local_get
 
-Return device's ipv4 address, given ``device_name``.
+Return device's ipv4 address from the local Ansible inventory, given ``device_name``.
 
 The device's ipv4 address is returned in the variable ``device_ipv4_address``.
 
-``device_ipv4_address`` is gleaned locally from ``ndfc_common/vars/main.yml``.
+``device_ipv4_address`` is gleaned locally from [./inventory/group_vars/ndfc/02_devices.yml](/inventory/group_vars/ndfc/02_devices.yml).
 
 Since this operation is local, the result is returned faster than ``ndfc_device_ipv4_address_remote_get``
 
@@ -28,7 +28,7 @@ See the following for details:
 ### Example Playbook
 
 ```yaml
-# Query ndfc_common/vars/main.yml for fabric_name + device_name
+# Query ./inventory/group_vars/ndfc/02_devices.yml for fabric_name + device_name
 # and print the device's ipv4 address
 ---
 - hosts: ndfc
