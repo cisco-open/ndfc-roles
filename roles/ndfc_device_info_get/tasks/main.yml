@@ -1,4 +1,4 @@
-# ndfc_device_info_get/tasks/worker.yml
+# ndfc_device_info_get/tasks/main.yml
 - ansible.builtin.include_role:
     name: ndfc_device_config_get
 
@@ -12,7 +12,7 @@
   vars:
     ansible_connection: httpapi
 
-- name: worker set_fact device_info
+- name: set_fact device_info
   set_fact:
     device_info: "{{ wr1.response | json_query(wq1) }}"
   vars:
