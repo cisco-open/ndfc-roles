@@ -4,19 +4,18 @@ Add ``child_fabric`` to Multi-Site Domain (MSD) fabric ``msd_fabric``
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-msd_fabric      | str() | The MSD fabric to which ``child_fabric`` will be added
-child_fabric    | str() | The fabric to be added to ``msd_fabric``
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+child_fabric    | string | The fabric to be added to ``msd_fabric``
+msd_fabric      | string | The MSD fabric to which ``child_fabric`` will be added
 
 Fabric parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
-
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Example Playbook
 

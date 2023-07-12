@@ -4,19 +4,18 @@ Remove child fabric ``child_fabric`` from Multi-Site Domain (MSD) fabric ``msd_f
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-msd_fabric      | str() | The MSD fabric from which ``child_fabric`` will be removed
-child_fabric    | str() | The fabric to be removed from ``msd_fabric``
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+child_fabric    | string | The fabric to be removed from ``msd_fabric``
+msd_fabric      | string | The MSD fabric from which ``child_fabric`` will be removed
 
 Fabric parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
-
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Example Playbook
 

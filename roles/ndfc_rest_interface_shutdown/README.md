@@ -1,25 +1,26 @@
 # ndfc_rest_interface_shutdown
 
-Administratively shutdown interface ``interface_name`` on ``device_name`` in fabric ``fabric_name``.
+Administratively shutdown interface ``interface_name`` on ``device_name``.
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|------------------------------------------------
-device_name     | str() | The device on which ``interface_name`` resides
-interface_name  | str() | The interface on ``device_name`` to shutdown
+Variable        | Type   | Description
+----------------|--------|------------------------------------------------
+device_name     | string | The device on which ``interface_name`` resides
+interface_name  | string | The interface on ``device_name`` to shutdown
 
-Device and Fabric names are defined in the following file:
+Device and interface parameters are defined in the following files:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/02_devices.yml](/inventory/group_vars/ndfc/02_devices.yml)
+- [./inventory/group_vars/ndfc/03_networks.yml](/inventory/group_vars/ndfc/03_networks.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 Other variables used in this Role:
 
-From ``./roles/ndfc_devices_merged/defaults/main.yml``:
+From [./roles/ndfc_rest_interface_shutdown/defaults/main.yml](/roles/ndfc_rest_interface_shutdown/defaults/main.yml)
 
 Variable           | Type   | Description
 -------------------|--------|------------
@@ -31,15 +32,15 @@ inclAllMSDSwitches | bool() | Default: ``false`` Included in the config-deploy R
 ### Example Playbooks
 
 ```yaml
+# example_ndfc_rest_interface_shutdown.yml
 ---
 - hosts: ndfc
   gather_facts: false
   roles:
     - ndfc_rest_interface_shutdown
   vars:
-    - fabric_name: f1
-      device_name: spine_1
-      interface_name: Ethernet1/1
+    device_name: spine_1
+    interface_name: Ethernet1/32
 ```
 
 ### Licensing
