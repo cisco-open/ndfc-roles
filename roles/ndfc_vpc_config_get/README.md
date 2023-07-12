@@ -1,20 +1,20 @@
 # ndfc_vpc_config_get
 
-Retrieve local configuration for ``vpc_name``
+Retrieve configuration for ``vpc_name`` from the local inventory
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-vpc_name        | str() | The vpc for which local configuration information is retrieved
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+vpc_name        | string | The vpc for which local configuration information is retrieved
 
-VPC names are defined in the following file under ``vpc_peers`` section:
+VPC parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/05_vpc.yml](/inventory/group_vars/ndfc/05_vpc.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Example Playbook
 

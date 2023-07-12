@@ -1,20 +1,20 @@
 # ndfc_service_node_deleted
 
-Delete service node ``service_node_name`` using ansible deleted operation
+Delete service node ``service_node_name``
 
 ### Role Variables
 
-Variable          | Type  | Description
-------------------|-------|----------------------------------------
-service_node_name | str() | The service node to merge
+Variable          | Type   | Description
+------------------|--------|----------------------------------------
+service_node_name | string | The service node to merge
 
-Service node parameters are defined in the following file under ``service_nodes`
+Service node parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/06_service_nodes.yml](/inventory/group_vars/ndfc/06_service_nodes.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 
 ### Example Playbook

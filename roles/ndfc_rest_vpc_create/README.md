@@ -4,23 +4,21 @@ Create vpc peering ``vpc_name`` in fabric ``fabric_name``
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-vpc_name        | str() | The name of the vpc peering to create
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+fabric_name     | string | The fabric in which the vpc peering resides
+vpc_name        | string | The name of the vpc peering to create
 
-``fabric_name`` and ``vpc_name`` are defined in the following file:
+NOTE 1: ``fabric_name`` is required by ndfc_rest_config_deploy_all
 
-``./roles/ndfc_common/vars/main.yml``
+Fabric and VPC parameters are defined in the following files:
 
-Specifically:
-
-``fabric_name`` is defined in the ``fabrics`` list
-
-``vpc_name`` is defined in the ``vpc_peers`` list
+- [./inventory/group_vars/ndfc/01_fabrics.yml](/inventory/group_vars/ndfc/01_fabrics.yml)
+- [./inventory/group_vars/ndfc/05_vpc.yml](/inventory/group_vars/ndfc/05_vpc.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Example Playbook
 

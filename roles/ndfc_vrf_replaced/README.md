@@ -12,7 +12,7 @@ NOTE, ``vrf_name`` above corresponds to the ``name:`` key within the vrfs dictio
 
 The parameter ``vrf_name`` is defined in the ``vrfs`` dictionary in following file:
 
-``./roles/ndfc_common/vars/main.yml``
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 User parameters in the the ``vrfs`` dictionary include:
 

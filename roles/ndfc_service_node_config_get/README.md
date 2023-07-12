@@ -4,18 +4,17 @@ Retrieve local configuration for ``service_node_name``
 
 ### Role Variables
 
-Variable          | Type  | Description
-------------------|-------|----------------------------------------
-service_node_name | str() | The service node for which local configuration information is retrieved
+Variable          | Type   | Description
+------------------|--------|----------------------------------------
+service_node_name | string | The service node for which local configuration information is retrieved
 
-Service node names are defined in the following file:
+Service node parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/06_service_nodes.yml](/inventory/group_vars/ndfc/06_service_nodes.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
-
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Example Playbook
 

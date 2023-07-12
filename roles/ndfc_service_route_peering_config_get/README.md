@@ -1,20 +1,20 @@
 # ndfc_service_route_peering_config_get
 
-Retrieve local configuration for ``service_route_peering_name``
+Retrieve configuration for ``service_route_peering_name`` from the Ansible inventory
 
 ### Role Variables
 
-Variable                   | Type  | Description
----------------------------|-------|----------------------------------------
-service_route_peering_name | str() | The service route peering for which local configuration information is retrieved
+Variable                   | Type   | Description
+---------------------------|--------|----------------------------------------
+service_route_peering_name | string | The service route peering for which local configuration information is retrieved
 
-Service route peering names are defined in the following file:
+Service route peerings are defined in the following file under ``service_route_peerings`
 
-``./roles/ndfc_common/vars/main.yml``)
+- [./inventory/group_vars/ndfc/06_service_nodes.yml](/inventory/group_vars/ndfc/06_service_nodes.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 
 ### Example Playbook

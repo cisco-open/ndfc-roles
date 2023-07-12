@@ -4,22 +4,17 @@ Merge all vpc interfaces for vpc peer ``vpc_name``
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-vpc_name        | str() | The name of the vpc peer for which interfaces will be merged
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+vpc_name        | string | The name of the vpc peer for which interfaces will be merged
 
-``vpc_name`` is defined in the following file within the ``vpc_peers`` dictionary:
+VPC parameters are defined in the following file:
 
-``./roles/ndfc_common/vars/main.yml``
-
+- [./inventory/group_vars/ndfc/05_vpc.yml](/inventory/group_vars/ndfc/05_vpc.yml)
 
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
-
-### See also
-
-``vpc_interfaces`` list in [./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 ### Example Playbook
 

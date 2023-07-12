@@ -4,13 +4,13 @@ Query VRF ``vrf_name`` and return json object ``vrf_info`` which contains vrf in
 
 ### Role Variables
 
-Variable        | Type  | Description
-----------------|-------|----------------------------------------
-vrf_name        | str() | The vrf to query.
+Variable        | Type   | Description
+----------------|--------|----------------------------------------
+vrf_name        | string | The vrf to query.
 
-vrf parameters, including ``vrf_name``, are defined in the following file:
+VRF parameters are defined in the following files:
 
-``./roles/ndfc_common/vars/main.yml``
+[./inventory/group_vars/ndfc/04_vrfs.yml](/inventory/group_vars/ndfc/04_vrfs.yml)
 
 NOTE, ``vrf_name`` above corresponds to the ``name:`` key within the vrfs dictionary in the file noted above.  The ``name:`` key is unique across all defined vrfs, whereas the ``vrf_name:`` key is not unique and cannot be used with this role.  By way of example, in the entry below, you would use the value of ``name:`` rather than the value of ``vrf_name``.  The example playbook below shows the correct value to use.
 
@@ -52,31 +52,9 @@ NOTE, ``vrf_name`` above corresponds to the ``name:`` key within the vrfs dictio
       msg: "vrf_info.parent.vrfStatus: {{ vrf_info.parent.vrfStatus }}"
 ```
 
-
-
 See the following for details:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
-
-## Example Playbook
-
-```yaml
----
-- hosts: ndfc
-  gather_facts: false
-  roles:
-    - ndfc_vrf_query
-  vars:
-    vrf_name: msd_v2
-  tasks:
-  - block:
-    - debug:
-        msg: "vrf_info.parent.fabric: {{ vrf_info.parent.fabric }}"
-    - debug:
-        msg: "vrf_info.parent.vrfId: {{ vrf_info.parent.vrfId }}"
-    - debug:
-        msg: "vrf_info.parent.vrfStatus: {{ vrf_info.parent.vrfStatus }}"
-```
+[./inventory/group_vars/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/inventory/group_vars/README.md)
 
 ### Licensing
 
