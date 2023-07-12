@@ -1,48 +1,48 @@
 # ndfc_policy_vrf_rt_import/tasks/main.yml
-- ansible.builtin.include_role:
-    name: ndfc_device_config_get
+-   ansible.builtin.include_role:
+        name: ndfc_device_config_get
 
-- name: set_fact all_fabrics
-  ansible.builtin.set_fact:
-    all_fabrics: "{{ msd | combine(easy_fabric, external, lan_classic) }}"
+-   name: set_fact all_fabrics
+    ansible.builtin.set_fact:
+        all_fabrics: "{{ msd | combine(easy_fabric, external, lan_classic) }}"
 
-- name: state {{ state }} fabric {{ device_config.switch_fabric }} {{ device_config.name }} vrf {{ vrf_name }} importing {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}
-  retries: 3
-  register: result
-  until: result is not failed
-  cisco.dcnm.dcnm_policy:
-    state: "{{ state }}"
-    deploy: true
-    fabric: "{{ device_config.switch_fabric }}"
-    config:
-      - name: Default_VRF_Universal
-        create_additional_policy: false
-        policy_vars:
-          vrfName: "{{ vrf_name }}"
-          vrfVlanId: "{{ vrf_vlan_id }}"
-          nveId: 1
-          asn: "{{ import_vrf_asn }}"
-          vrfSegmentId: "{{ vrf_index }}"
-          routeTargetImport: "{{ import_vpn_rt }}"
-          routeTargetImportEvpn: "{{ import_evpn_rt }}"
-      - switch:
-        - ip: "{{ device_config.ip }}"
-  vars:
-    ansible_connection: httpapi
-    wq1: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ import_vrf_name }}'].vrf_id | [0]"
-    wq2: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ vrf_name }}'].vlan_id | [0]"
-    wq3: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ vrf_name }}'].vrf_id | [0]"
-    wq4: "[?FABRIC_NAME == '{{ device_config.switch_fabric }}'].BGP_AS | [0]"
-    wq5: "[?vrf_name == '{{ vrf_name }}'].import_vpn_rt | [0]"
-    wq6: "[?vrf_name == '{{ vrf_name }}'].import_evpn_rt | [0]"
-    import_vrf_index: "{{ vrfs.values() | list | json_query(wq1) }}"
-    vrf_vlan_id: "{{ vrfs.values() | list | json_query(wq2) }}"
-    vrf_index: "{{ vrfs.values() | list | json_query(wq3) }}"
-    import_vrf_asn: "{{ all_fabrics.values() | list | json_query(wq4) }}"
-    import_vpn_rt: "{{ all_fabrics.values() | list | json_query(wq5) }}"
-    import_evpn_rt: "{{ all_fabrics.values() | list | json_query(wq6) }}"
+-   name: state {{ state }} fabric {{ device_config.switch_fabric }} {{ device_config.name }} vrf {{ vrf_name }} importing {{ import_vrf_name }}.{{ import_vrf_asn }}:{{ import_vrf_index }}
+    retries: 3
+    register: result
+    until: result is not failed
+    cisco.dcnm.dcnm_policy:
+        state: "{{ state }}"
+        deploy: true
+        fabric: "{{ device_config.switch_fabric }}"
+        config:
+        -   name: Default_VRF_Universal
+            create_additional_policy: false
+            policy_vars:
+                vrfName: "{{ vrf_name }}"
+                vrfVlanId: "{{ vrf_vlan_id }}"
+                nveId: 1
+                asn: "{{ import_vrf_asn }}"
+                vrfSegmentId: "{{ vrf_index }}"
+                routeTargetImport: "{{ import_vpn_rt }}"
+                routeTargetImportEvpn: "{{ import_evpn_rt }}"
+        -   switch:
+            -   ip: "{{ device_config.ip }}"
+    vars:
+        ansible_connection: httpapi
+        wq1: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ import_vrf_name }}'].vrf_id | [0]"
+        wq2: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ vrf_name }}'].vlan_id | [0]"
+        wq3: "[?fabric == '{{ device_config.switch_fabric }}'] | [?vrf_name == '{{ vrf_name }}'].vrf_id | [0]"
+        wq4: "[?FABRIC_NAME == '{{ device_config.switch_fabric }}'].BGP_AS | [0]"
+        wq5: "[?vrf_name == '{{ vrf_name }}'].import_vpn_rt | [0]"
+        wq6: "[?vrf_name == '{{ vrf_name }}'].import_evpn_rt | [0]"
+        import_vrf_index: "{{ vrfs.values() | list | json_query(wq1) }}"
+        vrf_vlan_id: "{{ vrfs.values() | list | json_query(wq2) }}"
+        vrf_index: "{{ vrfs.values() | list | json_query(wq3) }}"
+        import_vrf_asn: "{{ all_fabrics.values() | list | json_query(wq4) }}"
+        import_vpn_rt: "{{ all_fabrics.values() | list | json_query(wq5) }}"
+        import_evpn_rt: "{{ all_fabrics.values() | list | json_query(wq6) }}"
 
-- ansible.builtin.include_role:
-    name: ndfc_rest_config_deploy
-  vars:
-    device_name: "{{ device_config.name }}"
+-   ansible.builtin.include_role:
+        name: ndfc_rest_config_deploy
+    vars:
+        device_name: "{{ device_config.name }}"
