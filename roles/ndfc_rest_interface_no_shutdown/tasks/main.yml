@@ -1,8 +1,8 @@
-# ndfc_rest_interface_no_shutdown/tasks/worker.yml
+# ndfc_rest_interface_no_shutdown/tasks/main.yml
 - ansible.builtin.include_role:
     name: ndfc_device_config_get
 
-- name: worker query FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }}
+- name: query FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }}
   cisco.dcnm.dcnm_inventory:
     fabric: "{{ device_config.switch_fabric }}"
     state: query
@@ -15,7 +15,7 @@
 - ansible.builtin.include_role:
     name: ndfc_device_serial_number_get
 
-- name: worker REST POST interface no_shutdown FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }} SERIAL {{ device_serial_number }} INTERFACE {{ interface_name }} payload {{ payload }}
+- name: REST POST interface no_shutdown FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }} SERIAL {{ device_serial_number }} INTERFACE {{ interface_name }} payload {{ payload }}
   cisco.dcnm.dcnm_rest:
     method: POST
     path: "/appcenter/cisco/ndfc/api/v1/lan-fabric/rest/interface/adminstatus"

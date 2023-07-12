@@ -3,7 +3,7 @@
 - ansible.builtin.include_role:
     name: ndfc_rest_fabric_active_fabrics_get
 
-- name: worker set_fact service_node {{ service_node_name }}
+- name: set_fact service_node {{ service_node_name }}
   set_fact:
      external_fabric_name: "{{ service_nodes.values() | list | json_query(mq2) }}"
      service_node_type: "{{ service_nodes.values() | list  | json_query(mq3) }}"
