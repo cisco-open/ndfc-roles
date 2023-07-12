@@ -210,7 +210,6 @@ Role naming conventions used in this repo.
 
 Role                           | Description
 ------------                   | -----------
-[ndfc_common]       | Common variables used by all other Roles
 [ndfc_device_config_get] | Retrieve local configuration for device, given ``device_name``
 [ndfc_device_deleted] | Delete a device from a fabric, given ``device_name``
 [ndfc_device_deleted_all] | Delete all devices in a fabric, given ``fabric_name``
@@ -220,9 +219,12 @@ Role                           | Description
 [ndfc_device_interface_config_all_get] | Retrieve and display interface configuration on all devices in a fabric, given ``fabric_name``, ``interface_name``
 [ndfc_device_ipv4_address_local_get] | Retrieve device ipv4 address from local vars, given ``device_name``
 [ndfc_device_ipv4_address_remote_get] | Retrieve device ipv4 address from NDFC controller, given ``device_name``
+[ndfc_device_list_get] | Retrieve device configuration from the local inventory for all devices in fabric ``fabric_name``
+[ndfc_device_list_merged] | Merge a list of devices into a fabric.
 [ndfc_device_merged] | Merge a device into the topology, given ``device_name``
 [ndfc_device_merged_all] | Merge all devices into a fabric, given ``fabric_name``
 [ndfc_device_model_number_get] | Retrieve device model number ``device_model_number``, given ``device_name``
+[ndfc_device_names_get] | Set a list (``device_names``) of device names matching devices in fabric ``fabric_name`` with role ``role``
 [ndfc_device_serial_number_get] | Retrieve device serial number ``device_serial_number``, given ``fabric_name``, ``device_name``
 [ndfc_fabric_config_get] | Retrieve local configuration for fabric, given ``fabric_name``
 [ndfc_network_config_get] | Retrieve local configuration for network, given ``network_name``
@@ -235,22 +237,25 @@ Role                           | Description
 [ndfc_policy_vrf_rt_import_evpn_loop] | Import a vrf's route-targets into another vrf on a list of devices, given a list of ``device_name``
 [ndfc_rest_config_deploy] | NDFC REST API POST calls to config-save and config-deploy for a device, given ``device_name``
 [ndfc_rest_config_deploy_all] | NDFC REST API POST calls to config-save and config-deploy for a fabric, given ``fabric_name``
+[ndfc_rest_device_intent_config_get] | Retrieve intended config for ``device_name``
 [ndfc_rest_device_list_by_fabric] | Retrieve list of devices in fabric, given ``fabric_name``
+[ndfc_rest_device_rediscover] | Rediscover device ``device_name`` in fabric ``fabric_name``
 [ndfc_rest_device_set_role] | Set a device's role, given ``device_name``, and ``role``
 [ndfc_rest_fabric_access_mode_get] | Retrieve a fabric's access mode, given ``fabric_name``
 [ndfc_rest_fabric_access_mode_set] | Set a fabric's access mode, given ``fabric_name``, and ``read_only``
 [ndfc_rest_fabric_active_fabrics_get] | Queries NDFC controller for list of active fabrics
 [ndfc_rest_fabric_asn_get] | Retrieve a fabric's BGP ASN, given ``fabric_name``
+[ndfc_rest_fabric_create_easy_fabric] | Create a VXLAN/EVPN (aka EasyFabric in NDFC-speak) fabric ``fabric_name``
+[ndfc_rest_fabric_create_easy_fabric_ebgp] | Create fabric VXLAN/EVPN (aka EasyFabric in NDFC-speak) ``fabric_name`` that supports non-nexus devices
+[ndfc_rest_fabric_create_external] | Create External fabric ``fabric_name``
+[ndfc_rest_fabric_create_lan_classic] | Create Classic LAN fabric ``fabric_name``
+[ndfc_rest_fabric_create_msd] | Create Multi-Site Domain (MSD) fabric ``fabric_name``
 [ndfc_rest_fabric_delete] | Delete a fabric, given ``fabric_name``
-[ndfc_rest_fabric_external_create] | Create an external fabric, given ``fabric_name``
 [ndfc_rest_fabric_info_get] | Retrieve a fabric's information from the NDFC controller, given ``fabric_name``
 [ndfc_rest_fabric_msd_child_add] | Add a child fabric to an MSD fabric, given ``child_fabric``, and ``msd_fabric``
 [ndfc_rest_fabric_msd_child_remove] | Remove a child fabric from an MSD fabric, given ``child_fabric``, and ``msd_fabric``
-[ndfc_rest_fabric_msd_create] | Create a multi-side domain fabric, given ``msd_fabric``
-[ndfc_rest_fabric_switch_create] | Create a switch fabric, given ``fabric_name``
 [ndfc_rest_interface_no_shutdown] | Administratively no shutdown interface, given ``device_name``, ``interface_name``
 [ndfc_rest_interface_shutdown] | Administratively shutdown interface, given ``device_name``, ``interface_name``
-[ndfc_rest_rediscover] | Rediscover a device, given ``device_name``
 [ndfc_rest_service_node_add] | Add a service node, given ``service_node_name``
 [ndfc_rest_vpc_create] | Create a VPC pair, given ``fabric_name``, ``vpc_name``
 [ndfc_rest_vpc_delete] | Delete a VPC pair, given ``fabric_name``, ``vpc_name``
@@ -259,6 +264,7 @@ Role                           | Description
 [ndfc_service_node_deleted] | Delete a service node, given ``service_node_name``
 [ndfc_service_node_merged] | Create a service node, given ``service_node_name``
 [ndfc_service_route_peering_config_get] | Retrieve local configuration for service route peering, given ``service_route_peering_name``
+[ndfc_service_route_peering_intra_tenant_fw_merged] | Create intra-tenant service route peering. NOT TESTED.
 [ndfc_vpc_interface_merged_all] | Create (merge) all vpc interfaces for a vpc pair, given ``vpc_name``
 [ndfc_vrf_all] | merge/delete all vrfs in a fabric, given ``fabric_name``
 [ndfc_vrf_config_get] | Retrieve local configuration for vrf in json object ``vrf_config``, given ``vrf_name``
@@ -266,7 +272,6 @@ Role                           | Description
 [ndfc_vrf_replaced] | Update (replaced) a vrf, given ``vrf_name``
 
 
-[ndfc_common]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common
 [ndfc_device_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_config_get
 [ndfc_device_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_deleted
 [ndfc_device_deleted_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_deleted_all
@@ -276,9 +281,12 @@ Role                           | Description
 [ndfc_device_interface_config_all_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_interface_config_all_get
 [ndfc_device_ipv4_address_local_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_ipv4_address_local_get
 [ndfc_device_ipv4_address_remote_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_ipv4_address_remote_get
+[ndfc_device_list_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_list_get
+[ndfc_device_list_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_list_merged
 [ndfc_device_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_merged
 [ndfc_device_merged_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_merged_all
 [ndfc_device_model_number_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_model_number_get
+[ndfc_device_names_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_names_get
 [ndfc_device_serial_number_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_serial_number_get
 [ndfc_fabric_config_get]:  https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_fabric_config_get
 [ndfc_network_config_get]:  https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_network_config_get
@@ -291,22 +299,25 @@ Role                           | Description
 [ndfc_policy_vrf_rt_import_evpn_loop]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_policy_vrf_rt_import_evpn_loop
 [ndfc_rest_config_deploy]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_config_deploy
 [ndfc_rest_config_deploy_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_config_deploy_all
+[ndfc_rest_device_intent_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_device_intent_config_get
 [ndfc_rest_device_list_by_fabric]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_device_list_by_fabric
+[ndfc_rest_device_rediscover]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_device_rediscover
 [ndfc_rest_device_set_role]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_device_set_role
 [ndfc_rest_fabric_access_mode_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_access_mode_get
 [ndfc_rest_fabric_access_mode_set]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_access_mode_set
 [ndfc_rest_fabric_active_fabrics_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_active_fabrics_get
 [ndfc_rest_fabric_asn_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_asn_get
+[ndfc_rest_fabric_create_easy_fabric]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_create_easy_fabric
+[ndfc_rest_fabric_create_easy_fabric_ebgp]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_create_easy_fabric_ebgp
+[ndfc_rest_fabric_create_external]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_create_external
+[ndfc_rest_fabric_create_lan_classic]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_create_lan_classic
+[ndfc_rest_fabric_create_msd]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_create_msd
 [ndfc_rest_fabric_delete]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_delete
-[ndfc_rest_fabric_external_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_external_create
 [ndfc_rest_fabric_info_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_info_get
 [ndfc_rest_fabric_msd_child_add]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_add
 [ndfc_rest_fabric_msd_child_remove]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_child_remove
-[ndfc_rest_fabric_msd_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_msd_create
-[ndfc_rest_fabric_switch_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_fabric_switch_create
 [ndfc_rest_interface_no_shutdown]: https:////github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_interface_no_shutdown
 [ndfc_rest_interface_shutdown]: https:////github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_interface_shutdown
-[ndfc_rest_rediscover]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_rediscover
 [ndfc_rest_service_node_add]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_service_node_add
 [ndfc_rest_vpc_create]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_vpc_create
 [ndfc_rest_vpc_delete]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_rest_vpc_delete
@@ -315,6 +326,7 @@ Role                           | Description
 [ndfc_service_node_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_node_deleted
 [ndfc_service_node_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_node_merged
 [ndfc_service_route_peering_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_route_peering_config_get
+[ndfc_service_route_peering_intra_tenant_fw_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_route_peering_intra_tenant_fw_merged
 [ndfc_vpc_interface_merged_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vpc_interface_merged_all
 [ndfc_vrf_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_all
 [ndfc_vrf_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_config_get
