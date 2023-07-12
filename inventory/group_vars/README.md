@@ -647,20 +647,22 @@ networks:
 
 #### vrfs
 
-Dictionary of dictionaries which define VRFs and their attachments (device).
+Dictionary which define VRFs and their attachments (device).
 This follows the same property names and (more or less) the general structure as the corresponding Ansible [cisco.dcnm_vrf](https://github.com/CiscoDevNet/ansible-dcnm/blob/main/docs/cisco.dcnm.dcnm_vrf_module.rst) module.
 
-Variable               | Example        | Type          | Description
------------------------|----------------|---------------|-------------------
-fabric                 | f1             | string        | Fabric in which vrf resides
-vrf_name               | vrf_1          | string        | name of the vrf
-vrf_id                 | 9003031        | integer       | vrf Layer3 VNI / vn-segment
-vlan_id                | 3031           | integer       | vrf associated vlan 
-vrf_template           | TemplateVrf    | string        | Overlay VRF Template For Leafs
-vrf_extension_template | TemplateExVrf  | string        | Overlay VRF Template For Borders
-service_vrf_template   | ServiceVrf     | string        | Service vrf template
-attach                 | See example    | list of dict  | List of mgmt0 ip addresses of switches on which the VRF is configured
-attach.ip_address      | 192.168.1.1    | IP address    | mgmt0 address of the switch to which the vrf is attached
+Variable               | Example        | Type         | Description
+-----------------------|----------------|--------------|-------------------
+fabric                 | f1             | string       | Fabric in which vrf resides
+import_vpn_rt          | 65000:50001    | string       | vpn route-target to import
+import_evpn_rt         | 65000:50001    | string       | evpn route-target to import
+vrf_name               | vrf_1          | string       | name of the vrf
+vrf_id                 | 9003031        | integer      | vrf Layer3 VNI / vn-segment
+vlan_id                | 3031           | integer      | vrf associated vlan 
+vrf_template           | TemplateVrf    | string       | Overlay VRF Template For Leafs
+vrf_extension_template | TemplateExVrf  | string       | Overlay VRF Template For Borders
+service_vrf_template   | ServiceVrf     | string       | Service vrf template
+attach                 | See example    | list of dict | List of mgmt0 ip addresses of switches on which the VRF is configured
+attach.ip_address      | 192.168.1.1    | IP address   | mgmt0 address of the switch to which the vrf is attached
 
 ##### Example
 ```yaml
