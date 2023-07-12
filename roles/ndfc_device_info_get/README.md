@@ -56,6 +56,7 @@ See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 Allen Robel (@packetcalc)
 
 ### Example returned object device_info (as of NDFC version 12.0.1)
+
 ```json
 {
     "device_info": {
