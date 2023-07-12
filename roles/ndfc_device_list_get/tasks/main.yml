@@ -1,4 +1,4 @@
-# ndfc_device_config_get/tasks/main.yml
+# ndfc_device_list_get/tasks/main.yml
 ---
 - name: set fact device_list
   ansible.builtin.set_fact:
