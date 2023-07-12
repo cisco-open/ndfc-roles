@@ -3,7 +3,7 @@
 - ansible.builtin.include_role:
     name: ndfc_device_config_get
 
-- name: worker device_serial_number_get FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }}
+- name: device_serial_number_get FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }}
   cisco.dcnm.dcnm_inventory:
     fabric: "{{ device_config.switch_fabric }}"
     state: query
@@ -14,7 +14,7 @@
     ansible_connection: httpapi
 
 # Device serial number
-- name: worker set_fact device_serial_number
+- name: set_fact device_serial_number
   ansible.builtin.set_fact:
     device_serial_number: "{{ r1.response | json_query(q1) }}"
   vars:

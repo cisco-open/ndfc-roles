@@ -1,8 +1,8 @@
-# ndfc_device_model_number_get/tasks/worker.yml
+# ndfc_device_model_number_get/tasks/main.yml
 - ansible.builtin.include_role:
     name: ndfc_device_config_get
 
-- name: worker device_model_number_get FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }}
+- name: device_model_number_get FABRIC {{ device_config.switch_fabric }} NAME {{ device_config.name }} IP {{ device_config.ip }}
   cisco.dcnm.dcnm_inventory:
     fabric: "{{ device_config.switch_fabric }}"
     state: query
@@ -11,7 +11,7 @@
   register: wr1
 
 # Device model number
-- name: worker set_fact device_model_number
+- name: set_fact device_model_number
   set_fact:
     device_model_number: "{{ wr1.response | json_query(wq2) }}"
   vars:

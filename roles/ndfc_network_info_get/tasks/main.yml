@@ -3,7 +3,7 @@
 - ansible.builtin.include_role:
     name: ndfc_network_config_get
 
-- name: worker query network_name {{ network_config.name }} FABRIC {{ network_config.fabric }} NETWORK {{ network_config.net_name }}
+- name: query network_name {{ network_config.name }} FABRIC {{ network_config.fabric }} NETWORK {{ network_config.net_name }}
   cisco.dcnm.dcnm_network:
     fabric: "{{ network_config.fabric }}"
     state: query
@@ -13,7 +13,7 @@
   vars:
     ansible_connection: httpapi
 
-- name: worker set_fact network_info
+- name: set_fact network_info
   set_fact:
     network_info: "{{ wr1.response | json_query(wq1) | default('', true) }}"
   vars:
