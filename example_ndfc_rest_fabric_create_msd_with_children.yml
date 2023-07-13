@@ -7,7 +7,7 @@
     - ndfc_rest_fabric_create_easy_fabric
   vars:
     fabric_name: f1
-# Fabric f1 - Get list of devices from ndfc_common role vars
+# Fabric f1 - Get list of devices from Ansible inventory
 -   hosts: ndfc
     gather_facts: false
     roles:
@@ -30,7 +30,7 @@
     - ndfc_rest_fabric_create_easy_fabric
   vars:
     fabric_name: f2
-# Fabric f2 - Get list of devices from ndfc_common role vars
+# Fabric f2 - Get list of devices from Ansible inventory
 -   hosts: ndfc
     gather_facts: false
     roles:
