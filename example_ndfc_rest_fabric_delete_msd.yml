@@ -1,5 +1,6 @@
-# example_ndfc_rest_fabric_delete_f2.yml
+# example_ndfc_rest_fabric_delete_msd.yml
 ---
+# Delete all networks
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -7,6 +8,7 @@
   vars:
     fabric_name: MSD
 
+# Delete all VRFs
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -15,6 +17,7 @@
     fabric_name: MSD
     state: deleted
 
+# Remove fabric f1 from MSD fabric
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -23,6 +26,7 @@
     msd_fabric: MSD
     child_fabric: f1
 
+# Remove fabric f2 from MSD fabric
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -31,6 +35,7 @@
     msd_fabric: MSD
     child_fabric: f2
 
+# Delete switches from fabric f1
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -38,6 +43,7 @@
   vars:
     fabric_name: f1
 
+# Delete switches from fabric f2
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -45,6 +51,7 @@
   vars:
     fabric_name: f2
 
+# Delete fabric MSD
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -52,6 +59,7 @@
   vars:
     fabric_name: MSD
 
+# Delete fabric f1
 - hosts: ndfc
   gather_facts: false
   roles:
@@ -59,6 +67,7 @@
   vars:
     fabric_name: f1
 
+# Delete fabric f2
 - hosts: ndfc
   gather_facts: false
   roles:
