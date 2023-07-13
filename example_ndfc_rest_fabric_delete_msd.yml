@@ -1,4 +1,7 @@
 # example_ndfc_rest_fabric_delete_msd.yml
+#
+# This playbook deletes the topology created with
+# example_ndfc_rest_fabric_create_msd_with_children.yml
 ---
 # Delete all networks
 - hosts: ndfc
