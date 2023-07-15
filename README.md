@@ -8,27 +8,6 @@ This repo contains Ansible Roles and example playbooks that, together, implement
 
 Two identical child fabrics and a multisite domain (MSD) fabric are defined in the Ansible inventory.  The two child fabrics use non-overlapping underlay addressing to facilitate interconnection via a multi-site domain (MSD) fabric, which is also defined in the inventory; specifically, in ``./inventory/group_vars/ndfc/01_fabrics.yml``
 
-The inventory's structure is given below:
-
-```bash
-(py311) ndfc-roles % tree inventory 
-inventory
-├── group_vars
-│   ├── README.md
-│   └── ndfc
-│       ├── 00_connection.yml
-│       ├── 01_fabrics.yml
-│       ├── 02_devices.yml
-│       ├── 03_networks.yml
-│       ├── 04_vrfs.yml
-│       ├── 05_vpc.yml
-│       └── 06_service_nodes.yml
-└── hosts
-    └── hosts
-
-4 directories, 9 files
-(py311) ndfc-roles % 
-```
 The main playbooks, which create the two fabrics and the MSD fabric are located in this repo's the top-level directory.
 
 Ref | Playbook | Description
@@ -121,6 +100,28 @@ The characteristics of the child/site fabrics are as follows (see also the inclu
 spine and leaf can be added/removed by updating the Ansible inventory described below.
 
 ## Ansible Inventory
+
+The inventory's structure is given below:
+
+```bash
+(py311) ndfc-roles % tree inventory 
+inventory
+├── group_vars
+│   ├── README.md
+│   └── ndfc
+│       ├── 00_connection.yml
+│       ├── 01_fabrics.yml
+│       ├── 02_devices.yml
+│       ├── 03_networks.yml
+│       ├── 04_vrfs.yml
+│       ├── 05_vpc.yml
+│       └── 06_service_nodes.yml
+└── hosts
+    └── hosts
+
+4 directories, 9 files
+(py311) ndfc-roles % 
+```
 
 ### group_vars
 
