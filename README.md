@@ -6,17 +6,39 @@
 
 This repo contains Ansible Roles and example playbooks that, together, implement a basic Spine/Leaf VXLAN/EVPN fabric using Cisco's DCNM/NDFC Controller.
 
-Two identical child fabrics and a multisite domain (MSD) fabric are defined in the role ``ndfc_common``.  The two child fabrics use non-overlapping underlay addressing to facilitate interconnection via a multi-site domain (MSD) fabric, which is also defined in ``ndfc_common``; specifically, in ``ndfc_common/vars/main.yml``
+Two identical child fabrics and a multisite domain (MSD) fabric are defined in the Ansible inventory.  The two child fabrics use non-overlapping underlay addressing to facilitate interconnection via a multi-site domain (MSD) fabric, which is also defined in the inventory; specifically, in ``./inventory/group_vars/ndfc/01_fabrics.yml``
 
-The main playbooks, which create the two fabrics and the MSD fabric are located in the top-level directory.
+The inventory's structure is given below:
+
+```bash
+(py311) ndfc-roles % tree inventory 
+inventory
+├── group_vars
+│   ├── README.md
+│   └── ndfc
+│       ├── 00_connection.yml
+│       ├── 01_fabrics.yml
+│       ├── 02_devices.yml
+│       ├── 03_networks.yml
+│       ├── 04_vrfs.yml
+│       ├── 05_vpc.yml
+│       └── 06_service_nodes.yml
+└── hosts
+    └── hosts
+
+4 directories, 9 files
+(py311) ndfc-roles % 
+```
+The main playbooks, which create the two fabrics and the MSD fabric are located in this repo's the top-level directory.
 
 Ref | Playbook | Description
 --- | -------- | -----------
-1 | ``example_ndfc_rest_fabric_switch_create_f1.yml`` | creates VXLAN/EVPN fabric f1 without connectivity to an MSD fabric
-2 | ``example_ndfc_rest_fabric_switch_create_f2.yml`` | creates VXLAN/EVPN fabric f2 without connectivity to an MSD fabric
-3 | ``example_ndfc_rest_fabric_msd_create_with_children.yml`` | creates VXLAN/EVPN fabrics f1 and f2, connecting them through an MSD fabric
+1 | ``example_ndfc_rest_fabric_switch_create_f1.yml`` | creates VXLAN/EVPN fabric f1 without connectivity to an MSD fabric (2x VPC pair per fabric)
+2 | ``example_ndfc_rest_fabric_switch_create_f2.yml`` | creates VXLAN/EVPN fabric f2 without connectivity to an MSD fabric (2x VPC pair per fabric)
+3 | ``example_ndfc_rest_fabric_msd_create_with_children_vpc.yml`` | creates VXLAN/EVPN fabrics f1 and f2, connecting them through an MSD fabric
+4 | ``example_ndfc_rest_fabric_msd_create_with_children.yml`` | Same as 3, but with 2x non-VPC leaf per fabric
 
-You should use either (1 and 2) OR 3 (which creates 1 and 2, but with MSD connectivity).  That is, (1 and 2) are mutually exclusive to 3.
+You should use either (1 and 2) OR 3 OR 4 (3 creates 1 and 2, but with MSD connectivity, and 4 creates 3 but with 2x non-VPC leafs instead of 4x leaf as 2x VPC-pairs).  That is, (1 and 2) are mutually exclusive to 3 and 4.
 
 These playbooks leverage many of the included roles.
 
@@ -85,37 +107,36 @@ connect_timeout=1800
 
 The characteristics of the child/site fabrics are as follows (see also the included PDF for a topology).
 
-1. 2 Spine acting as Route Reflectors for all Leaf and Border Gateway
-2. 4 Leaf / VTEP (2 VPC pairs using fabric-peering for their virtual peer-link)
-3. 2 Border Gateway / VTEP
-4. 2 VRF: v1 and v2
-5. L3 (ipv4 / ipv6) connectivity between VRF v1 and v2 (import/export of route-targets)
-6. L2 connectivity within each VRF
-7. OSPF underlay
-8. VXLAN/EVPN Replication Mode: Ingress
+- 2 spine acting as Route Reflectors for all leaf and border_gateway
+- Either:
+    - 4 VPC leaf (2 VPC pairs using fabric-peering for their virtual peer-link)
+    - Or, 2 non-VPC leaf
+- 2 border_gateway
+- 2 VRF: v1 and v2
+- L3 (ipv4 / ipv6) connectivity between VRF v1 and v2 (symmetric import of route-targets)
+- L2 connectivity within each VRF
+- OSPF underlay
+- VXLAN/EVPN Replication Mode: Ingress
 
-Spines and Leafs can be added/removed by updating the Common Role Variables described below.
+spine and leaf can be added/removed by updating the Ansible inventory described below.
 
-## Common Role Variables
+## Ansible Inventory
 
-To use these Roles, and example playbooks, you'll need to update some common variables used across all Roles.  These are maintained in ``./ndfc_common/vars/main.yml`` and include things like: IP addresses of your switches, VRF names, VLAN identifiers, port attachments for networks, VPC peering info and other basic information.
+### group_vars
 
-See the following for details around the modifications you'll need to make
+To use these Roles, and example playbooks, you'll update some common variables used across all Roles. These are maintained in ``./inventory/group_vars/ndfc/*.yml`` and include things like: IP addresses of your switches, VRF names, VLAN identifiers, port attachments for networks, VPC peering info and other basic information.
 
+See the following for details around the modifications required:
 
-[./roles/ndfc_common/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_common/README.md)
+[./inventory/group_vars/ndfc/README.md](/inventory/group_vars/README.md)
 
-## Inventory
+Next, you'll edit the following to add your NDFC username and password and the username/password for the switches comprising your fabric(s)
 
-Next, you'll need to edit the following to add your NDFC username and password and the username/password for the switches comprising your fabric(s)
-
-```bash
-./inventory/group_vars/ndfc 
-```
+[./inventory/group_vars/ndfc/00_connection.yml](/inventory/group_vars/ndfc/00_connection.yml)
 
 It is recommended (but not mandatory) that you encrypt these passwords.  Below is one way to do this.
 
-### Modify ./inventory/group_vars/ndfc
+### Modify ./inventory/group_vars/ndfc/00_connection.yml
 
 #### Edit ``ansible_password`` (password for NDFC controller) and ``device_password`` (password for NX-OS switches)
 
@@ -124,10 +145,11 @@ Add ``ansible_password`` and ``device_password`` in encrypted format (or non-enc
 To add encrypted passwords for the NDFC controller and NX-OS devices, issue the following from this repo's top-level directory.  The lines containing ``echo`` are to ensure carraige returns are added after each line that ``ansible-vault`` adds.
 
 ```bash
-ansible-vault encrypt_string 'mySuperSecretNdfcPassword' --name 'ansible_password' >> ./inventory/group_vars/ndfc
-echo "\n" >> ./inventory/group_vars/ndfc
-ansible-vault encrypt_string 'mySuperSecretNxosPassword' --name 'device_password' >> ./inventory/group_vars/ndfc
-echo "\n" >> ./inventory/group_vars/ndfc
+cd /top/level/directory/for/this/repo
+ansible-vault encrypt_string 'mySuperSecretNdfcPassword' --name 'ansible_password' >> ./inventory/group_vars/ndfc/00_connection.yml
+echo "\n" >> ./inventory/group_vars/ndfc/00_connection.yml
+ansible-vault encrypt_string 'mySuperSecretNxosPassword' --name 'device_password' >> ./inventory/group_vars/ndfc/00_connection.yml
+echo "\n" >> ./inventory/group_vars/ndfc/00_connection.yml
 ```
 
 ansible-vault will prompt you for a vault password, which you'll use to decrypt these passwords (using ``ansible-playbook --ask-vault-pass``) when running the example playbooks.
@@ -135,11 +157,11 @@ ansible-vault will prompt you for a vault password, which you'll use to decrypt 
 Example:
 
 ```bash
-% ansible-vault encrypt_string 'mySuperSecretNdfcPassword' --name 'ansible_password' >> ./inventory/group_vars/ndfc
+% ansible-vault encrypt_string 'mySuperSecretNdfcPassword' --name 'ansible_password' >> ./inventory/group_vars/ndfc/00_connection.yml
 New Vault password: 
 Confirm New Vault password: 
-% echo "\n" >> ./inventory/group_vars/ndfc
-% cat ./inventory/group_vars/ndfc
+% echo "\n" >> ./inventory/group_vars/ndfc/00_connection.yml
+% cat ./inventory/group_vars/ndfc/00_connection.yml
 ansible_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           35313565343034623966323832303764633165386439663133323832383336366362663431366565
@@ -205,7 +227,7 @@ Role naming conventions used in this repo.
 
 1. If a Role pushes a specific Ansible state, that state is included in the Role's name.
 2. If a Role requires the user to provide the Ansible state, the Role's name does not include the state.
-3. If a Role uses the NDFC REST API, its name includes ``_rest_`` (e.g. ``ndfc_rest_rediscover``)
+3. If a Role uses the NDFC REST API, its name includes ``_rest_`` (e.g. ``ndfc_rest_device_rediscover``)
 
 
 Role                           | Description
