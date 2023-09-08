@@ -351,6 +351,7 @@ Role                           | Description
 [ndfc_service_node_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_node_merged
 [ndfc_service_route_peering_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_route_peering_config_get
 [ndfc_service_route_peering_intra_tenant_fw_merged]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_service_route_peering_intra_tenant_fw_merged
+[ndfc_vpc_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vpc_config_get
 [ndfc_vpc_interface_merged_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vpc_interface_merged_all
 [ndfc_vrf_all]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_all
 [ndfc_vrf_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_vrf_config_get
