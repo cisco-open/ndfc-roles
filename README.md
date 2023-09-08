@@ -12,10 +12,10 @@ The main playbooks, which create the two fabrics and the MSD fabric are located 
 
 Ref | Playbook | Description
 --- | -------- | -----------
-1 | ``example_ndfc_rest_fabric_switch_create_f1.yml`` | creates VXLAN/EVPN fabric f1 without connectivity to an MSD fabric (2x VPC pair per fabric)
-2 | ``example_ndfc_rest_fabric_switch_create_f2.yml`` | creates VXLAN/EVPN fabric f2 without connectivity to an MSD fabric (2x VPC pair per fabric)
-3 | ``example_ndfc_rest_fabric_msd_create_with_children_vpc.yml`` | creates VXLAN/EVPN fabrics f1 and f2, connecting them through an MSD fabric
-4 | ``example_ndfc_rest_fabric_msd_create_with_children.yml`` | Same as 3, but with 2x non-VPC leaf per fabric
+1 | ``example_ndfc_rest_fabric_create_easy_fabric_f1.yml`` | creates VXLAN/EVPN fabric f1 without connectivity to an MSD fabric (2x VPC pair per fabric)
+2 | ``example_ndfc_rest_fabric_create_easy_fabric_2.yml`` | creates VXLAN/EVPN fabric f2 without connectivity to an MSD fabric (2x VPC pair per fabric)
+3 | ``example_ndfc_rest_fabric_create_msd_with_children_vpc.yml`` | creates VXLAN/EVPN fabrics f1 and f2, connecting them through an MSD fabric
+4 | ``example_ndfc_rest_fabric_create_msd_with_children.yml`` | Same as 3, but with 2x non-VPC leaf per fabric
 
 You should use either (1 and 2) OR 3 OR 4 (3 creates 1 and 2, but with MSD connectivity, and 4 creates 3 but with 2x non-VPC leafs instead of 4x leaf as 2x VPC-pairs).  That is, (1 and 2) are mutually exclusive to 3 and 4.
 
