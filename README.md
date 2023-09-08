@@ -288,6 +288,7 @@ Role                           | Description
 [ndfc_service_node_merged] | Create a service node, given ``service_node_name``
 [ndfc_service_route_peering_config_get] | Retrieve local configuration for service route peering, given ``service_route_peering_name``
 [ndfc_service_route_peering_intra_tenant_fw_merged] | Create intra-tenant service route peering. NOT TESTED.
+[ndfc_vpc_config_get] | Retrieve configuration for ``vpc_name`` from the local inventory
 [ndfc_vpc_interface_merged_all] | Create (merge) all vpc interfaces for a vpc pair, given ``vpc_name``
 [ndfc_vrf_all] | merge/delete all vrfs in a fabric, given ``fabric_name``
 [ndfc_vrf_config_get] | Retrieve local configuration for vrf in json object ``vrf_config``, given ``vrf_name``
