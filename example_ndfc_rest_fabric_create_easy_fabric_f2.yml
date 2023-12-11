@@ -13,6 +13,13 @@
 -   hosts: ndfc
     gather_facts: false
     roles:
+    - ndfc_device_list_get
+    vars:
+        fabric_name: f2
+
+-   hosts: ndfc
+    gather_facts: false
+    roles:
     - ndfc_device_list_merged
     vars:
         devices: "{{ device_list }}"
