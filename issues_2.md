@@ -19,6 +19,6 @@ Older versions of this repo did not set this key (since it didn't exist in NDFC 
 
 A DDTS was filed and Closed, which provides more detail.
 
-[CSCwe26995 - addFabricAsMemberEntryCheck: KeyError: 'ENABLE_PVLAN'](https://bst.cloudapps.cisco.com/bugsearch/bug/CSCwe26995)
+[CSCwe26995 - addFabricAsMemberEntryCheck: KeyError: 'ENABLE_PVLAN'](https://bst.cisco.com/quickview/bug/CSCwe26995)
 
-The current version of this repo includes ``ENABLE_PVLAN`` key when creating fabrics, so will not see this error.
+The current version of this repo includes ``ENABLE_PVLAN`` key when creating fabrics, so will not encounter this error.
