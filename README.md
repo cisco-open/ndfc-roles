@@ -1,6 +1,6 @@
-<seotitle>Automating NDFC using Ansible</seotitle>
-
 # ndfc-roles
+
+Automating NDFC using Ansible
 
 ## Getting started
 
