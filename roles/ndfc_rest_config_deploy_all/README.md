@@ -2,7 +2,7 @@
 
 Issue NDFC POST REST API calls to invoke config-save and config-deploy in fabric ``fabric_name``
 
-### Role Variables
+## Role Variables
 
 Variable           | Type    | Description
 -------------------|---------|------------
@@ -23,7 +23,7 @@ Variable           | Type    | Description
 forceShowRun       | boolean | default, false
 inclAllMSDSwitches | boolean | default, false
 
-### Example Playbook
+## Example Playbook
 
 ```yaml
 ---
@@ -35,12 +35,12 @@ inclAllMSDSwitches | boolean | default, false
     fabric_name: f1
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

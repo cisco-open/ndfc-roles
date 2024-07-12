@@ -2,7 +2,7 @@
 
 Returns information for ``fabric_name`` in variable ``fabric_info``
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -16,7 +16,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Default Variables
+## Default Variables
 
 Defaults for the following are in [./roles/ndfc_rest_fabric_info_get/defaults/main.yml](/roles/ndfc_rest_fabric_info_get/defaults/main.yml)
 
@@ -25,7 +25,7 @@ Variable              | Type   | Description
 greenfield_debug_flag | str()  | Default: enable
 IS_READ_ONLY          | bool() | Default: false
 
-### Example Playbook
+## Example Playbook
 
 ```yaml
 ---
@@ -42,12 +42,12 @@ IS_READ_ONLY          | bool() | Default: false
         var: fabric_info
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

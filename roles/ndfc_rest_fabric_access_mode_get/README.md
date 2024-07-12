@@ -2,7 +2,7 @@
 
 Given ``fabric_name`` return fabric access_mode in var ``read_only``
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -16,7 +16,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Example playbook
+## Example playbook
 
 ```yaml
 ---
@@ -32,12 +32,12 @@ See the following for details:
         msg: "fabric {{ fabric_name }} read_only: {{ read_only }}"
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

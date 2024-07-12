@@ -2,14 +2,14 @@
 
 Create, update, or delete all defined VRFs in fabric ``fabric_name``.
 
-### Role Variables
+## Role Variables
 
 Variable     | Description
 ------------ | -----------
 fabric_name  | The name of the fabric in which the VRFs reside.<br>Typically defined in the playbook's vars: section.
 state        | Ansible state.  One of merged, overridden, replaced, or deleted.
 
-### Other variables
+## Other variables
 
 This role reads the ``vrfs`` dictionary from:
 
@@ -33,9 +33,10 @@ service_vrf_template   | ServiceVrf     | string       | Service vrf template
 attach                 | See example    | list of dict | List of mgmt0 ip addresses of switches on which the VRF is configured
 attach.ip_address      | 192.168.1.1    | IP address   | mgmt0 address of the switch to which the vrf is attached
 
-### Example Playbooks
+## Example Playbooks
 
-##### delete all vrf in fabric f2
+### delete all vrf in fabric f2
+
 ```yaml
 ---
 - hosts: ndfc
@@ -49,7 +50,8 @@ attach.ip_address      | 192.168.1.1    | IP address   | mgmt0 address of the sw
     state: deleted
 ```
 
-##### merge all vrf in fabric f1
+### merge all vrf in fabric f1
+
 ```yaml
 ---
 - hosts: ndfc
@@ -63,7 +65,7 @@ attach.ip_address      | 192.168.1.1    | IP address   | mgmt0 address of the sw
     state: merged
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 

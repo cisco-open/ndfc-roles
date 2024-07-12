@@ -2,11 +2,11 @@
 
 Retrieve device configuration from the local inventory for all devices in fabric ``fabric_name``
 
-### Returns
+## Returns
 
 A JSON list of objects containing device configurations, including seed_ip, role, password, username.
 
-#### Example structure of returned information:
+### Example structure of returned information:
 
 ```json
 [
@@ -25,7 +25,7 @@ A JSON list of objects containing device configurations, including seed_ip, role
 ]
 ```
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -39,7 +39,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Example Playbook
+## Example Playbook
 
 ```yaml
 ---
@@ -56,12 +56,12 @@ See the following for details:
     when: "device_list != ''"
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

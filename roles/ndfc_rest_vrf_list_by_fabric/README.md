@@ -5,14 +5,14 @@ Retrieve list of VRFs in fabric ``fabric_name``
 Returns JSON object ``info`` which will be a list of vrf dictionaries
 if the GET request succeeded, or an empty list if the GET request failed.
 
-### Role Variables
+## Role Variables
 
 Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 fabric_name     | str() | The fabric to be queried
 
 
-### Example Playbook
+## Example Playbook
 
 The playbook below prints select information for every VRF in fabric_name f2.
 
@@ -34,12 +34,12 @@ The playbook below prints select information for every VRF in fabric_name f2.
         label: vrf_info
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

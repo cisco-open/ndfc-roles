@@ -8,7 +8,7 @@ NOTE 2: This role isn't needed when route-target imports are added to a VRF's co
 - [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 - [./inventory/group_vars/ndfc/04_vrfs.yml](/inventory/group_vars/ndfc/04_vrfs.yml)
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -28,7 +28,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Example Playbook
+## Example Playbook
 
 The example below performs a bi-directional import of route-targets between vrfs v1 and v2 on four leaf devices in fabric f1.
 
@@ -85,12 +85,12 @@ The example below performs a bi-directional import of route-targets between vrfs
     fabric_name: f1
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

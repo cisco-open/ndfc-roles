@@ -4,7 +4,7 @@ Delete all networks in fabric ``fabric_name``
 
 NOTE: If the networks were created in an MSD fabric, Ansible will throw an InvalidFabric error if you set ``fabric_name`` to that of a child/switch fabric.
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -18,9 +18,9 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Example Playbooks
+## Example Playbooks
 
-# Delete all networks in external fabric_name f1
+### Delete all networks in external fabric_name f1
 
 ```yaml
 ---
@@ -32,12 +32,12 @@ See the following for details:
     fabric_name: MSD
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

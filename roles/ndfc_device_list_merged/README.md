@@ -2,7 +2,7 @@
 
 Merge a list of devices into a fabric.
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -36,9 +36,9 @@ Variable              | Type    | Description
 device_password       | string   | The password used to login to the device
 device_username       | string   | The username used to login to the device
 
-### Dependencies
+## Dependencies
 
-### Example Playbooks
+## Example Playbooks
 
 Merge all devices in the local inventory for ``fabric_name`` f1 into the topology.
 
@@ -59,12 +59,12 @@ Merge all devices in the local inventory for ``fabric_name`` f1 into the topolog
         devices: "{{ device_list }}"
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

@@ -6,7 +6,7 @@ NOTE: This role isn't needed when route-target imports are added to a VRF's conf
 - [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 - [./inventory/group_vars/ndfc/04_vrfs.yml](/inventory/group_vars/ndfc/04_vrfs.yml)
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -26,7 +26,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Example Playbook
+## Example Playbook
 
 ```yaml
 # Import vrf v2's route-targets into vrf v1 on device leaf_2 in fabric f1, using Ansible state 'merged'
@@ -43,12 +43,12 @@ See the following for details:
     state: merged
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

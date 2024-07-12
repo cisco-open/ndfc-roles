@@ -2,7 +2,7 @@
 
 Rediscover device ``device_name`` in fabric ``fabric_name``
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -19,7 +19,7 @@ See the following for details:
 [./inventory/group_vars/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/inventory/group_vars/README.md)
 
 
-### Example Playbook
+## Example Playbook
 
 ```yaml
 ---
@@ -32,10 +32,12 @@ See the following for details:
     device_name: spine_1
 ```
 
-### License
+## Licensing
 
-BSD
+GNU General Public License v3.0 or later.
 
-### Author Information
+See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
+
+## Author Information
 
 Allen Robel (@packetcalc)

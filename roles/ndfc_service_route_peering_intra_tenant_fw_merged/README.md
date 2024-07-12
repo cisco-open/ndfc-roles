@@ -4,7 +4,7 @@ Create intra-tenant service route peering
 
 NOTE 1: This role is not tested (or documented satisfactorily) yet.
 
-### Role Variables
+## Role Variables
 
 Variable                   | Type  | Description
 ---------------------------|-------|----------------------------------------
@@ -19,7 +19,7 @@ See the following for details:
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
 
-### Example Playbook
+## Example Playbook
 
 ```yaml
 ---
@@ -31,12 +31,12 @@ See the following for details:
     service_route_peering_name: srp_1
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

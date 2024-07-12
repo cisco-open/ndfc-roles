@@ -2,7 +2,7 @@
 
 Replace vrf ``vrf_name`` in fabric ``fabric_name`` with the current user-defined parameters.
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -34,7 +34,7 @@ service_vrf_template   | ServiceVrf            | string       | Service vrf temp
 attach                 | See example           | list of dict | List of mgmt0 ip addresses of switches on which the VRF is configured
 attach.ip_address      | 192.168.1.1           | IP address   | mgmt0 address of the switch to which the vrf is attached
 
-#### Example entry in vrfs dictionary
+## Example entry in vrfs dictionary
 
 ```yaml
 vrfs:
@@ -56,7 +56,7 @@ vrfs:
     - ip_address: "{{ devices.leaf_8.ip }}"
 ```
 
-## Example Playbook (referencing the above example vrf entry)
+### Example Playbook (referencing the above example vrf entry)
 
 ```yaml
 ---
@@ -68,12 +68,12 @@ vrfs:
     vrf_name: f2_v1
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

@@ -2,7 +2,7 @@
 
 Set role for device ``device_name``.
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -26,9 +26,9 @@ Variable           | Type    | Description
 forceShowRun       | boolean | Default: ``false`` Included in the config-deploy REST call payload.
 inclAllMSDSwitches | boolean | Default: ``false`` Included in the config-deploy REST call payload.
 
-### Dependencies
+## Dependencies
 
-### Example Playbooks
+## Example Playbooks
 
 ```yaml
 ---
@@ -42,12 +42,12 @@ inclAllMSDSwitches | boolean | Default: ``false`` Included in the config-deploy 
       role: spine
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)
