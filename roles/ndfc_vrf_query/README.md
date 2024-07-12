@@ -2,7 +2,7 @@
 
 Query VRF ``vrf_name`` and return json object ``vrf_info`` which contains vrf information for ``vrf_name`` from the NDFC controller.
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -14,7 +14,7 @@ VRF parameters are defined in the following files:
 
 NOTE, ``vrf_name`` above corresponds to the ``name:`` key within the vrfs dictionary in the file noted above.  The ``name:`` key is unique across all defined vrfs, whereas the ``vrf_name:`` key is not unique and cannot be used with this role.  By way of example, in the entry below, you would use the value of ``name:`` rather than the value of ``vrf_name``.  The example playbook below shows the correct value to use.
 
-#### Example entry in the vrfs dictionary
+## Example entry in the vrfs dictionary
 
 ```yaml
   f2_v1:
@@ -33,7 +33,7 @@ NOTE, ``vrf_name`` above corresponds to the ``name:`` key within the vrfs dictio
     - ip_address: "{{ devices.leaf_8.ip }}"
 ```
 
-#### Example playbook to query the above vrf
+### Example playbook to query the above vrf
 
 ```yaml
 ---
@@ -56,12 +56,12 @@ See the following for details:
 
 [./inventory/group_vars/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/inventory/group_vars/README.md)
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

@@ -2,7 +2,7 @@
 
 Delete network ``network_name`` where ``network_name`` matches the ``name`` key in the local ``networks`` dictionary in [./inventory/group_vars/ndfc/03_networks.yml](/inventory/group_vars/ndfc/03_networks.yml)
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -16,9 +16,9 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Example Playbooks
+## Example Playbooks
 
-# Delete network_name f1_n1111
+### Delete network_name f1_n1111
 
 ```yaml
 ---
@@ -30,7 +30,7 @@ See the following for details:
     network_name: f1_n1111
 ```
 
-# Delete network_name msd_n1111, which resides in fabric MSD (an msd fabric)
+### Delete network_name msd_n1111, which resides in fabric MSD (an msd fabric)
 
 This will delete network_name msd_n1111 from all child fabrics of fabric MSD.
 
@@ -44,10 +44,10 @@ This will delete network_name msd_n1111 from all child fabrics of fabric MSD.
     network_name: msd_n1111
 ```
 
-### License
+## License
 
 BSD
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

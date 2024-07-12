@@ -5,7 +5,7 @@ Retrieve list of devices in fabric ``fabric_name``
 Returns JSON object ``switch_list`` which will be a list of switch dictionaries
 if the GET request succeeded, or an empty list if the GET request failed.
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -20,7 +20,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Example Playbook
+## Example Playbook
 
 The playbook below prints select information for every switch in fabric f2.
 
@@ -42,12 +42,12 @@ The playbook below prints select information for every switch in fabric f2.
           label: device_info
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

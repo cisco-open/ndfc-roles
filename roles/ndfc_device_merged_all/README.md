@@ -2,7 +2,7 @@
 
 Merge all leaf, spine, border_gateway devices into fabric ``fabric_name``.
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -34,9 +34,9 @@ Variable              | Type    | Description
 device_password       | string   | The password used to login to the device
 device_username       | string   | The username used to login to the device
 
-### Dependencies
+## Dependencies
 
-### Example Playbook
+## Example Playbook
 
 ```yaml
 ---
@@ -48,12 +48,12 @@ device_username       | string   | The username used to login to the device
     fabric_name: f1
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

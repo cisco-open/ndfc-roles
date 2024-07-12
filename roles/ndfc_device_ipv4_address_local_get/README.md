@@ -10,7 +10,7 @@ Since this operation is local, the result is returned faster than ``ndfc_device_
 
 SEE ALSO: ``ndfc_device_ipv4_address_remote_get``
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -25,7 +25,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Example Playbook
+## Example Playbook
 
 ```yaml
 # Query ./inventory/group_vars/ndfc/02_devices.yml for fabric_name + device_name
@@ -44,12 +44,12 @@ See the following for details:
     when: "device_ipv4_address != ''"
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

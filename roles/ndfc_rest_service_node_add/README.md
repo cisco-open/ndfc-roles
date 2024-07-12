@@ -11,7 +11,7 @@ Role                        | service_node_type
 ndfc_rest_service_node_add  | Firewall, ADC, VNF
 ndfc_service_node_create    | firewall, load_balancer, virtual_network_function
 
-### Role Variables
+## Role Variables
 
 Variable          | Type   | Description
 ------------------|--------|----------------------------------------
@@ -25,7 +25,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Default Variables
+## Default Variables
 
 Defaults for the following are in ``./roles/ndfc_rest_service_node_add/defaults/main.yml``:
 
@@ -40,7 +40,7 @@ interface_bpduguard_enabled     | boolean | Default: true
 interface_porttype_fast_enabled | boolean | Default: true
 interface_admin_state           | boolean | true
 
-### Example Playbook
+## Example Playbook
 
 ```yaml
 ---
@@ -52,12 +52,12 @@ interface_admin_state           | boolean | true
     service_node_name: sn_1
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

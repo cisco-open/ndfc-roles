@@ -2,7 +2,7 @@
 
 Administratively shutdown interface ``interface_name`` on ``device_name``.
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|------------------------------------------------
@@ -27,9 +27,9 @@ Variable           | Type   | Description
 forceShowRun       | bool() | Default: ``false`` Included in the config-deploy REST call payload.
 inclAllMSDSwitches | bool() | Default: ``false`` Included in the config-deploy REST call payload.
 
-### Dependencies
+## Dependencies
 
-### Example Playbooks
+## Example Playbooks
 
 ```yaml
 # example_ndfc_rest_interface_shutdown.yml
@@ -43,12 +43,12 @@ inclAllMSDSwitches | bool() | Default: ``false`` Included in the config-deploy R
     interface_name: Ethernet1/32
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

@@ -2,7 +2,7 @@
 
 Add ``child_fabric`` to Multi-Site Domain (MSD) fabric ``msd_fabric``
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -17,7 +17,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Example Playbook
+## Example Playbook
 
 Add ``child_fabric`` f1 to ``msd_fabric`` MSD
 
@@ -32,12 +32,12 @@ Add ``child_fabric`` f1 to ``msd_fabric`` MSD
     msd_fabric: MSD
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

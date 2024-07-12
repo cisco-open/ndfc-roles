@@ -13,7 +13,7 @@ Role                        | service_node_type
 ndfc_rest_service_node_add  | Firewall, ADC, VNF
 ndfc_service_node_merged    | firewall, load_balancer, virtual_network_function
 
-### Role Variables
+## Role Variables
 
 Variable          | Type   | Description
 ------------------|--------|----------------------------------------
@@ -27,8 +27,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-
-### Example Playbook
+## Example Playbook
 
 ```yaml
 ---
@@ -40,12 +39,12 @@ See the following for details:
     service_node_name: sn_1
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

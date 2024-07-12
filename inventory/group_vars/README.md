@@ -2,13 +2,13 @@
 
 Contains vars required by ndfc_* roles
 
-### Requirements
+## Requirements
 
 json_query (``pip install jmespath``)
 
-### 01_fabrics.yml
+## 01_fabrics.yml
 
-#### lan_classic_fabrics
+### lan_classic_fabrics
 
 A dictionary of dictionaries.  Some of the more frequently-used variables are:
 
@@ -20,7 +20,7 @@ FABRIC_NAME            | LC_1           | string     | Fabric name
 LOOPBACK0_IP_RANGE     | 10.201.0.0/22  | string     | prefix/mask defining DCI loopback address range
 IS_READ_ONLY           | false          | boolean    | If ``true`` the fabric will be created in monitor mode and no edits can be made to it.  If ``false``, the fabric will be created in read/write mode.
 
-##### Example
+#### Example
 
 ```yaml
 lan_classic:
@@ -84,9 +84,9 @@ lan_classic:
         BOOTSTRAP_ENABLE: false
 ```
 
-#### easy_fabric
+### VXLAN/EVPN Fabrics
 
-aka. VXLAN/EVPN Fabrics
+aka. easy_fabric
 
 A dictionary of dictionaries.  Some of the more frequently-used variables are:
 
@@ -108,7 +108,7 @@ NOTE: variables below (mis)spelled DEAFULT_* e.g. DEAFULT_QUEUING_POLICY_CLOUDSC
 are correct (i.e. NDFC expects these to be spelled incorrectly).  A bug to fix these
 was filed, but was Closed with no action taken.
 
-##### Example
+#### Example
 
 ```yaml
 easy_fabric:
@@ -356,7 +356,7 @@ easy_fabric:
         ANYCAST_RP_IP_RANGE: ""
 ```
 
-#### msd - Multisite Domain Fabrics
+### msd - Multisite Domain Fabrics
 
 A dictionary of dictionaries.  Some of the more frequently-used variables are:
 
@@ -376,7 +376,7 @@ LOOPBACK100_IP_RANGE   | 10.100.0.0/24  | net/prefix  | range for BGW loopback i
 MS_LOOPBACK_ID         | 100            | integer     | loopback ID for the multisite loopback interface. min: 0, max: 1023
 MS_UNDERLAY_AUTOCONFIG | true           | boolean     | Enable ``true`` or disable ``false`` the multi-site underlay autoconfiguration
 
-##### Example
+#### Example
 
 ```yaml
 msd:
@@ -434,8 +434,7 @@ msd:
         scheduledTime: ""
 ```
 
-
-#### external - External Fabrics
+### external - External Fabrics
 
 A dictionary of dictionaries.  Some of the more frequently-used variables are:
 
@@ -451,7 +450,7 @@ LOOPBACK0_IP_RANGE     | 10.201.0.0/22  | string    | prefix/mask defining DCI l
 POWER_REDUNDANCY_MODE  | ps-redundant   | string    | ps-redundant,combined,insrc-redundant
 SUBINTERFACE_RANGE     | 2-512          | string    | Per Border Dot1q Range For VRF Lite Connectivity (Min:2, Max:4093)
 
-##### Example
+#### Example
 
 ```yaml
 external:
@@ -521,9 +520,10 @@ external:
         BOOTSTRAP_ENABLE: false
 ```
 
-### 02_devices.yml
+## 02_devices.yml
 
-#### devices
+### devices
+
 A dictionary of dictionaries
 The dictionaries all have the same format.
 
@@ -538,7 +538,7 @@ preserve_config       | false         | boolean    | If false, write erase the c
 role                  | leaf          | string     | The role of the switch.
 switch_fabric         | fabric_1      | string     | Fabric in which the switch resides
 
-##### Example
+#### Example
 
 ```yaml
 devices:
@@ -567,14 +567,13 @@ devices:
     preserve_config: false
 ```
 
+## 03_networks.yaml
 
-### 03_networks.yaml
-
-#### port_groups
+### port_groups
 
 Dictionary containing lists of ports to which networks are attached.  These are referenced with the ``networks`` dictionary
 
-##### Example
+#### Example
 
 ```yaml
 port_groups:
@@ -584,7 +583,7 @@ port_groups:
   - Port-channel12
 ```
 
-#### networks
+### networks
 
 Dictionary of dictionaries which define networks and their attachments (device + port_group).
 
@@ -599,8 +598,7 @@ attach                | See example    | list of dict | List of dictionaries def
 attach.ip_address     | 192.168.1.1    | IP address   | mgmt0 address of the switch to which the network is attached
 attach.ports          | See example    | list         | list of ports on the switch to which the network is attached
 
-
-##### Example
+#### Example
 
 Below, network n1111 (10.21.1.0/24), with gateway 10.21.1.1, in fabric f1, is connected to four leafs on port port-channel11 on each leaf, within vrf v1.
 
@@ -643,9 +641,9 @@ networks:
         ports: "{{ port_groups.pg12 }}"
 ```
 
-### 04_vrfs.yml
+## 04_vrfs.yml
 
-#### vrfs
+### vrfs
 
 Dictionary which define VRFs and their attachments (device).
 This follows the same property names and (more or less) the general structure as the corresponding Ansible [cisco.dcnm_vrf](https://github.com/CiscoDevNet/ansible-dcnm/blob/main/docs/cisco.dcnm.dcnm_vrf_module.rst) module.
@@ -657,14 +655,15 @@ import_vpn_rt          | 65000:50001    | string       | vpn route-target to imp
 import_evpn_rt         | 65000:50001    | string       | evpn route-target to import
 vrf_name               | vrf_1          | string       | name of the vrf
 vrf_id                 | 9003031        | integer      | vrf Layer3 VNI / vn-segment
-vlan_id                | 3031           | integer      | vrf associated vlan 
+vlan_id                | 3031           | integer      | vrf associated vlan
 vrf_template           | TemplateVrf    | string       | Overlay VRF Template For Leafs
 vrf_extension_template | TemplateExVrf  | string       | Overlay VRF Template For Borders
 service_vrf_template   | ServiceVrf     | string       | Service vrf template
 attach                 | See example    | list of dict | List of mgmt0 ip addresses of switches on which the VRF is configured
 attach.ip_address      | 192.168.1.1    | IP address   | mgmt0 address of the switch to which the vrf is attached
 
-##### Example
+#### Example
+
 ```yaml
 vrfs:
   f1_v1:
@@ -705,9 +704,9 @@ vrfs:
     - ip_address: "{{ devices.leaf_4.ip }}"
 ```
 
-### 05_vpc.yml
+## 05_vpc.yml
 
-#### vpc_peers
+### vpc_peers
 
 Variable            | Example        | Type         | Description
 --------------------|----------------|--------------|-------------------
@@ -715,7 +714,7 @@ vpc_name            | vpc_1          | string       | name of the VPC peering re
 peer_1              | leaf_1         | string       | Name of vpc peer 1 (from devices dictionary)
 peer_2              | leaf_2         | string       | Name of vpc peer 2 (from devices dictionary)
 
-##### Example
+#### Example
 
 ```yaml
 vpc_peers:
@@ -729,7 +728,7 @@ vpc_peers:
     peer_2: leaf_4
 ```
 
-#### vpc_interfaces
+### vpc_interfaces
 
 Variable               | Example          | Type    | Description
 -----------------------|------------------|---------|-------------------
@@ -743,7 +742,7 @@ vpc_port_id            | vpi11            | string  | User-provided name.  Can b
 peer1_allowed_vlans    | 1111             | string  | Valid values: none, all, or comma-separated list of allowed vlans e.g. 2-11,12,45-50
 peer2_allowed_vlans    | 1111             | string  | Valid values: none, all, or comma-separated list of allowed vlans e.g. 2-11,12,45-50
 
-##### Example
+#### Example
 
 ```yaml
 vpc_interfaces:
@@ -774,9 +773,11 @@ vpc_interfaces:
     - Ethernet1/12
 ```
 
-### 06_service_nodes.yml
+## 06_service_nodes.yml
 
 List of dictionaries which define Service Nodes
+
+### service_nodes
 
 Variable              | Example            | Type   | Description
 ----------------------|--------------------|--------------|-------------------
@@ -789,7 +790,7 @@ attached_fabric_name   | f1                | string  | fabric in which ``attache
 attached_switch_name   | leaf_1            | string  | name of the switch attached to service node
 attached_switch_interface_name | Eth1/5    | string  | name of the interface on ``attached_switch_name`` connecting to service node
 vpc_switches_attached | false              | boolean | Is service node attached to VPC switches?
-link_template_name    | service_link_trunk | string  | Template used to configure ``attached_switch_interface_name`` 
+link_template_name    | service_link_trunk | string  | Template used to configure ``attached_switch_interface_name``
 interface_speed       | Auto               | string  | Speed of ``attached_switch_interface_name``
 interface_mtu         | jumbo              | string  | MTU of ``attached_switch_interface_name``
 interface_allowed_vlans | all              | string  | Valid values: all, none. Allowed vlans on ``attached_switch_interface_name``
@@ -797,7 +798,7 @@ interface_bpduguard_enabled | true         | boolean | Enable BPDU guard on ``at
 interface_porttype_fast_enabled | false    | boolean | Enable port fast on ``attached_switch_interface_name``
 interface_admin_state | true               | boolean | Admin state for ``attached_switch_interface_name``
 
-##### Example
+#### Example
 
 ```yaml
 service_nodes:
@@ -820,13 +821,12 @@ service_nodes:
   interface_admin_state: true
 ```
 
-
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)
