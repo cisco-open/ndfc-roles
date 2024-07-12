@@ -2,7 +2,8 @@
 
 Import vrf ``import_vrf_name``'s route-targets into vrf ``vrf_name`` on device ``device_name`` using Ansible state ``state``
 
-NOTE: This role isn't needed when route-target imports are added to a VRF's config.  See the following:
+NOTE: This role isn't needed when route-target imports are added to a VRF's config.  See the following.
+
 - [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 - [./inventory/group_vars/ndfc/04_vrfs.yml](/inventory/group_vars/ndfc/04_vrfs.yml)
 

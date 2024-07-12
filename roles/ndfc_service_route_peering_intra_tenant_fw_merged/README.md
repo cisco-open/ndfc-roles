@@ -18,7 +18,6 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-
 ## Example Playbook
 
 ```yaml

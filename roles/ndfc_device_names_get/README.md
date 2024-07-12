@@ -14,10 +14,9 @@ Fabric and device parameters are defined in the following files:
 - ./inventory/group_vars/ndfc/01_fabrics.yml
 - ./inventory/group_vars/ndfc/02_devices.yml
 
-See the following for details:
+See the following for details.
 
 [./inventory/group_vars/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/inventory/group_vars/README.md)
-
 
 ## Example Playbook
 

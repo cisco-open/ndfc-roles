@@ -6,7 +6,7 @@ Retrieve device configuration from the local inventory for all devices in fabric
 
 A JSON list of objects containing device configurations, including seed_ip, role, password, username.
 
-### Example structure of returned information:
+### Example structure of returned information
 
 ```json
 [

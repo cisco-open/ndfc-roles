@@ -11,7 +11,6 @@ Variable        | Type  | Description
 ----------------|-------|----------------------------------------
 fabric_name     | str() | The fabric to be queried
 
-
 ## Example Playbook
 
 The playbook below prints select information for every VRF in fabric_name f2.
