@@ -434,7 +434,6 @@ msd:
         scheduledTime: ""
 ```
 
-
 ### external - External Fabrics
 
 A dictionary of dictionaries.  Some of the more frequently-used variables are:
@@ -524,6 +523,7 @@ external:
 ## 02_devices.yml
 
 ### devices
+
 A dictionary of dictionaries
 The dictionaries all have the same format.
 
@@ -567,7 +567,6 @@ devices:
     preserve_config: false
 ```
 
-
 ## 03_networks.yaml
 
 ### port_groups
@@ -598,7 +597,6 @@ gw_ip_subnet          | 10.1.1.1/24    | net/prefix   | gateway IP for the netwo
 attach                | See example    | list of dict | List of dictionaries defining the attachment
 attach.ip_address     | 192.168.1.1    | IP address   | mgmt0 address of the switch to which the network is attached
 attach.ports          | See example    | list         | list of ports on the switch to which the network is attached
-
 
 #### Example
 
@@ -657,7 +655,7 @@ import_vpn_rt          | 65000:50001    | string       | vpn route-target to imp
 import_evpn_rt         | 65000:50001    | string       | evpn route-target to import
 vrf_name               | vrf_1          | string       | name of the vrf
 vrf_id                 | 9003031        | integer      | vrf Layer3 VNI / vn-segment
-vlan_id                | 3031           | integer      | vrf associated vlan 
+vlan_id                | 3031           | integer      | vrf associated vlan
 vrf_template           | TemplateVrf    | string       | Overlay VRF Template For Leafs
 vrf_extension_template | TemplateExVrf  | string       | Overlay VRF Template For Borders
 service_vrf_template   | ServiceVrf     | string       | Service vrf template
@@ -665,6 +663,7 @@ attach                 | See example    | list of dict | List of mgmt0 ip addres
 attach.ip_address      | 192.168.1.1    | IP address   | mgmt0 address of the switch to which the vrf is attached
 
 #### Example
+
 ```yaml
 vrfs:
   f1_v1:
@@ -791,7 +790,7 @@ attached_fabric_name   | f1                | string  | fabric in which ``attache
 attached_switch_name   | leaf_1            | string  | name of the switch attached to service node
 attached_switch_interface_name | Eth1/5    | string  | name of the interface on ``attached_switch_name`` connecting to service node
 vpc_switches_attached | false              | boolean | Is service node attached to VPC switches?
-link_template_name    | service_link_trunk | string  | Template used to configure ``attached_switch_interface_name`` 
+link_template_name    | service_link_trunk | string  | Template used to configure ``attached_switch_interface_name``
 interface_speed       | Auto               | string  | Speed of ``attached_switch_interface_name``
 interface_mtu         | jumbo              | string  | MTU of ``attached_switch_interface_name``
 interface_allowed_vlans | all              | string  | Valid values: all, none. Allowed vlans on ``attached_switch_interface_name``
@@ -821,7 +820,6 @@ service_nodes:
   interface_porttype_fast_enabled: true
   interface_admin_state: true
 ```
-
 
 ## Licensing
 
