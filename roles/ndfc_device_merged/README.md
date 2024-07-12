@@ -2,7 +2,7 @@
 
 Merge device ``device_name`` into the topology.
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -36,9 +36,9 @@ Variable              | Type    | Description
 device_password       | string  | The password used to login to the device
 device_username       | string  | The username used to login to the device
 
-### Dependencies
+## Dependencies
 
-### Example Playbooks
+## Example Playbooks
 
 ```yaml
 ---
@@ -50,12 +50,12 @@ device_username       | string  | The username used to login to the device
     device_name: spine_1
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

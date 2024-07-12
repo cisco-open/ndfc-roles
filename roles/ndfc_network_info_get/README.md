@@ -2,7 +2,7 @@
 
 Query the NDFC controller and retrieve ``network_info`` dictionary given ``network_name``
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -24,7 +24,7 @@ Variable        | Type | Description
 ----------------|------|----------------------------------------
 network_info    | dict | information pertaining to network ``network_name``
 
-### Example Playbooks
+## Example Playbooks
 
 Retrieve ``network_info`` dictionary for ``network_name`` msd_n1111
 
@@ -42,10 +42,12 @@ Retrieve ``network_info`` dictionary for ``network_name`` msd_n1111
         msg: "network_info: {{ network_info | default('unable to find network. Check network_name.', true) }}"
 ```
 
-### License
+## Licensing
 
-BSD
+GNU General Public License v3.0 or later.
 
-### Author Information
+See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
+
+## Author Information
 
 Allen Robel (@packetcalc)

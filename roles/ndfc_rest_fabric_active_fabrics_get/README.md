@@ -2,13 +2,13 @@
 
 Returns the list of active fabrics on the Nexus Dashboard Fabric Controller.
 
-### Returned Variables
+## Returned Variables
 
 Variable        | Type         | Description
 ----------------|--------------|----------------------------------------
 active_fabrics  | list of dict | a list of active fabrics
 
-### Example Playbook
+## Example Playbook
 
 ```yaml
 ---
@@ -23,12 +23,12 @@ active_fabrics  | list of dict | a list of active fabrics
     when: "active_fabrics != ''"
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

@@ -2,7 +2,7 @@
 
 Use ``set_fact`` to set a list (``device_names``) of device names matching devices in fabric ``fabric_name`` with role ``role``.
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -14,12 +14,11 @@ Fabric and device parameters are defined in the following files:
 - ./inventory/group_vars/ndfc/01_fabrics.yml
 - ./inventory/group_vars/ndfc/02_devices.yml
 
-See the following for details:
+See the following for details.
 
 [./inventory/group_vars/README.md](https://github.com/allenrobel/ndfc-roles/tree/master/inventory/group_vars/README.md)
 
-
-### Example Playbook
+## Example Playbook
 
 ```yaml
 ---
@@ -37,12 +36,12 @@ See the following for details:
     when: "device_names != ''"
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

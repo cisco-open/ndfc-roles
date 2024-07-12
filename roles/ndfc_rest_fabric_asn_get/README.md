@@ -2,13 +2,13 @@
 
 Given ``fabric_name`` return fabric BGP ASN in var ``fabric_asn``
 
-### Returned variables
+## Returned variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
 fabric_asn      | string | The BGP AS of the queried fabric
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -22,7 +22,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Example Playbooks
+## Example Playbooks
 
 ```yaml
 ---
@@ -39,12 +39,12 @@ See the following for details:
     when: "fabric_asn != ''"
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

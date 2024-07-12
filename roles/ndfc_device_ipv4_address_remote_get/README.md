@@ -10,7 +10,7 @@ Since this operation involves a query of the NDFC controller, the result is retu
 
 SEE ALSO: ``ndfc_device_ipv4_address_local_get``
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -25,7 +25,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Example Playbook
+## Example Playbook
 
 ```yaml
 # Query NX-OS switch associated with fabric_name + device_name
@@ -44,12 +44,12 @@ See the following for details:
     when: "device_ipv4_address != ''"
 ```
 
-### Licensing
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)

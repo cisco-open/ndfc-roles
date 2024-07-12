@@ -88,8 +88,8 @@ The characteristics of the child/site fabrics are as follows (see also the inclu
 
 - 2 spine acting as Route Reflectors for all leaf and border_gateway
 - Either:
-    - 4 VPC leaf (2 VPC pairs using fabric-peering for their virtual peer-link)
-    - Or, 2 non-VPC leaf
+  - 4 VPC leaf (2 VPC pairs using fabric-peering for their virtual peer-link)
+  - Or, 2 non-VPC leaf
 - 2 border_gateway
 - 2 VRF: v1 and v2
 - L3 (ipv4 / ipv6) connectivity between VRF v1 and v2 (symmetric import of route-targets)
@@ -205,7 +205,6 @@ ndfc:
       ansible_host: 192.168.1.1
 ```
 
-
 #### To run a playbook if you encrypted your NDFC password
 
 ```bash
@@ -229,7 +228,6 @@ Role naming conventions used in this repo.
 1. If a Role pushes a specific Ansible state, that state is included in the Role's name.
 2. If a Role requires the user to provide the Ansible state, the Role's name does not include the state.
 3. If a Role uses the NDFC REST API, its name includes ``_rest_`` (e.g. ``ndfc_rest_device_rediscover``)
-
 
 Role                           | Description
 ------------                   | -----------
@@ -294,7 +292,6 @@ Role                           | Description
 [ndfc_vrf_config_get] | Retrieve local configuration for vrf in json object ``vrf_config``, given ``vrf_name``
 [ndfc_vrf_query] | Retrieve NDFC controller configuration for VRF in json object ``vrf_info``, given ``vrf_name``
 [ndfc_vrf_replaced] | Update (replaced) a vrf, given ``vrf_name``
-
 
 [ndfc_device_config_get]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_config_get
 [ndfc_device_deleted]: https://github.com/allenrobel/ndfc-roles/tree/master/roles/ndfc_device_deleted

@@ -2,13 +2,13 @@
 
 Retrieve the configuration for vrf  ``vrf_name``
 
-### Returns (via set_fact)
+## Returns (via set_fact)
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
 vrf_config      | object | A JSON object containing ``vrf_name``'s current configuration
 
-### Role Variables
+## Role Variables
 
 Variable        | Type   | Description
 ----------------|--------|----------------------------------------
@@ -22,7 +22,7 @@ See the following for details:
 
 [./inventory/group_vars/README.md](/inventory/group_vars/README.md)
 
-### Example Playbook
+## Example Playbook
 
 ```yaml
 ---
@@ -38,7 +38,7 @@ See the following for details:
         var: vrf_config
 ```
 
-### Example returned object
+## Example returned object
 
 ```json
 {
@@ -94,12 +94,13 @@ See the following for details:
     }
 }
 ```
-### Licensing
+
+## Licensing
 
 GNU General Public License v3.0 or later.
 
 See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) for full text.
 
-### Author Information
+## Author Information
 
 Allen Robel (@packetcalc)
