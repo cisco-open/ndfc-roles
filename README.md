@@ -2,6 +2,10 @@
 
 Automating NDFC using Ansible
 
+## Deprecation Notice
+
+This repository has been deprecated as of 2026-02-04.
+
 ## Getting started
 
 This repo contains Ansible Roles and example playbooks that, together, implement a basic Spine/Leaf VXLAN/EVPN fabric using Cisco's DCNM/NDFC Controller.
